@@ -1,0 +1,26 @@
+div.hotbelgo
+	h3 Feedback for the author
+
+	form.row(ng-hide="comments")
+		.col-sm-7
+			.form-group
+				textarea(rows="2", class="form-control" ng-model="vm.feedback" placeholder="Comments, suggestions,...")
+			p If the app did not work, please provide details of what you did and what you hoped / expected it would do.
+		.col-sm-3
+			.form-group
+				input(type="text" class="form-control" ng-model="vm.email" placeholder="email (Optional*)")
+			p * Used for feedback from author. Will not be made public.
+		.col-sm-2
+			button(ng-click="vm.sendFeedback()" class="btn btn-primary") Send
+
+	.row(ng-show="comments")
+		.col-sm-3
+			h4 Date
+		.col-sm-9
+			h4 Comment
+	
+	.row.comments(ng-repeat="comment in vm.comments")
+		.col-sm-3
+			p {{comment.date}}
+		.col-sm-9
+			p {{comment.comment}}

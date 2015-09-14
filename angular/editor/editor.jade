@@ -1,0 +1,58 @@
+.col-xs-12
+    h2 Summary of ride ({{vm.startTime | date: "d MMM yy"}})
+    .row
+        .col-xs-2.table-head Lap
+        .col-xs-2.table-head lapStart
+        .col-xs-2.table-head lapEnd
+        .col-xs-2.table-head Lap time
+        .col-xs-2.table-head Distance
+        .col-xs-2.table-head Avg speed
+    .row(ng-repeat="lap in vm.data.Lap")
+        .col-xs-2.table-head {{$index + 1}}
+        .col-xs-2 {{lap.Track[0].Trackpoint[0].Time[0] | date: "HH:mm:ss"}}
+        .col-xs-2 {{lap.Track[0].Trackpoint[lap.Track[0].Trackpoint.length - 1].Time[0] | date: "HH:mm:ss"}}
+        .col-xs-2 {{lap.TotalTimeSeconds[0]}}s
+        .col-xs-2 {{lap.DistanceMeters / 1000 | number : 3}} km
+        .col-xs-2 {{lap.Extensions[0].LX[0].AvgSpeed[0] * 60 * 60 / 1000 | number : 1}} km/h
+    //- .row
+    //-     .col-xs-2.col-xs-offset-8.table-head {{vm.totalDist / 1000 | number: 1}} km
+
+    h2 Trackpoint data
+    .row
+        .col-xs-6
+            p Choose the rows of data to delete below.
+
+            .data-table
+                div(scroll-to data-target="{{vm.scrollPos}}", ng-repeat="lap in vm.data.Lap track by $index")
+                    strong Lap {{$index+1}}
+                    lap(
+                        lapdata="lap.Track[0].Trackpoint", 
+                        count="{{$index}}", 
+                        check="vm.checkChange(lapIdx, idx, shift)",
+                        selected="vm.selected[$index]"
+                        )
+        .col-xs-6
+            //- h2 Map
+            map(
+                center="44, 5",
+                zoom="11", 
+                draggable="true", 
+                map-type-control="false", 
+                auto-refresh,
+                ng-controller="MapCtrl as map")
+                //- section(ng-repeat="path in vm.path")
+                //-     shape(
+                //-         id="polyline", name="polyline", geodesic="true", stroke-color="{{vm.pathColours[$index % 2]}}",
+                //-         stroke-opacity="1.0", stroke-weight="2", path="{{path}}"
+                //-         )
+            //- p Gaps between changes of colour (laps) are to be expected and do not affect final results
+        .row
+            .col-xs-12.controls
+                p Use Shift+Click to select multiple rows
+                button(class="btn btn-danger" ng-click="vm.deletePoints()") {{vm.deleteMsg}}
+                button(class="btn btn-success btn-disabled" ng-click="vm.saveFile()") Download .tcx
+                a(ui-sref="upload" class="btn btn-primary") Load different file
+
+    .row.feedback
+        .col-xs-12
+            feedback

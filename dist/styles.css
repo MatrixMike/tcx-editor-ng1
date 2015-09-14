@@ -1,0 +1,51 @@
+/**
+ * App-wide Styles
+ */
+
+.table-head {
+  font-weight: bold; }
+
+.data-table {
+  margin: 10px 0;
+  height: 20em;
+  overflow-y: scroll; }
+  .data-table button {
+    margin-right: 10px; }
+  .data-table lap {
+    width: 100%;
+    user-select: none;
+    /* CSS3 (little to no support) */
+    -ms-user-select: none;
+    /* IE 10+ */
+    -moz-user-select: none;
+    /* Gecko (Firefox) */
+    -webkit-user-select: none;
+    /* Webkit (Safari, Chrome) */ }
+    .data-table lap td, .data-table lap th {
+      padding-right: 10px; }
+    .data-table lap th.check {
+      width: 20px; }
+    .data-table lap .trackpoint {
+      cursor: pointer; }
+      .data-table lap .trackpoint.selected, .data-table lap .trackpoint.selected:hover {
+        background-color: #f5cec9; }
+      .data-table lap .trackpoint:hover {
+        background-color: #f4e9cb; }
+
+.controls button {
+  margin-right: 15px; }
+
+.feedback {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  background-color: cornsilk; }
+
+.feedback {
+  background-color: #6ca3f5; }
+
+.hotbelgo-feedback .comments {
+  padding: 5px 0; }
+
+map {
+  height: 300px; }
+

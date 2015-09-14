@@ -1,0 +1,40 @@
+doctype html
+html
+    head
+        title Garmin tcx online editor
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='description', content='Displays and editing of tcx files from Garmin GPS devices')
+        meta(name='viewport', content='width=device-width')
+
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+        link(rel='stylesheet', href='/styles.css')
+
+        base(href='/')
+
+    body(ng-app='garminEditorApp')
+        .container
+            .row
+                .col-xs-12
+                    h1 Garmin GPS .tcx editor
+
+            div.row(ui-view)
+
+            footer.row
+                .col-xs-12
+                    hr
+                    p (c) 
+                        a(href="http://stackoverflow.com/users/1923190/simon-h") Simon Hampton
+
+    script.
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga')
+        ga('create', 'UA-58153487-1', 'auto');
+        //- ga('send', 'pageview');
+    script(src='//maps.google.com/maps/api/js')
+    script(src='system.js')
+    script(src='config.js')
+    script(src='build.js')
+    script(src='loader.js')

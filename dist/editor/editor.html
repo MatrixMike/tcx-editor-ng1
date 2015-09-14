@@ -1,0 +1,45 @@
+
+<div class="col-xs-12">
+  <h2>Summary of ride ({{vm.startTime | date: "d MMM yy"}})</h2>
+  <div class="row">
+    <div class="col-xs-2 table-head">Lap</div>
+    <div class="col-xs-2 table-head">lapStart</div>
+    <div class="col-xs-2 table-head">lapEnd</div>
+    <div class="col-xs-2 table-head">Lap time</div>
+    <div class="col-xs-2 table-head">Distance</div>
+    <div class="col-xs-2 table-head">Avg speed</div>
+  </div>
+  <div ng-repeat="lap in vm.data.Lap" class="row">
+    <div class="col-xs-2 table-head">{{$index + 1}}</div>
+    <div class="col-xs-2">{{lap.Track[0].Trackpoint[0].Time[0] | date: "HH:mm:ss"}}</div>
+    <div class="col-xs-2">{{lap.Track[0].Trackpoint[lap.Track[0].Trackpoint.length - 1].Time[0] | date: "HH:mm:ss"}}</div>
+    <div class="col-xs-2">{{lap.TotalTimeSeconds[0]}}s</div>
+    <div class="col-xs-2">{{lap.DistanceMeters / 1000 | number : 3}} km</div>
+    <div class="col-xs-2">{{lap.Extensions[0].LX[0].AvgSpeed[0] * 60 * 60 / 1000 | number : 1}} km/h</div>
+  </div>
+  <h2>Trackpoint data</h2>
+  <div class="row">
+    <div class="col-xs-6">
+      <p>Choose the rows of data to delete below.</p>
+      <div class="data-table">
+        <div scroll-to="scroll-to" data-target="{{vm.scrollPos}}" ng-repeat="lap in vm.data.Lap track by $index"><strong>Lap {{$index+1}}</strong>
+          <lap lapdata="lap.Track[0].Trackpoint" count="{{$index}}" check="vm.checkChange(lapIdx, idx, shift)" selected="vm.selected[$index]"></lap>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6"><map center="44, 5" zoom="11" draggable="true" map-type-control="false" auto-refresh="auto-refresh" ng-controller="MapCtrl as map"></map>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 controls">
+        <p>Use Shift+Click to select multiple rows</p>
+        <button ng-click="vm.deletePoints()" class="btn btn-danger">{{vm.deleteMsg}}</button>
+        <button ng-click="vm.saveFile()" class="btn btn-success btn-disabled">Download .tcx</button><a ui-sref="upload" class="btn btn-primary">Load different file</a>
+      </div>
+    </div>
+  </div>
+  <div class="row feedback">
+    <div class="col-xs-12">
+      <feedback></feedback>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+table()
+    tr
+        th Timestamp
+        th Accum Dist. (m)
+    tr(
+        ng-repeat="tp in vm.lapdata track by $index", 
+        class="trackpoint c{{$index}}",
+        ng-class="{'selected': vm.selected[$index]}" 
+        ng-click="vm.select($event, $index)")
+        
+        td {{tp.Time[0] | date: 'H:mm:ss'}}
+        td {{tp.DistanceMeters[0] | number : 1}} m
+        //- td(ng-class="{'zero':(tp.Extensions[0].TPX[0].Speed[0] < 0.5)}") {{tp.Extensions[0].TPX[0].Speed[0] * 60 * 60 / 1000  | number : 1}} km/h
+        //-     input(type="checkbox", ng-model="vm.checkboxes[$parent.$index].row[$index]",                        ng-change="vm.checkChange($parent.$index, $index)")

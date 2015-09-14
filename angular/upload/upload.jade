@@ -1,0 +1,37 @@
+.col-sm-12
+    .row
+        .col-sm-6
+            p Ever left your Garmin running at the end of a ride? All your hard earned averages declined pointelessly? 
+            p This simple editor enables you to delete points from the [b end] of a file, and will then recalculate the overall ride data and return a new copy of the file.
+            p To start upload a '.tcx' file. You can convert a .fit file to .tcx using <a href="http://connect.garmin.com/"> Garmin Connect's</a> export functionality.
+            p <strong>Warning:</strong> This app has only been tested on an Edge 800 (cycle GPS) with firmware 2.6. YMMV, but a Garmin 610 user reported success. 
+            | No copy of the data uploaded or processed is kept.
+
+            form
+                div(
+                    class="btn btn-primary btn-upload" 
+                    ngf-select="vm.upload($file)"
+                    ng-model="vm.file" 
+                    name="file" 
+                    ) {{vm.msg}}
+                //- button(class="btn btn-success", type="submit", ng-click="vm.submit()") Submit
+                
+        .col-sm-6
+            img(src="edge.jpg" alt="edge 800")
+
+    .row
+        .col-xs-12
+            h3 Change log
+            p 14 Sept: rewrite in ES6
+            p 24 Jan: &lt;shift&gt;+click functionality improved; fixed bug when deleting entire lap
+            p 31 Jan: fixed bug when deleting last lap
+            p 2 Feb: Use colours to distinguish laps, highlight rows where speed = 0
+            p 29 June: Handles delete from start correctly; fixed potential crashes
+
+    .row
+        .col-xs-12
+            h3 Todo
+            ul
+                li Time is incorrectly shown on screen
+                li Provide option to change ride time (and avg speed) to time spent moving (i.e. dropping lunch stops where GPS left on)
+                li Show total distance for info

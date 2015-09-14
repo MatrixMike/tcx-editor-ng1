@@ -1,0 +1,11 @@
+
+<table>
+  <tr>
+    <th>Timestamp</th>
+    <th>Accum Dist. (m)</th>
+  </tr>
+  <tr ng-repeat="tp in vm.lapdata track by $index" ng-class="{'selected': vm.selected[$index]}" ng-click="vm.select($event, $index)" class="trackpoint c{{$index}}">
+    <td>{{tp.Time[0] | date: 'H:mm:ss'}}</td>
+    <td>{{tp.DistanceMeters[0] | number : 1}} m</td>
+  </tr>
+</table>

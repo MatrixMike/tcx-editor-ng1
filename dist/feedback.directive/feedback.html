@@ -1,0 +1,37 @@
+
+<div class="hotbelgo">
+  <h3>Feedback for the author</h3>
+  <form ng-hide="comments" class="row">
+    <div class="col-sm-7">
+      <div class="form-group">
+        <textarea rows="2" ng-model="vm.feedback" placeholder="Comments, suggestions,..." class="form-control"></textarea>
+      </div>
+      <p>If the app did not work, please provide details of what you did and what you hoped / expected it would do.</p>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <input type="text" ng-model="vm.email" placeholder="email (Optional*)" class="form-control"/>
+      </div>
+      <p>* Used for feedback from author. Will not be made public.</p>
+    </div>
+    <div class="col-sm-2">
+      <button ng-click="vm.sendFeedback()" class="btn btn-primary">Send</button>
+    </div>
+  </form>
+  <div ng-show="comments" class="row">
+    <div class="col-sm-3">
+      <h4>Date</h4>
+    </div>
+    <div class="col-sm-9">
+      <h4>Comment</h4>
+    </div>
+  </div>
+  <div ng-repeat="comment in vm.comments" class="row comments">
+    <div class="col-sm-3">
+      <p>{{comment.date}}</p>
+    </div>
+    <div class="col-sm-9">
+      <p>{{comment.comment}}</p>
+    </div>
+  </div>
+</div>
