@@ -137,6 +137,15 @@ class EditorCtrl {
         this.lastChanged = next;
     }
 
+    saveFile() {
+        this.Main.saveData()
+        .then( res => {
+            console.log(res.data);
+            window.location = '/' + this.Main.fname
+        })
+        .catch( err => console.error(err) );
+    }
+
     deletePoints() {
         // this.data.Lap.splice(0, 1);
         // return this.createSummaryInfo();

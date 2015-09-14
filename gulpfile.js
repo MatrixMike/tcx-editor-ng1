@@ -18,7 +18,7 @@ var paths = {
 	partials: ['angular/**/*.jade', '!angular/index.jade'],
 	home    : ['angular/index.jade'],
 	scss    : ['angular/**/*.scss'],
-	copy    : ['angular/assets/images/*'
+	copy    : ['angular/**/*.jpg'
 			  ,'angular/jspm_packages/system.js'
 			  ,'angular/config.js'
 		  	  ,'angular/loader.js'
@@ -58,7 +58,7 @@ gulp.task('systemjsbundle', function (cb) {
     return builder.loadConfig('./angular/config.js')
     .then(function() {
 		var options = {
-			// sourceMaps: true
+			sourceMaps: true
 		};
         return builder.build('./angular/app.js', 'dist/build.js', options);
         // return builder.buildSFX('./assets/app/app/app.js', 'dist/scripts/build.js');
@@ -85,7 +85,7 @@ config = require('./ignore/settings');
 gulp.task('serve', function(){
 	return nodemon({
 		script: 'index.js',
-		watch: 'server/',
+		watch: 'server/*',
 		// ignore: ['angular/**/*', 'dist/*', 'node_modules/*'],
 		env: config
 	})
@@ -99,7 +99,6 @@ gulp.task('watch', ['serve'], function() {
     	proxy: 'localhost:5000',
     });
 
-    // gulp.watch(paths.server, ['serve']);
     gulp.watch(paths.scss, ['sass']);
     gulp.watch(paths.app, ['systemjsbundle']);
     gulp.watch(paths.partials, ['jade']);

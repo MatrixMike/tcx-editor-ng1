@@ -20,7 +20,7 @@
   <h2>Trackpoint data</h2>
   <div class="row">
     <div class="col-xs-6">
-      <p>Choose the rows of data to delete below.</p>
+      <p>Choose the 'trackpoints' to delete below.</p>
       <div class="data-table">
         <div scroll-to="scroll-to" data-target="{{vm.scrollPos}}" ng-repeat="lap in vm.data.Lap track by $index"><strong>Lap {{$index+1}}</strong>
           <lap lapdata="lap.Track[0].Trackpoint" count="{{$index}}" check="vm.checkChange(lapIdx, idx, shift)" selected="vm.selected[$index]"></lap>

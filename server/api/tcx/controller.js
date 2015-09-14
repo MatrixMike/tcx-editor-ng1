@@ -18,7 +18,7 @@ exports.test = function(req, res) {
 // POST /tcx
 // writes file to disk so it can be requested separately by client
 exports.Json2TcxFile = function (req, res, next) {
-	var dname = __dirname + '/../../../tmp/';
+	var dname = path.join(__dirname, '/../../tmp/');
 	var fname = dname + req.params.fname;
 
 	console.log('createTCX: write to temporary file:', fname);

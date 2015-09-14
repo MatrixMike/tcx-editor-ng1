@@ -2,3 +2,4 @@ ignore
 node_modules
 jspm_packages
 elm-stuff
+server/tmp

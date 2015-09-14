@@ -18,13 +18,14 @@ class UploadCtrl {
             this.msg = 'progress: ' + progressPercentage + '% ' + evt.config.file.name;
         })
         .success( (data, status, headers, config) => {
+            ga('send', 'event', 'file-upload', config.file.name);
             // console.log(data);
 
             // this.Main.data = this.Main.removeNullEntries(data);
             this.Main.setTcxData(data);
-            this.Main.filename = config.file.name;
+            this.Main.fname = config.file.name;
 
-            // console.log(this.Main.data);
+            console.log("uploaded:", config.file.name);
 
             this.$state.go('editor', {});
         });

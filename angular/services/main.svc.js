@@ -4,7 +4,7 @@ class MainService {
     constructor($http) {
         this.$http = $http;
 
-        this.debug = true;
+        this.debug = location.host.match('localhost').length > 0;
         // total number of points in uploaded file; used to limit number of markers shown
         this.trackpointCount = 0;
         // this will be the full data; EditorCtrl just works with the laps
@@ -12,12 +12,17 @@ class MainService {
     }
 
     getDummyData() {
+        this.fname = 'dummy.tcx';
         return this.$http.get('/tcx/test')
             .then( res => this.setTcxData(res.data) );
     }
 
     getFeedback() {
         return this.$http.get('/comments');
+    }
+
+    saveData(fname) {
+		return this.$http.post('/tcx/fromjson/' + this.fname, this.data);
     }
 
     setTcxData(data) {

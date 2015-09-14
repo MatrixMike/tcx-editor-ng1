@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '../dist')));
+app.use(express.static(path.join(__dirname, './tmp')));
 
 app.use('/tcx', tcx);
 app.use('/comments', feedback);
