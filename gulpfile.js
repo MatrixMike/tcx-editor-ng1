@@ -108,5 +108,5 @@ gulp.task('watch', ['serve'], function() {
 });
 
 
-gulp.task('default', ['copy', 'systemjsbundle', 'sass', 'jade', 'home', 'watch']);
-// gulp.task('build', ['bower', 'copy', 'app-scripts', 'sass', 'jade']);
+gulp.task('default', ['build', 'watch']);
+gulp.task('build', ['copy', 'systemjsbundle', 'sass', 'jade', 'home']);

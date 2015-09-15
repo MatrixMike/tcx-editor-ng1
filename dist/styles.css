@@ -10,8 +10,7 @@
   font-weight: bold; }
 
 .data-table {
-  margin: 10px 0;
-  height: 20em;
+  height: 350px;
   overflow-y: scroll; }
   .data-table button {
     margin-right: 10px; }
@@ -36,20 +35,22 @@
       .data-table lap .trackpoint:hover {
         background-color: #f4e9cb; }
 
-.controls button {
-  margin-right: 15px; }
+.controls {
+  padding: 10px; }
+  .controls button {
+    margin-right: 15px; }
 
 .feedback {
   margin-top: 10px;
   padding-bottom: 10px;
   background-color: cornsilk; }
 
+.feedback {
+  background-color: #6ca3f5; }
+
 .hotbelgo-feedback .comments {
   padding: 5px 0; }
 
 map {
-  height: 300px; }
-
-.feedback {
-  background-color: #6ca3f5; }
+  height: 350px; }
 
