@@ -1,18 +1,12 @@
-.container.feedback
+.col-xs-12.feedback
 	h3 Feedback
 
 	.row
-		.col-sm-2.table-head
-			h4 Date
-		.col-sm-2.table-head
-			h4 Email
-		.col-sm-8.table-head
-			h4 Comments
+		.col-sm-3.table-head Date
+		.col-sm-2.table-head Email
+		.col-sm-7.table-head Comments
 
 	.row.comments(ng-repeat="comment in vm.comments")
-		.col-sm-2
-			p {{comment.date}}
-		.col-sm-2
-			p {{comment.email}}
-		.col-sm-8
-			p {{comment.comment}}
+		.col-sm-3 {{comment.date}}
+		.col-sm-2 {{comment.email}}
+		.col-sm-7 {{comment.comment}}

@@ -3,4 +3,10 @@
 	padding-bottom: 10px;
     background-color: rgb(108, 163, 245);
     // background-color: cornsilk;
+
+    .comments {
+        & > div {
+            margin-bottom: 1em;
+        }
+    }
 }

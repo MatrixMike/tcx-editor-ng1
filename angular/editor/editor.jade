@@ -1,22 +1,21 @@
 .col-xs-12
-    div.summary
-        .row
-            .col-xs-12
-                h2 Summary of ride ({{vm.startTime | date: "d MMM yy"}})
-        .row
-            .col-xs-2.table-head Lap
-            .col-xs-2.table-head lapStart
-            .col-xs-2.table-head lapEnd
-            .col-xs-2.table-head Lap time
-            .col-xs-2.table-head Distance
-            .col-xs-2.table-head Avg speed
-        .row(ng-repeat="lap in vm.data.Lap")
-            .col-xs-2.table-head {{$index + 1}}
-            .col-xs-2 {{lap.Track[0].Trackpoint[0].Time[0] | date: "HH:mm:ss"}}
-            .col-xs-2 {{lap.Track[0].Trackpoint[lap.Track[0].Trackpoint.length - 1].Time[0] | date: "HH:mm:ss"}}
-            .col-xs-2 {{lap.TotalTimeSeconds[0]}}s
-            .col-xs-2 {{lap.DistanceMeters / 1000 | number : 3}} km
-            .col-xs-2 {{lap.Extensions[0].LX[0].AvgSpeed[0] * 60 * 60 / 1000 | number : 1}} km/h
+    div.row.summary        
+        .col-xs-12
+            h2 Summary of ride ({{vm.startTime | date: "d MMM yy"}})
+            .row
+                .col-xs-2.table-head Lap
+                .col-xs-2.table-head lapStart
+                .col-xs-2.table-head lapEnd
+                .col-xs-2.table-head Lap time
+                .col-xs-2.table-head Distance
+                .col-xs-2.table-head Avg speed
+            .row(ng-repeat="lap in vm.data.Lap")
+                .col-xs-2.table-head {{$index + 1}}
+                .col-xs-2 {{lap.Track[0].Trackpoint[0].Time[0] | date: "HH:mm:ss"}}
+                .col-xs-2 {{lap.Track[0].Trackpoint[lap.Track[0].Trackpoint.length - 1].Time[0] | date: "HH:mm:ss"}}
+                .col-xs-2 {{lap.TotalTimeSeconds[0]}}s
+                .col-xs-2 {{lap.DistanceMeters / 1000 | number : 3}} km
+                .col-xs-2 {{lap.Extensions[0].LX[0].AvgSpeed[0] * 60 * 60 / 1000 | number : 1}} km/h
     //- .row
     //-     .col-xs-2.col-xs-offset-8.table-head {{vm.totalDist / 1000 | number: 1}} km
 

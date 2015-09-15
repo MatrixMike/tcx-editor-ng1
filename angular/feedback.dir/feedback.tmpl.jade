@@ -1,15 +1,15 @@
-div.hotbelgo
-	h3 Feedback for the author
+div
+	h3 Developer feedback
+	p Did the app work? If so, let me now your experience. If not, please provide details of what you did and what you hoped / expected it would do.
 
 	form.row(ng-hide="comments")
 		.col-sm-7
 			.form-group
 				textarea(rows="2", class="form-control" ng-model="vm.feedback" placeholder="Comments, suggestions,...")
-			p If the app did not work, please provide details of what you did and what you hoped / expected it would do.
 		.col-sm-3
 			.form-group
 				input(type="text" class="form-control" ng-model="vm.email" placeholder="email (Optional*)")
-			p * Used for feedback from author. Will not be made public.
+			p * For developer contact. Not made public.
 		.col-sm-2
 			button(ng-click="vm.sendFeedback()" class="btn btn-primary") Send
 

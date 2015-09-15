@@ -1,6 +1,6 @@
 .summary {
   background-color: #eee;
-  padding: 10px; }
+  padding-bottom: 10px; }
 
 .table-head {
   font-weight: bold; }
@@ -30,18 +30,20 @@
         background-color: #f4e9cb; }
 
 .controls {
-  padding: 10px; }
+  padding-top: 10px; }
   .controls button {
     margin-right: 15px; }
-
-map {
-  height: 350px; }
-
 
 .feedback {
   margin-top: 10px;
   padding-bottom: 10px;
   background-color: #6ca3f5; }
+  .feedback .comments > div {
+    margin-bottom: 1em; }
 
 .hotbelgo-feedback .comments {
   padding: 5px 0; }
+
+map {
+  height: 350px; }
+
