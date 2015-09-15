@@ -1,6 +1,6 @@
 // import Immutable from 'immutable';
 
-var LapDir = function() {
+function LapDir() {
     var bindings = {
         lapdata: '=',
         selected: '=',
@@ -26,3 +26,5 @@ var LapDir = function() {
         templateUrl: 'editor/lap.tmpl.html'
     }
 }
+
+export default LapDir;

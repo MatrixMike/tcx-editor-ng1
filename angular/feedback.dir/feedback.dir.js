@@ -1,4 +1,4 @@
-var FeedbackDir = function() {
+function FeedbackDir() {
     return {
         templateUrl: 'feedback.dir/feedback.tmpl.html',
         restrict: 'EA',
@@ -23,3 +23,5 @@ var FeedbackDir = function() {
         controllerAs: 'vm'
     };
 };
+
+export default FeedbackDir;

@@ -11,8 +11,8 @@ import EditorCtrl from './editor/editor.ctrl';
 import UploadCtrl from './upload/upload.ctrl';
 import MapCtrl from './map/map.ctrl';
 import FeedbackCtrl from './feedback/feedback.ctrl';
-import './feedback.dir/feedback.dir';
-import './editor/lap.dir';
+import FeedbackDir from './feedback.dir/feedback.dir';
+import LapDir from './editor/lap.dir';
 import './modules/scroller.dir';
 import "./templates";
 

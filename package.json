@@ -29,14 +29,12 @@
     "browser-sync": "^2.9.3",
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.7.0",
-    "gulp-babel": "^5.2.1",
     "gulp-concat": "^2.6.0",
     "gulp-jade": "^1.1.0",
     "gulp-ng-annotate": "^1.1.0",
     "gulp-nodemon": "^2.0.4",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.5.2",
-    "main-bower-files": "^2.9.0",
     "systemjs-builder": "^0.13.5"
   },
   "jspm": {

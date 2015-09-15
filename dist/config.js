@@ -20,7 +20,7 @@ System.config({
     "babel": "npm:babel-core@5.8.24",
     "babel-runtime": "npm:babel-runtime@5.8.24",
     "core-js": "npm:core-js@1.1.4",
-    "danialfarid/ng-file-upload": "github:danialfarid/ng-file-upload@7.2.0",
+    "danialfarid/ng-file-upload": "github:danialfarid/ng-file-upload@7.2.1",
     "immutable": "npm:immutable@3.7.5",
     "jquery": "github:components/jquery@2.1.4",
     "lodash": "npm:lodash@3.10.1",

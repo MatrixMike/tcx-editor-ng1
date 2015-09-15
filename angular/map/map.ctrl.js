@@ -38,7 +38,6 @@ class MapCtrl {
     }
 
     drawCircles(laps) {
-        console.log("drawCircles");
         var mybounds, radius, skipCount;
         radius = 2;
         skipCount = Math.floor(Math.log(this.Main.trackpointCount));

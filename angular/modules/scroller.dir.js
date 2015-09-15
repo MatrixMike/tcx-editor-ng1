@@ -8,7 +8,7 @@ angular.module("scroller", [])
             link: function(scope, $elm, attrs) {
 
                 return attrs.$observe('target', function(newValue, oldValue) {
-                    console.log("scroller: moving to", newValue);
+                    // console.log("scroller: moving to", newValue);
                     // $elm.scrollTop = parseInt(newValue);
                     jQuery(".data-table").animate({
                         scrollTop: parseInt(newValue)

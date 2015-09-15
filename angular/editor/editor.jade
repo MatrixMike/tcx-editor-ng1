@@ -3,14 +3,14 @@
         .col-xs-12
             h2 Summary of ride ({{vm.startTime | date: "d MMM yy"}})
             .row
-                .col-xs-2.table-head Lap
-                .col-xs-2.table-head lapStart
-                .col-xs-2.table-head lapEnd
-                .col-xs-2.table-head Lap time
+                .col-xs-2.table-head 
+                .col-xs-2.table-head Start
+                .col-xs-2.table-head End
+                .col-xs-2.table-head Time
                 .col-xs-2.table-head Distance
                 .col-xs-2.table-head Avg speed
             .row(ng-repeat="lap in vm.data.Lap")
-                .col-xs-2.table-head {{$index + 1}}
+                .col-xs-2.table-head Lap {{$index + 1}}
                 .col-xs-2 {{lap.Track[0].Trackpoint[0].Time[0] | date: "HH:mm:ss"}}
                 .col-xs-2 {{lap.Track[0].Trackpoint[lap.Track[0].Trackpoint.length - 1].Time[0] | date: "HH:mm:ss"}}
                 .col-xs-2 {{lap.TotalTimeSeconds[0]}}s
