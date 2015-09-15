@@ -5,17 +5,17 @@ var mailgun = require('mailgun-js')({
 });
 
 var oio = require('orchestrate');
-oio.ApiEndPoint = "api.aws-eu-west-1.orchestrate.io";
-var db = oio(process.env.ORCHESTRATE_KEY);
+// oio.ApiEndPoint = "api.aws-eu-west-1.orchestrate.io";
+var db = oio(process.env.ORCHESTRATE_KEY, "api.aws-eu-west-1.orchestrate.io");
 var coll = (debug) ? "tcxeditor-dev" : "tcxeditor";
 
 var getAllComments = function(withEmail, cb) {
 	if (debug) console.log("Getting data from collection: ", coll);
 
-	db.list(coll, {limit:20})
+	db.list(coll)
 	.then(function(result) {
 		var items = result.body.results;
-		console.log("got:", result.body.results.length);
+		console.log("got %s results", result.body.results.length);
 
 		// clean up dates before sending to client
 		var comments = items.map(function(item) {
@@ -34,16 +34,16 @@ var getAllComments = function(withEmail, cb) {
 		// return comments
 	})
 	.fail(function(err) {
-		console.log("error", err);
+		console.log(err);
 		cb(err);
 	});
 };
 
 // Get list of feedbacks
 exports.index = function(req, res) {
-	if (debug) console.log(req.params);
+	// if (debug) console.log(req.params);
 	getAllComments(true, (err, data) => {
-		if (err) res.status(500).send("error getting comments");
+		if (err) res.status(500).send(err);
 		res.send(data);
 	});
 	// getAllComments()
