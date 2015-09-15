@@ -19,6 +19,7 @@ var paths = {
 	home    : ['angular/index.jade'],
 	scss    : ['angular/**/*.scss'],
 	copy    : ['angular/assets/**/*.jpg'
+			  ,'angular/favicon.ico'
 			  ,'angular/jspm_packages/system.js'
 			  ,'angular/config.js'
 		  	  ,'angular/loader.js'
@@ -84,9 +85,12 @@ gulp.task('copy', function () {
 config = require('./ignore/settings');
 gulp.task('serve', function(){
 	return nodemon({
+		// script: 'server/bin/www',
 		script: 'index.js',
-		watch: 'server/*',
-		// ignore: ['angular/**/*', 'dist/*', 'node_modules/*'],
+		execMap: {
+	      js: "node --harmony --use_strict"
+	    },
+	    watch: 'server/*',
 		env: config
 	})
 	.on('start', function () {

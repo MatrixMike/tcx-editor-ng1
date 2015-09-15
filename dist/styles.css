@@ -1,6 +1,12 @@
-/**
- * App-wide Styles
- */
+.feedback {
+  background-color: #6ca3f5; }
+
+.hotbelgo-feedback .comments {
+  padding: 5px 0; }
+
+map {
+  height: 350px; }
+
 
 .summary {
   background-color: #eee;
@@ -44,13 +50,3 @@
   margin-top: 10px;
   padding-bottom: 10px;
   background-color: cornsilk; }
-
-.feedback {
-  background-color: #6ca3f5; }
-
-.hotbelgo-feedback .comments {
-  padding: 5px 0; }
-
-map {
-  height: 350px; }
-

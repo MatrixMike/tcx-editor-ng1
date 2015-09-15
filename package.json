@@ -1,19 +1,17 @@
 {
-  "name": "garmin2",
+  "name": "garmin-tcx-editor",
   "version": "2.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Garmin tcx file editor",
   "scripts": {
-    "start": "node ./server/bin/www",
+    "start": "node --harmony ./server/bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
     "node": "0.12.x"
   },
-  "author": "",
+  "author": "Simon Hampton",
   "license": "ISC",
   "dependencies": {
-    "babel": "^5.8.23",
     "body-parser": "~1.13.2",
     "busboy": "^0.2.11",
     "cookie-parser": "~1.3.5",
@@ -23,7 +21,6 @@
     "mailgun-js": "^0.7.1",
     "morgan": "~1.6.1",
     "orchestrate": "^0.4.7",
-    "restify": "latest",
     "serve-favicon": "~2.3.0",
     "xml2js": "^0.4.12"
   },
@@ -31,7 +28,6 @@
     "browser-sync": "^2.9.3",
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.7.0",
-    "gulp-angular-templates": "0.0.2",
     "gulp-babel": "^5.2.1",
     "gulp-concat": "^2.6.0",
     "gulp-jade": "^1.1.0",
