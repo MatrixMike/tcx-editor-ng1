@@ -7,7 +7,7 @@ var	gulp           = require('gulp'),
 	babel          = require('gulp-babel'),
 	sourcemaps     = require('gulp-sourcemaps'),
 	sass           = require('gulp-sass'),
-    ngTemplates   = require('gulp-angular-templates');
+    ngTemplates   = require('gulp-angular-templatecache');
 var ngAnnotate = require('gulp-ng-annotate');
 var Builder = require('systemjs-builder');
 var builder = new Builder();
@@ -18,7 +18,7 @@ var paths = {
 	partials: ['angular/**/*.jade', '!angular/index.jade'],
 	home    : ['angular/index.jade'],
 	scss    : ['angular/**/*.scss'],
-	copy    : ['angular/**/*.jpg'
+	copy    : ['angular/assets/**/*.jpg'
 			  ,'angular/jspm_packages/system.js'
 			  ,'angular/config.js'
 		  	  ,'angular/loader.js'
@@ -30,9 +30,9 @@ var dist = './dist/';
 gulp.task('jade', function() {
 	return gulp.src(paths.partials)
 	.pipe(jade({pretty: true}))
-	// .pipe(ngTemplates({module: 'garminEditorApp'}))
+	.pipe(ngTemplates({standalone:true}))
 	// .pipe(concat('templates.js'))
-	.pipe(gulp.dest(dist));
+	.pipe(gulp.dest('./angular'));
 });
 
 gulp.task('home', function() {

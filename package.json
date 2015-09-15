@@ -27,6 +27,7 @@
   "devDependencies": {
     "browser-sync": "^2.9.3",
     "gulp": "^3.9.0",
+    "gulp-angular-templatecache": "^1.7.0",
     "gulp-angular-templates": "0.0.2",
     "gulp-babel": "^5.2.1",
     "gulp-concat": "^2.6.0",

@@ -2,6 +2,10 @@
  * App-wide Styles
  */
 
+.summary {
+  background-color: #eee;
+  padding: 10px; }
+
 .table-head {
   font-weight: bold; }
 
@@ -40,12 +44,12 @@
   padding-bottom: 10px;
   background-color: cornsilk; }
 
-.feedback {
-  background-color: #6ca3f5; }
-
 .hotbelgo-feedback .comments {
   padding: 5px 0; }
 
 map {
   height: 300px; }
+
+.feedback {
+  background-color: #6ca3f5; }
 

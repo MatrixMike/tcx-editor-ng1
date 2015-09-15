@@ -14,6 +14,7 @@ import FeedbackCtrl from './feedback/feedback.ctrl';
 import './feedback.dir/feedback.dir';
 import './editor/lap.dir';
 import './modules/scroller.dir';
+import "./templates";
 
 angular.module('garminEditorApp',
     [ 'ui.router'
@@ -21,6 +22,7 @@ angular.module('garminEditorApp',
     , 'ngFileUpload'
     , 'immutable'
     , 'scroller'
+    , 'templates'
     ]
 );
 
