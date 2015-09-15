@@ -4,7 +4,7 @@ class MainService {
     constructor($http) {
         this.$http = $http;
 
-        this.debug = location.host.match('localhost').length > 0;
+        this.debug = !!location.host.match('localhost');
         // total number of points in uploaded file; used to limit number of markers shown
         this.trackpointCount = 0;
         // this will be the full data; EditorCtrl just works with the laps
