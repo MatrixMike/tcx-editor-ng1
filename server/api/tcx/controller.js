@@ -44,7 +44,7 @@ exports.TCX2Json = function (req, res, next) {
 
 	busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
 		file.on('data', function(data) {
-			console.log('receive: File [' + filename + '] got ' + data.length + ' bytes');
+			// console.log('receive: File [' + filename + '] got ' + data.length + ' bytes');
 			fileBuffer = Buffer.concat([fileBuffer, data]);
 		});
 

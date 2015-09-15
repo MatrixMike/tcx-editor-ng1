@@ -19,6 +19,16 @@ type alias Model =
     { outer: KV
     }
 
+type alias TCAttributes =
+    { xsischemaLocation: String
+    , xmlnsns5: String
+    , xmlnsns3: String
+    , xmlnsns2: String
+    , xmlns: String
+    , xmlnsxsi: String
+    , xmlnsns4: String
+    }
+
 type Action =
       Raw (Maybe Model)
 

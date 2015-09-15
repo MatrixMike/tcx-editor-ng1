@@ -52,7 +52,7 @@ gulp.task('systemjsbundle', function () {
 			sourceMaps: true
 		};
         // return builder.build('./angular/app.js', 'dist/build.js');
-		return builder.buildSFX('./angular/app.js', 'dist/build.js');
+		return builder.buildSFX('./angular/app.js', 'dist/build.js', options);
     })
     .catch( console.error );
 });
@@ -76,9 +76,9 @@ gulp.task('serve', function(){
 	return nodemon({
 		// script: 'server/bin/www',
 		script: 'index.js',
-		// execMap: {
-	    //   js: "node --harmony --use_strict"
-	    // },
+		execMap: {
+	      js: "node --harmony --use_strict"
+	    },
 	    watch: 'server/*',
 		env: config
 	})
