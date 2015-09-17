@@ -67,7 +67,8 @@ class MapCtrl {
         return this.map.fitBounds(mybounds);
     }
 
-    // ???
+    // Iterates through Main.data to find point closest to click point
+    // returns [lap, idx]
     findClosest(laps, point) {
         var plat, plng, res;
 

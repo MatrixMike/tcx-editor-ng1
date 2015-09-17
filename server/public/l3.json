@@ -1,0 +1,21 @@
+{
+    "$": {
+        "StartTime": "2015-01-31T11:03:04.000Z"
+    },
+    "TotalTimeSeconds": ["54"],
+    "DistanceMeters": [
+        "94.82000350952148"
+    ],
+    "MaximumSpeed": [
+        "4.241000175476074"
+    ],
+    "Calories": [
+        "1"
+    ],
+    "Intensity": [
+        "Active"
+    ],
+    "TriggerMethod": [
+        "Manual"
+    ]
+}

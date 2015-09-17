@@ -1,0 +1,393 @@
+{
+    "TrainingCenterDatabase": {
+        "$": {
+            "xsi:schemaLocation": "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd",
+            "xmlns:ns5": "http://www.garmin.com/xmlschemas/ActivityGoals/v1",
+            "xmlns:ns3": "http://www.garmin.com/xmlschemas/ActivityExtension/v2",
+            "xmlns:ns2": "http://www.garmin.com/xmlschemas/UserProfile/v2",
+            "xmlns": "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2",
+            "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+            "xmlns:ns4": "http://www.garmin.com/xmlschemas/ProfileExtension/v1"
+        },
+        "Activities": [
+            {
+                "Activity": [
+                    {
+                        "$": {
+                            "Sport": "Biking"
+                        },
+                        "Id": [
+                            "2015-01-31T11:03:04.000Z"
+                        ],
+                        "Lap": [
+                            {
+                                "$": {
+                                    "StartTime": "2015-01-31T11:03:04.000Z"
+                                },
+                                "TotalTimeSeconds": [
+                                    "54"
+                                ],
+                                "DistanceMeters": [
+                                    "94.82000350952148"
+                                ],
+                                "MaximumSpeed": [
+                                    "4.241000175476074"
+                                ],
+                                "Calories": [
+                                    "1"
+                                ],
+                                "Intensity": [
+                                    "Active"
+                                ],
+                                "TriggerMethod": [
+                                    "Manual"
+                                ],
+                                "Track": [
+                                    {
+                                        "Trackpoint": [
+                                            {
+                                                "Time": [
+                                                    "2015-01-31T11:03:04.000Z"
+                                                ],
+                                                "Position": [
+                                                    {
+                                                        "LatitudeDegrees": [
+                                                            "50.84449136629701"
+                                                        ],
+                                                        "LongitudeDegrees": [
+                                                            "4.494487205520272"
+                                                        ]
+                                                    }
+                                                ],
+                                                "AltitudeMeters": [
+                                                    "314.79998779296875"
+                                                ],
+                                                "DistanceMeters": [
+                                                    "0.9799995422363281"
+                                                ],
+                                                "Extensions": [
+                                                    {
+                                                        "TPX": [
+                                                            {
+                                                                "$": {
+                                                                    "xmlns": "http://www.garmin.com/xmlschemas/ActivityExtension/v2"
+                                                                },
+                                                                "Speed": [
+                                                                    "1.6729999780654907"
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "Time": [
+                                                    "2015-01-31T11:03:11.000Z"
+                                                ],
+                                                "Position": [
+                                                    {
+                                                        "LatitudeDegrees": [
+                                                            "50.84449740126729"
+                                                        ],
+                                                        "LongitudeDegrees": [
+                                                            "4.49465517885983"
+                                                        ]
+                                                    }
+                                                ],
+                                                "AltitudeMeters": [
+                                                    "314.79998779296875"
+                                                ],
+                                                "DistanceMeters": [
+                                                    "12.829999923706055"
+                                                ],
+                                                "Extensions": [
+                                                    {
+                                                        "TPX": [
+                                                            {
+                                                                "$": {
+                                                                    "xmlns": "http://www.garmin.com/xmlschemas/ActivityExtension/v2"
+                                                                },
+                                                                "Speed": [
+                                                                    "1.5700000524520874"
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "Time": [
+                                                    "2015-01-31T11:03:20.000Z"
+                                                ],
+                                                "Position": [
+                                                    {
+                                                        "LatitudeDegrees": [
+                                                            "50.84448264911771"
+                                                        ],
+                                                        "LongitudeDegrees": [
+                                                            "4.494854835793376"
+                                                        ]
+                                                    }
+                                                ],
+                                                "AltitudeMeters": [
+                                                    "314.79998779296875"
+                                                ],
+                                                "DistanceMeters": [
+                                                    "26.959999084472656"
+                                                ],
+                                                "Extensions": [
+                                                    {
+                                                        "TPX": [
+                                                            {
+                                                                "$": {
+                                                                    "xmlns": "http://www.garmin.com/xmlschemas/ActivityExtension/v2"
+                                                                },
+                                                                "Speed": [
+                                                                    "1.5700000524520874"
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "Time": [
+                                                    "2015-01-31T11:03:24.000Z"
+                                                ],
+                                                "Position": [
+                                                    {
+                                                        "LatitudeDegrees": [
+                                                            "50.844475692138076"
+                                                        ],
+                                                        "LongitudeDegrees": [
+                                                            "4.494935469701886"
+                                                        ]
+                                                    }
+                                                ],
+                                                "AltitudeMeters": [
+                                                    "314.79998779296875"
+                                                ],
+                                                "DistanceMeters": [
+                                                    "32.63999938964844"
+                                                ],
+                                                "Extensions": [
+                                                    {
+                                                        "TPX": [
+                                                            {
+                                                                "$": {
+                                                                    "xmlns": "http://www.garmin.com/xmlschemas/ActivityExtension/v2"
+                                                                },
+                                                                "Speed": [
+                                                                    "1.1859999895095825"
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "Extensions": [
+                                    {
+                                        "LX": [
+                                            {
+                                                "$": {
+                                                    "xmlns": "http://www.garmin.com/xmlschemas/ActivityExtension/v2"
+                                                },
+                                                "AvgSpeed": [
+                                                    "1.7559259909170646"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "$": {
+                                    "StartTime": "2015-01-31T11:03:58.000Z"
+                                },
+                                "TotalTimeSeconds": [
+                                    "25.625"
+                                ],
+                                "DistanceMeters": [
+                                    "56.9"
+                                ],
+                                "MaximumSpeed": [
+                                    "3.7200000286102295"
+                                ],
+                                "Calories": [
+                                    "0"
+                                ],
+                                "Intensity": [
+                                    "Active"
+                                ],
+                                "TriggerMethod": [
+                                    "Manual"
+                                ],
+                                "Track": [
+                                    {
+                                        "Trackpoint": [
+                                            {
+                                                "Time": [
+                                                    "2015-01-31T11:03:59.000Z"
+                                                ],
+                                                "Position": [
+                                                    {
+                                                        "LatitudeDegrees": [
+                                                            "50.84451785311103"
+                                                        ],
+                                                        "LongitudeDegrees": [
+                                                            "4.494020165875554"
+                                                        ]
+                                                    }
+                                                ],
+                                                "AltitudeMeters": [
+                                                    "312.3999938964844"
+                                                ],
+                                                "DistanceMeters": [
+                                                    "99.5999984741211"
+                                                ],
+                                                "Extensions": [
+                                                    {
+                                                        "TPX": [
+                                                            {
+                                                                "$": {
+                                                                    "xmlns": "http://www.garmin.com/xmlschemas/ActivityExtension/v2"
+                                                                },
+                                                                "Speed": [
+                                                                    "3.7200000286102295"
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "Time": [
+                                                    "2015-01-31T11:04:03.000Z"
+                                                ],
+                                                "Position": [
+                                                    {
+                                                        "LatitudeDegrees": [
+                                                            "50.84451701492071"
+                                                        ],
+                                                        "LongitudeDegrees": [
+                                                            "4.493822772055864"
+                                                        ]
+                                                    }
+                                                ],
+                                                "AltitudeMeters": [
+                                                    "312.3999938964844"
+                                                ],
+                                                "DistanceMeters": [
+                                                    "113.67999267578125"
+                                                ],
+                                                "Extensions": [
+                                                    {
+                                                        "TPX": [
+                                                            {
+                                                                "$": {
+                                                                    "xmlns": "http://www.garmin.com/xmlschemas/ActivityExtension/v2"
+                                                                },
+                                                                "Speed": [
+                                                                    "3.403000116348267"
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "Extensions": [
+                                    {
+                                        "LX": [
+                                            {
+                                                "$": {
+                                                    "xmlns": "http://www.garmin.com/xmlschemas/ActivityExtension/v2"
+                                                },
+                                                "AvgSpeed": [
+                                                    "2.2200000286102295"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "Creator": [
+                            {
+                                "$": {
+                                    "xsi:type": "Device_t"
+                                },
+                                "Name": [
+                                    "Garmin Edge 800"
+                                ],
+                                "UnitId": [
+                                    "3835246964"
+                                ],
+                                "ProductID": [
+                                    "1169"
+                                ],
+                                "Version": [
+                                    {
+                                        "VersionMajor": [
+                                            "2"
+                                        ],
+                                        "VersionMinor": [
+                                            "70"
+                                        ],
+                                        "BuildMajor": [
+                                            "0"
+                                        ],
+                                        "BuildMinor": [
+                                            "0"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "Author": [
+            {
+                "$": {
+                    "xsi:type": "Application_t"
+                },
+                "Name": [
+                    "Garmin Connect API"
+                ],
+                "Build": [
+                    {
+                        "Version": [
+                            {
+                                "VersionMajor": [
+                                    "14"
+                                ],
+                                "VersionMinor": [
+                                    "11"
+                                ],
+                                "BuildMajor": [
+                                    "0"
+                                ],
+                                "BuildMinor": [
+                                    "0"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "LangID": [
+                    "en"
+                ],
+                "PartNumber": [
+                    "006-D2449-00"
+                ]
+            }
+        ]
+    }
+}

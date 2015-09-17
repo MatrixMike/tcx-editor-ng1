@@ -23,11 +23,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // CORS
-app.use(cors());
+if (process.env.NODE_ENV = 'development')
+    app.use(cors());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '../dist')));
-app.use(express.static(path.join(__dirname, '../elm')));
-app.use(express.static(path.join(__dirname, './tmp')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'tmp')));
+
 app.use('/tcx', tcx);
 app.use('/comments', feedback);
 app.use('/', routes); // must be last

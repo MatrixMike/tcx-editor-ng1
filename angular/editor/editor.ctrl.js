@@ -73,6 +73,7 @@ class EditorCtrl {
 
         // Switch this to Immutable?
         this.data = null;
+
         this.lastChanged = [0,0];
 
     	this.deleteMsg = "Delete checked points";
@@ -86,21 +87,27 @@ class EditorCtrl {
             else this.processData();
         }
 
-        $scope.$on("closest", (evt, c) => {
+        $scope.$on("closest", (evt, next) => {
             // console.log("closest received", c);
 
-            if (!this.selected[c[0]]) this.selected[c[0]] = {}
-            this.selected[c[0]][c[1]] = true
+            if (!this.selected[next[0]]) this.selected[next[0]] = {}
+            this.selected[next[0]][next[1]] = true
 
-            // need to add up all the points in laps before selected one
+            /* Calculate scroll position
+             * Needs to know how many tps in previous laps
+             * Add that to preceding tps in this lap
+             */
             let res = _.reduce(this.data.Lap, function(acc, lap, idx) {
-                if (idx < c[0])
+                if (idx < next[0])
                     return acc + lap.Track[0].Trackpoint.length;
                 else return acc;
-            }, c[1]);
+            }, next[1]);
+            this.scrollPos = 20*next[0] + 20*res;
 
-            this.scrollPos = 20*c[0] + 20*res;
-            // console.log("lap %s, tps %s, res %s, = %s", c[0], c[1], res, this.scrollPos);
+            // update lastChanged so that subsequent use of shift+ work properly
+            // USE CHECKCHANGE INSTEAD?
+            this.lastChanged = next;
+            // console.log("lap %s, tps %s, res %s, = %s", next[0], next[1], res, this.scrollPos);
             $scope.$apply();
         });
     }
@@ -128,11 +135,12 @@ class EditorCtrl {
         this.totalDist = totalDist(this.data.Lap);
     }
 
+    /* Called by click event on items
+     */
     checkChange(lapIdx, idx, shift) {
         console.log("checkChange", lapIdx, idx, shift);
         let next = [lapIdx, idx];
-        // let tmp = updateSelected(this.lastChanged, next, shift, Immutable.fromJS(this.selected));
-        // this.selected = tmp.toJS();
+        // takes this.selected and adds/removes, before returning updated version
         let tmp = updateSelected(this.lastChanged, next, shift, this.selected);
         this.selected = tmp;
         this.lastChanged = next;
