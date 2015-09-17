@@ -34,7 +34,16 @@ html
                 .col-xs-12
                     h1 Garmin GPS .tcx editor
 
-            div.row(ui-view)
+            article.row(ui-view)
+
+            .row.social
+                .col-xs-12
+                    .fb-like(
+                        data-href="https://tcx-editor.herokuapp.com/" 
+                        data-layout="standard" 
+                        data-action="recommend" 
+                        data-show-faces="true" 
+                        data-share="true")
 
             footer.row
                 .col-xs-12

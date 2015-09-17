@@ -68,6 +68,8 @@ var initialiseSelected = function(n) {
 
 class EditorCtrl {
     constructor($state, Main, $scope, $rootScope) {
+        // FB.XFBML.parse();
+
         this.Main = Main;
         this.$rootScope = $rootScope;
 

@@ -1,13 +1,3 @@
-.feedback {
-  margin-top: 10px;
-  padding-bottom: 10px;
-  background-color: #6ca3f5; }
-  .feedback .comments > div {
-    margin-bottom: 1em; }
-
-.hotbelgo-feedback .comments {
-  padding: 5px 0; }
-
 .summary {
   background-color: #eee;
   padding-bottom: 10px; }
@@ -48,6 +38,16 @@
   margin-top: 10px;
   background-color: #ecdea5;
   padding: 10px 0 5px; }
+
+.feedback {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  background-color: #6ca3f5; }
+  .feedback .comments > div {
+    margin-bottom: 1em; }
+
+.hotbelgo-feedback .comments {
+  padding: 5px 0; }
 
 map {
   height: 350px; }
