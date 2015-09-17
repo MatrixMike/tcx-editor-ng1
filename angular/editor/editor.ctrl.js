@@ -58,6 +58,7 @@ var getLastDistFromLap = function(lap) {
     return lap.Trackpoint[count].DistanceMeters[0]
 }
 
+// () -> {1:{}, 2:{},...}
 var initialiseSelected = function(n) {
     let r = _.range(0, n);
     let s = {};
@@ -113,7 +114,7 @@ class EditorCtrl {
     createSummaryInfo() {
         this.startTime = this.data.Lap[0].Track[0].Trackpoint[0].Time[0]
 
-        // # Need last Lap with Trackpoints
+        // Need last Lap with Trackpoints to get (new) endTime
         var lastLapIdx = this.data.Lap.length - 1;
         while (!this.data.Lap[lastLapIdx].Track[0].Trackpoint.length) {
             lastLapIdx--;
@@ -128,7 +129,7 @@ class EditorCtrl {
     }
 
     checkChange(lapIdx, idx, shift) {
-        console.log("checkChange");
+        console.log("checkChange", lapIdx, idx, shift);
         let next = [lapIdx, idx];
         // let tmp = updateSelected(this.lastChanged, next, shift, Immutable.fromJS(this.selected));
         // this.selected = tmp.toJS();
@@ -140,6 +141,7 @@ class EditorCtrl {
     saveFile() {
         this.Main.saveData()
         .then( res => {
+            ga('send', 'event', 'file-download', this.Main.fname);
             console.log(res.data);
             window.location = '/' + this.Main.fname
         })

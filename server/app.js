@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var cors = require('cors');
 var routes = require('./routes/index');
 var tcx = require('./api/tcx');
 var feedback = require('./api/feedback');
@@ -21,10 +22,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+// CORS
+app.use(cors());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '../dist')));
+app.use(express.static(path.join(__dirname, '../elm')));
 app.use(express.static(path.join(__dirname, './tmp')));
-
 app.use('/tcx', tcx);
 app.use('/comments', feedback);
 app.use('/', routes); // must be last

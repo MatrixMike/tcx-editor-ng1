@@ -5,67 +5,134 @@ import Http
 import Effects exposing (Effects)
 import Json.Decode as Json exposing (..)
 import Task exposing (..)
+import String exposing (toInt, toFloat)
 
 -- MODEL
 
-type alias KV = (String, String)
-type alias KO = (String, KV)
-type alias Arr = List KV
-
-type Item = MkKV KV | MkKO KO | MkArr Arr
-
-type alias Model =
-    -- { outer: String
-    { outer: KV
+type alias Position =
+    { lat: Float
+    , lng: Float
     }
 
-type alias TCAttributes =
-    { xsischemaLocation: String
-    , xmlnsns5: String
-    , xmlnsns3: String
-    , xmlnsns2: String
-    , xmlns: String
-    , xmlnsxsi: String
-    , xmlnsns4: String
+type alias Trackpoint =
+    { time: String
+    , position: Position
+    , distance: Float
     }
 
-type Action =
-      Raw (Maybe Model)
+type alias Lap =
+    { totalTime: Float
+    , distance: Float
+    , tps: List Trackpoint
+    }
 
+type alias Model = List Lap
+
+i = []
+    -- { totalTime = 100
+    -- , distance = 99
+    -- , tps = []
+    -- }
+
+type Action = Raw (Maybe Model)
+-- type Action = Raw (Task String Model)
 
 init : (Model, Effects Action)
-init = (
-    { outer = ("initial key", "init val")
-    }, loadData)
+init = (i, loadData)
 
 -- get : Decoder value -> String -> Task Error value
+-- type Error = Timeout | NetworkError | UnexpectedPayload String | BadResponse Int String
+-- toMaybe : Task x a -> Task y (Maybe a)
+-- map : (a -> b) -> Task x a -> Task x b
 loadData : Effects Action
 loadData =
-    Http.get myParser "http://localhost:8080/tcx"
+    -- Http.get tcxDecoder "http://localhost:5000/tcx/test"
+    Http.get tcxDecoder "http://localhost:5000/longexample.json"
         |> Task.toMaybe
         |> Task.map Raw
         |> Effects.task
 
 -- (:=) : String -> Decoder a -> Decoder a
 -- object1 : (a -> value) -> Decoder a -> Decoder value
-myParser : Json.Decoder Model
--- myParser = Json.object1 Model (outer := Json.string)
-myParser = Json.object1 Model (kvCreator "TrainingCenterDatabase")
-
+-- at : List String -> Decoder a -> Decoder a
+-- int : Decoder Int
 -- map : (a -> b) -> Decoder a -> Decoder b
--- map : (String -> KV) -> Decoder String -> Decoder KV)
-kvCreator : String -> Decoder KV
-kvCreator key = Json.map ((,) key) (key := Json.string)
+-- list : Decoder a -> Decoder (List a)
+-- tuple1 : (a -> value) -> Decoder a -> Decoder value
+-- "DistanceMeters": ["94.8200"],
+
+tcxDecoder : Decoder Model
+tcxDecoder =
+    -- at ["TrainingCenterDatabase", "Activities"] <| object1 (\[x] -> x) (list activitiesDecoder)
+    at ["TrainingCenterDatabase", "Activities"] <| tuple1 identity activitiesDecoder
+
+activitiesDecoder : Decoder Model
+-- activitiesDecoder = xtract "Activity" activityDecoder
+activitiesDecoder = ("Activity" := tuple1 identity activityDecoder)
+
+activityDecoder : Decoder Model
+activityDecoder = ("Lap" := list lapDecoder)
+
+-- customDecoder : Decoder a -> (a -> Result String b) -> Decoder b
+-- toFloat : String -> Result String Float
+lapDecoder: Decoder Lap
+lapDecoder =
+    object3 Lap
+        (xtractFloat "TotalTimeSeconds")
+        (xtractFloat "DistanceMeters")
+        trackDecoder
+
+trackDecoder: Decoder (List Trackpoint)
+trackDecoder = "Track" := tuple1 identity ("Trackpoint" := list tpDecoder)
+
+tpDecoder : Decoder Trackpoint
+tpDecoder =
+    object3 Trackpoint
+        ("Time" := tuple1 identity string)
+        ("Position" := tuple1 identity posDecoder)
+        (xtractFloat "DistanceMeters")
+
+posDecoder: Decoder Position
+posDecoder =
+    object2 Position
+        (xtractFloat "LatitudeDegrees")
+        (xtractFloat "LongitudeDegrees")
+
+-- apply decoder to singleton array
+-- xtract : String -> Decoder a -> Decoder a
+-- xtract s d = object1 (\[x] -> x) (s := list d)
+-- xtract s d = (s:= tuple1 identity d)
+
+xtractFloat: String -> Decoder Float
+xtractFloat str = customDecoder (str := tuple1 identity string) String.toFloat
+-- "TotalTimeSeconds" := tuple1 go string
+
+-- UPDATE
 
 update : Action -> Model -> (Model, Effects Action)
 update action model =
     let newmodel =
         case action of
             Raw maybeModel ->
-                Maybe.withDefault
-                    { outer = ("dummey", "failed string") }
-                    maybeModel
+                -- maybeModel
+                Maybe.withDefault i maybeModel
     in (newmodel, Effects.none)
 
+-- VIEW
+
+viewTrack : Trackpoint -> Html
+viewTrack tp =
+    div [] <| [(text << toString) tp.distance]
+
+viewLap : Lap -> Html
+viewLap lap =
+    div []
+        <| p [] [text <| "Distance: " ++ toString lap.distance]
+           :: List.map viewTrack lap.tps
+
 view : Signal.Address Action -> Model -> Html
-view address model = div [] [text <| fst model.outer ++ snd model.outer]
+view address model = div [] <| List.map viewLap model
+    -- case model of
+    --     Result.Ok mod -> div [] <| List.map viewLap mod
+    --     Result.Err
+-- view address model = div [] <| List.map (\lap -> (text << toString) lap.distance) model
