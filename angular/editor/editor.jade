@@ -24,7 +24,7 @@
             h2 Trackpoint data
             p Choose the 'trackpoints' to delete from below or click on the map (not the markers). Use Shift+Click to select multiple rows.
     .row
-        .col-xs-6.data-table
+        .col-xs-5.data-table
             div(scroll-to data-target="{{vm.scrollPos}}", ng-repeat="lap in vm.data.Lap track by $index")
                 strong Lap {{$index+1}}
                 lap(
@@ -33,7 +33,7 @@
                     check="vm.checkChange(lapIdx, idx, shift)",
                     selected="vm.selected[$index]"
                     )
-        .col-xs-6
+        .col-xs-7
             //- h2 Map
             map(
                 center="44, 5",
@@ -53,6 +53,15 @@
             button(class="btn btn-danger" ng-click="vm.deletePoints()") {{vm.deleteMsg}}
             button(class="btn btn-success btn-disabled" ng-click="vm.saveFile()") Download .tcx
             a(ui-sref="upload" class="btn btn-primary") Load different file
+
+    .row.social
+        .col-xs-12
+            .fb-like(
+                data-href="https://tcx-editor.herokuapp.com/" 
+                data-layout="standard" 
+                data-action="recommend" 
+                data-show-faces="true" 
+                data-share="true")
 
     .row.feedback
         .col-xs-12

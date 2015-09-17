@@ -9,9 +9,26 @@ html
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
         link(rel='stylesheet', href='/styles.css')
 
+        //- You can use open graph tags to customize link previews. Learn more: https://developers.facebook.com/docs/sharing/webmasters
+        meta(property="og:url", content="https://tcx-editor.herokuapp.com/")
+        meta(property="og:type"          content="website")
+        meta(property="og:title"         content="Garmin tcx online file editor")
+        meta(property="og:description"   content="Remove unneeded points on tcx track via simple online application; no download needed|")
+        meta(property="og:image"         content="https://tcx-editor.herokuapp.com/images/editor.png")
+
         base(href='/')
 
     body(ng-app='garminEditorApp')
+        div#fb-root
+        script.
+            (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4";
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            
         .container
             header.row
                 .col-xs-12

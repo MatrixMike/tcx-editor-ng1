@@ -17,7 +17,7 @@ var paths = {
 	partials: ['angular/**/*.jade', '!angular/index.jade'],
 	home    : ['angular/index.jade'],
 	scss    : ['angular/**/*.scss'],
-	copy    : ['angular/assets/**/*.jpg'
+	copy    : ['angular/assets/**/*.{png,jpg}'
 			  ,'angular/favicon.ico'
 			  ,'angular/jspm_packages/system.js'
 			  ,'angular/config.js'

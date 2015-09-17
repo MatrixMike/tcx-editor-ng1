@@ -76,7 +76,7 @@ class EditorCtrl {
 
         this.lastChanged = [0,0];
 
-    	this.deleteMsg = "Delete checked points";
+    	this.deleteMsg = "Delete selected points";
 
     	if (Main.debug && _.isEmpty(Main.data)) {
             Main.getDummyData()
@@ -114,6 +114,8 @@ class EditorCtrl {
 
     processData() {
 		this.data = this.Main.data.TrainingCenterDatabase.Activities[0].Activity[0];
+        // send this to store as analytics
+        console.log(this.data.Lap[0].Track[0].Trackpoint[0].Position[0]);
 		this.createSummaryInfo();
         this.selected = initialiseSelected(this.data.Lap.length);
     }

@@ -16,7 +16,7 @@ class MapCtrl {
                     this.lap = Main.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
 
                     if (!_.isEmpty(this.map))
-                        this.drawCircles(this.lap);
+                        this.drawMarkers(this.lap);
                 }
             }
         );
@@ -25,22 +25,28 @@ class MapCtrl {
             this.map = map;
 
             if (!_.isEmpty(this.lap))
-                this.drawCircles(this.lap);
+                this.drawMarkers(this.lap);
 
             map.addListener('click', (e) => {
 				// console.log(e.latLng);
 				let closest = this.findClosest(this.lap, e.latLng);
                 $rootScope.$broadcast("closest", closest);
             });
+
+            map.addListener('zoom_changed', () => {
+                this.drawMarkers(this.lap, false);
+            });
         });
 
-        $scope.$on('redraw', () => this.drawCircles(this.lap) );
+        $scope.$on('redraw', () => this.drawMarkers(this.lap) );
     }
 
-    drawCircles(laps) {
+    drawMarkers(laps, fitBounds = true) {
         var mybounds, radius, skipCount;
         radius = 2;
-        skipCount = Math.floor(Math.log(this.Main.trackpointCount));
+        // skipCount = Math.floor(Math.log(this.Main.trackpointCount));
+        skipCount = (20 - Math.min(19, this.map.getZoom())) * 3 - 2;
+        console.log("Zoom %s, skipCount %s", this.map.getZoom(), skipCount);
 
         // remove existing points
         if (this.dots.length)
@@ -64,7 +70,9 @@ class MapCtrl {
                 }
             });
         });
-        return this.map.fitBounds(mybounds);
+
+        if (fitBounds)
+            this.map.fitBounds(mybounds);
     }
 
     // Iterates through Main.data to find point closest to click point

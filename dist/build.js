@@ -783,25 +783,25 @@
   loader.amdRequire = require;
 })(typeof self != 'undefined' ? self : global);
 "bundle";
+$__System.registerDynamic("2", ["10"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("10");
+  global.define = __define;
+  return module.exports;
+});
+
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-define("1", ["10"], function(main) {
+define("1", ["11"], function(main) {
   return main;
 });
 
 _removeDefine();
 })();
-$__System.registerDynamic("2", ["11"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("11");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3", ["12"], true, function(require, exports, module) {
+$__System.registerDynamic("5", ["12"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -811,7 +811,7 @@ $__System.registerDynamic("3", ["12"], true, function(require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("4", ["13"], true, function(require, exports, module) {
+$__System.registerDynamic("3", ["13"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -821,7 +821,7 @@ $__System.registerDynamic("4", ["13"], true, function(require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("5", ["14"], true, function(require, exports, module) {
+$__System.registerDynamic("4", ["14"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -845,11 +845,11 @@ $__System.registerDynamic("f", [], false, function(__require, __exports, __modul
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
   (function() {
     angular.module("templates", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("editor/editor.html", "\n<div class=\"col-xs-12\">\n  <div class=\"row summary\">       \n    <div class=\"col-xs-12\">\n      <h2>Summary of ride ({{vm.startTime | date: \"d MMM yy\"}})</h2>\n      <div class=\"row\">\n        <div class=\"col-xs-2 table-head\"> </div>\n        <div class=\"col-xs-2 table-head\">Start</div>\n        <div class=\"col-xs-2 table-head\">End</div>\n        <div class=\"col-xs-2 table-head\">Time</div>\n        <div class=\"col-xs-2 table-head\">Distance</div>\n        <div class=\"col-xs-2 table-head\">Avg speed</div>\n      </div>\n      <div ng-repeat=\"lap in vm.data.Lap\" class=\"row\">\n        <div class=\"col-xs-2 table-head\">Lap {{$index + 1}}</div>\n        <div class=\"col-xs-2\">{{lap.Track[0].Trackpoint[0].Time[0] | date: \"HH:mm:ss\"}}</div>\n        <div class=\"col-xs-2\">{{lap.Track[0].Trackpoint[lap.Track[0].Trackpoint.length - 1].Time[0] | date: \"HH:mm:ss\"}}</div>\n        <div class=\"col-xs-2\">{{lap.TotalTimeSeconds[0]}}s</div>\n        <div class=\"col-xs-2\">{{lap.DistanceMeters / 1000 | number : 3}} km</div>\n        <div class=\"col-xs-2\">{{lap.Extensions[0].LX[0].AvgSpeed[0] * 60 * 60 / 1000 | number : 1}} km/h</div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <h2>Trackpoint data</h2>\n      <p>Choose the \'trackpoints\' to delete from below or click on the map (not the markers). Use Shift+Click to select multiple rows.</p>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-6 data-table\">\n      <div scroll-to=\"scroll-to\" data-target=\"{{vm.scrollPos}}\" ng-repeat=\"lap in vm.data.Lap track by $index\"><strong>Lap {{$index+1}}</strong>\n        <lap lapdata=\"lap.Track[0].Trackpoint\" count=\"{{$index}}\" check=\"vm.checkChange(lapIdx, idx, shift)\" selected=\"vm.selected[$index]\"></lap>\n      </div>\n    </div>\n    <div class=\"col-xs-6\"><map center=\"44, 5\" zoom=\"11\" draggable=\"true\" map-type-control=\"false\" auto-refresh=\"auto-refresh\" ng-controller=\"MapCtrl as map\"></map>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12 controls\">\n      <button ng-click=\"vm.deletePoints()\" class=\"btn btn-danger\">{{vm.deleteMsg}}</button>\n      <button ng-click=\"vm.saveFile()\" class=\"btn btn-success btn-disabled\">Download .tcx</button><a ui-sref=\"upload\" class=\"btn btn-primary\">Load different file</a>\n    </div>\n  </div>\n  <div class=\"row feedback\">\n    <div class=\"col-xs-12\">\n      <feedback></feedback>\n    </div>\n  </div>\n</div>");
+      $templateCache.put("editor/editor.html", "\n<div class=\"col-xs-12\">\n  <div class=\"row summary\">       \n    <div class=\"col-xs-12\">\n      <h2>Summary of ride ({{vm.startTime | date: \"d MMM yy\"}})</h2>\n      <div class=\"row\">\n        <div class=\"col-xs-2 table-head\"> </div>\n        <div class=\"col-xs-2 table-head\">Start</div>\n        <div class=\"col-xs-2 table-head\">End</div>\n        <div class=\"col-xs-2 table-head\">Time</div>\n        <div class=\"col-xs-2 table-head\">Distance</div>\n        <div class=\"col-xs-2 table-head\">Avg speed</div>\n      </div>\n      <div ng-repeat=\"lap in vm.data.Lap\" class=\"row\">\n        <div class=\"col-xs-2 table-head\">Lap {{$index + 1}}</div>\n        <div class=\"col-xs-2\">{{lap.Track[0].Trackpoint[0].Time[0] | date: \"HH:mm:ss\"}}</div>\n        <div class=\"col-xs-2\">{{lap.Track[0].Trackpoint[lap.Track[0].Trackpoint.length - 1].Time[0] | date: \"HH:mm:ss\"}}</div>\n        <div class=\"col-xs-2\">{{lap.TotalTimeSeconds[0]}}s</div>\n        <div class=\"col-xs-2\">{{lap.DistanceMeters / 1000 | number : 3}} km</div>\n        <div class=\"col-xs-2\">{{lap.Extensions[0].LX[0].AvgSpeed[0] * 60 * 60 / 1000 | number : 1}} km/h</div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <h2>Trackpoint data</h2>\n      <p>Choose the \'trackpoints\' to delete from below or click on the map (not the markers). Use Shift+Click to select multiple rows.</p>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-5 data-table\">\n      <div scroll-to=\"scroll-to\" data-target=\"{{vm.scrollPos}}\" ng-repeat=\"lap in vm.data.Lap track by $index\"><strong>Lap {{$index+1}}</strong>\n        <lap lapdata=\"lap.Track[0].Trackpoint\" count=\"{{$index}}\" check=\"vm.checkChange(lapIdx, idx, shift)\" selected=\"vm.selected[$index]\"></lap>\n      </div>\n    </div>\n    <div class=\"col-xs-7\"><map center=\"44, 5\" zoom=\"11\" draggable=\"true\" map-type-control=\"false\" auto-refresh=\"auto-refresh\" ng-controller=\"MapCtrl as map\"></map>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12 controls\">\n      <button ng-click=\"vm.deletePoints()\" class=\"btn btn-danger\">{{vm.deleteMsg}}</button>\n      <button ng-click=\"vm.saveFile()\" class=\"btn btn-success btn-disabled\">Download .tcx</button><a ui-sref=\"upload\" class=\"btn btn-primary\">Load different file</a>\n    </div>\n  </div>\n  <div class=\"row social\">\n    <div class=\"col-xs-12\">\n      <div data-href=\"https://tcx-editor.herokuapp.com/\" data-layout=\"standard\" data-action=\"recommend\" data-show-faces=\"true\" data-share=\"true\" class=\"fb-like\"></div>\n    </div>\n  </div>\n  <div class=\"row feedback\">\n    <div class=\"col-xs-12\">\n      <feedback></feedback>\n    </div>\n  </div>\n</div>");
       $templateCache.put("editor/lap.tmpl.html", "\n<table>\n  <tr>\n    <th>Timestamp</th>\n    <th>Accum Dist. (m)</th>\n  </tr>\n  <tr ng-repeat=\"tp in vm.lapdata track by $index\" ng-class=\"{\'selected\': vm.selected[$index]}\" ng-click=\"vm.select($event, $index)\" class=\"trackpoint c{{$index}}\">\n    <td>{{tp.Time[0] | date: \'H:mm:ss\'}}</td>\n    <td>{{tp.DistanceMeters[0] | number : 1}} m</td>\n  </tr>\n</table>");
       $templateCache.put("feedback/feedback.html", "\n<div class=\"col-xs-12 feedback\">\n  <h3>Feedback</h3>\n  <div class=\"row\">\n    <div class=\"col-sm-3 table-head\">Date</div>\n    <div class=\"col-sm-2 table-head\">Email</div>\n    <div class=\"col-sm-7 table-head\">Comments</div>\n  </div>\n  <div ng-repeat=\"comment in vm.comments\" class=\"row comments\">\n    <div class=\"col-sm-3\">{{comment.date}}</div>\n    <div class=\"col-sm-2\">{{comment.email}}</div>\n    <div class=\"col-sm-7\">{{comment.comment}}</div>\n  </div>\n</div>");
       $templateCache.put("feedback.dir/feedback.tmpl.html", "\n<div>\n  <h3>Developer feedback</h3>\n  <p>Did the app work? If so, let me now your experience. If not, please provide details of what you did and what you hoped / expected it would do.</p>\n  <form ng-hide=\"comments\" class=\"row\">\n    <div class=\"col-sm-7\">\n      <div class=\"form-group\">\n        <textarea rows=\"2\" ng-model=\"vm.feedback\" placeholder=\"Comments, suggestions,...\" class=\"form-control\"></textarea>\n      </div>\n    </div>\n    <div class=\"col-sm-3\">\n      <div class=\"form-group\">\n        <input type=\"text\" ng-model=\"vm.email\" placeholder=\"email (Optional*)\" class=\"form-control\"/>\n      </div>\n      <p>* For developer contact. Not made public.</p>\n    </div>\n    <div class=\"col-sm-2\">\n      <button ng-click=\"vm.sendFeedback()\" class=\"btn btn-primary\">Send</button>\n    </div>\n  </form>\n  <div ng-show=\"comments\" class=\"row\">\n    <div class=\"col-sm-3\">\n      <h4>Date</h4>\n    </div>\n    <div class=\"col-sm-9\">\n      <h4>Comment</h4>\n    </div>\n  </div>\n  <div ng-repeat=\"comment in vm.comments\" class=\"row comments\">\n    <div class=\"col-sm-3\">\n      <p>{{comment.date}}</p>\n    </div>\n    <div class=\"col-sm-9\">\n      <p>{{comment.comment}}</p>\n    </div>\n  </div>\n</div>");
-      $templateCache.put("upload/upload.html", "\n<div class=\"col-xs-12 upload\">\n  <div class=\"row\">\n    <div class=\"col-xs-7\">\n      <p>Ever left your Garmin running at the end of a ride? All your hard earned averages declined pointlessly? </p>\n      <p>This simple editor enables you to delete points from a file, recalculates aggregate ride data, and returns a new copy of the file.</p>\n      <p>To start, upload a \'.tcx\' file. You can convert a .fit file to .tcx using <a href=\"http://connect.garmin.com/\"> Garmin Connect\'s</a> export functionality.</p>\n      <p><strong>Note:</strong> This app is tested with Edge 800 (firmware 2.6) data. YMMV, but other users (including with Garmin 610) report success. </p>\n      <p>No copy of the data processed is kept.</p>\n      <form>\n        <div ngf-select=\"vm.upload($file)\" ng-model=\"vm.file\" name=\"file\" class=\"btn btn-primary btn-upload\">{{vm.msg}}</div>\n      </form>\n    </div>\n    <div class=\"col-xs-5 img-holder\"><img src=\"images/edge.jpg\" alt=\"edge 800\"/></div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <h3>Change log</h3>\n      <p>14 Sep 15 - 2.0.0: rewrite in ES6</p>\n      <p>24 Jan 15 - 1.3.0: &lt;shift&gt;+click functionality improved; fixed bug when deleting entire lap</p>\n      <p>31 Jan 15 - 1.2.1: fixed bug when deleting last lap</p>\n      <p>&nbsp;2 Feb 15 - 1.2.0: Use colours to distinguish laps, highlight rows where speed = 0</p>\n      <p>29 Jun 14 - 1.1.0: Handles delete from start correctly; fixed potential crashes</p>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <h3>Todo</h3>\n      <ul>\n        <li>Error messages for badly formatted files</li>\n        <li>Provide option to change ride time (and avg speed) to time spent moving (i.e. dropping lunch stops where GPS left on)</li>\n        <li>Show total distance for info</li>\n      </ul>\n    </div>\n  </div>\n</div>");
+      $templateCache.put("upload/upload.html", "\n<div class=\"col-xs-12 upload\">\n  <div class=\"row\">\n    <div class=\"col-xs-7\">\n      <p>Ever left your Garmin running at the end of a ride? All your hard earned averages declined pointlessly? </p>\n      <p>This simple editor enables you to delete points from a file, recalculates aggregate ride data, and returns a new copy of the file.</p>\n      <p>To start, upload a \'.tcx\' file. You can convert a .fit file to .tcx using <a href=\"http://connect.garmin.com/\"> Garmin Connect\'s</a> export functionality.</p>\n      <p><strong>Note:</strong> This app is tested with Edge 800 (firmware 2.6) data. YMMV, but other users (including with Garmin 610) report success. </p>\n      <p>No copy of the data processed is kept.</p>\n      <form>\n        <div ngf-select=\"vm.upload($file)\" ng-model=\"vm.file\" name=\"file\" class=\"btn btn-primary btn-upload\">{{vm.msg}}</div>\n      </form>\n    </div>\n    <div class=\"col-xs-5 img-holder\"><img src=\"images/editor.png\" alt=\"Garmin tcx editor\"/></div>\n  </div>\n</div>");
     }]);
   })();
   return _retrieveGlobal();
@@ -869,6 +869,2062 @@ $__System.registerDynamic("e", [], false, function(__require, __exports, __modul
         }
       };
     });
+  })();
+  return _retrieveGlobal();
+});
+
+$__System.registerDynamic("13", ["2"], false, function(__require, __exports, __module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
+  (function() {
+    "format global";
+    "deps angular";
+    if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports) {
+      module.exports = 'ui.router';
+    }
+    (function(window, angular, undefined) {
+      'use strict';
+      var isDefined = angular.isDefined,
+          isFunction = angular.isFunction,
+          isString = angular.isString,
+          isObject = angular.isObject,
+          isArray = angular.isArray,
+          forEach = angular.forEach,
+          extend = angular.extend,
+          copy = angular.copy;
+      function inherit(parent, extra) {
+        return extend(new (extend(function() {}, {prototype: parent}))(), extra);
+      }
+      function merge(dst) {
+        forEach(arguments, function(obj) {
+          if (obj !== dst) {
+            forEach(obj, function(value, key) {
+              if (!dst.hasOwnProperty(key))
+                dst[key] = value;
+            });
+          }
+        });
+        return dst;
+      }
+      function ancestors(first, second) {
+        var path = [];
+        for (var n in first.path) {
+          if (first.path[n] !== second.path[n])
+            break;
+          path.push(first.path[n]);
+        }
+        return path;
+      }
+      function objectKeys(object) {
+        if (Object.keys) {
+          return Object.keys(object);
+        }
+        var result = [];
+        forEach(object, function(val, key) {
+          result.push(key);
+        });
+        return result;
+      }
+      function indexOf(array, value) {
+        if (Array.prototype.indexOf) {
+          return array.indexOf(value, Number(arguments[2]) || 0);
+        }
+        var len = array.length >>> 0,
+            from = Number(arguments[2]) || 0;
+        from = (from < 0) ? Math.ceil(from) : Math.floor(from);
+        if (from < 0)
+          from += len;
+        for (; from < len; from++) {
+          if (from in array && array[from] === value)
+            return from;
+        }
+        return -1;
+      }
+      function inheritParams(currentParams, newParams, $current, $to) {
+        var parents = ancestors($current, $to),
+            parentParams,
+            inherited = {},
+            inheritList = [];
+        for (var i in parents) {
+          if (!parents[i].params)
+            continue;
+          parentParams = objectKeys(parents[i].params);
+          if (!parentParams.length)
+            continue;
+          for (var j in parentParams) {
+            if (indexOf(inheritList, parentParams[j]) >= 0)
+              continue;
+            inheritList.push(parentParams[j]);
+            inherited[parentParams[j]] = currentParams[parentParams[j]];
+          }
+        }
+        return extend({}, inherited, newParams);
+      }
+      function equalForKeys(a, b, keys) {
+        if (!keys) {
+          keys = [];
+          for (var n in a)
+            keys.push(n);
+        }
+        for (var i = 0; i < keys.length; i++) {
+          var k = keys[i];
+          if (a[k] != b[k])
+            return false;
+        }
+        return true;
+      }
+      function filterByKeys(keys, values) {
+        var filtered = {};
+        forEach(keys, function(name) {
+          filtered[name] = values[name];
+        });
+        return filtered;
+      }
+      function indexBy(array, propName) {
+        var result = {};
+        forEach(array, function(item) {
+          result[item[propName]] = item;
+        });
+        return result;
+      }
+      function pick(obj) {
+        var copy = {};
+        var keys = Array.prototype.concat.apply(Array.prototype, Array.prototype.slice.call(arguments, 1));
+        forEach(keys, function(key) {
+          if (key in obj)
+            copy[key] = obj[key];
+        });
+        return copy;
+      }
+      function omit(obj) {
+        var copy = {};
+        var keys = Array.prototype.concat.apply(Array.prototype, Array.prototype.slice.call(arguments, 1));
+        for (var key in obj) {
+          if (indexOf(keys, key) == -1)
+            copy[key] = obj[key];
+        }
+        return copy;
+      }
+      function pluck(collection, key) {
+        var result = isArray(collection) ? [] : {};
+        forEach(collection, function(val, i) {
+          result[i] = isFunction(key) ? key(val) : val[key];
+        });
+        return result;
+      }
+      function filter(collection, callback) {
+        var array = isArray(collection);
+        var result = array ? [] : {};
+        forEach(collection, function(val, i) {
+          if (callback(val, i)) {
+            result[array ? result.length : i] = val;
+          }
+        });
+        return result;
+      }
+      function map(collection, callback) {
+        var result = isArray(collection) ? [] : {};
+        forEach(collection, function(val, i) {
+          result[i] = callback(val, i);
+        });
+        return result;
+      }
+      angular.module('ui.router.util', ['ng']);
+      angular.module('ui.router.router', ['ui.router.util']);
+      angular.module('ui.router.state', ['ui.router.router', 'ui.router.util']);
+      angular.module('ui.router', ['ui.router.state']);
+      angular.module('ui.router.compat', ['ui.router']);
+      $Resolve.$inject = ['$q', '$injector'];
+      function $Resolve($q, $injector) {
+        var VISIT_IN_PROGRESS = 1,
+            VISIT_DONE = 2,
+            NOTHING = {},
+            NO_DEPENDENCIES = [],
+            NO_LOCALS = NOTHING,
+            NO_PARENT = extend($q.when(NOTHING), {
+              $$promises: NOTHING,
+              $$values: NOTHING
+            });
+        this.study = function(invocables) {
+          if (!isObject(invocables))
+            throw new Error("'invocables' must be an object");
+          var invocableKeys = objectKeys(invocables || {});
+          var plan = [],
+              cycle = [],
+              visited = {};
+          function visit(value, key) {
+            if (visited[key] === VISIT_DONE)
+              return;
+            cycle.push(key);
+            if (visited[key] === VISIT_IN_PROGRESS) {
+              cycle.splice(0, indexOf(cycle, key));
+              throw new Error("Cyclic dependency: " + cycle.join(" -> "));
+            }
+            visited[key] = VISIT_IN_PROGRESS;
+            if (isString(value)) {
+              plan.push(key, [function() {
+                return $injector.get(value);
+              }], NO_DEPENDENCIES);
+            } else {
+              var params = $injector.annotate(value);
+              forEach(params, function(param) {
+                if (param !== key && invocables.hasOwnProperty(param))
+                  visit(invocables[param], param);
+              });
+              plan.push(key, value, params);
+            }
+            cycle.pop();
+            visited[key] = VISIT_DONE;
+          }
+          forEach(invocables, visit);
+          invocables = cycle = visited = null;
+          function isResolve(value) {
+            return isObject(value) && value.then && value.$$promises;
+          }
+          return function(locals, parent, self) {
+            if (isResolve(locals) && self === undefined) {
+              self = parent;
+              parent = locals;
+              locals = null;
+            }
+            if (!locals)
+              locals = NO_LOCALS;
+            else if (!isObject(locals)) {
+              throw new Error("'locals' must be an object");
+            }
+            if (!parent)
+              parent = NO_PARENT;
+            else if (!isResolve(parent)) {
+              throw new Error("'parent' must be a promise returned by $resolve.resolve()");
+            }
+            var resolution = $q.defer(),
+                result = resolution.promise,
+                promises = result.$$promises = {},
+                values = extend({}, locals),
+                wait = 1 + plan.length / 3,
+                merged = false;
+            function done() {
+              if (!--wait) {
+                if (!merged)
+                  merge(values, parent.$$values);
+                result.$$values = values;
+                result.$$promises = result.$$promises || true;
+                delete result.$$inheritedValues;
+                resolution.resolve(values);
+              }
+            }
+            function fail(reason) {
+              result.$$failure = reason;
+              resolution.reject(reason);
+            }
+            if (isDefined(parent.$$failure)) {
+              fail(parent.$$failure);
+              return result;
+            }
+            if (parent.$$inheritedValues) {
+              merge(values, omit(parent.$$inheritedValues, invocableKeys));
+            }
+            extend(promises, parent.$$promises);
+            if (parent.$$values) {
+              merged = merge(values, omit(parent.$$values, invocableKeys));
+              result.$$inheritedValues = omit(parent.$$values, invocableKeys);
+              done();
+            } else {
+              if (parent.$$inheritedValues) {
+                result.$$inheritedValues = omit(parent.$$inheritedValues, invocableKeys);
+              }
+              parent.then(done, fail);
+            }
+            for (var i = 0,
+                ii = plan.length; i < ii; i += 3) {
+              if (locals.hasOwnProperty(plan[i]))
+                done();
+              else
+                invoke(plan[i], plan[i + 1], plan[i + 2]);
+            }
+            function invoke(key, invocable, params) {
+              var invocation = $q.defer(),
+                  waitParams = 0;
+              function onfailure(reason) {
+                invocation.reject(reason);
+                fail(reason);
+              }
+              forEach(params, function(dep) {
+                if (promises.hasOwnProperty(dep) && !locals.hasOwnProperty(dep)) {
+                  waitParams++;
+                  promises[dep].then(function(result) {
+                    values[dep] = result;
+                    if (!(--waitParams))
+                      proceed();
+                  }, onfailure);
+                }
+              });
+              if (!waitParams)
+                proceed();
+              function proceed() {
+                if (isDefined(result.$$failure))
+                  return;
+                try {
+                  invocation.resolve($injector.invoke(invocable, self, values));
+                  invocation.promise.then(function(result) {
+                    values[key] = result;
+                    done();
+                  }, onfailure);
+                } catch (e) {
+                  onfailure(e);
+                }
+              }
+              promises[key] = invocation.promise;
+            }
+            return result;
+          };
+        };
+        this.resolve = function(invocables, locals, parent, self) {
+          return this.study(invocables)(locals, parent, self);
+        };
+      }
+      angular.module('ui.router.util').service('$resolve', $Resolve);
+      $TemplateFactory.$inject = ['$http', '$templateCache', '$injector'];
+      function $TemplateFactory($http, $templateCache, $injector) {
+        this.fromConfig = function(config, params, locals) {
+          return (isDefined(config.template) ? this.fromString(config.template, params) : isDefined(config.templateUrl) ? this.fromUrl(config.templateUrl, params) : isDefined(config.templateProvider) ? this.fromProvider(config.templateProvider, params, locals) : null);
+        };
+        this.fromString = function(template, params) {
+          return isFunction(template) ? template(params) : template;
+        };
+        this.fromUrl = function(url, params) {
+          if (isFunction(url))
+            url = url(params);
+          if (url == null)
+            return null;
+          else
+            return $http.get(url, {
+              cache: $templateCache,
+              headers: {Accept: 'text/html'}
+            }).then(function(response) {
+              return response.data;
+            });
+        };
+        this.fromProvider = function(provider, params, locals) {
+          return $injector.invoke(provider, null, locals || {params: params});
+        };
+      }
+      angular.module('ui.router.util').service('$templateFactory', $TemplateFactory);
+      var $$UMFP;
+      function UrlMatcher(pattern, config, parentMatcher) {
+        config = extend({params: {}}, isObject(config) ? config : {});
+        var placeholder = /([:*])([\w\[\]]+)|\{([\w\[\]]+)(?:\:((?:[^{}\\]+|\\.|\{(?:[^{}\\]+|\\.)*\})+))?\}/g,
+            searchPlaceholder = /([:]?)([\w\[\]-]+)|\{([\w\[\]-]+)(?:\:((?:[^{}\\]+|\\.|\{(?:[^{}\\]+|\\.)*\})+))?\}/g,
+            compiled = '^',
+            last = 0,
+            m,
+            segments = this.segments = [],
+            parentParams = parentMatcher ? parentMatcher.params : {},
+            params = this.params = parentMatcher ? parentMatcher.params.$$new() : new $$UMFP.ParamSet(),
+            paramNames = [];
+        function addParameter(id, type, config, location) {
+          paramNames.push(id);
+          if (parentParams[id])
+            return parentParams[id];
+          if (!/^\w+(-+\w+)*(?:\[\])?$/.test(id))
+            throw new Error("Invalid parameter name '" + id + "' in pattern '" + pattern + "'");
+          if (params[id])
+            throw new Error("Duplicate parameter name '" + id + "' in pattern '" + pattern + "'");
+          params[id] = new $$UMFP.Param(id, type, config, location);
+          return params[id];
+        }
+        function quoteRegExp(string, pattern, squash, optional) {
+          var surroundPattern = ['', ''],
+              result = string.replace(/[\\\[\]\^$*+?.()|{}]/g, "\\$&");
+          if (!pattern)
+            return result;
+          switch (squash) {
+            case false:
+              surroundPattern = ['(', ')' + (optional ? "?" : "")];
+              break;
+            case true:
+              surroundPattern = ['?(', ')?'];
+              break;
+            default:
+              surroundPattern = ['(' + squash + "|", ')?'];
+              break;
+          }
+          return result + surroundPattern[0] + pattern + surroundPattern[1];
+        }
+        this.source = pattern;
+        function matchDetails(m, isSearch) {
+          var id,
+              regexp,
+              segment,
+              type,
+              cfg,
+              arrayMode;
+          id = m[2] || m[3];
+          cfg = config.params[id];
+          segment = pattern.substring(last, m.index);
+          regexp = isSearch ? m[4] : m[4] || (m[1] == '*' ? '.*' : null);
+          type = $$UMFP.type(regexp || "string") || inherit($$UMFP.type("string"), {pattern: new RegExp(regexp, config.caseInsensitive ? 'i' : undefined)});
+          return {
+            id: id,
+            regexp: regexp,
+            segment: segment,
+            type: type,
+            cfg: cfg
+          };
+        }
+        var p,
+            param,
+            segment;
+        while ((m = placeholder.exec(pattern))) {
+          p = matchDetails(m, false);
+          if (p.segment.indexOf('?') >= 0)
+            break;
+          param = addParameter(p.id, p.type, p.cfg, "path");
+          compiled += quoteRegExp(p.segment, param.type.pattern.source, param.squash, param.isOptional);
+          segments.push(p.segment);
+          last = placeholder.lastIndex;
+        }
+        segment = pattern.substring(last);
+        var i = segment.indexOf('?');
+        if (i >= 0) {
+          var search = this.sourceSearch = segment.substring(i);
+          segment = segment.substring(0, i);
+          this.sourcePath = pattern.substring(0, last + i);
+          if (search.length > 0) {
+            last = 0;
+            while ((m = searchPlaceholder.exec(search))) {
+              p = matchDetails(m, true);
+              param = addParameter(p.id, p.type, p.cfg, "search");
+              last = placeholder.lastIndex;
+            }
+          }
+        } else {
+          this.sourcePath = pattern;
+          this.sourceSearch = '';
+        }
+        compiled += quoteRegExp(segment) + (config.strict === false ? '\/?' : '') + '$';
+        segments.push(segment);
+        this.regexp = new RegExp(compiled, config.caseInsensitive ? 'i' : undefined);
+        this.prefix = segments[0];
+        this.$$paramNames = paramNames;
+      }
+      UrlMatcher.prototype.concat = function(pattern, config) {
+        var defaultConfig = {
+          caseInsensitive: $$UMFP.caseInsensitive(),
+          strict: $$UMFP.strictMode(),
+          squash: $$UMFP.defaultSquashPolicy()
+        };
+        return new UrlMatcher(this.sourcePath + pattern + this.sourceSearch, extend(defaultConfig, config), this);
+      };
+      UrlMatcher.prototype.toString = function() {
+        return this.source;
+      };
+      UrlMatcher.prototype.exec = function(path, searchParams) {
+        var m = this.regexp.exec(path);
+        if (!m)
+          return null;
+        searchParams = searchParams || {};
+        var paramNames = this.parameters(),
+            nTotal = paramNames.length,
+            nPath = this.segments.length - 1,
+            values = {},
+            i,
+            j,
+            cfg,
+            paramName;
+        if (nPath !== m.length - 1)
+          throw new Error("Unbalanced capture group in route '" + this.source + "'");
+        function decodePathArray(string) {
+          function reverseString(str) {
+            return str.split("").reverse().join("");
+          }
+          function unquoteDashes(str) {
+            return str.replace(/\\-/g, "-");
+          }
+          var split = reverseString(string).split(/-(?!\\)/);
+          var allReversed = map(split, reverseString);
+          return map(allReversed, unquoteDashes).reverse();
+        }
+        for (i = 0; i < nPath; i++) {
+          paramName = paramNames[i];
+          var param = this.params[paramName];
+          var paramVal = m[i + 1];
+          for (j = 0; j < param.replace; j++) {
+            if (param.replace[j].from === paramVal)
+              paramVal = param.replace[j].to;
+          }
+          if (paramVal && param.array === true)
+            paramVal = decodePathArray(paramVal);
+          values[paramName] = param.value(paramVal);
+        }
+        for (; i < nTotal; i++) {
+          paramName = paramNames[i];
+          values[paramName] = this.params[paramName].value(searchParams[paramName]);
+        }
+        return values;
+      };
+      UrlMatcher.prototype.parameters = function(param) {
+        if (!isDefined(param))
+          return this.$$paramNames;
+        return this.params[param] || null;
+      };
+      UrlMatcher.prototype.validates = function(params) {
+        return this.params.$$validates(params);
+      };
+      UrlMatcher.prototype.format = function(values) {
+        values = values || {};
+        var segments = this.segments,
+            params = this.parameters(),
+            paramset = this.params;
+        if (!this.validates(values))
+          return null;
+        var i,
+            search = false,
+            nPath = segments.length - 1,
+            nTotal = params.length,
+            result = segments[0];
+        function encodeDashes(str) {
+          return encodeURIComponent(str).replace(/-/g, function(c) {
+            return '%5C%' + c.charCodeAt(0).toString(16).toUpperCase();
+          });
+        }
+        for (i = 0; i < nTotal; i++) {
+          var isPathParam = i < nPath;
+          var name = params[i],
+              param = paramset[name],
+              value = param.value(values[name]);
+          var isDefaultValue = param.isOptional && param.type.equals(param.value(), value);
+          var squash = isDefaultValue ? param.squash : false;
+          var encoded = param.type.encode(value);
+          if (isPathParam) {
+            var nextSegment = segments[i + 1];
+            if (squash === false) {
+              if (encoded != null) {
+                if (isArray(encoded)) {
+                  result += map(encoded, encodeDashes).join("-");
+                } else {
+                  result += encodeURIComponent(encoded);
+                }
+              }
+              result += nextSegment;
+            } else if (squash === true) {
+              var capture = result.match(/\/$/) ? /\/?(.*)/ : /(.*)/;
+              result += nextSegment.match(capture)[1];
+            } else if (isString(squash)) {
+              result += squash + nextSegment;
+            }
+          } else {
+            if (encoded == null || (isDefaultValue && squash !== false))
+              continue;
+            if (!isArray(encoded))
+              encoded = [encoded];
+            encoded = map(encoded, encodeURIComponent).join('&' + name + '=');
+            result += (search ? '&' : '?') + (name + '=' + encoded);
+            search = true;
+          }
+        }
+        return result;
+      };
+      function Type(config) {
+        extend(this, config);
+      }
+      Type.prototype.is = function(val, key) {
+        return true;
+      };
+      Type.prototype.encode = function(val, key) {
+        return val;
+      };
+      Type.prototype.decode = function(val, key) {
+        return val;
+      };
+      Type.prototype.equals = function(a, b) {
+        return a == b;
+      };
+      Type.prototype.$subPattern = function() {
+        var sub = this.pattern.toString();
+        return sub.substr(1, sub.length - 2);
+      };
+      Type.prototype.pattern = /.*/;
+      Type.prototype.toString = function() {
+        return "{Type:" + this.name + "}";
+      };
+      Type.prototype.$normalize = function(val) {
+        return this.is(val) ? val : this.decode(val);
+      };
+      Type.prototype.$asArray = function(mode, isSearch) {
+        if (!mode)
+          return this;
+        if (mode === "auto" && !isSearch)
+          throw new Error("'auto' array mode is for query parameters only");
+        function ArrayType(type, mode) {
+          function bindTo(type, callbackName) {
+            return function() {
+              return type[callbackName].apply(type, arguments);
+            };
+          }
+          function arrayWrap(val) {
+            return isArray(val) ? val : (isDefined(val) ? [val] : []);
+          }
+          function arrayUnwrap(val) {
+            switch (val.length) {
+              case 0:
+                return undefined;
+              case 1:
+                return mode === "auto" ? val[0] : val;
+              default:
+                return val;
+            }
+          }
+          function falsey(val) {
+            return !val;
+          }
+          function arrayHandler(callback, allTruthyMode) {
+            return function handleArray(val) {
+              val = arrayWrap(val);
+              var result = map(val, callback);
+              if (allTruthyMode === true)
+                return filter(result, falsey).length === 0;
+              return arrayUnwrap(result);
+            };
+          }
+          function arrayEqualsHandler(callback) {
+            return function handleArray(val1, val2) {
+              var left = arrayWrap(val1),
+                  right = arrayWrap(val2);
+              if (left.length !== right.length)
+                return false;
+              for (var i = 0; i < left.length; i++) {
+                if (!callback(left[i], right[i]))
+                  return false;
+              }
+              return true;
+            };
+          }
+          this.encode = arrayHandler(bindTo(type, 'encode'));
+          this.decode = arrayHandler(bindTo(type, 'decode'));
+          this.is = arrayHandler(bindTo(type, 'is'), true);
+          this.equals = arrayEqualsHandler(bindTo(type, 'equals'));
+          this.pattern = type.pattern;
+          this.$normalize = arrayHandler(bindTo(type, '$normalize'));
+          this.name = type.name;
+          this.$arrayMode = mode;
+        }
+        return new ArrayType(this, mode);
+      };
+      function $UrlMatcherFactory() {
+        $$UMFP = this;
+        var isCaseInsensitive = false,
+            isStrictMode = true,
+            defaultSquashPolicy = false;
+        function valToString(val) {
+          return val != null ? val.toString().replace(/\//g, "%2F") : val;
+        }
+        function valFromString(val) {
+          return val != null ? val.toString().replace(/%2F/g, "/") : val;
+        }
+        var $types = {},
+            enqueue = true,
+            typeQueue = [],
+            injector,
+            defaultTypes = {
+              string: {
+                encode: valToString,
+                decode: valFromString,
+                is: function(val) {
+                  return val == null || !isDefined(val) || typeof val === "string";
+                },
+                pattern: /[^/]*/
+              },
+              int: {
+                encode: valToString,
+                decode: function(val) {
+                  return parseInt(val, 10);
+                },
+                is: function(val) {
+                  return isDefined(val) && this.decode(val.toString()) === val;
+                },
+                pattern: /\d+/
+              },
+              bool: {
+                encode: function(val) {
+                  return val ? 1 : 0;
+                },
+                decode: function(val) {
+                  return parseInt(val, 10) !== 0;
+                },
+                is: function(val) {
+                  return val === true || val === false;
+                },
+                pattern: /0|1/
+              },
+              date: {
+                encode: function(val) {
+                  if (!this.is(val))
+                    return undefined;
+                  return [val.getFullYear(), ('0' + (val.getMonth() + 1)).slice(-2), ('0' + val.getDate()).slice(-2)].join("-");
+                },
+                decode: function(val) {
+                  if (this.is(val))
+                    return val;
+                  var match = this.capture.exec(val);
+                  return match ? new Date(match[1], match[2] - 1, match[3]) : undefined;
+                },
+                is: function(val) {
+                  return val instanceof Date && !isNaN(val.valueOf());
+                },
+                equals: function(a, b) {
+                  return this.is(a) && this.is(b) && a.toISOString() === b.toISOString();
+                },
+                pattern: /[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2][0-9]|3[0-1])/,
+                capture: /([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/
+              },
+              json: {
+                encode: angular.toJson,
+                decode: angular.fromJson,
+                is: angular.isObject,
+                equals: angular.equals,
+                pattern: /[^/]*/
+              },
+              any: {
+                encode: angular.identity,
+                decode: angular.identity,
+                equals: angular.equals,
+                pattern: /.*/
+              }
+            };
+        function getDefaultConfig() {
+          return {
+            strict: isStrictMode,
+            caseInsensitive: isCaseInsensitive
+          };
+        }
+        function isInjectable(value) {
+          return (isFunction(value) || (isArray(value) && isFunction(value[value.length - 1])));
+        }
+        $UrlMatcherFactory.$$getDefaultValue = function(config) {
+          if (!isInjectable(config.value))
+            return config.value;
+          if (!injector)
+            throw new Error("Injectable functions cannot be called at configuration time");
+          return injector.invoke(config.value);
+        };
+        this.caseInsensitive = function(value) {
+          if (isDefined(value))
+            isCaseInsensitive = value;
+          return isCaseInsensitive;
+        };
+        this.strictMode = function(value) {
+          if (isDefined(value))
+            isStrictMode = value;
+          return isStrictMode;
+        };
+        this.defaultSquashPolicy = function(value) {
+          if (!isDefined(value))
+            return defaultSquashPolicy;
+          if (value !== true && value !== false && !isString(value))
+            throw new Error("Invalid squash policy: " + value + ". Valid policies: false, true, arbitrary-string");
+          defaultSquashPolicy = value;
+          return value;
+        };
+        this.compile = function(pattern, config) {
+          return new UrlMatcher(pattern, extend(getDefaultConfig(), config));
+        };
+        this.isMatcher = function(o) {
+          if (!isObject(o))
+            return false;
+          var result = true;
+          forEach(UrlMatcher.prototype, function(val, name) {
+            if (isFunction(val)) {
+              result = result && (isDefined(o[name]) && isFunction(o[name]));
+            }
+          });
+          return result;
+        };
+        this.type = function(name, definition, definitionFn) {
+          if (!isDefined(definition))
+            return $types[name];
+          if ($types.hasOwnProperty(name))
+            throw new Error("A type named '" + name + "' has already been defined.");
+          $types[name] = new Type(extend({name: name}, definition));
+          if (definitionFn) {
+            typeQueue.push({
+              name: name,
+              def: definitionFn
+            });
+            if (!enqueue)
+              flushTypeQueue();
+          }
+          return this;
+        };
+        function flushTypeQueue() {
+          while (typeQueue.length) {
+            var type = typeQueue.shift();
+            if (type.pattern)
+              throw new Error("You cannot override a type's .pattern at runtime.");
+            angular.extend($types[type.name], injector.invoke(type.def));
+          }
+        }
+        forEach(defaultTypes, function(type, name) {
+          $types[name] = new Type(extend({name: name}, type));
+        });
+        $types = inherit($types, {});
+        this.$get = ['$injector', function($injector) {
+          injector = $injector;
+          enqueue = false;
+          flushTypeQueue();
+          forEach(defaultTypes, function(type, name) {
+            if (!$types[name])
+              $types[name] = new Type(type);
+          });
+          return this;
+        }];
+        this.Param = function Param(id, type, config, location) {
+          var self = this;
+          config = unwrapShorthand(config);
+          type = getType(config, type, location);
+          var arrayMode = getArrayMode();
+          type = arrayMode ? type.$asArray(arrayMode, location === "search") : type;
+          if (type.name === "string" && !arrayMode && location === "path" && config.value === undefined)
+            config.value = "";
+          var isOptional = config.value !== undefined;
+          var squash = getSquashPolicy(config, isOptional);
+          var replace = getReplace(config, arrayMode, isOptional, squash);
+          function unwrapShorthand(config) {
+            var keys = isObject(config) ? objectKeys(config) : [];
+            var isShorthand = indexOf(keys, "value") === -1 && indexOf(keys, "type") === -1 && indexOf(keys, "squash") === -1 && indexOf(keys, "array") === -1;
+            if (isShorthand)
+              config = {value: config};
+            config.$$fn = isInjectable(config.value) ? config.value : function() {
+              return config.value;
+            };
+            return config;
+          }
+          function getType(config, urlType, location) {
+            if (config.type && urlType)
+              throw new Error("Param '" + id + "' has two type configurations.");
+            if (urlType)
+              return urlType;
+            if (!config.type)
+              return (location === "config" ? $types.any : $types.string);
+            return config.type instanceof Type ? config.type : new Type(config.type);
+          }
+          function getArrayMode() {
+            var arrayDefaults = {array: (location === "search" ? "auto" : false)};
+            var arrayParamNomenclature = id.match(/\[\]$/) ? {array: true} : {};
+            return extend(arrayDefaults, arrayParamNomenclature, config).array;
+          }
+          function getSquashPolicy(config, isOptional) {
+            var squash = config.squash;
+            if (!isOptional || squash === false)
+              return false;
+            if (!isDefined(squash) || squash == null)
+              return defaultSquashPolicy;
+            if (squash === true || isString(squash))
+              return squash;
+            throw new Error("Invalid squash policy: '" + squash + "'. Valid policies: false, true, or arbitrary string");
+          }
+          function getReplace(config, arrayMode, isOptional, squash) {
+            var replace,
+                configuredKeys,
+                defaultPolicy = [{
+                  from: "",
+                  to: (isOptional || arrayMode ? undefined : "")
+                }, {
+                  from: null,
+                  to: (isOptional || arrayMode ? undefined : "")
+                }];
+            replace = isArray(config.replace) ? config.replace : [];
+            if (isString(squash))
+              replace.push({
+                from: squash,
+                to: undefined
+              });
+            configuredKeys = map(replace, function(item) {
+              return item.from;
+            });
+            return filter(defaultPolicy, function(item) {
+              return indexOf(configuredKeys, item.from) === -1;
+            }).concat(replace);
+          }
+          function $$getDefaultValue() {
+            if (!injector)
+              throw new Error("Injectable functions cannot be called at configuration time");
+            var defaultValue = injector.invoke(config.$$fn);
+            if (defaultValue !== null && defaultValue !== undefined && !self.type.is(defaultValue))
+              throw new Error("Default value (" + defaultValue + ") for parameter '" + self.id + "' is not an instance of Type (" + self.type.name + ")");
+            return defaultValue;
+          }
+          function $value(value) {
+            function hasReplaceVal(val) {
+              return function(obj) {
+                return obj.from === val;
+              };
+            }
+            function $replace(value) {
+              var replacement = map(filter(self.replace, hasReplaceVal(value)), function(obj) {
+                return obj.to;
+              });
+              return replacement.length ? replacement[0] : value;
+            }
+            value = $replace(value);
+            return !isDefined(value) ? $$getDefaultValue() : self.type.$normalize(value);
+          }
+          function toString() {
+            return "{Param:" + id + " " + type + " squash: '" + squash + "' optional: " + isOptional + "}";
+          }
+          extend(this, {
+            id: id,
+            type: type,
+            location: location,
+            array: arrayMode,
+            squash: squash,
+            replace: replace,
+            isOptional: isOptional,
+            value: $value,
+            dynamic: undefined,
+            config: config,
+            toString: toString
+          });
+        };
+        function ParamSet(params) {
+          extend(this, params || {});
+        }
+        ParamSet.prototype = {
+          $$new: function() {
+            return inherit(this, extend(new ParamSet(), {$$parent: this}));
+          },
+          $$keys: function() {
+            var keys = [],
+                chain = [],
+                parent = this,
+                ignore = objectKeys(ParamSet.prototype);
+            while (parent) {
+              chain.push(parent);
+              parent = parent.$$parent;
+            }
+            chain.reverse();
+            forEach(chain, function(paramset) {
+              forEach(objectKeys(paramset), function(key) {
+                if (indexOf(keys, key) === -1 && indexOf(ignore, key) === -1)
+                  keys.push(key);
+              });
+            });
+            return keys;
+          },
+          $$values: function(paramValues) {
+            var values = {},
+                self = this;
+            forEach(self.$$keys(), function(key) {
+              values[key] = self[key].value(paramValues && paramValues[key]);
+            });
+            return values;
+          },
+          $$equals: function(paramValues1, paramValues2) {
+            var equal = true,
+                self = this;
+            forEach(self.$$keys(), function(key) {
+              var left = paramValues1 && paramValues1[key],
+                  right = paramValues2 && paramValues2[key];
+              if (!self[key].type.equals(left, right))
+                equal = false;
+            });
+            return equal;
+          },
+          $$validates: function $$validate(paramValues) {
+            var keys = this.$$keys(),
+                i,
+                param,
+                rawVal,
+                normalized,
+                encoded;
+            for (i = 0; i < keys.length; i++) {
+              param = this[keys[i]];
+              rawVal = paramValues[keys[i]];
+              if ((rawVal === undefined || rawVal === null) && param.isOptional)
+                break;
+              normalized = param.type.$normalize(rawVal);
+              if (!param.type.is(normalized))
+                return false;
+              encoded = param.type.encode(normalized);
+              if (angular.isString(encoded) && !param.type.pattern.exec(encoded))
+                return false;
+            }
+            return true;
+          },
+          $$parent: undefined
+        };
+        this.ParamSet = ParamSet;
+      }
+      angular.module('ui.router.util').provider('$urlMatcherFactory', $UrlMatcherFactory);
+      angular.module('ui.router.util').run(['$urlMatcherFactory', function($urlMatcherFactory) {}]);
+      $UrlRouterProvider.$inject = ['$locationProvider', '$urlMatcherFactoryProvider'];
+      function $UrlRouterProvider($locationProvider, $urlMatcherFactory) {
+        var rules = [],
+            otherwise = null,
+            interceptDeferred = false,
+            listener;
+        function regExpPrefix(re) {
+          var prefix = /^\^((?:\\[^a-zA-Z0-9]|[^\\\[\]\^$*+?.()|{}]+)*)/.exec(re.source);
+          return (prefix != null) ? prefix[1].replace(/\\(.)/g, "$1") : '';
+        }
+        function interpolate(pattern, match) {
+          return pattern.replace(/\$(\$|\d{1,2})/, function(m, what) {
+            return match[what === '$' ? 0 : Number(what)];
+          });
+        }
+        this.rule = function(rule) {
+          if (!isFunction(rule))
+            throw new Error("'rule' must be a function");
+          rules.push(rule);
+          return this;
+        };
+        this.otherwise = function(rule) {
+          if (isString(rule)) {
+            var redirect = rule;
+            rule = function() {
+              return redirect;
+            };
+          } else if (!isFunction(rule))
+            throw new Error("'rule' must be a function");
+          otherwise = rule;
+          return this;
+        };
+        function handleIfMatch($injector, handler, match) {
+          if (!match)
+            return false;
+          var result = $injector.invoke(handler, handler, {$match: match});
+          return isDefined(result) ? result : true;
+        }
+        this.when = function(what, handler) {
+          var redirect,
+              handlerIsString = isString(handler);
+          if (isString(what))
+            what = $urlMatcherFactory.compile(what);
+          if (!handlerIsString && !isFunction(handler) && !isArray(handler))
+            throw new Error("invalid 'handler' in when()");
+          var strategies = {
+            matcher: function(what, handler) {
+              if (handlerIsString) {
+                redirect = $urlMatcherFactory.compile(handler);
+                handler = ['$match', function($match) {
+                  return redirect.format($match);
+                }];
+              }
+              return extend(function($injector, $location) {
+                return handleIfMatch($injector, handler, what.exec($location.path(), $location.search()));
+              }, {prefix: isString(what.prefix) ? what.prefix : ''});
+            },
+            regex: function(what, handler) {
+              if (what.global || what.sticky)
+                throw new Error("when() RegExp must not be global or sticky");
+              if (handlerIsString) {
+                redirect = handler;
+                handler = ['$match', function($match) {
+                  return interpolate(redirect, $match);
+                }];
+              }
+              return extend(function($injector, $location) {
+                return handleIfMatch($injector, handler, what.exec($location.path()));
+              }, {prefix: regExpPrefix(what)});
+            }
+          };
+          var check = {
+            matcher: $urlMatcherFactory.isMatcher(what),
+            regex: what instanceof RegExp
+          };
+          for (var n in check) {
+            if (check[n])
+              return this.rule(strategies[n](what, handler));
+          }
+          throw new Error("invalid 'what' in when()");
+        };
+        this.deferIntercept = function(defer) {
+          if (defer === undefined)
+            defer = true;
+          interceptDeferred = defer;
+        };
+        this.$get = $get;
+        $get.$inject = ['$location', '$rootScope', '$injector', '$browser'];
+        function $get($location, $rootScope, $injector, $browser) {
+          var baseHref = $browser.baseHref(),
+              location = $location.url(),
+              lastPushedUrl;
+          function appendBasePath(url, isHtml5, absolute) {
+            if (baseHref === '/')
+              return url;
+            if (isHtml5)
+              return baseHref.slice(0, -1) + url;
+            if (absolute)
+              return baseHref.slice(1) + url;
+            return url;
+          }
+          function update(evt) {
+            if (evt && evt.defaultPrevented)
+              return;
+            var ignoreUpdate = lastPushedUrl && $location.url() === lastPushedUrl;
+            lastPushedUrl = undefined;
+            function check(rule) {
+              var handled = rule($injector, $location);
+              if (!handled)
+                return false;
+              if (isString(handled))
+                $location.replace().url(handled);
+              return true;
+            }
+            var n = rules.length,
+                i;
+            for (i = 0; i < n; i++) {
+              if (check(rules[i]))
+                return;
+            }
+            if (otherwise)
+              check(otherwise);
+          }
+          function listen() {
+            listener = listener || $rootScope.$on('$locationChangeSuccess', update);
+            return listener;
+          }
+          if (!interceptDeferred)
+            listen();
+          return {
+            sync: function() {
+              update();
+            },
+            listen: function() {
+              return listen();
+            },
+            update: function(read) {
+              if (read) {
+                location = $location.url();
+                return;
+              }
+              if ($location.url() === location)
+                return;
+              $location.url(location);
+              $location.replace();
+            },
+            push: function(urlMatcher, params, options) {
+              var url = urlMatcher.format(params || {});
+              if (url !== null && params && params['#']) {
+                url += '#' + params['#'];
+              }
+              $location.url(url);
+              lastPushedUrl = options && options.$$avoidResync ? $location.url() : undefined;
+              if (options && options.replace)
+                $location.replace();
+            },
+            href: function(urlMatcher, params, options) {
+              if (!urlMatcher.validates(params))
+                return null;
+              var isHtml5 = $locationProvider.html5Mode();
+              if (angular.isObject(isHtml5)) {
+                isHtml5 = isHtml5.enabled;
+              }
+              var url = urlMatcher.format(params);
+              options = options || {};
+              if (!isHtml5 && url !== null) {
+                url = "#" + $locationProvider.hashPrefix() + url;
+              }
+              if (url !== null && params && params['#']) {
+                url += '#' + params['#'];
+              }
+              url = appendBasePath(url, isHtml5, options.absolute);
+              if (!options.absolute || !url) {
+                return url;
+              }
+              var slash = (!isHtml5 && url ? '/' : ''),
+                  port = $location.port();
+              port = (port === 80 || port === 443 ? '' : ':' + port);
+              return [$location.protocol(), '://', $location.host(), port, slash, url].join('');
+            }
+          };
+        }
+      }
+      angular.module('ui.router.router').provider('$urlRouter', $UrlRouterProvider);
+      $StateProvider.$inject = ['$urlRouterProvider', '$urlMatcherFactoryProvider'];
+      function $StateProvider($urlRouterProvider, $urlMatcherFactory) {
+        var root,
+            states = {},
+            $state,
+            queue = {},
+            abstractKey = 'abstract';
+        var stateBuilder = {
+          parent: function(state) {
+            if (isDefined(state.parent) && state.parent)
+              return findState(state.parent);
+            var compositeName = /^(.+)\.[^.]+$/.exec(state.name);
+            return compositeName ? findState(compositeName[1]) : root;
+          },
+          data: function(state) {
+            if (state.parent && state.parent.data) {
+              state.data = state.self.data = extend({}, state.parent.data, state.data);
+            }
+            return state.data;
+          },
+          url: function(state) {
+            var url = state.url,
+                config = {params: state.params || {}};
+            if (isString(url)) {
+              if (url.charAt(0) == '^')
+                return $urlMatcherFactory.compile(url.substring(1), config);
+              return (state.parent.navigable || root).url.concat(url, config);
+            }
+            if (!url || $urlMatcherFactory.isMatcher(url))
+              return url;
+            throw new Error("Invalid url '" + url + "' in state '" + state + "'");
+          },
+          navigable: function(state) {
+            return state.url ? state : (state.parent ? state.parent.navigable : null);
+          },
+          ownParams: function(state) {
+            var params = state.url && state.url.params || new $$UMFP.ParamSet();
+            forEach(state.params || {}, function(config, id) {
+              if (!params[id])
+                params[id] = new $$UMFP.Param(id, null, config, "config");
+            });
+            return params;
+          },
+          params: function(state) {
+            return state.parent && state.parent.params ? extend(state.parent.params.$$new(), state.ownParams) : new $$UMFP.ParamSet();
+          },
+          views: function(state) {
+            var views = {};
+            forEach(isDefined(state.views) ? state.views : {'': state}, function(view, name) {
+              if (name.indexOf('@') < 0)
+                name += '@' + state.parent.name;
+              views[name] = view;
+            });
+            return views;
+          },
+          path: function(state) {
+            return state.parent ? state.parent.path.concat(state) : [];
+          },
+          includes: function(state) {
+            var includes = state.parent ? extend({}, state.parent.includes) : {};
+            includes[state.name] = true;
+            return includes;
+          },
+          $delegates: {}
+        };
+        function isRelative(stateName) {
+          return stateName.indexOf(".") === 0 || stateName.indexOf("^") === 0;
+        }
+        function findState(stateOrName, base) {
+          if (!stateOrName)
+            return undefined;
+          var isStr = isString(stateOrName),
+              name = isStr ? stateOrName : stateOrName.name,
+              path = isRelative(name);
+          if (path) {
+            if (!base)
+              throw new Error("No reference point given for path '" + name + "'");
+            base = findState(base);
+            var rel = name.split("."),
+                i = 0,
+                pathLength = rel.length,
+                current = base;
+            for (; i < pathLength; i++) {
+              if (rel[i] === "" && i === 0) {
+                current = base;
+                continue;
+              }
+              if (rel[i] === "^") {
+                if (!current.parent)
+                  throw new Error("Path '" + name + "' not valid for state '" + base.name + "'");
+                current = current.parent;
+                continue;
+              }
+              break;
+            }
+            rel = rel.slice(i).join(".");
+            name = current.name + (current.name && rel ? "." : "") + rel;
+          }
+          var state = states[name];
+          if (state && (isStr || (!isStr && (state === stateOrName || state.self === stateOrName)))) {
+            return state;
+          }
+          return undefined;
+        }
+        function queueState(parentName, state) {
+          if (!queue[parentName]) {
+            queue[parentName] = [];
+          }
+          queue[parentName].push(state);
+        }
+        function flushQueuedChildren(parentName) {
+          var queued = queue[parentName] || [];
+          while (queued.length) {
+            registerState(queued.shift());
+          }
+        }
+        function registerState(state) {
+          state = inherit(state, {
+            self: state,
+            resolve: state.resolve || {},
+            toString: function() {
+              return this.name;
+            }
+          });
+          var name = state.name;
+          if (!isString(name) || name.indexOf('@') >= 0)
+            throw new Error("State must have a valid name");
+          if (states.hasOwnProperty(name))
+            throw new Error("State '" + name + "'' is already defined");
+          var parentName = (name.indexOf('.') !== -1) ? name.substring(0, name.lastIndexOf('.')) : (isString(state.parent)) ? state.parent : (isObject(state.parent) && isString(state.parent.name)) ? state.parent.name : '';
+          if (parentName && !states[parentName]) {
+            return queueState(parentName, state.self);
+          }
+          for (var key in stateBuilder) {
+            if (isFunction(stateBuilder[key]))
+              state[key] = stateBuilder[key](state, stateBuilder.$delegates[key]);
+          }
+          states[name] = state;
+          if (!state[abstractKey] && state.url) {
+            $urlRouterProvider.when(state.url, ['$match', '$stateParams', function($match, $stateParams) {
+              if ($state.$current.navigable != state || !equalForKeys($match, $stateParams)) {
+                $state.transitionTo(state, $match, {
+                  inherit: true,
+                  location: false
+                });
+              }
+            }]);
+          }
+          flushQueuedChildren(name);
+          return state;
+        }
+        function isGlob(text) {
+          return text.indexOf('*') > -1;
+        }
+        function doesStateMatchGlob(glob) {
+          var globSegments = glob.split('.'),
+              segments = $state.$current.name.split('.');
+          for (var i = 0,
+              l = globSegments.length; i < l; i++) {
+            if (globSegments[i] === '*') {
+              segments[i] = '*';
+            }
+          }
+          if (globSegments[0] === '**') {
+            segments = segments.slice(indexOf(segments, globSegments[1]));
+            segments.unshift('**');
+          }
+          if (globSegments[globSegments.length - 1] === '**') {
+            segments.splice(indexOf(segments, globSegments[globSegments.length - 2]) + 1, Number.MAX_VALUE);
+            segments.push('**');
+          }
+          if (globSegments.length != segments.length) {
+            return false;
+          }
+          return segments.join('') === globSegments.join('');
+        }
+        root = registerState({
+          name: '',
+          url: '^',
+          views: null,
+          'abstract': true
+        });
+        root.navigable = null;
+        this.decorator = decorator;
+        function decorator(name, func) {
+          if (isString(name) && !isDefined(func)) {
+            return stateBuilder[name];
+          }
+          if (!isFunction(func) || !isString(name)) {
+            return this;
+          }
+          if (stateBuilder[name] && !stateBuilder.$delegates[name]) {
+            stateBuilder.$delegates[name] = stateBuilder[name];
+          }
+          stateBuilder[name] = func;
+          return this;
+        }
+        this.state = state;
+        function state(name, definition) {
+          if (isObject(name))
+            definition = name;
+          else
+            definition.name = name;
+          registerState(definition);
+          return this;
+        }
+        this.$get = $get;
+        $get.$inject = ['$rootScope', '$q', '$view', '$injector', '$resolve', '$stateParams', '$urlRouter', '$location', '$urlMatcherFactory'];
+        function $get($rootScope, $q, $view, $injector, $resolve, $stateParams, $urlRouter, $location, $urlMatcherFactory) {
+          var TransitionSuperseded = $q.reject(new Error('transition superseded'));
+          var TransitionPrevented = $q.reject(new Error('transition prevented'));
+          var TransitionAborted = $q.reject(new Error('transition aborted'));
+          var TransitionFailed = $q.reject(new Error('transition failed'));
+          function handleRedirect(redirect, state, params, options) {
+            var evt = $rootScope.$broadcast('$stateNotFound', redirect, state, params);
+            if (evt.defaultPrevented) {
+              $urlRouter.update();
+              return TransitionAborted;
+            }
+            if (!evt.retry) {
+              return null;
+            }
+            if (options.$retry) {
+              $urlRouter.update();
+              return TransitionFailed;
+            }
+            var retryTransition = $state.transition = $q.when(evt.retry);
+            retryTransition.then(function() {
+              if (retryTransition !== $state.transition)
+                return TransitionSuperseded;
+              redirect.options.$retry = true;
+              return $state.transitionTo(redirect.to, redirect.toParams, redirect.options);
+            }, function() {
+              return TransitionAborted;
+            });
+            $urlRouter.update();
+            return retryTransition;
+          }
+          root.locals = {
+            resolve: null,
+            globals: {$stateParams: {}}
+          };
+          $state = {
+            params: {},
+            current: root.self,
+            $current: root,
+            transition: null
+          };
+          $state.reload = function reload(state) {
+            return $state.transitionTo($state.current, $stateParams, {
+              reload: state || true,
+              inherit: false,
+              notify: true
+            });
+          };
+          $state.go = function go(to, params, options) {
+            return $state.transitionTo(to, params, extend({
+              inherit: true,
+              relative: $state.$current
+            }, options));
+          };
+          $state.transitionTo = function transitionTo(to, toParams, options) {
+            toParams = toParams || {};
+            options = extend({
+              location: true,
+              inherit: false,
+              relative: null,
+              notify: true,
+              reload: false,
+              $retry: false
+            }, options || {});
+            var from = $state.$current,
+                fromParams = $state.params,
+                fromPath = from.path;
+            var evt,
+                toState = findState(to, options.relative);
+            var hash = toParams['#'];
+            if (!isDefined(toState)) {
+              var redirect = {
+                to: to,
+                toParams: toParams,
+                options: options
+              };
+              var redirectResult = handleRedirect(redirect, from.self, fromParams, options);
+              if (redirectResult) {
+                return redirectResult;
+              }
+              to = redirect.to;
+              toParams = redirect.toParams;
+              options = redirect.options;
+              toState = findState(to, options.relative);
+              if (!isDefined(toState)) {
+                if (!options.relative)
+                  throw new Error("No such state '" + to + "'");
+                throw new Error("Could not resolve '" + to + "' from state '" + options.relative + "'");
+              }
+            }
+            if (toState[abstractKey])
+              throw new Error("Cannot transition to abstract state '" + to + "'");
+            if (options.inherit)
+              toParams = inheritParams($stateParams, toParams || {}, $state.$current, toState);
+            if (!toState.params.$$validates(toParams))
+              return TransitionFailed;
+            toParams = toState.params.$$values(toParams);
+            to = toState;
+            var toPath = to.path;
+            var keep = 0,
+                state = toPath[keep],
+                locals = root.locals,
+                toLocals = [];
+            if (!options.reload) {
+              while (state && state === fromPath[keep] && state.ownParams.$$equals(toParams, fromParams)) {
+                locals = toLocals[keep] = state.locals;
+                keep++;
+                state = toPath[keep];
+              }
+            } else if (isString(options.reload) || isObject(options.reload)) {
+              if (isObject(options.reload) && !options.reload.name) {
+                throw new Error('Invalid reload state object');
+              }
+              var reloadState = options.reload === true ? fromPath[0] : findState(options.reload);
+              if (options.reload && !reloadState) {
+                throw new Error("No such reload state '" + (isString(options.reload) ? options.reload : options.reload.name) + "'");
+              }
+              while (state && state === fromPath[keep] && state !== reloadState) {
+                locals = toLocals[keep] = state.locals;
+                keep++;
+                state = toPath[keep];
+              }
+            }
+            if (shouldSkipReload(to, toParams, from, fromParams, locals, options)) {
+              if (hash)
+                toParams['#'] = hash;
+              $state.params = toParams;
+              copy($state.params, $stateParams);
+              if (options.location && to.navigable && to.navigable.url) {
+                $urlRouter.push(to.navigable.url, toParams, {
+                  $$avoidResync: true,
+                  replace: options.location === 'replace'
+                });
+                $urlRouter.update(true);
+              }
+              $state.transition = null;
+              return $q.when($state.current);
+            }
+            toParams = filterByKeys(to.params.$$keys(), toParams || {});
+            if (options.notify) {
+              if ($rootScope.$broadcast('$stateChangeStart', to.self, toParams, from.self, fromParams).defaultPrevented) {
+                $rootScope.$broadcast('$stateChangeCancel', to.self, toParams, from.self, fromParams);
+                $urlRouter.update();
+                return TransitionPrevented;
+              }
+            }
+            var resolved = $q.when(locals);
+            for (var l = keep; l < toPath.length; l++, state = toPath[l]) {
+              locals = toLocals[l] = inherit(locals);
+              resolved = resolveState(state, toParams, state === to, resolved, locals, options);
+            }
+            var transition = $state.transition = resolved.then(function() {
+              var l,
+                  entering,
+                  exiting;
+              if ($state.transition !== transition)
+                return TransitionSuperseded;
+              for (l = fromPath.length - 1; l >= keep; l--) {
+                exiting = fromPath[l];
+                if (exiting.self.onExit) {
+                  $injector.invoke(exiting.self.onExit, exiting.self, exiting.locals.globals);
+                }
+                exiting.locals = null;
+              }
+              for (l = keep; l < toPath.length; l++) {
+                entering = toPath[l];
+                entering.locals = toLocals[l];
+                if (entering.self.onEnter) {
+                  $injector.invoke(entering.self.onEnter, entering.self, entering.locals.globals);
+                }
+              }
+              if (hash)
+                toParams['#'] = hash;
+              if ($state.transition !== transition)
+                return TransitionSuperseded;
+              $state.$current = to;
+              $state.current = to.self;
+              $state.params = toParams;
+              copy($state.params, $stateParams);
+              $state.transition = null;
+              if (options.location && to.navigable) {
+                $urlRouter.push(to.navigable.url, to.navigable.locals.globals.$stateParams, {
+                  $$avoidResync: true,
+                  replace: options.location === 'replace'
+                });
+              }
+              if (options.notify) {
+                $rootScope.$broadcast('$stateChangeSuccess', to.self, toParams, from.self, fromParams);
+              }
+              $urlRouter.update(true);
+              return $state.current;
+            }, function(error) {
+              if ($state.transition !== transition)
+                return TransitionSuperseded;
+              $state.transition = null;
+              evt = $rootScope.$broadcast('$stateChangeError', to.self, toParams, from.self, fromParams, error);
+              if (!evt.defaultPrevented) {
+                $urlRouter.update();
+              }
+              return $q.reject(error);
+            });
+            return transition;
+          };
+          $state.is = function is(stateOrName, params, options) {
+            options = extend({relative: $state.$current}, options || {});
+            var state = findState(stateOrName, options.relative);
+            if (!isDefined(state)) {
+              return undefined;
+            }
+            if ($state.$current !== state) {
+              return false;
+            }
+            return params ? equalForKeys(state.params.$$values(params), $stateParams) : true;
+          };
+          $state.includes = function includes(stateOrName, params, options) {
+            options = extend({relative: $state.$current}, options || {});
+            if (isString(stateOrName) && isGlob(stateOrName)) {
+              if (!doesStateMatchGlob(stateOrName)) {
+                return false;
+              }
+              stateOrName = $state.$current.name;
+            }
+            var state = findState(stateOrName, options.relative);
+            if (!isDefined(state)) {
+              return undefined;
+            }
+            if (!isDefined($state.$current.includes[state.name])) {
+              return false;
+            }
+            return params ? equalForKeys(state.params.$$values(params), $stateParams, objectKeys(params)) : true;
+          };
+          $state.href = function href(stateOrName, params, options) {
+            options = extend({
+              lossy: true,
+              inherit: true,
+              absolute: false,
+              relative: $state.$current
+            }, options || {});
+            var state = findState(stateOrName, options.relative);
+            if (!isDefined(state))
+              return null;
+            if (options.inherit)
+              params = inheritParams($stateParams, params || {}, $state.$current, state);
+            var nav = (state && options.lossy) ? state.navigable : state;
+            if (!nav || nav.url === undefined || nav.url === null) {
+              return null;
+            }
+            return $urlRouter.href(nav.url, filterByKeys(state.params.$$keys().concat('#'), params || {}), {absolute: options.absolute});
+          };
+          $state.get = function(stateOrName, context) {
+            if (arguments.length === 0)
+              return map(objectKeys(states), function(name) {
+                return states[name].self;
+              });
+            var state = findState(stateOrName, context || $state.$current);
+            return (state && state.self) ? state.self : null;
+          };
+          function resolveState(state, params, paramsAreFiltered, inherited, dst, options) {
+            var $stateParams = (paramsAreFiltered) ? params : filterByKeys(state.params.$$keys(), params);
+            var locals = {$stateParams: $stateParams};
+            dst.resolve = $resolve.resolve(state.resolve, locals, dst.resolve, state);
+            var promises = [dst.resolve.then(function(globals) {
+              dst.globals = globals;
+            })];
+            if (inherited)
+              promises.push(inherited);
+            function resolveViews() {
+              var viewsPromises = [];
+              forEach(state.views, function(view, name) {
+                var injectables = (view.resolve && view.resolve !== state.resolve ? view.resolve : {});
+                injectables.$template = [function() {
+                  return $view.load(name, {
+                    view: view,
+                    locals: dst.globals,
+                    params: $stateParams,
+                    notify: options.notify
+                  }) || '';
+                }];
+                viewsPromises.push($resolve.resolve(injectables, dst.globals, dst.resolve, state).then(function(result) {
+                  if (isFunction(view.controllerProvider) || isArray(view.controllerProvider)) {
+                    var injectLocals = angular.extend({}, injectables, dst.globals);
+                    result.$$controller = $injector.invoke(view.controllerProvider, null, injectLocals);
+                  } else {
+                    result.$$controller = view.controller;
+                  }
+                  result.$$state = state;
+                  result.$$controllerAs = view.controllerAs;
+                  dst[name] = result;
+                }));
+              });
+              return $q.all(viewsPromises).then(function() {
+                return dst.globals;
+              });
+            }
+            return $q.all(promises).then(resolveViews).then(function(values) {
+              return dst;
+            });
+          }
+          return $state;
+        }
+        function shouldSkipReload(to, toParams, from, fromParams, locals, options) {
+          function nonSearchParamsEqual(fromAndToState, fromParams, toParams) {
+            function notSearchParam(key) {
+              return fromAndToState.params[key].location != "search";
+            }
+            var nonQueryParamKeys = fromAndToState.params.$$keys().filter(notSearchParam);
+            var nonQueryParams = pick.apply({}, [fromAndToState.params].concat(nonQueryParamKeys));
+            var nonQueryParamSet = new $$UMFP.ParamSet(nonQueryParams);
+            return nonQueryParamSet.$$equals(fromParams, toParams);
+          }
+          if (!options.reload && to === from && (locals === from.locals || (to.self.reloadOnSearch === false && nonSearchParamsEqual(from, fromParams, toParams)))) {
+            return true;
+          }
+        }
+      }
+      angular.module('ui.router.state').value('$stateParams', {}).provider('$state', $StateProvider);
+      $ViewProvider.$inject = [];
+      function $ViewProvider() {
+        this.$get = $get;
+        $get.$inject = ['$rootScope', '$templateFactory'];
+        function $get($rootScope, $templateFactory) {
+          return {load: function load(name, options) {
+              var result,
+                  defaults = {
+                    template: null,
+                    controller: null,
+                    view: null,
+                    locals: null,
+                    notify: true,
+                    async: true,
+                    params: {}
+                  };
+              options = extend(defaults, options);
+              if (options.view) {
+                result = $templateFactory.fromConfig(options.view, options.params, options.locals);
+              }
+              if (result && options.notify) {
+                $rootScope.$broadcast('$viewContentLoading', options);
+              }
+              return result;
+            }};
+        }
+      }
+      angular.module('ui.router.state').provider('$view', $ViewProvider);
+      function $ViewScrollProvider() {
+        var useAnchorScroll = false;
+        this.useAnchorScroll = function() {
+          useAnchorScroll = true;
+        };
+        this.$get = ['$anchorScroll', '$timeout', function($anchorScroll, $timeout) {
+          if (useAnchorScroll) {
+            return $anchorScroll;
+          }
+          return function($element) {
+            return $timeout(function() {
+              $element[0].scrollIntoView();
+            }, 0, false);
+          };
+        }];
+      }
+      angular.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProvider);
+      $ViewDirective.$inject = ['$state', '$injector', '$uiViewScroll', '$interpolate'];
+      function $ViewDirective($state, $injector, $uiViewScroll, $interpolate) {
+        function getService() {
+          return ($injector.has) ? function(service) {
+            return $injector.has(service) ? $injector.get(service) : null;
+          } : function(service) {
+            try {
+              return $injector.get(service);
+            } catch (e) {
+              return null;
+            }
+          };
+        }
+        var service = getService(),
+            $animator = service('$animator'),
+            $animate = service('$animate');
+        function getRenderer(attrs, scope) {
+          var statics = function() {
+            return {
+              enter: function(element, target, cb) {
+                target.after(element);
+                cb();
+              },
+              leave: function(element, cb) {
+                element.remove();
+                cb();
+              }
+            };
+          };
+          if ($animate) {
+            return {
+              enter: function(element, target, cb) {
+                var promise = $animate.enter(element, null, target, cb);
+                if (promise && promise.then)
+                  promise.then(cb);
+              },
+              leave: function(element, cb) {
+                var promise = $animate.leave(element, cb);
+                if (promise && promise.then)
+                  promise.then(cb);
+              }
+            };
+          }
+          if ($animator) {
+            var animate = $animator && $animator(scope, attrs);
+            return {
+              enter: function(element, target, cb) {
+                animate.enter(element, null, target);
+                cb();
+              },
+              leave: function(element, cb) {
+                animate.leave(element);
+                cb();
+              }
+            };
+          }
+          return statics();
+        }
+        var directive = {
+          restrict: 'ECA',
+          terminal: true,
+          priority: 400,
+          transclude: 'element',
+          compile: function(tElement, tAttrs, $transclude) {
+            return function(scope, $element, attrs) {
+              var previousEl,
+                  currentEl,
+                  currentScope,
+                  latestLocals,
+                  onloadExp = attrs.onload || '',
+                  autoScrollExp = attrs.autoscroll,
+                  renderer = getRenderer(attrs, scope);
+              scope.$on('$stateChangeSuccess', function() {
+                updateView(false);
+              });
+              scope.$on('$viewContentLoading', function() {
+                updateView(false);
+              });
+              updateView(true);
+              function cleanupLastView() {
+                if (previousEl) {
+                  previousEl.remove();
+                  previousEl = null;
+                }
+                if (currentScope) {
+                  currentScope.$destroy();
+                  currentScope = null;
+                }
+                if (currentEl) {
+                  renderer.leave(currentEl, function() {
+                    previousEl = null;
+                  });
+                  previousEl = currentEl;
+                  currentEl = null;
+                }
+              }
+              function updateView(firstTime) {
+                var newScope,
+                    name = getUiViewName(scope, attrs, $element, $interpolate),
+                    previousLocals = name && $state.$current && $state.$current.locals[name];
+                if (!firstTime && previousLocals === latestLocals)
+                  return;
+                newScope = scope.$new();
+                latestLocals = $state.$current.locals[name];
+                var clone = $transclude(newScope, function(clone) {
+                  renderer.enter(clone, $element, function onUiViewEnter() {
+                    if (currentScope) {
+                      currentScope.$emit('$viewContentAnimationEnded');
+                    }
+                    if (angular.isDefined(autoScrollExp) && !autoScrollExp || scope.$eval(autoScrollExp)) {
+                      $uiViewScroll(clone);
+                    }
+                  });
+                  cleanupLastView();
+                });
+                currentEl = clone;
+                currentScope = newScope;
+                currentScope.$emit('$viewContentLoaded');
+                currentScope.$eval(onloadExp);
+              }
+            };
+          }
+        };
+        return directive;
+      }
+      $ViewDirectiveFill.$inject = ['$compile', '$controller', '$state', '$interpolate'];
+      function $ViewDirectiveFill($compile, $controller, $state, $interpolate) {
+        return {
+          restrict: 'ECA',
+          priority: -400,
+          compile: function(tElement) {
+            var initial = tElement.html();
+            return function(scope, $element, attrs) {
+              var current = $state.$current,
+                  name = getUiViewName(scope, attrs, $element, $interpolate),
+                  locals = current && current.locals[name];
+              if (!locals) {
+                return;
+              }
+              $element.data('$uiView', {
+                name: name,
+                state: locals.$$state
+              });
+              $element.html(locals.$template ? locals.$template : initial);
+              var link = $compile($element.contents());
+              if (locals.$$controller) {
+                locals.$scope = scope;
+                locals.$element = $element;
+                var controller = $controller(locals.$$controller, locals);
+                if (locals.$$controllerAs) {
+                  scope[locals.$$controllerAs] = controller;
+                }
+                $element.data('$ngControllerController', controller);
+                $element.children().data('$ngControllerController', controller);
+              }
+              link(scope);
+            };
+          }
+        };
+      }
+      function getUiViewName(scope, attrs, element, $interpolate) {
+        var name = $interpolate(attrs.uiView || attrs.name || '')(scope);
+        var inherited = element.inheritedData('$uiView');
+        return name.indexOf('@') >= 0 ? name : (name + '@' + (inherited ? inherited.state.name : ''));
+      }
+      angular.module('ui.router.state').directive('uiView', $ViewDirective);
+      angular.module('ui.router.state').directive('uiView', $ViewDirectiveFill);
+      function parseStateRef(ref, current) {
+        var preparsed = ref.match(/^\s*({[^}]*})\s*$/),
+            parsed;
+        if (preparsed)
+          ref = current + '(' + preparsed[1] + ')';
+        parsed = ref.replace(/\n/g, " ").match(/^([^(]+?)\s*(\((.*)\))?$/);
+        if (!parsed || parsed.length !== 4)
+          throw new Error("Invalid state ref '" + ref + "'");
+        return {
+          state: parsed[1],
+          paramExpr: parsed[3] || null
+        };
+      }
+      function stateContext(el) {
+        var stateData = el.parent().inheritedData('$uiView');
+        if (stateData && stateData.state && stateData.state.name) {
+          return stateData.state;
+        }
+      }
+      $StateRefDirective.$inject = ['$state', '$timeout'];
+      function $StateRefDirective($state, $timeout) {
+        var allowedOptions = ['location', 'inherit', 'reload', 'absolute'];
+        return {
+          restrict: 'A',
+          require: ['?^uiSrefActive', '?^uiSrefActiveEq'],
+          link: function(scope, element, attrs, uiSrefActive) {
+            var ref = parseStateRef(attrs.uiSref, $state.current.name);
+            var params = null,
+                url = null,
+                base = stateContext(element) || $state.$current;
+            var hrefKind = Object.prototype.toString.call(element.prop('href')) === '[object SVGAnimatedString]' ? 'xlink:href' : 'href';
+            var newHref = null,
+                isAnchor = element.prop("tagName").toUpperCase() === "A";
+            var isForm = element[0].nodeName === "FORM";
+            var attr = isForm ? "action" : hrefKind,
+                nav = true;
+            var options = {
+              relative: base,
+              inherit: true
+            };
+            var optionsOverride = scope.$eval(attrs.uiSrefOpts) || {};
+            angular.forEach(allowedOptions, function(option) {
+              if (option in optionsOverride) {
+                options[option] = optionsOverride[option];
+              }
+            });
+            var update = function(newVal) {
+              if (newVal)
+                params = angular.copy(newVal);
+              if (!nav)
+                return;
+              newHref = $state.href(ref.state, params, options);
+              var activeDirective = uiSrefActive[1] || uiSrefActive[0];
+              if (activeDirective) {
+                activeDirective.$$addStateInfo(ref.state, params);
+              }
+              if (newHref === null) {
+                nav = false;
+                return false;
+              }
+              attrs.$set(attr, newHref);
+            };
+            if (ref.paramExpr) {
+              scope.$watch(ref.paramExpr, function(newVal, oldVal) {
+                if (newVal !== params)
+                  update(newVal);
+              }, true);
+              params = angular.copy(scope.$eval(ref.paramExpr));
+            }
+            update();
+            if (isForm)
+              return;
+            element.bind("click", function(e) {
+              var button = e.which || e.button;
+              if (!(button > 1 || e.ctrlKey || e.metaKey || e.shiftKey || element.attr('target'))) {
+                var transition = $timeout(function() {
+                  $state.go(ref.state, params, options);
+                });
+                e.preventDefault();
+                var ignorePreventDefaultCount = isAnchor && !newHref ? 1 : 0;
+                e.preventDefault = function() {
+                  if (ignorePreventDefaultCount-- <= 0)
+                    $timeout.cancel(transition);
+                };
+              }
+            });
+          }
+        };
+      }
+      $StateRefActiveDirective.$inject = ['$state', '$stateParams', '$interpolate'];
+      function $StateRefActiveDirective($state, $stateParams, $interpolate) {
+        return {
+          restrict: "A",
+          controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
+            var states = [],
+                activeClass;
+            activeClass = $interpolate($attrs.uiSrefActiveEq || $attrs.uiSrefActive || '', false)($scope);
+            this.$$addStateInfo = function(newState, newParams) {
+              var state = $state.get(newState, stateContext($element));
+              states.push({
+                state: state || {name: newState},
+                params: newParams
+              });
+              update();
+            };
+            $scope.$on('$stateChangeSuccess', update);
+            function update() {
+              if (anyMatch()) {
+                $element.addClass(activeClass);
+              } else {
+                $element.removeClass(activeClass);
+              }
+            }
+            function anyMatch() {
+              for (var i = 0; i < states.length; i++) {
+                if (isMatch(states[i].state, states[i].params)) {
+                  return true;
+                }
+              }
+              return false;
+            }
+            function isMatch(state, params) {
+              if (typeof $attrs.uiSrefActiveEq !== 'undefined') {
+                return $state.is(state.name, params);
+              } else {
+                return $state.includes(state.name, params);
+              }
+            }
+          }]
+        };
+      }
+      angular.module('ui.router.state').directive('uiSref', $StateRefDirective).directive('uiSrefActive', $StateRefActiveDirective).directive('uiSrefActiveEq', $StateRefActiveDirective);
+      $IsStateFilter.$inject = ['$state'];
+      function $IsStateFilter($state) {
+        var isFilter = function(state) {
+          return $state.is(state);
+        };
+        isFilter.$stateful = true;
+        return isFilter;
+      }
+      $IncludedByStateFilter.$inject = ['$state'];
+      function $IncludedByStateFilter($state) {
+        var includesFilter = function(state) {
+          return $state.includes(state);
+        };
+        includesFilter.$stateful = true;
+        return includesFilter;
+      }
+      angular.module('ui.router.state').filter('isState', $IsStateFilter).filter('includedByState', $IncludedByStateFilter);
+    })(window, window.angular);
   })();
   return _retrieveGlobal();
 });
@@ -6774,7 +8830,7 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
   };
   jQuery.fn.andSelf = jQuery.fn.addBack;
   if (typeof define === "function" && define.amd) {
-    define("10", [], function() {
+    define("11", [], function() {
       return jQuery;
     });
   }
@@ -6797,2062 +8853,6 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
 
 _removeDefine();
 })();
-$__System.registerDynamic("12", ["2"], false, function(__require, __exports, __module) {
-  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
-  (function() {
-    "format global";
-    "deps angular";
-    if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports) {
-      module.exports = 'ui.router';
-    }
-    (function(window, angular, undefined) {
-      'use strict';
-      var isDefined = angular.isDefined,
-          isFunction = angular.isFunction,
-          isString = angular.isString,
-          isObject = angular.isObject,
-          isArray = angular.isArray,
-          forEach = angular.forEach,
-          extend = angular.extend,
-          copy = angular.copy;
-      function inherit(parent, extra) {
-        return extend(new (extend(function() {}, {prototype: parent}))(), extra);
-      }
-      function merge(dst) {
-        forEach(arguments, function(obj) {
-          if (obj !== dst) {
-            forEach(obj, function(value, key) {
-              if (!dst.hasOwnProperty(key))
-                dst[key] = value;
-            });
-          }
-        });
-        return dst;
-      }
-      function ancestors(first, second) {
-        var path = [];
-        for (var n in first.path) {
-          if (first.path[n] !== second.path[n])
-            break;
-          path.push(first.path[n]);
-        }
-        return path;
-      }
-      function objectKeys(object) {
-        if (Object.keys) {
-          return Object.keys(object);
-        }
-        var result = [];
-        forEach(object, function(val, key) {
-          result.push(key);
-        });
-        return result;
-      }
-      function indexOf(array, value) {
-        if (Array.prototype.indexOf) {
-          return array.indexOf(value, Number(arguments[2]) || 0);
-        }
-        var len = array.length >>> 0,
-            from = Number(arguments[2]) || 0;
-        from = (from < 0) ? Math.ceil(from) : Math.floor(from);
-        if (from < 0)
-          from += len;
-        for (; from < len; from++) {
-          if (from in array && array[from] === value)
-            return from;
-        }
-        return -1;
-      }
-      function inheritParams(currentParams, newParams, $current, $to) {
-        var parents = ancestors($current, $to),
-            parentParams,
-            inherited = {},
-            inheritList = [];
-        for (var i in parents) {
-          if (!parents[i].params)
-            continue;
-          parentParams = objectKeys(parents[i].params);
-          if (!parentParams.length)
-            continue;
-          for (var j in parentParams) {
-            if (indexOf(inheritList, parentParams[j]) >= 0)
-              continue;
-            inheritList.push(parentParams[j]);
-            inherited[parentParams[j]] = currentParams[parentParams[j]];
-          }
-        }
-        return extend({}, inherited, newParams);
-      }
-      function equalForKeys(a, b, keys) {
-        if (!keys) {
-          keys = [];
-          for (var n in a)
-            keys.push(n);
-        }
-        for (var i = 0; i < keys.length; i++) {
-          var k = keys[i];
-          if (a[k] != b[k])
-            return false;
-        }
-        return true;
-      }
-      function filterByKeys(keys, values) {
-        var filtered = {};
-        forEach(keys, function(name) {
-          filtered[name] = values[name];
-        });
-        return filtered;
-      }
-      function indexBy(array, propName) {
-        var result = {};
-        forEach(array, function(item) {
-          result[item[propName]] = item;
-        });
-        return result;
-      }
-      function pick(obj) {
-        var copy = {};
-        var keys = Array.prototype.concat.apply(Array.prototype, Array.prototype.slice.call(arguments, 1));
-        forEach(keys, function(key) {
-          if (key in obj)
-            copy[key] = obj[key];
-        });
-        return copy;
-      }
-      function omit(obj) {
-        var copy = {};
-        var keys = Array.prototype.concat.apply(Array.prototype, Array.prototype.slice.call(arguments, 1));
-        for (var key in obj) {
-          if (indexOf(keys, key) == -1)
-            copy[key] = obj[key];
-        }
-        return copy;
-      }
-      function pluck(collection, key) {
-        var result = isArray(collection) ? [] : {};
-        forEach(collection, function(val, i) {
-          result[i] = isFunction(key) ? key(val) : val[key];
-        });
-        return result;
-      }
-      function filter(collection, callback) {
-        var array = isArray(collection);
-        var result = array ? [] : {};
-        forEach(collection, function(val, i) {
-          if (callback(val, i)) {
-            result[array ? result.length : i] = val;
-          }
-        });
-        return result;
-      }
-      function map(collection, callback) {
-        var result = isArray(collection) ? [] : {};
-        forEach(collection, function(val, i) {
-          result[i] = callback(val, i);
-        });
-        return result;
-      }
-      angular.module('ui.router.util', ['ng']);
-      angular.module('ui.router.router', ['ui.router.util']);
-      angular.module('ui.router.state', ['ui.router.router', 'ui.router.util']);
-      angular.module('ui.router', ['ui.router.state']);
-      angular.module('ui.router.compat', ['ui.router']);
-      $Resolve.$inject = ['$q', '$injector'];
-      function $Resolve($q, $injector) {
-        var VISIT_IN_PROGRESS = 1,
-            VISIT_DONE = 2,
-            NOTHING = {},
-            NO_DEPENDENCIES = [],
-            NO_LOCALS = NOTHING,
-            NO_PARENT = extend($q.when(NOTHING), {
-              $$promises: NOTHING,
-              $$values: NOTHING
-            });
-        this.study = function(invocables) {
-          if (!isObject(invocables))
-            throw new Error("'invocables' must be an object");
-          var invocableKeys = objectKeys(invocables || {});
-          var plan = [],
-              cycle = [],
-              visited = {};
-          function visit(value, key) {
-            if (visited[key] === VISIT_DONE)
-              return;
-            cycle.push(key);
-            if (visited[key] === VISIT_IN_PROGRESS) {
-              cycle.splice(0, indexOf(cycle, key));
-              throw new Error("Cyclic dependency: " + cycle.join(" -> "));
-            }
-            visited[key] = VISIT_IN_PROGRESS;
-            if (isString(value)) {
-              plan.push(key, [function() {
-                return $injector.get(value);
-              }], NO_DEPENDENCIES);
-            } else {
-              var params = $injector.annotate(value);
-              forEach(params, function(param) {
-                if (param !== key && invocables.hasOwnProperty(param))
-                  visit(invocables[param], param);
-              });
-              plan.push(key, value, params);
-            }
-            cycle.pop();
-            visited[key] = VISIT_DONE;
-          }
-          forEach(invocables, visit);
-          invocables = cycle = visited = null;
-          function isResolve(value) {
-            return isObject(value) && value.then && value.$$promises;
-          }
-          return function(locals, parent, self) {
-            if (isResolve(locals) && self === undefined) {
-              self = parent;
-              parent = locals;
-              locals = null;
-            }
-            if (!locals)
-              locals = NO_LOCALS;
-            else if (!isObject(locals)) {
-              throw new Error("'locals' must be an object");
-            }
-            if (!parent)
-              parent = NO_PARENT;
-            else if (!isResolve(parent)) {
-              throw new Error("'parent' must be a promise returned by $resolve.resolve()");
-            }
-            var resolution = $q.defer(),
-                result = resolution.promise,
-                promises = result.$$promises = {},
-                values = extend({}, locals),
-                wait = 1 + plan.length / 3,
-                merged = false;
-            function done() {
-              if (!--wait) {
-                if (!merged)
-                  merge(values, parent.$$values);
-                result.$$values = values;
-                result.$$promises = result.$$promises || true;
-                delete result.$$inheritedValues;
-                resolution.resolve(values);
-              }
-            }
-            function fail(reason) {
-              result.$$failure = reason;
-              resolution.reject(reason);
-            }
-            if (isDefined(parent.$$failure)) {
-              fail(parent.$$failure);
-              return result;
-            }
-            if (parent.$$inheritedValues) {
-              merge(values, omit(parent.$$inheritedValues, invocableKeys));
-            }
-            extend(promises, parent.$$promises);
-            if (parent.$$values) {
-              merged = merge(values, omit(parent.$$values, invocableKeys));
-              result.$$inheritedValues = omit(parent.$$values, invocableKeys);
-              done();
-            } else {
-              if (parent.$$inheritedValues) {
-                result.$$inheritedValues = omit(parent.$$inheritedValues, invocableKeys);
-              }
-              parent.then(done, fail);
-            }
-            for (var i = 0,
-                ii = plan.length; i < ii; i += 3) {
-              if (locals.hasOwnProperty(plan[i]))
-                done();
-              else
-                invoke(plan[i], plan[i + 1], plan[i + 2]);
-            }
-            function invoke(key, invocable, params) {
-              var invocation = $q.defer(),
-                  waitParams = 0;
-              function onfailure(reason) {
-                invocation.reject(reason);
-                fail(reason);
-              }
-              forEach(params, function(dep) {
-                if (promises.hasOwnProperty(dep) && !locals.hasOwnProperty(dep)) {
-                  waitParams++;
-                  promises[dep].then(function(result) {
-                    values[dep] = result;
-                    if (!(--waitParams))
-                      proceed();
-                  }, onfailure);
-                }
-              });
-              if (!waitParams)
-                proceed();
-              function proceed() {
-                if (isDefined(result.$$failure))
-                  return;
-                try {
-                  invocation.resolve($injector.invoke(invocable, self, values));
-                  invocation.promise.then(function(result) {
-                    values[key] = result;
-                    done();
-                  }, onfailure);
-                } catch (e) {
-                  onfailure(e);
-                }
-              }
-              promises[key] = invocation.promise;
-            }
-            return result;
-          };
-        };
-        this.resolve = function(invocables, locals, parent, self) {
-          return this.study(invocables)(locals, parent, self);
-        };
-      }
-      angular.module('ui.router.util').service('$resolve', $Resolve);
-      $TemplateFactory.$inject = ['$http', '$templateCache', '$injector'];
-      function $TemplateFactory($http, $templateCache, $injector) {
-        this.fromConfig = function(config, params, locals) {
-          return (isDefined(config.template) ? this.fromString(config.template, params) : isDefined(config.templateUrl) ? this.fromUrl(config.templateUrl, params) : isDefined(config.templateProvider) ? this.fromProvider(config.templateProvider, params, locals) : null);
-        };
-        this.fromString = function(template, params) {
-          return isFunction(template) ? template(params) : template;
-        };
-        this.fromUrl = function(url, params) {
-          if (isFunction(url))
-            url = url(params);
-          if (url == null)
-            return null;
-          else
-            return $http.get(url, {
-              cache: $templateCache,
-              headers: {Accept: 'text/html'}
-            }).then(function(response) {
-              return response.data;
-            });
-        };
-        this.fromProvider = function(provider, params, locals) {
-          return $injector.invoke(provider, null, locals || {params: params});
-        };
-      }
-      angular.module('ui.router.util').service('$templateFactory', $TemplateFactory);
-      var $$UMFP;
-      function UrlMatcher(pattern, config, parentMatcher) {
-        config = extend({params: {}}, isObject(config) ? config : {});
-        var placeholder = /([:*])([\w\[\]]+)|\{([\w\[\]]+)(?:\:((?:[^{}\\]+|\\.|\{(?:[^{}\\]+|\\.)*\})+))?\}/g,
-            searchPlaceholder = /([:]?)([\w\[\]-]+)|\{([\w\[\]-]+)(?:\:((?:[^{}\\]+|\\.|\{(?:[^{}\\]+|\\.)*\})+))?\}/g,
-            compiled = '^',
-            last = 0,
-            m,
-            segments = this.segments = [],
-            parentParams = parentMatcher ? parentMatcher.params : {},
-            params = this.params = parentMatcher ? parentMatcher.params.$$new() : new $$UMFP.ParamSet(),
-            paramNames = [];
-        function addParameter(id, type, config, location) {
-          paramNames.push(id);
-          if (parentParams[id])
-            return parentParams[id];
-          if (!/^\w+(-+\w+)*(?:\[\])?$/.test(id))
-            throw new Error("Invalid parameter name '" + id + "' in pattern '" + pattern + "'");
-          if (params[id])
-            throw new Error("Duplicate parameter name '" + id + "' in pattern '" + pattern + "'");
-          params[id] = new $$UMFP.Param(id, type, config, location);
-          return params[id];
-        }
-        function quoteRegExp(string, pattern, squash, optional) {
-          var surroundPattern = ['', ''],
-              result = string.replace(/[\\\[\]\^$*+?.()|{}]/g, "\\$&");
-          if (!pattern)
-            return result;
-          switch (squash) {
-            case false:
-              surroundPattern = ['(', ')' + (optional ? "?" : "")];
-              break;
-            case true:
-              surroundPattern = ['?(', ')?'];
-              break;
-            default:
-              surroundPattern = ['(' + squash + "|", ')?'];
-              break;
-          }
-          return result + surroundPattern[0] + pattern + surroundPattern[1];
-        }
-        this.source = pattern;
-        function matchDetails(m, isSearch) {
-          var id,
-              regexp,
-              segment,
-              type,
-              cfg,
-              arrayMode;
-          id = m[2] || m[3];
-          cfg = config.params[id];
-          segment = pattern.substring(last, m.index);
-          regexp = isSearch ? m[4] : m[4] || (m[1] == '*' ? '.*' : null);
-          type = $$UMFP.type(regexp || "string") || inherit($$UMFP.type("string"), {pattern: new RegExp(regexp, config.caseInsensitive ? 'i' : undefined)});
-          return {
-            id: id,
-            regexp: regexp,
-            segment: segment,
-            type: type,
-            cfg: cfg
-          };
-        }
-        var p,
-            param,
-            segment;
-        while ((m = placeholder.exec(pattern))) {
-          p = matchDetails(m, false);
-          if (p.segment.indexOf('?') >= 0)
-            break;
-          param = addParameter(p.id, p.type, p.cfg, "path");
-          compiled += quoteRegExp(p.segment, param.type.pattern.source, param.squash, param.isOptional);
-          segments.push(p.segment);
-          last = placeholder.lastIndex;
-        }
-        segment = pattern.substring(last);
-        var i = segment.indexOf('?');
-        if (i >= 0) {
-          var search = this.sourceSearch = segment.substring(i);
-          segment = segment.substring(0, i);
-          this.sourcePath = pattern.substring(0, last + i);
-          if (search.length > 0) {
-            last = 0;
-            while ((m = searchPlaceholder.exec(search))) {
-              p = matchDetails(m, true);
-              param = addParameter(p.id, p.type, p.cfg, "search");
-              last = placeholder.lastIndex;
-            }
-          }
-        } else {
-          this.sourcePath = pattern;
-          this.sourceSearch = '';
-        }
-        compiled += quoteRegExp(segment) + (config.strict === false ? '\/?' : '') + '$';
-        segments.push(segment);
-        this.regexp = new RegExp(compiled, config.caseInsensitive ? 'i' : undefined);
-        this.prefix = segments[0];
-        this.$$paramNames = paramNames;
-      }
-      UrlMatcher.prototype.concat = function(pattern, config) {
-        var defaultConfig = {
-          caseInsensitive: $$UMFP.caseInsensitive(),
-          strict: $$UMFP.strictMode(),
-          squash: $$UMFP.defaultSquashPolicy()
-        };
-        return new UrlMatcher(this.sourcePath + pattern + this.sourceSearch, extend(defaultConfig, config), this);
-      };
-      UrlMatcher.prototype.toString = function() {
-        return this.source;
-      };
-      UrlMatcher.prototype.exec = function(path, searchParams) {
-        var m = this.regexp.exec(path);
-        if (!m)
-          return null;
-        searchParams = searchParams || {};
-        var paramNames = this.parameters(),
-            nTotal = paramNames.length,
-            nPath = this.segments.length - 1,
-            values = {},
-            i,
-            j,
-            cfg,
-            paramName;
-        if (nPath !== m.length - 1)
-          throw new Error("Unbalanced capture group in route '" + this.source + "'");
-        function decodePathArray(string) {
-          function reverseString(str) {
-            return str.split("").reverse().join("");
-          }
-          function unquoteDashes(str) {
-            return str.replace(/\\-/g, "-");
-          }
-          var split = reverseString(string).split(/-(?!\\)/);
-          var allReversed = map(split, reverseString);
-          return map(allReversed, unquoteDashes).reverse();
-        }
-        for (i = 0; i < nPath; i++) {
-          paramName = paramNames[i];
-          var param = this.params[paramName];
-          var paramVal = m[i + 1];
-          for (j = 0; j < param.replace; j++) {
-            if (param.replace[j].from === paramVal)
-              paramVal = param.replace[j].to;
-          }
-          if (paramVal && param.array === true)
-            paramVal = decodePathArray(paramVal);
-          values[paramName] = param.value(paramVal);
-        }
-        for (; i < nTotal; i++) {
-          paramName = paramNames[i];
-          values[paramName] = this.params[paramName].value(searchParams[paramName]);
-        }
-        return values;
-      };
-      UrlMatcher.prototype.parameters = function(param) {
-        if (!isDefined(param))
-          return this.$$paramNames;
-        return this.params[param] || null;
-      };
-      UrlMatcher.prototype.validates = function(params) {
-        return this.params.$$validates(params);
-      };
-      UrlMatcher.prototype.format = function(values) {
-        values = values || {};
-        var segments = this.segments,
-            params = this.parameters(),
-            paramset = this.params;
-        if (!this.validates(values))
-          return null;
-        var i,
-            search = false,
-            nPath = segments.length - 1,
-            nTotal = params.length,
-            result = segments[0];
-        function encodeDashes(str) {
-          return encodeURIComponent(str).replace(/-/g, function(c) {
-            return '%5C%' + c.charCodeAt(0).toString(16).toUpperCase();
-          });
-        }
-        for (i = 0; i < nTotal; i++) {
-          var isPathParam = i < nPath;
-          var name = params[i],
-              param = paramset[name],
-              value = param.value(values[name]);
-          var isDefaultValue = param.isOptional && param.type.equals(param.value(), value);
-          var squash = isDefaultValue ? param.squash : false;
-          var encoded = param.type.encode(value);
-          if (isPathParam) {
-            var nextSegment = segments[i + 1];
-            if (squash === false) {
-              if (encoded != null) {
-                if (isArray(encoded)) {
-                  result += map(encoded, encodeDashes).join("-");
-                } else {
-                  result += encodeURIComponent(encoded);
-                }
-              }
-              result += nextSegment;
-            } else if (squash === true) {
-              var capture = result.match(/\/$/) ? /\/?(.*)/ : /(.*)/;
-              result += nextSegment.match(capture)[1];
-            } else if (isString(squash)) {
-              result += squash + nextSegment;
-            }
-          } else {
-            if (encoded == null || (isDefaultValue && squash !== false))
-              continue;
-            if (!isArray(encoded))
-              encoded = [encoded];
-            encoded = map(encoded, encodeURIComponent).join('&' + name + '=');
-            result += (search ? '&' : '?') + (name + '=' + encoded);
-            search = true;
-          }
-        }
-        return result;
-      };
-      function Type(config) {
-        extend(this, config);
-      }
-      Type.prototype.is = function(val, key) {
-        return true;
-      };
-      Type.prototype.encode = function(val, key) {
-        return val;
-      };
-      Type.prototype.decode = function(val, key) {
-        return val;
-      };
-      Type.prototype.equals = function(a, b) {
-        return a == b;
-      };
-      Type.prototype.$subPattern = function() {
-        var sub = this.pattern.toString();
-        return sub.substr(1, sub.length - 2);
-      };
-      Type.prototype.pattern = /.*/;
-      Type.prototype.toString = function() {
-        return "{Type:" + this.name + "}";
-      };
-      Type.prototype.$normalize = function(val) {
-        return this.is(val) ? val : this.decode(val);
-      };
-      Type.prototype.$asArray = function(mode, isSearch) {
-        if (!mode)
-          return this;
-        if (mode === "auto" && !isSearch)
-          throw new Error("'auto' array mode is for query parameters only");
-        function ArrayType(type, mode) {
-          function bindTo(type, callbackName) {
-            return function() {
-              return type[callbackName].apply(type, arguments);
-            };
-          }
-          function arrayWrap(val) {
-            return isArray(val) ? val : (isDefined(val) ? [val] : []);
-          }
-          function arrayUnwrap(val) {
-            switch (val.length) {
-              case 0:
-                return undefined;
-              case 1:
-                return mode === "auto" ? val[0] : val;
-              default:
-                return val;
-            }
-          }
-          function falsey(val) {
-            return !val;
-          }
-          function arrayHandler(callback, allTruthyMode) {
-            return function handleArray(val) {
-              val = arrayWrap(val);
-              var result = map(val, callback);
-              if (allTruthyMode === true)
-                return filter(result, falsey).length === 0;
-              return arrayUnwrap(result);
-            };
-          }
-          function arrayEqualsHandler(callback) {
-            return function handleArray(val1, val2) {
-              var left = arrayWrap(val1),
-                  right = arrayWrap(val2);
-              if (left.length !== right.length)
-                return false;
-              for (var i = 0; i < left.length; i++) {
-                if (!callback(left[i], right[i]))
-                  return false;
-              }
-              return true;
-            };
-          }
-          this.encode = arrayHandler(bindTo(type, 'encode'));
-          this.decode = arrayHandler(bindTo(type, 'decode'));
-          this.is = arrayHandler(bindTo(type, 'is'), true);
-          this.equals = arrayEqualsHandler(bindTo(type, 'equals'));
-          this.pattern = type.pattern;
-          this.$normalize = arrayHandler(bindTo(type, '$normalize'));
-          this.name = type.name;
-          this.$arrayMode = mode;
-        }
-        return new ArrayType(this, mode);
-      };
-      function $UrlMatcherFactory() {
-        $$UMFP = this;
-        var isCaseInsensitive = false,
-            isStrictMode = true,
-            defaultSquashPolicy = false;
-        function valToString(val) {
-          return val != null ? val.toString().replace(/\//g, "%2F") : val;
-        }
-        function valFromString(val) {
-          return val != null ? val.toString().replace(/%2F/g, "/") : val;
-        }
-        var $types = {},
-            enqueue = true,
-            typeQueue = [],
-            injector,
-            defaultTypes = {
-              string: {
-                encode: valToString,
-                decode: valFromString,
-                is: function(val) {
-                  return val == null || !isDefined(val) || typeof val === "string";
-                },
-                pattern: /[^/]*/
-              },
-              int: {
-                encode: valToString,
-                decode: function(val) {
-                  return parseInt(val, 10);
-                },
-                is: function(val) {
-                  return isDefined(val) && this.decode(val.toString()) === val;
-                },
-                pattern: /\d+/
-              },
-              bool: {
-                encode: function(val) {
-                  return val ? 1 : 0;
-                },
-                decode: function(val) {
-                  return parseInt(val, 10) !== 0;
-                },
-                is: function(val) {
-                  return val === true || val === false;
-                },
-                pattern: /0|1/
-              },
-              date: {
-                encode: function(val) {
-                  if (!this.is(val))
-                    return undefined;
-                  return [val.getFullYear(), ('0' + (val.getMonth() + 1)).slice(-2), ('0' + val.getDate()).slice(-2)].join("-");
-                },
-                decode: function(val) {
-                  if (this.is(val))
-                    return val;
-                  var match = this.capture.exec(val);
-                  return match ? new Date(match[1], match[2] - 1, match[3]) : undefined;
-                },
-                is: function(val) {
-                  return val instanceof Date && !isNaN(val.valueOf());
-                },
-                equals: function(a, b) {
-                  return this.is(a) && this.is(b) && a.toISOString() === b.toISOString();
-                },
-                pattern: /[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2][0-9]|3[0-1])/,
-                capture: /([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/
-              },
-              json: {
-                encode: angular.toJson,
-                decode: angular.fromJson,
-                is: angular.isObject,
-                equals: angular.equals,
-                pattern: /[^/]*/
-              },
-              any: {
-                encode: angular.identity,
-                decode: angular.identity,
-                equals: angular.equals,
-                pattern: /.*/
-              }
-            };
-        function getDefaultConfig() {
-          return {
-            strict: isStrictMode,
-            caseInsensitive: isCaseInsensitive
-          };
-        }
-        function isInjectable(value) {
-          return (isFunction(value) || (isArray(value) && isFunction(value[value.length - 1])));
-        }
-        $UrlMatcherFactory.$$getDefaultValue = function(config) {
-          if (!isInjectable(config.value))
-            return config.value;
-          if (!injector)
-            throw new Error("Injectable functions cannot be called at configuration time");
-          return injector.invoke(config.value);
-        };
-        this.caseInsensitive = function(value) {
-          if (isDefined(value))
-            isCaseInsensitive = value;
-          return isCaseInsensitive;
-        };
-        this.strictMode = function(value) {
-          if (isDefined(value))
-            isStrictMode = value;
-          return isStrictMode;
-        };
-        this.defaultSquashPolicy = function(value) {
-          if (!isDefined(value))
-            return defaultSquashPolicy;
-          if (value !== true && value !== false && !isString(value))
-            throw new Error("Invalid squash policy: " + value + ". Valid policies: false, true, arbitrary-string");
-          defaultSquashPolicy = value;
-          return value;
-        };
-        this.compile = function(pattern, config) {
-          return new UrlMatcher(pattern, extend(getDefaultConfig(), config));
-        };
-        this.isMatcher = function(o) {
-          if (!isObject(o))
-            return false;
-          var result = true;
-          forEach(UrlMatcher.prototype, function(val, name) {
-            if (isFunction(val)) {
-              result = result && (isDefined(o[name]) && isFunction(o[name]));
-            }
-          });
-          return result;
-        };
-        this.type = function(name, definition, definitionFn) {
-          if (!isDefined(definition))
-            return $types[name];
-          if ($types.hasOwnProperty(name))
-            throw new Error("A type named '" + name + "' has already been defined.");
-          $types[name] = new Type(extend({name: name}, definition));
-          if (definitionFn) {
-            typeQueue.push({
-              name: name,
-              def: definitionFn
-            });
-            if (!enqueue)
-              flushTypeQueue();
-          }
-          return this;
-        };
-        function flushTypeQueue() {
-          while (typeQueue.length) {
-            var type = typeQueue.shift();
-            if (type.pattern)
-              throw new Error("You cannot override a type's .pattern at runtime.");
-            angular.extend($types[type.name], injector.invoke(type.def));
-          }
-        }
-        forEach(defaultTypes, function(type, name) {
-          $types[name] = new Type(extend({name: name}, type));
-        });
-        $types = inherit($types, {});
-        this.$get = ['$injector', function($injector) {
-          injector = $injector;
-          enqueue = false;
-          flushTypeQueue();
-          forEach(defaultTypes, function(type, name) {
-            if (!$types[name])
-              $types[name] = new Type(type);
-          });
-          return this;
-        }];
-        this.Param = function Param(id, type, config, location) {
-          var self = this;
-          config = unwrapShorthand(config);
-          type = getType(config, type, location);
-          var arrayMode = getArrayMode();
-          type = arrayMode ? type.$asArray(arrayMode, location === "search") : type;
-          if (type.name === "string" && !arrayMode && location === "path" && config.value === undefined)
-            config.value = "";
-          var isOptional = config.value !== undefined;
-          var squash = getSquashPolicy(config, isOptional);
-          var replace = getReplace(config, arrayMode, isOptional, squash);
-          function unwrapShorthand(config) {
-            var keys = isObject(config) ? objectKeys(config) : [];
-            var isShorthand = indexOf(keys, "value") === -1 && indexOf(keys, "type") === -1 && indexOf(keys, "squash") === -1 && indexOf(keys, "array") === -1;
-            if (isShorthand)
-              config = {value: config};
-            config.$$fn = isInjectable(config.value) ? config.value : function() {
-              return config.value;
-            };
-            return config;
-          }
-          function getType(config, urlType, location) {
-            if (config.type && urlType)
-              throw new Error("Param '" + id + "' has two type configurations.");
-            if (urlType)
-              return urlType;
-            if (!config.type)
-              return (location === "config" ? $types.any : $types.string);
-            return config.type instanceof Type ? config.type : new Type(config.type);
-          }
-          function getArrayMode() {
-            var arrayDefaults = {array: (location === "search" ? "auto" : false)};
-            var arrayParamNomenclature = id.match(/\[\]$/) ? {array: true} : {};
-            return extend(arrayDefaults, arrayParamNomenclature, config).array;
-          }
-          function getSquashPolicy(config, isOptional) {
-            var squash = config.squash;
-            if (!isOptional || squash === false)
-              return false;
-            if (!isDefined(squash) || squash == null)
-              return defaultSquashPolicy;
-            if (squash === true || isString(squash))
-              return squash;
-            throw new Error("Invalid squash policy: '" + squash + "'. Valid policies: false, true, or arbitrary string");
-          }
-          function getReplace(config, arrayMode, isOptional, squash) {
-            var replace,
-                configuredKeys,
-                defaultPolicy = [{
-                  from: "",
-                  to: (isOptional || arrayMode ? undefined : "")
-                }, {
-                  from: null,
-                  to: (isOptional || arrayMode ? undefined : "")
-                }];
-            replace = isArray(config.replace) ? config.replace : [];
-            if (isString(squash))
-              replace.push({
-                from: squash,
-                to: undefined
-              });
-            configuredKeys = map(replace, function(item) {
-              return item.from;
-            });
-            return filter(defaultPolicy, function(item) {
-              return indexOf(configuredKeys, item.from) === -1;
-            }).concat(replace);
-          }
-          function $$getDefaultValue() {
-            if (!injector)
-              throw new Error("Injectable functions cannot be called at configuration time");
-            var defaultValue = injector.invoke(config.$$fn);
-            if (defaultValue !== null && defaultValue !== undefined && !self.type.is(defaultValue))
-              throw new Error("Default value (" + defaultValue + ") for parameter '" + self.id + "' is not an instance of Type (" + self.type.name + ")");
-            return defaultValue;
-          }
-          function $value(value) {
-            function hasReplaceVal(val) {
-              return function(obj) {
-                return obj.from === val;
-              };
-            }
-            function $replace(value) {
-              var replacement = map(filter(self.replace, hasReplaceVal(value)), function(obj) {
-                return obj.to;
-              });
-              return replacement.length ? replacement[0] : value;
-            }
-            value = $replace(value);
-            return !isDefined(value) ? $$getDefaultValue() : self.type.$normalize(value);
-          }
-          function toString() {
-            return "{Param:" + id + " " + type + " squash: '" + squash + "' optional: " + isOptional + "}";
-          }
-          extend(this, {
-            id: id,
-            type: type,
-            location: location,
-            array: arrayMode,
-            squash: squash,
-            replace: replace,
-            isOptional: isOptional,
-            value: $value,
-            dynamic: undefined,
-            config: config,
-            toString: toString
-          });
-        };
-        function ParamSet(params) {
-          extend(this, params || {});
-        }
-        ParamSet.prototype = {
-          $$new: function() {
-            return inherit(this, extend(new ParamSet(), {$$parent: this}));
-          },
-          $$keys: function() {
-            var keys = [],
-                chain = [],
-                parent = this,
-                ignore = objectKeys(ParamSet.prototype);
-            while (parent) {
-              chain.push(parent);
-              parent = parent.$$parent;
-            }
-            chain.reverse();
-            forEach(chain, function(paramset) {
-              forEach(objectKeys(paramset), function(key) {
-                if (indexOf(keys, key) === -1 && indexOf(ignore, key) === -1)
-                  keys.push(key);
-              });
-            });
-            return keys;
-          },
-          $$values: function(paramValues) {
-            var values = {},
-                self = this;
-            forEach(self.$$keys(), function(key) {
-              values[key] = self[key].value(paramValues && paramValues[key]);
-            });
-            return values;
-          },
-          $$equals: function(paramValues1, paramValues2) {
-            var equal = true,
-                self = this;
-            forEach(self.$$keys(), function(key) {
-              var left = paramValues1 && paramValues1[key],
-                  right = paramValues2 && paramValues2[key];
-              if (!self[key].type.equals(left, right))
-                equal = false;
-            });
-            return equal;
-          },
-          $$validates: function $$validate(paramValues) {
-            var keys = this.$$keys(),
-                i,
-                param,
-                rawVal,
-                normalized,
-                encoded;
-            for (i = 0; i < keys.length; i++) {
-              param = this[keys[i]];
-              rawVal = paramValues[keys[i]];
-              if ((rawVal === undefined || rawVal === null) && param.isOptional)
-                break;
-              normalized = param.type.$normalize(rawVal);
-              if (!param.type.is(normalized))
-                return false;
-              encoded = param.type.encode(normalized);
-              if (angular.isString(encoded) && !param.type.pattern.exec(encoded))
-                return false;
-            }
-            return true;
-          },
-          $$parent: undefined
-        };
-        this.ParamSet = ParamSet;
-      }
-      angular.module('ui.router.util').provider('$urlMatcherFactory', $UrlMatcherFactory);
-      angular.module('ui.router.util').run(['$urlMatcherFactory', function($urlMatcherFactory) {}]);
-      $UrlRouterProvider.$inject = ['$locationProvider', '$urlMatcherFactoryProvider'];
-      function $UrlRouterProvider($locationProvider, $urlMatcherFactory) {
-        var rules = [],
-            otherwise = null,
-            interceptDeferred = false,
-            listener;
-        function regExpPrefix(re) {
-          var prefix = /^\^((?:\\[^a-zA-Z0-9]|[^\\\[\]\^$*+?.()|{}]+)*)/.exec(re.source);
-          return (prefix != null) ? prefix[1].replace(/\\(.)/g, "$1") : '';
-        }
-        function interpolate(pattern, match) {
-          return pattern.replace(/\$(\$|\d{1,2})/, function(m, what) {
-            return match[what === '$' ? 0 : Number(what)];
-          });
-        }
-        this.rule = function(rule) {
-          if (!isFunction(rule))
-            throw new Error("'rule' must be a function");
-          rules.push(rule);
-          return this;
-        };
-        this.otherwise = function(rule) {
-          if (isString(rule)) {
-            var redirect = rule;
-            rule = function() {
-              return redirect;
-            };
-          } else if (!isFunction(rule))
-            throw new Error("'rule' must be a function");
-          otherwise = rule;
-          return this;
-        };
-        function handleIfMatch($injector, handler, match) {
-          if (!match)
-            return false;
-          var result = $injector.invoke(handler, handler, {$match: match});
-          return isDefined(result) ? result : true;
-        }
-        this.when = function(what, handler) {
-          var redirect,
-              handlerIsString = isString(handler);
-          if (isString(what))
-            what = $urlMatcherFactory.compile(what);
-          if (!handlerIsString && !isFunction(handler) && !isArray(handler))
-            throw new Error("invalid 'handler' in when()");
-          var strategies = {
-            matcher: function(what, handler) {
-              if (handlerIsString) {
-                redirect = $urlMatcherFactory.compile(handler);
-                handler = ['$match', function($match) {
-                  return redirect.format($match);
-                }];
-              }
-              return extend(function($injector, $location) {
-                return handleIfMatch($injector, handler, what.exec($location.path(), $location.search()));
-              }, {prefix: isString(what.prefix) ? what.prefix : ''});
-            },
-            regex: function(what, handler) {
-              if (what.global || what.sticky)
-                throw new Error("when() RegExp must not be global or sticky");
-              if (handlerIsString) {
-                redirect = handler;
-                handler = ['$match', function($match) {
-                  return interpolate(redirect, $match);
-                }];
-              }
-              return extend(function($injector, $location) {
-                return handleIfMatch($injector, handler, what.exec($location.path()));
-              }, {prefix: regExpPrefix(what)});
-            }
-          };
-          var check = {
-            matcher: $urlMatcherFactory.isMatcher(what),
-            regex: what instanceof RegExp
-          };
-          for (var n in check) {
-            if (check[n])
-              return this.rule(strategies[n](what, handler));
-          }
-          throw new Error("invalid 'what' in when()");
-        };
-        this.deferIntercept = function(defer) {
-          if (defer === undefined)
-            defer = true;
-          interceptDeferred = defer;
-        };
-        this.$get = $get;
-        $get.$inject = ['$location', '$rootScope', '$injector', '$browser'];
-        function $get($location, $rootScope, $injector, $browser) {
-          var baseHref = $browser.baseHref(),
-              location = $location.url(),
-              lastPushedUrl;
-          function appendBasePath(url, isHtml5, absolute) {
-            if (baseHref === '/')
-              return url;
-            if (isHtml5)
-              return baseHref.slice(0, -1) + url;
-            if (absolute)
-              return baseHref.slice(1) + url;
-            return url;
-          }
-          function update(evt) {
-            if (evt && evt.defaultPrevented)
-              return;
-            var ignoreUpdate = lastPushedUrl && $location.url() === lastPushedUrl;
-            lastPushedUrl = undefined;
-            function check(rule) {
-              var handled = rule($injector, $location);
-              if (!handled)
-                return false;
-              if (isString(handled))
-                $location.replace().url(handled);
-              return true;
-            }
-            var n = rules.length,
-                i;
-            for (i = 0; i < n; i++) {
-              if (check(rules[i]))
-                return;
-            }
-            if (otherwise)
-              check(otherwise);
-          }
-          function listen() {
-            listener = listener || $rootScope.$on('$locationChangeSuccess', update);
-            return listener;
-          }
-          if (!interceptDeferred)
-            listen();
-          return {
-            sync: function() {
-              update();
-            },
-            listen: function() {
-              return listen();
-            },
-            update: function(read) {
-              if (read) {
-                location = $location.url();
-                return;
-              }
-              if ($location.url() === location)
-                return;
-              $location.url(location);
-              $location.replace();
-            },
-            push: function(urlMatcher, params, options) {
-              var url = urlMatcher.format(params || {});
-              if (url !== null && params && params['#']) {
-                url += '#' + params['#'];
-              }
-              $location.url(url);
-              lastPushedUrl = options && options.$$avoidResync ? $location.url() : undefined;
-              if (options && options.replace)
-                $location.replace();
-            },
-            href: function(urlMatcher, params, options) {
-              if (!urlMatcher.validates(params))
-                return null;
-              var isHtml5 = $locationProvider.html5Mode();
-              if (angular.isObject(isHtml5)) {
-                isHtml5 = isHtml5.enabled;
-              }
-              var url = urlMatcher.format(params);
-              options = options || {};
-              if (!isHtml5 && url !== null) {
-                url = "#" + $locationProvider.hashPrefix() + url;
-              }
-              if (url !== null && params && params['#']) {
-                url += '#' + params['#'];
-              }
-              url = appendBasePath(url, isHtml5, options.absolute);
-              if (!options.absolute || !url) {
-                return url;
-              }
-              var slash = (!isHtml5 && url ? '/' : ''),
-                  port = $location.port();
-              port = (port === 80 || port === 443 ? '' : ':' + port);
-              return [$location.protocol(), '://', $location.host(), port, slash, url].join('');
-            }
-          };
-        }
-      }
-      angular.module('ui.router.router').provider('$urlRouter', $UrlRouterProvider);
-      $StateProvider.$inject = ['$urlRouterProvider', '$urlMatcherFactoryProvider'];
-      function $StateProvider($urlRouterProvider, $urlMatcherFactory) {
-        var root,
-            states = {},
-            $state,
-            queue = {},
-            abstractKey = 'abstract';
-        var stateBuilder = {
-          parent: function(state) {
-            if (isDefined(state.parent) && state.parent)
-              return findState(state.parent);
-            var compositeName = /^(.+)\.[^.]+$/.exec(state.name);
-            return compositeName ? findState(compositeName[1]) : root;
-          },
-          data: function(state) {
-            if (state.parent && state.parent.data) {
-              state.data = state.self.data = extend({}, state.parent.data, state.data);
-            }
-            return state.data;
-          },
-          url: function(state) {
-            var url = state.url,
-                config = {params: state.params || {}};
-            if (isString(url)) {
-              if (url.charAt(0) == '^')
-                return $urlMatcherFactory.compile(url.substring(1), config);
-              return (state.parent.navigable || root).url.concat(url, config);
-            }
-            if (!url || $urlMatcherFactory.isMatcher(url))
-              return url;
-            throw new Error("Invalid url '" + url + "' in state '" + state + "'");
-          },
-          navigable: function(state) {
-            return state.url ? state : (state.parent ? state.parent.navigable : null);
-          },
-          ownParams: function(state) {
-            var params = state.url && state.url.params || new $$UMFP.ParamSet();
-            forEach(state.params || {}, function(config, id) {
-              if (!params[id])
-                params[id] = new $$UMFP.Param(id, null, config, "config");
-            });
-            return params;
-          },
-          params: function(state) {
-            return state.parent && state.parent.params ? extend(state.parent.params.$$new(), state.ownParams) : new $$UMFP.ParamSet();
-          },
-          views: function(state) {
-            var views = {};
-            forEach(isDefined(state.views) ? state.views : {'': state}, function(view, name) {
-              if (name.indexOf('@') < 0)
-                name += '@' + state.parent.name;
-              views[name] = view;
-            });
-            return views;
-          },
-          path: function(state) {
-            return state.parent ? state.parent.path.concat(state) : [];
-          },
-          includes: function(state) {
-            var includes = state.parent ? extend({}, state.parent.includes) : {};
-            includes[state.name] = true;
-            return includes;
-          },
-          $delegates: {}
-        };
-        function isRelative(stateName) {
-          return stateName.indexOf(".") === 0 || stateName.indexOf("^") === 0;
-        }
-        function findState(stateOrName, base) {
-          if (!stateOrName)
-            return undefined;
-          var isStr = isString(stateOrName),
-              name = isStr ? stateOrName : stateOrName.name,
-              path = isRelative(name);
-          if (path) {
-            if (!base)
-              throw new Error("No reference point given for path '" + name + "'");
-            base = findState(base);
-            var rel = name.split("."),
-                i = 0,
-                pathLength = rel.length,
-                current = base;
-            for (; i < pathLength; i++) {
-              if (rel[i] === "" && i === 0) {
-                current = base;
-                continue;
-              }
-              if (rel[i] === "^") {
-                if (!current.parent)
-                  throw new Error("Path '" + name + "' not valid for state '" + base.name + "'");
-                current = current.parent;
-                continue;
-              }
-              break;
-            }
-            rel = rel.slice(i).join(".");
-            name = current.name + (current.name && rel ? "." : "") + rel;
-          }
-          var state = states[name];
-          if (state && (isStr || (!isStr && (state === stateOrName || state.self === stateOrName)))) {
-            return state;
-          }
-          return undefined;
-        }
-        function queueState(parentName, state) {
-          if (!queue[parentName]) {
-            queue[parentName] = [];
-          }
-          queue[parentName].push(state);
-        }
-        function flushQueuedChildren(parentName) {
-          var queued = queue[parentName] || [];
-          while (queued.length) {
-            registerState(queued.shift());
-          }
-        }
-        function registerState(state) {
-          state = inherit(state, {
-            self: state,
-            resolve: state.resolve || {},
-            toString: function() {
-              return this.name;
-            }
-          });
-          var name = state.name;
-          if (!isString(name) || name.indexOf('@') >= 0)
-            throw new Error("State must have a valid name");
-          if (states.hasOwnProperty(name))
-            throw new Error("State '" + name + "'' is already defined");
-          var parentName = (name.indexOf('.') !== -1) ? name.substring(0, name.lastIndexOf('.')) : (isString(state.parent)) ? state.parent : (isObject(state.parent) && isString(state.parent.name)) ? state.parent.name : '';
-          if (parentName && !states[parentName]) {
-            return queueState(parentName, state.self);
-          }
-          for (var key in stateBuilder) {
-            if (isFunction(stateBuilder[key]))
-              state[key] = stateBuilder[key](state, stateBuilder.$delegates[key]);
-          }
-          states[name] = state;
-          if (!state[abstractKey] && state.url) {
-            $urlRouterProvider.when(state.url, ['$match', '$stateParams', function($match, $stateParams) {
-              if ($state.$current.navigable != state || !equalForKeys($match, $stateParams)) {
-                $state.transitionTo(state, $match, {
-                  inherit: true,
-                  location: false
-                });
-              }
-            }]);
-          }
-          flushQueuedChildren(name);
-          return state;
-        }
-        function isGlob(text) {
-          return text.indexOf('*') > -1;
-        }
-        function doesStateMatchGlob(glob) {
-          var globSegments = glob.split('.'),
-              segments = $state.$current.name.split('.');
-          for (var i = 0,
-              l = globSegments.length; i < l; i++) {
-            if (globSegments[i] === '*') {
-              segments[i] = '*';
-            }
-          }
-          if (globSegments[0] === '**') {
-            segments = segments.slice(indexOf(segments, globSegments[1]));
-            segments.unshift('**');
-          }
-          if (globSegments[globSegments.length - 1] === '**') {
-            segments.splice(indexOf(segments, globSegments[globSegments.length - 2]) + 1, Number.MAX_VALUE);
-            segments.push('**');
-          }
-          if (globSegments.length != segments.length) {
-            return false;
-          }
-          return segments.join('') === globSegments.join('');
-        }
-        root = registerState({
-          name: '',
-          url: '^',
-          views: null,
-          'abstract': true
-        });
-        root.navigable = null;
-        this.decorator = decorator;
-        function decorator(name, func) {
-          if (isString(name) && !isDefined(func)) {
-            return stateBuilder[name];
-          }
-          if (!isFunction(func) || !isString(name)) {
-            return this;
-          }
-          if (stateBuilder[name] && !stateBuilder.$delegates[name]) {
-            stateBuilder.$delegates[name] = stateBuilder[name];
-          }
-          stateBuilder[name] = func;
-          return this;
-        }
-        this.state = state;
-        function state(name, definition) {
-          if (isObject(name))
-            definition = name;
-          else
-            definition.name = name;
-          registerState(definition);
-          return this;
-        }
-        this.$get = $get;
-        $get.$inject = ['$rootScope', '$q', '$view', '$injector', '$resolve', '$stateParams', '$urlRouter', '$location', '$urlMatcherFactory'];
-        function $get($rootScope, $q, $view, $injector, $resolve, $stateParams, $urlRouter, $location, $urlMatcherFactory) {
-          var TransitionSuperseded = $q.reject(new Error('transition superseded'));
-          var TransitionPrevented = $q.reject(new Error('transition prevented'));
-          var TransitionAborted = $q.reject(new Error('transition aborted'));
-          var TransitionFailed = $q.reject(new Error('transition failed'));
-          function handleRedirect(redirect, state, params, options) {
-            var evt = $rootScope.$broadcast('$stateNotFound', redirect, state, params);
-            if (evt.defaultPrevented) {
-              $urlRouter.update();
-              return TransitionAborted;
-            }
-            if (!evt.retry) {
-              return null;
-            }
-            if (options.$retry) {
-              $urlRouter.update();
-              return TransitionFailed;
-            }
-            var retryTransition = $state.transition = $q.when(evt.retry);
-            retryTransition.then(function() {
-              if (retryTransition !== $state.transition)
-                return TransitionSuperseded;
-              redirect.options.$retry = true;
-              return $state.transitionTo(redirect.to, redirect.toParams, redirect.options);
-            }, function() {
-              return TransitionAborted;
-            });
-            $urlRouter.update();
-            return retryTransition;
-          }
-          root.locals = {
-            resolve: null,
-            globals: {$stateParams: {}}
-          };
-          $state = {
-            params: {},
-            current: root.self,
-            $current: root,
-            transition: null
-          };
-          $state.reload = function reload(state) {
-            return $state.transitionTo($state.current, $stateParams, {
-              reload: state || true,
-              inherit: false,
-              notify: true
-            });
-          };
-          $state.go = function go(to, params, options) {
-            return $state.transitionTo(to, params, extend({
-              inherit: true,
-              relative: $state.$current
-            }, options));
-          };
-          $state.transitionTo = function transitionTo(to, toParams, options) {
-            toParams = toParams || {};
-            options = extend({
-              location: true,
-              inherit: false,
-              relative: null,
-              notify: true,
-              reload: false,
-              $retry: false
-            }, options || {});
-            var from = $state.$current,
-                fromParams = $state.params,
-                fromPath = from.path;
-            var evt,
-                toState = findState(to, options.relative);
-            var hash = toParams['#'];
-            if (!isDefined(toState)) {
-              var redirect = {
-                to: to,
-                toParams: toParams,
-                options: options
-              };
-              var redirectResult = handleRedirect(redirect, from.self, fromParams, options);
-              if (redirectResult) {
-                return redirectResult;
-              }
-              to = redirect.to;
-              toParams = redirect.toParams;
-              options = redirect.options;
-              toState = findState(to, options.relative);
-              if (!isDefined(toState)) {
-                if (!options.relative)
-                  throw new Error("No such state '" + to + "'");
-                throw new Error("Could not resolve '" + to + "' from state '" + options.relative + "'");
-              }
-            }
-            if (toState[abstractKey])
-              throw new Error("Cannot transition to abstract state '" + to + "'");
-            if (options.inherit)
-              toParams = inheritParams($stateParams, toParams || {}, $state.$current, toState);
-            if (!toState.params.$$validates(toParams))
-              return TransitionFailed;
-            toParams = toState.params.$$values(toParams);
-            to = toState;
-            var toPath = to.path;
-            var keep = 0,
-                state = toPath[keep],
-                locals = root.locals,
-                toLocals = [];
-            if (!options.reload) {
-              while (state && state === fromPath[keep] && state.ownParams.$$equals(toParams, fromParams)) {
-                locals = toLocals[keep] = state.locals;
-                keep++;
-                state = toPath[keep];
-              }
-            } else if (isString(options.reload) || isObject(options.reload)) {
-              if (isObject(options.reload) && !options.reload.name) {
-                throw new Error('Invalid reload state object');
-              }
-              var reloadState = options.reload === true ? fromPath[0] : findState(options.reload);
-              if (options.reload && !reloadState) {
-                throw new Error("No such reload state '" + (isString(options.reload) ? options.reload : options.reload.name) + "'");
-              }
-              while (state && state === fromPath[keep] && state !== reloadState) {
-                locals = toLocals[keep] = state.locals;
-                keep++;
-                state = toPath[keep];
-              }
-            }
-            if (shouldSkipReload(to, toParams, from, fromParams, locals, options)) {
-              if (hash)
-                toParams['#'] = hash;
-              $state.params = toParams;
-              copy($state.params, $stateParams);
-              if (options.location && to.navigable && to.navigable.url) {
-                $urlRouter.push(to.navigable.url, toParams, {
-                  $$avoidResync: true,
-                  replace: options.location === 'replace'
-                });
-                $urlRouter.update(true);
-              }
-              $state.transition = null;
-              return $q.when($state.current);
-            }
-            toParams = filterByKeys(to.params.$$keys(), toParams || {});
-            if (options.notify) {
-              if ($rootScope.$broadcast('$stateChangeStart', to.self, toParams, from.self, fromParams).defaultPrevented) {
-                $rootScope.$broadcast('$stateChangeCancel', to.self, toParams, from.self, fromParams);
-                $urlRouter.update();
-                return TransitionPrevented;
-              }
-            }
-            var resolved = $q.when(locals);
-            for (var l = keep; l < toPath.length; l++, state = toPath[l]) {
-              locals = toLocals[l] = inherit(locals);
-              resolved = resolveState(state, toParams, state === to, resolved, locals, options);
-            }
-            var transition = $state.transition = resolved.then(function() {
-              var l,
-                  entering,
-                  exiting;
-              if ($state.transition !== transition)
-                return TransitionSuperseded;
-              for (l = fromPath.length - 1; l >= keep; l--) {
-                exiting = fromPath[l];
-                if (exiting.self.onExit) {
-                  $injector.invoke(exiting.self.onExit, exiting.self, exiting.locals.globals);
-                }
-                exiting.locals = null;
-              }
-              for (l = keep; l < toPath.length; l++) {
-                entering = toPath[l];
-                entering.locals = toLocals[l];
-                if (entering.self.onEnter) {
-                  $injector.invoke(entering.self.onEnter, entering.self, entering.locals.globals);
-                }
-              }
-              if (hash)
-                toParams['#'] = hash;
-              if ($state.transition !== transition)
-                return TransitionSuperseded;
-              $state.$current = to;
-              $state.current = to.self;
-              $state.params = toParams;
-              copy($state.params, $stateParams);
-              $state.transition = null;
-              if (options.location && to.navigable) {
-                $urlRouter.push(to.navigable.url, to.navigable.locals.globals.$stateParams, {
-                  $$avoidResync: true,
-                  replace: options.location === 'replace'
-                });
-              }
-              if (options.notify) {
-                $rootScope.$broadcast('$stateChangeSuccess', to.self, toParams, from.self, fromParams);
-              }
-              $urlRouter.update(true);
-              return $state.current;
-            }, function(error) {
-              if ($state.transition !== transition)
-                return TransitionSuperseded;
-              $state.transition = null;
-              evt = $rootScope.$broadcast('$stateChangeError', to.self, toParams, from.self, fromParams, error);
-              if (!evt.defaultPrevented) {
-                $urlRouter.update();
-              }
-              return $q.reject(error);
-            });
-            return transition;
-          };
-          $state.is = function is(stateOrName, params, options) {
-            options = extend({relative: $state.$current}, options || {});
-            var state = findState(stateOrName, options.relative);
-            if (!isDefined(state)) {
-              return undefined;
-            }
-            if ($state.$current !== state) {
-              return false;
-            }
-            return params ? equalForKeys(state.params.$$values(params), $stateParams) : true;
-          };
-          $state.includes = function includes(stateOrName, params, options) {
-            options = extend({relative: $state.$current}, options || {});
-            if (isString(stateOrName) && isGlob(stateOrName)) {
-              if (!doesStateMatchGlob(stateOrName)) {
-                return false;
-              }
-              stateOrName = $state.$current.name;
-            }
-            var state = findState(stateOrName, options.relative);
-            if (!isDefined(state)) {
-              return undefined;
-            }
-            if (!isDefined($state.$current.includes[state.name])) {
-              return false;
-            }
-            return params ? equalForKeys(state.params.$$values(params), $stateParams, objectKeys(params)) : true;
-          };
-          $state.href = function href(stateOrName, params, options) {
-            options = extend({
-              lossy: true,
-              inherit: true,
-              absolute: false,
-              relative: $state.$current
-            }, options || {});
-            var state = findState(stateOrName, options.relative);
-            if (!isDefined(state))
-              return null;
-            if (options.inherit)
-              params = inheritParams($stateParams, params || {}, $state.$current, state);
-            var nav = (state && options.lossy) ? state.navigable : state;
-            if (!nav || nav.url === undefined || nav.url === null) {
-              return null;
-            }
-            return $urlRouter.href(nav.url, filterByKeys(state.params.$$keys().concat('#'), params || {}), {absolute: options.absolute});
-          };
-          $state.get = function(stateOrName, context) {
-            if (arguments.length === 0)
-              return map(objectKeys(states), function(name) {
-                return states[name].self;
-              });
-            var state = findState(stateOrName, context || $state.$current);
-            return (state && state.self) ? state.self : null;
-          };
-          function resolveState(state, params, paramsAreFiltered, inherited, dst, options) {
-            var $stateParams = (paramsAreFiltered) ? params : filterByKeys(state.params.$$keys(), params);
-            var locals = {$stateParams: $stateParams};
-            dst.resolve = $resolve.resolve(state.resolve, locals, dst.resolve, state);
-            var promises = [dst.resolve.then(function(globals) {
-              dst.globals = globals;
-            })];
-            if (inherited)
-              promises.push(inherited);
-            function resolveViews() {
-              var viewsPromises = [];
-              forEach(state.views, function(view, name) {
-                var injectables = (view.resolve && view.resolve !== state.resolve ? view.resolve : {});
-                injectables.$template = [function() {
-                  return $view.load(name, {
-                    view: view,
-                    locals: dst.globals,
-                    params: $stateParams,
-                    notify: options.notify
-                  }) || '';
-                }];
-                viewsPromises.push($resolve.resolve(injectables, dst.globals, dst.resolve, state).then(function(result) {
-                  if (isFunction(view.controllerProvider) || isArray(view.controllerProvider)) {
-                    var injectLocals = angular.extend({}, injectables, dst.globals);
-                    result.$$controller = $injector.invoke(view.controllerProvider, null, injectLocals);
-                  } else {
-                    result.$$controller = view.controller;
-                  }
-                  result.$$state = state;
-                  result.$$controllerAs = view.controllerAs;
-                  dst[name] = result;
-                }));
-              });
-              return $q.all(viewsPromises).then(function() {
-                return dst.globals;
-              });
-            }
-            return $q.all(promises).then(resolveViews).then(function(values) {
-              return dst;
-            });
-          }
-          return $state;
-        }
-        function shouldSkipReload(to, toParams, from, fromParams, locals, options) {
-          function nonSearchParamsEqual(fromAndToState, fromParams, toParams) {
-            function notSearchParam(key) {
-              return fromAndToState.params[key].location != "search";
-            }
-            var nonQueryParamKeys = fromAndToState.params.$$keys().filter(notSearchParam);
-            var nonQueryParams = pick.apply({}, [fromAndToState.params].concat(nonQueryParamKeys));
-            var nonQueryParamSet = new $$UMFP.ParamSet(nonQueryParams);
-            return nonQueryParamSet.$$equals(fromParams, toParams);
-          }
-          if (!options.reload && to === from && (locals === from.locals || (to.self.reloadOnSearch === false && nonSearchParamsEqual(from, fromParams, toParams)))) {
-            return true;
-          }
-        }
-      }
-      angular.module('ui.router.state').value('$stateParams', {}).provider('$state', $StateProvider);
-      $ViewProvider.$inject = [];
-      function $ViewProvider() {
-        this.$get = $get;
-        $get.$inject = ['$rootScope', '$templateFactory'];
-        function $get($rootScope, $templateFactory) {
-          return {load: function load(name, options) {
-              var result,
-                  defaults = {
-                    template: null,
-                    controller: null,
-                    view: null,
-                    locals: null,
-                    notify: true,
-                    async: true,
-                    params: {}
-                  };
-              options = extend(defaults, options);
-              if (options.view) {
-                result = $templateFactory.fromConfig(options.view, options.params, options.locals);
-              }
-              if (result && options.notify) {
-                $rootScope.$broadcast('$viewContentLoading', options);
-              }
-              return result;
-            }};
-        }
-      }
-      angular.module('ui.router.state').provider('$view', $ViewProvider);
-      function $ViewScrollProvider() {
-        var useAnchorScroll = false;
-        this.useAnchorScroll = function() {
-          useAnchorScroll = true;
-        };
-        this.$get = ['$anchorScroll', '$timeout', function($anchorScroll, $timeout) {
-          if (useAnchorScroll) {
-            return $anchorScroll;
-          }
-          return function($element) {
-            return $timeout(function() {
-              $element[0].scrollIntoView();
-            }, 0, false);
-          };
-        }];
-      }
-      angular.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProvider);
-      $ViewDirective.$inject = ['$state', '$injector', '$uiViewScroll', '$interpolate'];
-      function $ViewDirective($state, $injector, $uiViewScroll, $interpolate) {
-        function getService() {
-          return ($injector.has) ? function(service) {
-            return $injector.has(service) ? $injector.get(service) : null;
-          } : function(service) {
-            try {
-              return $injector.get(service);
-            } catch (e) {
-              return null;
-            }
-          };
-        }
-        var service = getService(),
-            $animator = service('$animator'),
-            $animate = service('$animate');
-        function getRenderer(attrs, scope) {
-          var statics = function() {
-            return {
-              enter: function(element, target, cb) {
-                target.after(element);
-                cb();
-              },
-              leave: function(element, cb) {
-                element.remove();
-                cb();
-              }
-            };
-          };
-          if ($animate) {
-            return {
-              enter: function(element, target, cb) {
-                var promise = $animate.enter(element, null, target, cb);
-                if (promise && promise.then)
-                  promise.then(cb);
-              },
-              leave: function(element, cb) {
-                var promise = $animate.leave(element, cb);
-                if (promise && promise.then)
-                  promise.then(cb);
-              }
-            };
-          }
-          if ($animator) {
-            var animate = $animator && $animator(scope, attrs);
-            return {
-              enter: function(element, target, cb) {
-                animate.enter(element, null, target);
-                cb();
-              },
-              leave: function(element, cb) {
-                animate.leave(element);
-                cb();
-              }
-            };
-          }
-          return statics();
-        }
-        var directive = {
-          restrict: 'ECA',
-          terminal: true,
-          priority: 400,
-          transclude: 'element',
-          compile: function(tElement, tAttrs, $transclude) {
-            return function(scope, $element, attrs) {
-              var previousEl,
-                  currentEl,
-                  currentScope,
-                  latestLocals,
-                  onloadExp = attrs.onload || '',
-                  autoScrollExp = attrs.autoscroll,
-                  renderer = getRenderer(attrs, scope);
-              scope.$on('$stateChangeSuccess', function() {
-                updateView(false);
-              });
-              scope.$on('$viewContentLoading', function() {
-                updateView(false);
-              });
-              updateView(true);
-              function cleanupLastView() {
-                if (previousEl) {
-                  previousEl.remove();
-                  previousEl = null;
-                }
-                if (currentScope) {
-                  currentScope.$destroy();
-                  currentScope = null;
-                }
-                if (currentEl) {
-                  renderer.leave(currentEl, function() {
-                    previousEl = null;
-                  });
-                  previousEl = currentEl;
-                  currentEl = null;
-                }
-              }
-              function updateView(firstTime) {
-                var newScope,
-                    name = getUiViewName(scope, attrs, $element, $interpolate),
-                    previousLocals = name && $state.$current && $state.$current.locals[name];
-                if (!firstTime && previousLocals === latestLocals)
-                  return;
-                newScope = scope.$new();
-                latestLocals = $state.$current.locals[name];
-                var clone = $transclude(newScope, function(clone) {
-                  renderer.enter(clone, $element, function onUiViewEnter() {
-                    if (currentScope) {
-                      currentScope.$emit('$viewContentAnimationEnded');
-                    }
-                    if (angular.isDefined(autoScrollExp) && !autoScrollExp || scope.$eval(autoScrollExp)) {
-                      $uiViewScroll(clone);
-                    }
-                  });
-                  cleanupLastView();
-                });
-                currentEl = clone;
-                currentScope = newScope;
-                currentScope.$emit('$viewContentLoaded');
-                currentScope.$eval(onloadExp);
-              }
-            };
-          }
-        };
-        return directive;
-      }
-      $ViewDirectiveFill.$inject = ['$compile', '$controller', '$state', '$interpolate'];
-      function $ViewDirectiveFill($compile, $controller, $state, $interpolate) {
-        return {
-          restrict: 'ECA',
-          priority: -400,
-          compile: function(tElement) {
-            var initial = tElement.html();
-            return function(scope, $element, attrs) {
-              var current = $state.$current,
-                  name = getUiViewName(scope, attrs, $element, $interpolate),
-                  locals = current && current.locals[name];
-              if (!locals) {
-                return;
-              }
-              $element.data('$uiView', {
-                name: name,
-                state: locals.$$state
-              });
-              $element.html(locals.$template ? locals.$template : initial);
-              var link = $compile($element.contents());
-              if (locals.$$controller) {
-                locals.$scope = scope;
-                locals.$element = $element;
-                var controller = $controller(locals.$$controller, locals);
-                if (locals.$$controllerAs) {
-                  scope[locals.$$controllerAs] = controller;
-                }
-                $element.data('$ngControllerController', controller);
-                $element.children().data('$ngControllerController', controller);
-              }
-              link(scope);
-            };
-          }
-        };
-      }
-      function getUiViewName(scope, attrs, element, $interpolate) {
-        var name = $interpolate(attrs.uiView || attrs.name || '')(scope);
-        var inherited = element.inheritedData('$uiView');
-        return name.indexOf('@') >= 0 ? name : (name + '@' + (inherited ? inherited.state.name : ''));
-      }
-      angular.module('ui.router.state').directive('uiView', $ViewDirective);
-      angular.module('ui.router.state').directive('uiView', $ViewDirectiveFill);
-      function parseStateRef(ref, current) {
-        var preparsed = ref.match(/^\s*({[^}]*})\s*$/),
-            parsed;
-        if (preparsed)
-          ref = current + '(' + preparsed[1] + ')';
-        parsed = ref.replace(/\n/g, " ").match(/^([^(]+?)\s*(\((.*)\))?$/);
-        if (!parsed || parsed.length !== 4)
-          throw new Error("Invalid state ref '" + ref + "'");
-        return {
-          state: parsed[1],
-          paramExpr: parsed[3] || null
-        };
-      }
-      function stateContext(el) {
-        var stateData = el.parent().inheritedData('$uiView');
-        if (stateData && stateData.state && stateData.state.name) {
-          return stateData.state;
-        }
-      }
-      $StateRefDirective.$inject = ['$state', '$timeout'];
-      function $StateRefDirective($state, $timeout) {
-        var allowedOptions = ['location', 'inherit', 'reload', 'absolute'];
-        return {
-          restrict: 'A',
-          require: ['?^uiSrefActive', '?^uiSrefActiveEq'],
-          link: function(scope, element, attrs, uiSrefActive) {
-            var ref = parseStateRef(attrs.uiSref, $state.current.name);
-            var params = null,
-                url = null,
-                base = stateContext(element) || $state.$current;
-            var hrefKind = Object.prototype.toString.call(element.prop('href')) === '[object SVGAnimatedString]' ? 'xlink:href' : 'href';
-            var newHref = null,
-                isAnchor = element.prop("tagName").toUpperCase() === "A";
-            var isForm = element[0].nodeName === "FORM";
-            var attr = isForm ? "action" : hrefKind,
-                nav = true;
-            var options = {
-              relative: base,
-              inherit: true
-            };
-            var optionsOverride = scope.$eval(attrs.uiSrefOpts) || {};
-            angular.forEach(allowedOptions, function(option) {
-              if (option in optionsOverride) {
-                options[option] = optionsOverride[option];
-              }
-            });
-            var update = function(newVal) {
-              if (newVal)
-                params = angular.copy(newVal);
-              if (!nav)
-                return;
-              newHref = $state.href(ref.state, params, options);
-              var activeDirective = uiSrefActive[1] || uiSrefActive[0];
-              if (activeDirective) {
-                activeDirective.$$addStateInfo(ref.state, params);
-              }
-              if (newHref === null) {
-                nav = false;
-                return false;
-              }
-              attrs.$set(attr, newHref);
-            };
-            if (ref.paramExpr) {
-              scope.$watch(ref.paramExpr, function(newVal, oldVal) {
-                if (newVal !== params)
-                  update(newVal);
-              }, true);
-              params = angular.copy(scope.$eval(ref.paramExpr));
-            }
-            update();
-            if (isForm)
-              return;
-            element.bind("click", function(e) {
-              var button = e.which || e.button;
-              if (!(button > 1 || e.ctrlKey || e.metaKey || e.shiftKey || element.attr('target'))) {
-                var transition = $timeout(function() {
-                  $state.go(ref.state, params, options);
-                });
-                e.preventDefault();
-                var ignorePreventDefaultCount = isAnchor && !newHref ? 1 : 0;
-                e.preventDefault = function() {
-                  if (ignorePreventDefaultCount-- <= 0)
-                    $timeout.cancel(transition);
-                };
-              }
-            });
-          }
-        };
-      }
-      $StateRefActiveDirective.$inject = ['$state', '$stateParams', '$interpolate'];
-      function $StateRefActiveDirective($state, $stateParams, $interpolate) {
-        return {
-          restrict: "A",
-          controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
-            var states = [],
-                activeClass;
-            activeClass = $interpolate($attrs.uiSrefActiveEq || $attrs.uiSrefActive || '', false)($scope);
-            this.$$addStateInfo = function(newState, newParams) {
-              var state = $state.get(newState, stateContext($element));
-              states.push({
-                state: state || {name: newState},
-                params: newParams
-              });
-              update();
-            };
-            $scope.$on('$stateChangeSuccess', update);
-            function update() {
-              if (anyMatch()) {
-                $element.addClass(activeClass);
-              } else {
-                $element.removeClass(activeClass);
-              }
-            }
-            function anyMatch() {
-              for (var i = 0; i < states.length; i++) {
-                if (isMatch(states[i].state, states[i].params)) {
-                  return true;
-                }
-              }
-              return false;
-            }
-            function isMatch(state, params) {
-              if (typeof $attrs.uiSrefActiveEq !== 'undefined') {
-                return $state.is(state.name, params);
-              } else {
-                return $state.includes(state.name, params);
-              }
-            }
-          }]
-        };
-      }
-      angular.module('ui.router.state').directive('uiSref', $StateRefDirective).directive('uiSrefActive', $StateRefActiveDirective).directive('uiSrefActiveEq', $StateRefActiveDirective);
-      $IsStateFilter.$inject = ['$state'];
-      function $IsStateFilter($state) {
-        var isFilter = function(state) {
-          return $state.is(state);
-        };
-        isFilter.$stateful = true;
-        return isFilter;
-      }
-      $IncludedByStateFilter.$inject = ['$state'];
-      function $IncludedByStateFilter($state) {
-        var includesFilter = function(state) {
-          return $state.includes(state);
-        };
-        includesFilter.$stateful = true;
-        return includesFilter;
-      }
-      angular.module('ui.router.state').filter('isState', $IsStateFilter).filter('includedByState', $IncludedByStateFilter);
-    })(window, window.angular);
-  })();
-  return _retrieveGlobal();
-});
-
 $__System.registerDynamic("15", [], false, function(__require, __exports, __module) {
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
   (function() {
@@ -8887,18 +8887,69 @@ $__System.registerDynamic("15", [], false, function(__require, __exports, __modu
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("14", ["1b"], true, function(require, exports, module) {
+$__System.registerDynamic("16", ["1b"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  require("1b");
+  module.exports = require("1b");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("17", ["1c"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("1c");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("12", ["1d"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  require("1d");
   module.exports = 'ngFileUpload';
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("13", [], false, function(__require, __exports, __module) {
+$__System.registerDynamic("18", ["1e"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  var _Object$defineProperty = require("1e")["default"];
+  exports["default"] = (function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        _Object$defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  })();
+  exports.__esModule = true;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("14", [], false, function(__require, __exports, __module) {
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
   (function() {
     angular.module('ngMap', []);
@@ -10471,48 +10522,7 @@ $__System.registerDynamic("13", [], false, function(__require, __exports, __modu
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("16", ["1c"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("1c");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("17", ["1d"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  "use strict";
-  var _Object$defineProperty = require("1d")["default"];
-  exports["default"] = (function() {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor)
-          descriptor.writable = true;
-        _Object$defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-    return function(Constructor, protoProps, staticProps) {
-      if (protoProps)
-        defineProperties(Constructor.prototype, protoProps);
-      if (staticProps)
-        defineProperties(Constructor, staticProps);
-      return Constructor;
-    };
-  })();
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("18", [], true, function(require, exports, module) {
+$__System.registerDynamic("19", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -10528,14 +10538,14 @@ $__System.registerDynamic("18", [], true, function(require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("1a", ["1e", "1f"], true, function(require, exports, module) {
+$__System.registerDynamic("1a", ["1f", "20"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   "use strict";
-  var _getIterator = require("1e")["default"];
-  var _isIterable = require("1f")["default"];
+  var _getIterator = require("1f")["default"];
+  var _isIterable = require("20")["default"];
   exports["default"] = (function() {
     function sliceIterator(arr, i) {
       var _arr = [];
@@ -10578,17 +10588,7 @@ $__System.registerDynamic("1a", ["1e", "1f"], true, function(require, exports, m
   return module.exports;
 });
 
-$__System.registerDynamic("19", ["20"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("20");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("11", [], false, function(__require, __exports, __module) {
+$__System.registerDynamic("10", [], false, function(__require, __exports, __module) {
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, "angular", null);
   (function() {
     "format global";
@@ -21908,1798 +21908,7 @@ $__System.registerDynamic("11", [], false, function(__require, __exports, __modu
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("1b", [], false, function(__require, __exports, __module) {
-  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
-  (function() {
-    var ngFileUpload = this["ngFileUpload"];
-    (function() {
-      function patchXHR(fnName, newFn) {
-        window.XMLHttpRequest.prototype[fnName] = newFn(window.XMLHttpRequest.prototype[fnName]);
-      }
-      function redefineProp(xhr, prop, fn) {
-        try {
-          Object.defineProperty(xhr, prop, {get: fn});
-        } catch (e) {}
-      }
-      if (!window.FileAPI) {
-        window.FileAPI = {};
-      }
-      FileAPI.shouldLoad = (window.XMLHttpRequest && !window.FormData) || FileAPI.forceLoad;
-      if (FileAPI.shouldLoad) {
-        var initializeUploadListener = function(xhr) {
-          if (!xhr.__listeners) {
-            if (!xhr.upload)
-              xhr.upload = {};
-            xhr.__listeners = [];
-            var origAddEventListener = xhr.upload.addEventListener;
-            xhr.upload.addEventListener = function(t, fn) {
-              xhr.__listeners[t] = fn;
-              if (origAddEventListener)
-                origAddEventListener.apply(this, arguments);
-            };
-          }
-        };
-        patchXHR('open', function(orig) {
-          return function(m, url, b) {
-            initializeUploadListener(this);
-            this.__url = url;
-            try {
-              orig.apply(this, [m, url, b]);
-            } catch (e) {
-              if (e.message.indexOf('Access is denied') > -1) {
-                this.__origError = e;
-                orig.apply(this, [m, '_fix_for_ie_crossdomain__', b]);
-              }
-            }
-          };
-        });
-        patchXHR('getResponseHeader', function(orig) {
-          return function(h) {
-            return this.__fileApiXHR && this.__fileApiXHR.getResponseHeader ? this.__fileApiXHR.getResponseHeader(h) : (orig == null ? null : orig.apply(this, [h]));
-          };
-        });
-        patchXHR('getAllResponseHeaders', function(orig) {
-          return function() {
-            return this.__fileApiXHR && this.__fileApiXHR.getAllResponseHeaders ? this.__fileApiXHR.getAllResponseHeaders() : (orig == null ? null : orig.apply(this));
-          };
-        });
-        patchXHR('abort', function(orig) {
-          return function() {
-            return this.__fileApiXHR && this.__fileApiXHR.abort ? this.__fileApiXHR.abort() : (orig == null ? null : orig.apply(this));
-          };
-        });
-        patchXHR('setRequestHeader', function(orig) {
-          return function(header, value) {
-            if (header === '__setXHR_') {
-              initializeUploadListener(this);
-              var val = value(this);
-              if (val instanceof Function) {
-                val(this);
-              }
-            } else {
-              this.__requestHeaders = this.__requestHeaders || {};
-              this.__requestHeaders[header] = value;
-              orig.apply(this, arguments);
-            }
-          };
-        });
-        patchXHR('send', function(orig) {
-          return function() {
-            var xhr = this;
-            if (arguments[0] && arguments[0].__isFileAPIShim) {
-              var formData = arguments[0];
-              var config = {
-                url: xhr.__url,
-                jsonp: false,
-                cache: true,
-                complete: function(err, fileApiXHR) {
-                  if (err && angular.isString(err) && err.indexOf('#2174') !== -1) {
-                    err = null;
-                  }
-                  xhr.__completed = true;
-                  if (!err && xhr.__listeners.load)
-                    xhr.__listeners.load({
-                      type: 'load',
-                      loaded: xhr.__loaded,
-                      total: xhr.__total,
-                      target: xhr,
-                      lengthComputable: true
-                    });
-                  if (!err && xhr.__listeners.loadend)
-                    xhr.__listeners.loadend({
-                      type: 'loadend',
-                      loaded: xhr.__loaded,
-                      total: xhr.__total,
-                      target: xhr,
-                      lengthComputable: true
-                    });
-                  if (err === 'abort' && xhr.__listeners.abort)
-                    xhr.__listeners.abort({
-                      type: 'abort',
-                      loaded: xhr.__loaded,
-                      total: xhr.__total,
-                      target: xhr,
-                      lengthComputable: true
-                    });
-                  if (fileApiXHR.status !== undefined)
-                    redefineProp(xhr, 'status', function() {
-                      return (fileApiXHR.status === 0 && err && err !== 'abort') ? 500 : fileApiXHR.status;
-                    });
-                  if (fileApiXHR.statusText !== undefined)
-                    redefineProp(xhr, 'statusText', function() {
-                      return fileApiXHR.statusText;
-                    });
-                  redefineProp(xhr, 'readyState', function() {
-                    return 4;
-                  });
-                  if (fileApiXHR.response !== undefined)
-                    redefineProp(xhr, 'response', function() {
-                      return fileApiXHR.response;
-                    });
-                  var resp = fileApiXHR.responseText || (err && fileApiXHR.status === 0 && err !== 'abort' ? err : undefined);
-                  redefineProp(xhr, 'responseText', function() {
-                    return resp;
-                  });
-                  redefineProp(xhr, 'response', function() {
-                    return resp;
-                  });
-                  if (err)
-                    redefineProp(xhr, 'err', function() {
-                      return err;
-                    });
-                  xhr.__fileApiXHR = fileApiXHR;
-                  if (xhr.onreadystatechange)
-                    xhr.onreadystatechange();
-                  if (xhr.onload)
-                    xhr.onload();
-                },
-                progress: function(e) {
-                  e.target = xhr;
-                  if (xhr.__listeners.progress)
-                    xhr.__listeners.progress(e);
-                  xhr.__total = e.total;
-                  xhr.__loaded = e.loaded;
-                  if (e.total === e.loaded) {
-                    var _this = this;
-                    setTimeout(function() {
-                      if (!xhr.__completed) {
-                        xhr.getAllResponseHeaders = function() {};
-                        _this.complete(null, {
-                          status: 204,
-                          statusText: 'No Content'
-                        });
-                      }
-                    }, FileAPI.noContentTimeout || 10000);
-                  }
-                },
-                headers: xhr.__requestHeaders
-              };
-              config.data = {};
-              config.files = {};
-              for (var i = 0; i < formData.data.length; i++) {
-                var item = formData.data[i];
-                if (item.val != null && item.val.name != null && item.val.size != null && item.val.type != null) {
-                  config.files[item.key] = item.val;
-                } else {
-                  config.data[item.key] = item.val;
-                }
-              }
-              setTimeout(function() {
-                if (!FileAPI.hasFlash) {
-                  throw 'Adode Flash Player need to be installed. To check ahead use "FileAPI.hasFlash"';
-                }
-                xhr.__fileApiXHR = FileAPI.upload(config);
-              }, 1);
-            } else {
-              if (this.__origError) {
-                throw this.__origError;
-              }
-              orig.apply(xhr, arguments);
-            }
-          };
-        });
-        window.XMLHttpRequest.__isFileAPIShim = true;
-        window.FormData = FormData = function() {
-          return {
-            append: function(key, val, name) {
-              if (val.__isFileAPIBlobShim) {
-                val = val.data[0];
-              }
-              this.data.push({
-                key: key,
-                val: val,
-                name: name
-              });
-            },
-            data: [],
-            __isFileAPIShim: true
-          };
-        };
-        window.Blob = Blob = function(b) {
-          return {
-            data: b,
-            __isFileAPIBlobShim: true
-          };
-        };
-      }
-    })();
-    (function() {
-      function isInputTypeFile(elem) {
-        return elem[0].tagName.toLowerCase() === 'input' && elem.attr('type') && elem.attr('type').toLowerCase() === 'file';
-      }
-      function hasFlash() {
-        try {
-          var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
-          if (fo)
-            return true;
-        } catch (e) {
-          if (navigator.mimeTypes['application/x-shockwave-flash'] !== undefined)
-            return true;
-        }
-        return false;
-      }
-      function getOffset(obj) {
-        var left = 0,
-            top = 0;
-        if (window.jQuery) {
-          return jQuery(obj).offset();
-        }
-        if (obj.offsetParent) {
-          do {
-            left += (obj.offsetLeft - obj.scrollLeft);
-            top += (obj.offsetTop - obj.scrollTop);
-            obj = obj.offsetParent;
-          } while (obj);
-        }
-        return {
-          left: left,
-          top: top
-        };
-      }
-      if (FileAPI.shouldLoad) {
-        if (FileAPI.forceLoad) {
-          FileAPI.html5 = false;
-        }
-        if (!FileAPI.upload) {
-          var jsUrl,
-              basePath,
-              script = document.createElement('script'),
-              allScripts = document.getElementsByTagName('script'),
-              i,
-              index,
-              src;
-          if (window.FileAPI.jsUrl) {
-            jsUrl = window.FileAPI.jsUrl;
-          } else if (window.FileAPI.jsPath) {
-            basePath = window.FileAPI.jsPath;
-          } else {
-            for (i = 0; i < allScripts.length; i++) {
-              src = allScripts[i].src;
-              index = src.search(/\/ng\-file\-upload[\-a-zA-z0-9\.]*\.js/);
-              if (index > -1) {
-                basePath = src.substring(0, index + 1);
-                break;
-              }
-            }
-          }
-          if (FileAPI.staticPath == null)
-            FileAPI.staticPath = basePath;
-          script.setAttribute('src', jsUrl || basePath + 'FileAPI.min.js');
-          document.getElementsByTagName('head')[0].appendChild(script);
-          FileAPI.hasFlash = hasFlash();
-        }
-        FileAPI.ngfFixIE = function(elem, fileElem, changeFn) {
-          if (!hasFlash()) {
-            throw 'Adode Flash Player need to be installed. To check ahead use "FileAPI.hasFlash"';
-          }
-          var fixInputStyle = function() {
-            if (elem.attr('disabled')) {
-              if (fileElem)
-                fileElem.removeClass('js-fileapi-wrapper');
-            } else {
-              if (!fileElem.attr('__ngf_flash_')) {
-                fileElem.unbind('change');
-                fileElem.unbind('click');
-                fileElem.bind('change', function(evt) {
-                  fileApiChangeFn.apply(this, [evt]);
-                  changeFn.apply(this, [evt]);
-                });
-                fileElem.attr('__ngf_flash_', 'true');
-              }
-              fileElem.addClass('js-fileapi-wrapper');
-              if (!isInputTypeFile(elem)) {
-                fileElem.css('position', 'absolute').css('top', getOffset(elem[0]).top + 'px').css('left', getOffset(elem[0]).left + 'px').css('width', elem[0].offsetWidth + 'px').css('height', elem[0].offsetHeight + 'px').css('filter', 'alpha(opacity=0)').css('display', elem.css('display')).css('overflow', 'hidden').css('z-index', '900000').css('visibility', 'visible');
-              }
-            }
-          };
-          elem.bind('mouseenter', fixInputStyle);
-          var fileApiChangeFn = function(evt) {
-            var files = FileAPI.getFiles(evt);
-            for (var i = 0; i < files.length; i++) {
-              if (files[i].size === undefined)
-                files[i].size = 0;
-              if (files[i].name === undefined)
-                files[i].name = 'file';
-              if (files[i].type === undefined)
-                files[i].type = 'undefined';
-            }
-            if (!evt.target) {
-              evt.target = {};
-            }
-            evt.target.files = files;
-            if (evt.target.files !== files) {
-              evt.__files_ = files;
-            }
-            (evt.__files_ || evt.target.files).item = function(i) {
-              return (evt.__files_ || evt.target.files)[i] || null;
-            };
-          };
-        };
-        FileAPI.disableFileInput = function(elem, disable) {
-          if (disable) {
-            elem.removeClass('js-fileapi-wrapper');
-          } else {
-            elem.addClass('js-fileapi-wrapper');
-          }
-        };
-      }
-    })();
-    if (!window.FileReader) {
-      window.FileReader = function() {
-        var _this = this,
-            loadStarted = false;
-        this.listeners = {};
-        this.addEventListener = function(type, fn) {
-          _this.listeners[type] = _this.listeners[type] || [];
-          _this.listeners[type].push(fn);
-        };
-        this.removeEventListener = function(type, fn) {
-          if (_this.listeners[type])
-            _this.listeners[type].splice(_this.listeners[type].indexOf(fn), 1);
-        };
-        this.dispatchEvent = function(evt) {
-          var list = _this.listeners[evt.type];
-          if (list) {
-            for (var i = 0; i < list.length; i++) {
-              list[i].call(_this, evt);
-            }
-          }
-        };
-        this.onabort = this.onerror = this.onload = this.onloadstart = this.onloadend = this.onprogress = null;
-        var constructEvent = function(type, evt) {
-          var e = {
-            type: type,
-            target: _this,
-            loaded: evt.loaded,
-            total: evt.total,
-            error: evt.error
-          };
-          if (evt.result != null)
-            e.target.result = evt.result;
-          return e;
-        };
-        var listener = function(evt) {
-          if (!loadStarted) {
-            loadStarted = true;
-            if (_this.onloadstart)
-              _this.onloadstart(constructEvent('loadstart', evt));
-          }
-          var e;
-          if (evt.type === 'load') {
-            if (_this.onloadend)
-              _this.onloadend(constructEvent('loadend', evt));
-            e = constructEvent('load', evt);
-            if (_this.onload)
-              _this.onload(e);
-            _this.dispatchEvent(e);
-          } else if (evt.type === 'progress') {
-            e = constructEvent('progress', evt);
-            if (_this.onprogress)
-              _this.onprogress(e);
-            _this.dispatchEvent(e);
-          } else {
-            e = constructEvent('error', evt);
-            if (_this.onerror)
-              _this.onerror(e);
-            _this.dispatchEvent(e);
-          }
-        };
-        this.readAsArrayBuffer = function(file) {
-          FileAPI.readAsBinaryString(file, listener);
-        };
-        this.readAsBinaryString = function(file) {
-          FileAPI.readAsBinaryString(file, listener);
-        };
-        this.readAsDataURL = function(file) {
-          FileAPI.readAsDataURL(file, listener);
-        };
-        this.readAsText = function(file) {
-          FileAPI.readAsText(file, listener);
-        };
-      };
-    }
-    if (window.XMLHttpRequest && !(window.FileAPI && FileAPI.shouldLoad)) {
-      window.XMLHttpRequest.prototype.setRequestHeader = (function(orig) {
-        return function(header, value) {
-          if (header === '__setXHR_') {
-            var val = value(this);
-            if (val instanceof Function) {
-              val(this);
-            }
-          } else {
-            orig.apply(this, arguments);
-          }
-        };
-      })(window.XMLHttpRequest.prototype.setRequestHeader);
-    }
-    var ngFileUpload = angular.module('ngFileUpload', []);
-    ngFileUpload.version = '7.2.1';
-    ngFileUpload.service('UploadBase', ['$http', '$q', '$timeout', function($http, $q, $timeout) {
-      function sendHttp(config) {
-        config.method = config.method || 'POST';
-        config.headers = config.headers || {};
-        var deferred = $q.defer();
-        var promise = deferred.promise;
-        config.headers.__setXHR_ = function() {
-          return function(xhr) {
-            if (!xhr)
-              return;
-            config.__XHR = xhr;
-            if (config.xhrFn)
-              config.xhrFn(xhr);
-            xhr.upload.addEventListener('progress', function(e) {
-              e.config = config;
-              if (deferred.notify) {
-                deferred.notify(e);
-              } else if (promise.progressFunc) {
-                $timeout(function() {
-                  promise.progressFunc(e);
-                });
-              }
-            }, false);
-            xhr.upload.addEventListener('load', function(e) {
-              if (e.lengthComputable) {
-                e.config = config;
-                if (deferred.notify) {
-                  deferred.notify(e);
-                } else if (promise.progressFunc) {
-                  $timeout(function() {
-                    promise.progressFunc(e);
-                  });
-                }
-              }
-            }, false);
-          };
-        };
-        $http(config).then(function(r) {
-          deferred.resolve(r);
-        }, function(e) {
-          deferred.reject(e);
-        }, function(n) {
-          deferred.notify(n);
-        });
-        promise.success = function(fn) {
-          promise.then(function(response) {
-            fn(response.data, response.status, response.headers, config);
-          });
-          return promise;
-        };
-        promise.error = function(fn) {
-          promise.then(null, function(response) {
-            fn(response.data, response.status, response.headers, config);
-          });
-          return promise;
-        };
-        promise.progress = function(fn) {
-          promise.progressFunc = fn;
-          promise.then(null, null, function(update) {
-            fn(update);
-          });
-          return promise;
-        };
-        promise.abort = function() {
-          if (config.__XHR) {
-            $timeout(function() {
-              config.__XHR.abort();
-            });
-          }
-          return promise;
-        };
-        promise.xhr = function(fn) {
-          config.xhrFn = (function(origXhrFn) {
-            return function() {
-              if (origXhrFn)
-                origXhrFn.apply(promise, arguments);
-              fn.apply(promise, arguments);
-            };
-          })(config.xhrFn);
-          return promise;
-        };
-        return promise;
-      }
-      this.upload = function(config) {
-        function addFieldToFormData(formData, val, key) {
-          if (val !== undefined) {
-            if (angular.isDate(val)) {
-              val = val.toISOString();
-            }
-            if (angular.isString(val)) {
-              formData.append(key, val);
-            } else if (config.sendFieldsAs === 'form') {
-              if (angular.isObject(val)) {
-                for (var k in val) {
-                  if (val.hasOwnProperty(k)) {
-                    addFieldToFormData(formData, val[k], key + '[' + k + ']');
-                  }
-                }
-              } else {
-                formData.append(key, val);
-              }
-            } else {
-              val = angular.isString(val) ? val : angular.toJson(val);
-              if (config.sendFieldsAs === 'json-blob') {
-                formData.append(key, new Blob([val], {type: 'application/json'}));
-              } else {
-                formData.append(key, val);
-              }
-            }
-          }
-        }
-        function isFile(file) {
-          return file instanceof Blob || (file.flashId && file.name && file.size);
-        }
-        function addFileToFormData(formData, file, key) {
-          if (isFile(file)) {
-            formData.append(key, file, file.fileName || file.name);
-          } else if (angular.isObject(file)) {
-            for (var k in file) {
-              if (file.hasOwnProperty(k)) {
-                var split = k.split(',');
-                if (split[1]) {
-                  file[k].fileName = split[1].replace(/^\s+|\s+$/g, '');
-                }
-                addFileToFormData(formData, file[k], split[0]);
-              }
-            }
-          } else {
-            throw 'Expected file object in Upload.upload file option: ' + file.toString();
-          }
-        }
-        config.headers = config.headers || {};
-        config.headers['Content-Type'] = undefined;
-        config.transformRequest = config.transformRequest ? (angular.isArray(config.transformRequest) ? config.transformRequest : [config.transformRequest]) : [];
-        config.transformRequest.push(function(data) {
-          var formData = new FormData(),
-              allFields = {},
-              key;
-          for (key in config.fields) {
-            if (config.fields.hasOwnProperty(key)) {
-              allFields[key] = config.fields[key];
-            }
-          }
-          if (data)
-            allFields.data = data;
-          for (key in allFields) {
-            if (allFields.hasOwnProperty(key)) {
-              var val = allFields[key];
-              if (config.formDataAppender) {
-                config.formDataAppender(formData, key, val);
-              } else {
-                addFieldToFormData(formData, val, key);
-              }
-            }
-          }
-          if (config.file != null) {
-            if (angular.isArray(config.file)) {
-              for (var i = 0; i < config.file.length; i++) {
-                addFileToFormData(formData, config.file[i], 'file');
-              }
-            } else {
-              addFileToFormData(formData, config.file, 'file');
-            }
-          }
-          return formData;
-        });
-        return sendHttp(config);
-      };
-      this.http = function(config) {
-        config.transformRequest = config.transformRequest || function(data) {
-          if ((window.ArrayBuffer && data instanceof window.ArrayBuffer) || data instanceof Blob) {
-            return data;
-          }
-          return $http.defaults.transformRequest[0].apply(this, arguments);
-        };
-        return sendHttp(config);
-      };
-      this.setDefaults = function(defaults) {
-        this.defaults = defaults || {};
-      };
-      this.defaults = {};
-      this.version = ngFileUpload.version;
-    }]);
-    ngFileUpload.service('Upload', ['$parse', '$timeout', '$compile', 'UploadResize', function($parse, $timeout, $compile, UploadResize) {
-      var upload = UploadResize;
-      upload.getAttrWithDefaults = function(attr, name) {
-        return attr[name] != null ? attr[name] : (upload.defaults[name] == null ? upload.defaults[name] : upload.defaults[name].toString());
-      };
-      upload.attrGetter = function(name, attr, scope, params) {
-        if (scope) {
-          try {
-            if (params) {
-              return $parse(this.getAttrWithDefaults(attr, name))(scope, params);
-            } else {
-              return $parse(this.getAttrWithDefaults(attr, name))(scope);
-            }
-          } catch (e) {
-            if (name.search(/min|max|pattern/i)) {
-              return this.getAttrWithDefaults(attr, name);
-            } else {
-              throw e;
-            }
-          }
-        } else {
-          return this.getAttrWithDefaults(attr, name);
-        }
-      };
-      upload.updateModel = function(ngModel, attr, scope, fileChange, files, evt, noDelay) {
-        function update() {
-          var file = files && files.length ? files[0] : null;
-          if (ngModel) {
-            var singleModel = !upload.attrGetter('ngfMultiple', attr, scope) && !upload.attrGetter('multiple', attr) && !keep;
-            $parse(upload.attrGetter('ngModel', attr)).assign(scope, singleModel ? file : files);
-          }
-          var ngfModel = upload.attrGetter('ngfModel', attr);
-          if (ngfModel) {
-            $parse(ngfModel).assign(scope, files);
-          }
-          if (fileChange) {
-            $parse(fileChange)(scope, {
-              $files: files,
-              $file: file,
-              $event: evt
-            });
-          }
-          $timeout(function() {});
-        }
-        var keep = upload.attrGetter('ngfKeep', attr, scope);
-        if (keep === true) {
-          if (!files || !files.length) {
-            return;
-          } else {
-            var prevFiles = ((ngModel && ngModel.$modelValue) || attr.$$ngfPrevFiles || []).slice(0),
-                hasNew = false;
-            if (upload.attrGetter('ngfKeepDistinct', attr, scope) === true) {
-              var len = prevFiles.length;
-              for (var i = 0; i < files.length; i++) {
-                for (var j = 0; j < len; j++) {
-                  if (files[i].name === prevFiles[j].name)
-                    break;
-                }
-                if (j === len) {
-                  prevFiles.push(files[i]);
-                  hasNew = true;
-                }
-              }
-              if (!hasNew)
-                return;
-              files = prevFiles;
-            } else {
-              files = prevFiles.concat(files);
-            }
-          }
-        }
-        attr.$$ngfPrevFiles = files;
-        function resize(files, callback) {
-          var param = upload.attrGetter('ngfResize', attr, scope);
-          if (!param)
-            return callback();
-          var count = files.length;
-          var checkCallback = function() {
-            count--;
-            if (count === 0)
-              callback();
-          };
-          var success = function(index) {
-            return function(resizedFile) {
-              files.splice(index, 1, resizedFile);
-              checkCallback();
-            };
-          };
-          var error = function(f) {
-            return function(e) {
-              checkCallback();
-              f.$error = 'resize';
-              f.$errorParam = (e ? (e.message ? e.message : e) + ': ' : '') + (f && f.name);
-            };
-          };
-          for (var i = 0; i < files.length; i++) {
-            var f = files[i];
-            if (!f.$error && f.type.indexOf('image') === 0) {
-              upload.resize(f, param.width, param.height, param.quality).then(success(i), error(f));
-            } else {
-              checkCallback();
-            }
-          }
-        }
-        if (noDelay) {
-          update();
-        } else if (upload.validate(files, ngModel, attr, scope, upload.attrGetter('ngfValidateLater', attr), function() {
-          resize(files, function() {
-            $timeout(function() {
-              update();
-            });
-          });
-        }))
-          ;
-      };
-      return upload;
-    }]);
-    ngFileUpload.directive('ngfSelect', ['$parse', '$timeout', '$compile', 'Upload', function($parse, $timeout, $compile, Upload) {
-      var generatedElems = [];
-      function isDelayedClickSupported(ua) {
-        var m = ua.match(/Android[^\d]*(\d+)\.(\d+)/);
-        if (m && m.length > 2) {
-          var v = Upload.defaults.androidFixMinorVersion || 4;
-          return parseInt(m[1]) < 4 || (parseInt(m[1]) === v && parseInt(m[2]) < v);
-        }
-        return ua.indexOf('Chrome') === -1 && /.*Windows.*Safari.*/.test(ua);
-      }
-      function linkFileSelect(scope, elem, attr, ngModel, $parse, $timeout, $compile, upload) {
-        var attrGetter = function(name, scope) {
-          return upload.attrGetter(name, attr, scope);
-        };
-        function isInputTypeFile() {
-          return elem[0].tagName.toLowerCase() === 'input' && attr.type && attr.type.toLowerCase() === 'file';
-        }
-        function fileChangeAttr() {
-          return attrGetter('ngfChange') || attrGetter('ngfSelect');
-        }
-        function changeFn(evt) {
-          var fileList = evt.__files_ || (evt.target && evt.target.files),
-              files = [];
-          for (var i = 0; i < fileList.length; i++) {
-            files.push(fileList[i]);
-          }
-          upload.updateModel(ngModel, attr, scope, fileChangeAttr(), files.length ? files : null, evt);
-        }
-        var unwatches = [];
-        unwatches.push(scope.$watch(attrGetter('ngfMultiple'), function() {
-          fileElem.attr('multiple', attrGetter('ngfMultiple', scope));
-        }));
-        unwatches.push(scope.$watch(attrGetter('ngfCapture'), function() {
-          fileElem.attr('capture', attrGetter('ngfCapture', scope));
-        }));
-        attr.$observe('accept', function() {
-          fileElem.attr('accept', attrGetter('accept'));
-        });
-        unwatches.push(function() {
-          if (attr.$$observers)
-            delete attr.$$observers.accept;
-        });
-        function bindAttrToFileInput(fileElem) {
-          if (elem !== fileElem) {
-            for (var i = 0; i < elem[0].attributes.length; i++) {
-              var attribute = elem[0].attributes[i];
-              if (attribute.name !== 'type' && attribute.name !== 'class' && attribute.name !== 'id' && attribute.name !== 'style') {
-                if (attribute.value == null || attribute.value === '') {
-                  if (attribute.name === 'required')
-                    attribute.value = 'required';
-                  if (attribute.name === 'multiple')
-                    attribute.value = 'multiple';
-                }
-                fileElem.attr(attribute.name, attribute.value);
-              }
-            }
-          }
-        }
-        function createFileInput() {
-          if (isInputTypeFile()) {
-            return elem;
-          }
-          var fileElem = angular.element('<input type="file">');
-          bindAttrToFileInput(fileElem);
-          fileElem.css('visibility', 'hidden').css('position', 'absolute').css('overflow', 'hidden').css('width', '0px').css('height', '0px').css('border', 'none').css('margin', '0px').css('padding', '0px').attr('tabindex', '-1');
-          generatedElems.push({
-            el: elem,
-            ref: fileElem
-          });
-          document.body.appendChild(fileElem[0]);
-          return fileElem;
-        }
-        var initialTouchStartY = 0;
-        function clickHandler(evt) {
-          if (elem.attr('disabled') || attrGetter('ngfSelectDisabled', scope))
-            return false;
-          var r = handleTouch(evt);
-          if (r != null)
-            return r;
-          resetModel(evt);
-          if (isDelayedClickSupported(navigator.userAgent)) {
-            setTimeout(function() {
-              fileElem[0].click();
-            }, 0);
-          } else {
-            fileElem[0].click();
-          }
-          return false;
-        }
-        function handleTouch(evt) {
-          var touches = evt.changedTouches || (evt.originalEvent && evt.originalEvent.changedTouches);
-          if (evt.type === 'touchstart') {
-            initialTouchStartY = touches ? touches[0].clientY : 0;
-            return true;
-          } else {
-            evt.stopPropagation();
-            evt.preventDefault();
-            if (evt.type === 'touchend') {
-              var currentLocation = touches ? touches[0].clientY : 0;
-              if (Math.abs(currentLocation - initialTouchStartY) > 20)
-                return false;
-            }
-          }
-        }
-        var fileElem = elem;
-        function resetModel(evt) {
-          if (fileElem.val()) {
-            fileElem.val(null);
-            upload.updateModel(ngModel, attr, scope, fileChangeAttr(), null, evt, true);
-          }
-        }
-        if (!isInputTypeFile()) {
-          fileElem = createFileInput();
-        }
-        fileElem.bind('change', changeFn);
-        if (!isInputTypeFile()) {
-          elem.bind('click touchstart touchend', clickHandler);
-        } else {
-          elem.bind('click', resetModel);
-        }
-        upload.registerValidators(ngModel, fileElem, attr, scope);
-        function ie10SameFileSelectFix(evt) {
-          if (fileElem && !fileElem.attr('__ngf_ie10_Fix_')) {
-            if (!fileElem[0].parentNode) {
-              fileElem = null;
-              return;
-            }
-            evt.preventDefault();
-            evt.stopPropagation();
-            fileElem.unbind('click');
-            var clone = fileElem.clone();
-            fileElem.replaceWith(clone);
-            fileElem = clone;
-            fileElem.attr('__ngf_ie10_Fix_', 'true');
-            fileElem.bind('change', changeFn);
-            fileElem.bind('click', ie10SameFileSelectFix);
-            fileElem[0].click();
-            return false;
-          } else {
-            fileElem.removeAttr('__ngf_ie10_Fix_');
-          }
-        }
-        if (navigator.appVersion.indexOf('MSIE 10') !== -1) {
-          fileElem.bind('click', ie10SameFileSelectFix);
-        }
-        scope.$on('$destroy', function() {
-          if (!isInputTypeFile())
-            fileElem.remove();
-          angular.forEach(unwatches, function(unwatch) {
-            unwatch();
-          });
-        });
-        $timeout(function() {
-          for (var i = 0; i < generatedElems.length; i++) {
-            var g = generatedElems[i];
-            if (!document.body.contains(g.el[0])) {
-              generatedElems.splice(i, 1);
-              g.ref.remove();
-            }
-          }
-        });
-        if (window.FileAPI && window.FileAPI.ngfFixIE) {
-          window.FileAPI.ngfFixIE(elem, fileElem, changeFn);
-        }
-      }
-      return {
-        restrict: 'AEC',
-        require: '?ngModel',
-        link: function(scope, elem, attr, ngModel) {
-          linkFileSelect(scope, elem, attr, ngModel, $parse, $timeout, $compile, Upload);
-        }
-      };
-    }]);
-    (function() {
-      ngFileUpload.service('UploadDataUrl', ['UploadBase', '$timeout', '$q', function(UploadBase, $timeout, $q) {
-        var upload = UploadBase;
-        upload.dataUrl = function(file, disallowObjectUrl) {
-          if ((disallowObjectUrl && file.dataUrl != null) || (!disallowObjectUrl && file.blobUrl != null)) {
-            var d = $q.defer();
-            $timeout(function() {
-              d.resolve(disallowObjectUrl ? file.dataUrl : file.blobUrl);
-            });
-            return d.promise;
-          }
-          var p = disallowObjectUrl ? file.$ngfDataUrlPromise : file.$ngfBlobUrlPromise;
-          if (p)
-            return p;
-          var deferred = $q.defer();
-          $timeout(function() {
-            if (window.FileReader && file && (!window.FileAPI || navigator.userAgent.indexOf('MSIE 8') === -1 || file.size < 20000) && (!window.FileAPI || navigator.userAgent.indexOf('MSIE 9') === -1 || file.size < 4000000)) {
-              var URL = window.URL || window.webkitURL;
-              if (URL && URL.createObjectURL && !disallowObjectUrl) {
-                var url;
-                try {
-                  url = URL.createObjectURL(file);
-                } catch (e) {
-                  $timeout(function() {
-                    file.blobUrl = '';
-                    deferred.reject();
-                  });
-                  return;
-                }
-                $timeout(function() {
-                  file.blobUrl = url;
-                  if (url)
-                    deferred.resolve(url);
-                });
-              } else {
-                var fileReader = new FileReader();
-                fileReader.onload = function(e) {
-                  $timeout(function() {
-                    file.dataUrl = e.target.result;
-                    deferred.resolve(e.target.result);
-                  });
-                };
-                fileReader.onerror = function() {
-                  $timeout(function() {
-                    file.dataUrl = '';
-                    deferred.reject();
-                  });
-                };
-                fileReader.readAsDataURL(file);
-              }
-            } else {
-              $timeout(function() {
-                file[disallowObjectUrl ? 'dataUrl' : 'blobUrl'] = '';
-                deferred.reject();
-              });
-            }
-          });
-          if (disallowObjectUrl) {
-            p = file.$ngfDataUrlPromise = deferred.promise;
-          } else {
-            p = file.$ngfBlobUrlPromise = deferred.promise;
-          }
-          p['finally'](function() {
-            delete file[disallowObjectUrl ? '$ngfDataUrlPromise' : '$ngfBlobUrlPromise'];
-          });
-          return p;
-        };
-        return upload;
-      }]);
-      function getTagType(el) {
-        if (el.tagName.toLowerCase() === 'img')
-          return 'image';
-        if (el.tagName.toLowerCase() === 'audio')
-          return 'audio';
-        if (el.tagName.toLowerCase() === 'video')
-          return 'video';
-        return /\./;
-      }
-      var style = angular.element('<style>.ngf-hide{display:none !important}</style>');
-      document.getElementsByTagName('head')[0].appendChild(style[0]);
-      ngFileUpload.directive('ngfSrc', ['$compile', '$timeout', 'Upload', function($compile, $timeout, Upload) {
-        return {
-          restrict: 'AE',
-          link: function(scope, elem, attr) {
-            $timeout(function() {
-              var unwatch = scope.$watch(attr.ngfSrc, function(file) {
-                if (angular.isString(file)) {
-                  elem.removeClass('ngf-hide');
-                  return elem.attr('src', file);
-                }
-                if (file && file.type && file.type.indexOf(getTagType(elem[0])) === 0) {
-                  var disallowObjectUrl = Upload.attrGetter('ngfNoObjectUrl', attr, scope);
-                  Upload.dataUrl(file, disallowObjectUrl)['finally'](function() {
-                    $timeout(function() {
-                      if (file.blobUrl || file.dataUrl) {
-                        elem.removeClass('ngf-hide');
-                        elem.attr('src', (disallowObjectUrl ? file.dataUrl : file.blobUrl) || file.dataUrl);
-                      } else {
-                        elem.addClass('ngf-hide');
-                      }
-                    });
-                  });
-                } else {
-                  elem.addClass('ngf-hide');
-                }
-              });
-              scope.$on('$destroy', function() {
-                unwatch();
-              });
-            });
-          }
-        };
-      }]);
-      ngFileUpload.directive('ngfBackground', ['Upload', '$compile', '$timeout', function(Upload, $compile, $timeout) {
-        return {
-          restrict: 'AE',
-          link: function(scope, elem, attr) {
-            $timeout(function() {
-              var unwatch = scope.$watch(attr.ngfBackground, function(file) {
-                if (angular.isString(file))
-                  return elem.css('background-image', 'url(\'' + file + '\')');
-                if (file && file.type && file.type.indexOf('image') === 0) {
-                  var disallowObjectUrl = Upload.attrGetter('ngfNoObjectUrl', attr, scope);
-                  Upload.dataUrl(file, disallowObjectUrl)['finally'](function() {
-                    $timeout(function() {
-                      if ((disallowObjectUrl && file.dataUrl) || (!disallowObjectUrl && file.blobUrl)) {
-                        elem.css('background-image', 'url(\'' + (disallowObjectUrl ? file.dataUrl : file.blobUrl) + '\')');
-                      } else {
-                        elem.css('background-image', '');
-                      }
-                    });
-                  });
-                } else {
-                  elem.css('background-image', '');
-                }
-              });
-              scope.$on('$destroy', function() {
-                unwatch();
-              });
-            });
-          }
-        };
-      }]);
-      ngFileUpload.config(['$compileProvider', function($compileProvider) {
-        if ($compileProvider.imgSrcSanitizationWhitelist)
-          $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|local|file|data|blob):/);
-        if ($compileProvider.aHrefSanitizationWhitelist)
-          $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|local|file|data|blob):/);
-      }]);
-      ngFileUpload.filter('ngfDataUrl', ['UploadDataUrl', '$sce', function(UploadDataUrl, $sce) {
-        return function(file, disallowObjectUrl) {
-          if (angular.isString(file)) {
-            return $sce.trustAsResourceUrl(file);
-          }
-          if (file && !file.dataUrl) {
-            if (file.dataUrl === undefined && angular.isObject(file)) {
-              file.dataUrl = null;
-              UploadDataUrl.dataUrl(file, disallowObjectUrl);
-            }
-            return '';
-          }
-          return (file && file.dataUrl ? $sce.trustAsResourceUrl(file.dataUrl) : file) || '';
-        };
-      }]);
-    })();
-    ngFileUpload.service('UploadValidate', ['UploadDataUrl', '$q', '$timeout', function(UploadDataUrl, $q, $timeout) {
-      var upload = UploadDataUrl;
-      function globStringToRegex(str) {
-        if (str.length > 2 && str[0] === '/' && str[str.length - 1] === '/') {
-          return str.substring(1, str.length - 1);
-        }
-        var split = str.split(','),
-            result = '';
-        if (split.length > 1) {
-          for (var i = 0; i < split.length; i++) {
-            result += '(' + globStringToRegex(split[i]) + ')';
-            if (i < split.length - 1) {
-              result += '|';
-            }
-          }
-        } else {
-          if (str.indexOf('.') === 0) {
-            str = '*' + str;
-          }
-          result = '^' + str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\' + '-]', 'g'), '\\$&') + '$';
-          result = result.replace(/\\\*/g, '.*').replace(/\\\?/g, '.');
-        }
-        return result;
-      }
-      function translateScalars(str) {
-        if (angular.isString(str)) {
-          if (str.search(/kb/i) === str.length - 2) {
-            return parseFloat(str.substring(0, str.length - 2) * 1000);
-          } else if (str.search(/mb/i) === str.length - 2) {
-            return parseFloat(str.substring(0, str.length - 2) * 1000000);
-          } else if (str.search(/gb/i) === str.length - 2) {
-            return parseFloat(str.substring(0, str.length - 2) * 1000000000);
-          } else if (str.search(/b/i) === str.length - 1) {
-            return parseFloat(str.substring(0, str.length - 1));
-          } else if (str.search(/s/i) === str.length - 1) {
-            return parseFloat(str.substring(0, str.length - 1));
-          } else if (str.search(/m/i) === str.length - 1) {
-            return parseFloat(str.substring(0, str.length - 1) * 60);
-          } else if (str.search(/h/i) === str.length - 1) {
-            return parseFloat(str.substring(0, str.length - 1) * 3600);
-          }
-        }
-        return str;
-      }
-      upload.registerValidators = function(ngModel, elem, attr, scope) {
-        if (!ngModel)
-          return;
-        ngModel.$ngfValidations = [];
-        function setValidities(ngModel) {
-          angular.forEach(ngModel.$ngfValidations, function(validation) {
-            ngModel.$setValidity(validation.name, validation.valid);
-          });
-        }
-        ngModel.$formatters.push(function(val) {
-          if (upload.attrGetter('ngfValidateLater', attr, scope) || !ngModel.$$ngfValidated) {
-            upload.validate(val, ngModel, attr, scope, false, function() {
-              setValidities(ngModel);
-              ngModel.$$ngfValidated = false;
-            });
-            if (val && val.length === 0) {
-              val = null;
-            }
-            if (elem && (val == null || val.length === 0)) {
-              if (elem.val()) {
-                elem.val(null);
-              }
-            }
-          } else {
-            setValidities(ngModel);
-            ngModel.$$ngfValidated = false;
-          }
-          return val;
-        });
-      };
-      upload.validatePattern = function(file, val) {
-        if (!val) {
-          return true;
-        }
-        var regexp = new RegExp(globStringToRegex(val), 'gi');
-        return (file.type != null && regexp.test(file.type.toLowerCase())) || (file.name != null && regexp.test(file.name.toLowerCase()));
-      };
-      upload.validate = function(files, ngModel, attr, scope, later, callback) {
-        ngModel = ngModel || {};
-        ngModel.$ngfValidations = ngModel.$ngfValidations || [];
-        angular.forEach(ngModel.$ngfValidations, function(v) {
-          v.valid = true;
-        });
-        var attrGetter = function(name, params) {
-          return upload.attrGetter(name, attr, scope, params);
-        };
-        if (later) {
-          callback.call(ngModel);
-          return;
-        }
-        ngModel.$$ngfValidated = true;
-        if (files == null || files.length === 0) {
-          callback.call(ngModel);
-          return;
-        }
-        files = files.length === undefined ? [files] : files.slice(0);
-        function validateSync(name, validatorVal, fn) {
-          if (files) {
-            var dName = 'ngf' + name[0].toUpperCase() + name.substr(1);
-            var i = files.length,
-                valid = null;
-            while (i--) {
-              var file = files[i];
-              var val = attrGetter(dName, {'$file': file});
-              if (val == null) {
-                val = validatorVal(attrGetter('ngfValidate') || {});
-                valid = valid == null ? true : valid;
-              }
-              if (val != null) {
-                if (!fn(file, val)) {
-                  file.$error = name;
-                  file.$errorParam = val;
-                  files.splice(i, 1);
-                  valid = false;
-                }
-              }
-            }
-            if (valid !== null) {
-              ngModel.$ngfValidations.push({
-                name: name,
-                valid: valid
-              });
-            }
-          }
-        }
-        validateSync('pattern', function(cons) {
-          return cons.pattern;
-        }, upload.validatePattern);
-        validateSync('minSize', function(cons) {
-          return cons.size && cons.size.min;
-        }, function(file, val) {
-          return file.size >= translateScalars(val);
-        });
-        validateSync('maxSize', function(cons) {
-          return cons.size && cons.size.max;
-        }, function(file, val) {
-          return file.size <= translateScalars(val);
-        });
-        validateSync('validateFn', function() {
-          return null;
-        }, function(file, r) {
-          return r === true || r === null || r === '';
-        });
-        if (!files.length) {
-          callback.call(ngModel, ngModel.$ngfValidations);
-          return;
-        }
-        var pendings = 0;
-        function validateAsync(name, validatorVal, type, asyncFn, fn) {
-          if (files) {
-            var thisPendings = 0,
-                hasError = false,
-                dName = 'ngf' + name[0].toUpperCase() + name.substr(1);
-            files = files.length === undefined ? [files] : files;
-            angular.forEach(files, function(file) {
-              if (file.type.search(type) !== 0) {
-                return true;
-              }
-              var val = attrGetter(dName, {'$file': file}) || validatorVal(attrGetter('ngfValidate', {'$file': file}) || {});
-              if (val) {
-                pendings++;
-                thisPendings++;
-                asyncFn(file, val).then(function(d) {
-                  if (!fn(d, val)) {
-                    file.$error = name;
-                    file.$errorParam = val;
-                    hasError = true;
-                  }
-                }, function() {
-                  if (attrGetter('ngfValidateForce', {'$file': file})) {
-                    file.$error = name;
-                    file.$errorParam = val;
-                    hasError = true;
-                  }
-                })['finally'](function() {
-                  pendings--;
-                  thisPendings--;
-                  if (!thisPendings) {
-                    ngModel.$ngfValidations.push({
-                      name: name,
-                      valid: !hasError
-                    });
-                  }
-                  if (!pendings) {
-                    callback.call(ngModel, ngModel.$ngfValidations);
-                  }
-                });
-              }
-            });
-          }
-        }
-        validateAsync('maxHeight', function(cons) {
-          return cons.height && cons.height.max;
-        }, /image/, this.imageDimensions, function(d, val) {
-          return d.height <= val;
-        });
-        validateAsync('minHeight', function(cons) {
-          return cons.height && cons.height.min;
-        }, /image/, this.imageDimensions, function(d, val) {
-          return d.height >= val;
-        });
-        validateAsync('maxWidth', function(cons) {
-          return cons.width && cons.width.max;
-        }, /image/, this.imageDimensions, function(d, val) {
-          return d.width <= val;
-        });
-        validateAsync('minWidth', function(cons) {
-          return cons.width && cons.width.min;
-        }, /image/, this.imageDimensions, function(d, val) {
-          return d.width >= val;
-        });
-        validateAsync('ratio', function(cons) {
-          return cons.ratio;
-        }, /image/, this.imageDimensions, function(d, val) {
-          var split = val.toString().split(','),
-              valid = false;
-          for (var i = 0; i < split.length; i++) {
-            var r = split[i],
-                xIndex = r.search(/x/i);
-            if (xIndex > -1) {
-              r = parseFloat(r.substring(0, xIndex)) / parseFloat(r.substring(xIndex + 1));
-            } else {
-              r = parseFloat(r);
-            }
-            if (Math.abs((d.width / d.height) - r) < 0.0001) {
-              valid = true;
-            }
-          }
-          return valid;
-        });
-        validateAsync('maxDuration', function(cons) {
-          return cons.duration && cons.duration.max;
-        }, /audio|video/, this.mediaDuration, function(d, val) {
-          return d <= translateScalars(val);
-        });
-        validateAsync('minDuration', function(cons) {
-          return cons.duration && cons.duration.min;
-        }, /audio|video/, this.mediaDuration, function(d, val) {
-          return d >= translateScalars(val);
-        });
-        validateAsync('validateAsyncFn', function() {
-          return null;
-        }, /./, function(file, val) {
-          return val;
-        }, function(r) {
-          return r === true || r === null || r === '';
-        });
-        if (!pendings) {
-          callback.call(ngModel, ngModel.$ngfValidations);
-        }
-      };
-      upload.imageDimensions = function(file) {
-        if (file.width && file.height) {
-          var d = $q.defer();
-          $timeout(function() {
-            d.resolve({
-              width: file.width,
-              height: file.height
-            });
-          });
-          return d.promise;
-        }
-        if (file.$ngfDimensionPromise)
-          return file.$ngfDimensionPromise;
-        var deferred = $q.defer();
-        $timeout(function() {
-          if (file.type.indexOf('image') !== 0) {
-            deferred.reject('not image');
-            return;
-          }
-          upload.dataUrl(file).then(function(dataUrl) {
-            var img = angular.element('<img>').attr('src', dataUrl).css('visibility', 'hidden').css('position', 'fixed');
-            function success() {
-              var width = img[0].clientWidth;
-              var height = img[0].clientHeight;
-              img.remove();
-              file.width = width;
-              file.height = height;
-              deferred.resolve({
-                width: width,
-                height: height
-              });
-            }
-            function error() {
-              img.remove();
-              deferred.reject('load error');
-            }
-            img.on('load', success);
-            img.on('error', error);
-            var count = 0;
-            function checkLoadError() {
-              $timeout(function() {
-                if (img[0].parentNode) {
-                  if (img[0].clientWidth) {
-                    success();
-                  } else if (count > 10) {
-                    error();
-                  } else {
-                    checkLoadError();
-                  }
-                }
-              }, 1000);
-            }
-            checkLoadError();
-            angular.element(document.getElementsByTagName('body')[0]).append(img);
-          }, function() {
-            deferred.reject('load error');
-          });
-        });
-        file.$ngfDimensionPromise = deferred.promise;
-        file.$ngfDimensionPromise['finally'](function() {
-          delete file.$ngfDimensionPromise;
-        });
-        return file.$ngfDimensionPromise;
-      };
-      upload.mediaDuration = function(file) {
-        if (file.duration) {
-          var d = $q.defer();
-          $timeout(function() {
-            d.resolve(file.duration);
-          });
-          return d.promise;
-        }
-        if (file.$ngfDurationPromise)
-          return file.$ngfDurationPromise;
-        var deferred = $q.defer();
-        $timeout(function() {
-          if (file.type.indexOf('audio') !== 0 && file.type.indexOf('video') !== 0) {
-            deferred.reject('not media');
-            return;
-          }
-          upload.dataUrl(file).then(function(dataUrl) {
-            var el = angular.element(file.type.indexOf('audio') === 0 ? '<audio>' : '<video>').attr('src', dataUrl).css('visibility', 'none').css('position', 'fixed');
-            function success() {
-              var duration = el[0].duration;
-              file.duration = duration;
-              el.remove();
-              deferred.resolve(duration);
-            }
-            function error() {
-              el.remove();
-              deferred.reject('load error');
-            }
-            el.on('loadedmetadata', success);
-            el.on('error', error);
-            var count = 0;
-            function checkLoadError() {
-              $timeout(function() {
-                if (el[0].parentNode) {
-                  if (el[0].duration) {
-                    success();
-                  } else if (count > 10) {
-                    error();
-                  } else {
-                    checkLoadError();
-                  }
-                }
-              }, 1000);
-            }
-            checkLoadError();
-            angular.element(document.body).append(el);
-          }, function() {
-            deferred.reject('load error');
-          });
-        });
-        file.$ngfDurationPromise = deferred.promise;
-        file.$ngfDurationPromise['finally'](function() {
-          delete file.$ngfDurationPromise;
-        });
-        return file.$ngfDurationPromise;
-      };
-      return upload;
-    }]);
-    ngFileUpload.service('UploadResize', ['UploadValidate', '$q', '$timeout', function(UploadValidate, $q, $timeout) {
-      var upload = UploadValidate;
-      var calculateAspectRatioFit = function(srcWidth, srcHeight, maxWidth, maxHeight) {
-        var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
-        return {
-          width: srcWidth * ratio,
-          height: srcHeight * ratio
-        };
-      };
-      var resize = function(imagen, width, height, quality, type) {
-        var deferred = $q.defer();
-        var canvasElement = document.createElement('canvas');
-        var imagenElement = document.createElement('img');
-        imagenElement.onload = function() {
-          try {
-            var dimensions = calculateAspectRatioFit(imagenElement.width, imagenElement.height, width, height);
-            canvasElement.width = dimensions.width;
-            canvasElement.height = dimensions.height;
-            var context = canvasElement.getContext('2d');
-            context.drawImage(imagenElement, 0, 0, dimensions.width, dimensions.height);
-            deferred.resolve(canvasElement.toDataURL(type || 'image/WebP', quality || 1.0));
-          } catch (e) {
-            deferred.reject(e);
-          }
-        };
-        imagenElement.onerror = function() {
-          deferred.reject();
-        };
-        imagenElement.src = imagen;
-        return deferred.promise;
-      };
-      var dataURLtoBlob = function(dataurl) {
-        var arr = dataurl.split(','),
-            mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]),
-            n = bstr.length,
-            u8arr = new Uint8Array(n);
-        while (n--) {
-          u8arr[n] = bstr.charCodeAt(n);
-        }
-        return new Blob([u8arr], {type: mime});
-      };
-      upload.resize = function(file, width, height, quality) {
-        var deferred = $q.defer();
-        if (file.type.indexOf('image') !== 0) {
-          $timeout(function() {
-            deferred.resolve('Only images are allowed for resizing!');
-          });
-          return deferred.promise;
-        }
-        upload.dataUrl(file, true).then(function(url) {
-          resize(url, width, height, quality, file.type).then(function(dataUrl) {
-            var blob = dataURLtoBlob(dataUrl);
-            blob.name = file.name;
-            deferred.resolve(blob);
-          }, function() {
-            deferred.reject();
-          });
-        }, function() {
-          deferred.reject();
-        });
-        return deferred.promise;
-      };
-      return upload;
-    }]);
-    (function() {
-      ngFileUpload.directive('ngfDrop', ['$parse', '$timeout', '$location', 'Upload', function($parse, $timeout, $location, Upload) {
-        return {
-          restrict: 'AEC',
-          require: '?ngModel',
-          link: function(scope, elem, attr, ngModel) {
-            linkDrop(scope, elem, attr, ngModel, $parse, $timeout, $location, Upload);
-          }
-        };
-      }]);
-      ngFileUpload.directive('ngfNoFileDrop', function() {
-        return function(scope, elem) {
-          if (dropAvailable())
-            elem.css('display', 'none');
-        };
-      });
-      ngFileUpload.directive('ngfDropAvailable', ['$parse', '$timeout', 'Upload', function($parse, $timeout, Upload) {
-        return function(scope, elem, attr) {
-          if (dropAvailable()) {
-            var model = $parse(Upload.attrGetter('ngfDropAvailable', attr));
-            $timeout(function() {
-              model(scope);
-              if (model.assign) {
-                model.assign(scope, true);
-              }
-            });
-          }
-        };
-      }]);
-      function linkDrop(scope, elem, attr, ngModel, $parse, $timeout, $location, upload) {
-        var available = dropAvailable();
-        var attrGetter = function(name, scope, params) {
-          return upload.attrGetter(name, attr, scope, params);
-        };
-        if (attrGetter('dropAvailable')) {
-          $timeout(function() {
-            if (scope[attrGetter('dropAvailable')]) {
-              scope[attrGetter('dropAvailable')].value = available;
-            } else {
-              scope[attrGetter('dropAvailable')] = available;
-            }
-          });
-        }
-        if (!available) {
-          if (attrGetter('ngfHideOnDropNotAvailable', scope) === true) {
-            elem.css('display', 'none');
-          }
-          return;
-        }
-        function isDisabled() {
-          return elem.attr('disabled') || attrGetter('ngfDropDisabled', scope);
-        }
-        upload.registerValidators(ngModel, null, attr, scope);
-        var leaveTimeout = null;
-        var stopPropagation = $parse(attrGetter('ngfStopPropagation'));
-        var dragOverDelay = 1;
-        var actualDragOverClass;
-        elem[0].addEventListener('dragover', function(evt) {
-          if (isDisabled())
-            return;
-          evt.preventDefault();
-          if (stopPropagation(scope))
-            evt.stopPropagation();
-          if (navigator.userAgent.indexOf('Chrome') > -1) {
-            var b = evt.dataTransfer.effectAllowed;
-            evt.dataTransfer.dropEffect = ('move' === b || 'linkMove' === b) ? 'move' : 'copy';
-          }
-          $timeout.cancel(leaveTimeout);
-          if (!actualDragOverClass) {
-            actualDragOverClass = 'C';
-            calculateDragOverClass(scope, attr, evt, function(clazz) {
-              actualDragOverClass = clazz;
-              elem.addClass(actualDragOverClass);
-            });
-          }
-        }, false);
-        elem[0].addEventListener('dragenter', function(evt) {
-          if (isDisabled())
-            return;
-          evt.preventDefault();
-          if (stopPropagation(scope))
-            evt.stopPropagation();
-        }, false);
-        elem[0].addEventListener('dragleave', function() {
-          if (isDisabled())
-            return;
-          leaveTimeout = $timeout(function() {
-            elem.removeClass(actualDragOverClass);
-            actualDragOverClass = null;
-          }, dragOverDelay || 1);
-        }, false);
-        elem[0].addEventListener('drop', function(evt) {
-          if (isDisabled())
-            return;
-          evt.preventDefault();
-          if (stopPropagation(scope))
-            evt.stopPropagation();
-          elem.removeClass(actualDragOverClass);
-          actualDragOverClass = null;
-          extractFiles(evt, function(files) {
-            upload.updateModel(ngModel, attr, scope, attrGetter('ngfChange') || attrGetter('ngfDrop'), files, evt);
-          }, attrGetter('ngfAllowDir', scope) !== false, attrGetter('multiple') || attrGetter('ngfMultiple', scope));
-        }, false);
-        elem[0].addEventListener('paste', function(evt) {
-          if (isDisabled())
-            return;
-          var files = [];
-          var clipboard = evt.clipboardData || evt.originalEvent.clipboardData;
-          if (clipboard && clipboard.items) {
-            for (var k = 0; k < clipboard.items.length; k++) {
-              if (clipboard.items[k].type.indexOf('image') !== -1) {
-                files.push(clipboard.items[k].getAsFile());
-              }
-            }
-            upload.updateModel(ngModel, attr, scope, attrGetter('ngfChange') || attrGetter('ngfDrop'), files, evt);
-          }
-        }, false);
-        function calculateDragOverClass(scope, attr, evt, callback) {
-          var clazz = attrGetter('ngfDragOverClass', scope, {$event: evt}),
-              dClass = attrGetter('ngfDragOverClass') || 'dragover';
-          if (angular.isString(clazz)) {
-            callback(clazz);
-            return;
-          }
-          if (clazz) {
-            if (clazz.delay)
-              dragOverDelay = clazz.delay;
-            if (clazz.accept || clazz.reject) {
-              var items = evt.dataTransfer.items;
-              if (items != null) {
-                var pattern = attrGetter('ngfPattern', scope, {$event: evt});
-                for (var i = 0; i < items.length; i++) {
-                  if (items[i].kind === 'file' || items[i].kind === '') {
-                    if (!upload.validatePattern(items[i], pattern)) {
-                      dClass = clazz.reject;
-                      break;
-                    } else {
-                      dClass = clazz.accept;
-                    }
-                  }
-                }
-              }
-            }
-          }
-          callback(dClass);
-        }
-        function extractFiles(evt, callback, allowDir, multiple) {
-          var files = [],
-              processing = 0;
-          function traverseFileTree(files, entry, path) {
-            if (entry != null) {
-              if (entry.isDirectory) {
-                var filePath = (path || '') + entry.name;
-                files.push({
-                  name: entry.name,
-                  type: 'directory',
-                  path: filePath
-                });
-                var dirReader = entry.createReader();
-                var entries = [];
-                processing++;
-                var readEntries = function() {
-                  dirReader.readEntries(function(results) {
-                    try {
-                      if (!results.length) {
-                        for (var i = 0; i < entries.length; i++) {
-                          traverseFileTree(files, entries[i], (path ? path : '') + entry.name + '/');
-                        }
-                        processing--;
-                      } else {
-                        entries = entries.concat(Array.prototype.slice.call(results || [], 0));
-                        readEntries();
-                      }
-                    } catch (e) {
-                      processing--;
-                      console.error(e);
-                    }
-                  }, function() {
-                    processing--;
-                  });
-                };
-                readEntries();
-              } else {
-                processing++;
-                entry.file(function(file) {
-                  try {
-                    processing--;
-                    file.path = (path ? path : '') + file.name;
-                    files.push(file);
-                  } catch (e) {
-                    processing--;
-                    console.error(e);
-                  }
-                }, function() {
-                  processing--;
-                });
-              }
-            }
-          }
-          var items = evt.dataTransfer.items;
-          if (items && items.length > 0 && $location.protocol() !== 'file') {
-            for (var i = 0; i < items.length; i++) {
-              if (items[i].webkitGetAsEntry && items[i].webkitGetAsEntry() && items[i].webkitGetAsEntry().isDirectory) {
-                var entry = items[i].webkitGetAsEntry();
-                if (entry.isDirectory && !allowDir) {
-                  continue;
-                }
-                if (entry != null) {
-                  traverseFileTree(files, entry);
-                }
-              } else {
-                var f = items[i].getAsFile();
-                if (f != null)
-                  files.push(f);
-              }
-              if (!multiple && files.length > 0)
-                break;
-            }
-          } else {
-            var fileList = evt.dataTransfer.files;
-            if (fileList != null) {
-              for (var j = 0; j < fileList.length; j++) {
-                files.push(fileList.item(j));
-                if (!multiple && files.length > 0) {
-                  break;
-                }
-              }
-            }
-          }
-          var delays = 0;
-          (function waitForProcess(delay) {
-            $timeout(function() {
-              if (!processing) {
-                if (!multiple && files.length > 1) {
-                  i = 0;
-                  while (files[i].type === 'directory')
-                    i++;
-                  files = [files[i]];
-                }
-                callback(files);
-              } else {
-                if (delays++ * 10 < 20 * 1000) {
-                  waitForProcess(10);
-                }
-              }
-            }, delay || 0);
-          })();
-        }
-      }
-      function dropAvailable() {
-        var div = document.createElement('div');
-        return ('draggable' in div) && ('ondrop' in div) && !/Edge\/12./i.test(navigator.userAgent);
-      }
-    })();
-    this["ngFileUpload"] = ngFileUpload;
-  })();
-  return _retrieveGlobal();
-});
-
-$__System.registerDynamic("1e", ["21"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": require("21"),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("1f", ["22"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": require("22"),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("1c", ["23"], true, function(require, exports, module) {
+$__System.registerDynamic("1b", ["21"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -28008,12 +26217,1803 @@ $__System.registerDynamic("1c", ["23"], true, function(require, exports, module)
         root._ = _;
       }
     }.call(this));
-  })(require("23"));
+  })(require("21"));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("20", [], true, function(require, exports, module) {
+$__System.registerDynamic("1d", [], false, function(__require, __exports, __module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
+  (function() {
+    var ngFileUpload = this["ngFileUpload"];
+    (function() {
+      function patchXHR(fnName, newFn) {
+        window.XMLHttpRequest.prototype[fnName] = newFn(window.XMLHttpRequest.prototype[fnName]);
+      }
+      function redefineProp(xhr, prop, fn) {
+        try {
+          Object.defineProperty(xhr, prop, {get: fn});
+        } catch (e) {}
+      }
+      if (!window.FileAPI) {
+        window.FileAPI = {};
+      }
+      FileAPI.shouldLoad = (window.XMLHttpRequest && !window.FormData) || FileAPI.forceLoad;
+      if (FileAPI.shouldLoad) {
+        var initializeUploadListener = function(xhr) {
+          if (!xhr.__listeners) {
+            if (!xhr.upload)
+              xhr.upload = {};
+            xhr.__listeners = [];
+            var origAddEventListener = xhr.upload.addEventListener;
+            xhr.upload.addEventListener = function(t, fn) {
+              xhr.__listeners[t] = fn;
+              if (origAddEventListener)
+                origAddEventListener.apply(this, arguments);
+            };
+          }
+        };
+        patchXHR('open', function(orig) {
+          return function(m, url, b) {
+            initializeUploadListener(this);
+            this.__url = url;
+            try {
+              orig.apply(this, [m, url, b]);
+            } catch (e) {
+              if (e.message.indexOf('Access is denied') > -1) {
+                this.__origError = e;
+                orig.apply(this, [m, '_fix_for_ie_crossdomain__', b]);
+              }
+            }
+          };
+        });
+        patchXHR('getResponseHeader', function(orig) {
+          return function(h) {
+            return this.__fileApiXHR && this.__fileApiXHR.getResponseHeader ? this.__fileApiXHR.getResponseHeader(h) : (orig == null ? null : orig.apply(this, [h]));
+          };
+        });
+        patchXHR('getAllResponseHeaders', function(orig) {
+          return function() {
+            return this.__fileApiXHR && this.__fileApiXHR.getAllResponseHeaders ? this.__fileApiXHR.getAllResponseHeaders() : (orig == null ? null : orig.apply(this));
+          };
+        });
+        patchXHR('abort', function(orig) {
+          return function() {
+            return this.__fileApiXHR && this.__fileApiXHR.abort ? this.__fileApiXHR.abort() : (orig == null ? null : orig.apply(this));
+          };
+        });
+        patchXHR('setRequestHeader', function(orig) {
+          return function(header, value) {
+            if (header === '__setXHR_') {
+              initializeUploadListener(this);
+              var val = value(this);
+              if (val instanceof Function) {
+                val(this);
+              }
+            } else {
+              this.__requestHeaders = this.__requestHeaders || {};
+              this.__requestHeaders[header] = value;
+              orig.apply(this, arguments);
+            }
+          };
+        });
+        patchXHR('send', function(orig) {
+          return function() {
+            var xhr = this;
+            if (arguments[0] && arguments[0].__isFileAPIShim) {
+              var formData = arguments[0];
+              var config = {
+                url: xhr.__url,
+                jsonp: false,
+                cache: true,
+                complete: function(err, fileApiXHR) {
+                  if (err && angular.isString(err) && err.indexOf('#2174') !== -1) {
+                    err = null;
+                  }
+                  xhr.__completed = true;
+                  if (!err && xhr.__listeners.load)
+                    xhr.__listeners.load({
+                      type: 'load',
+                      loaded: xhr.__loaded,
+                      total: xhr.__total,
+                      target: xhr,
+                      lengthComputable: true
+                    });
+                  if (!err && xhr.__listeners.loadend)
+                    xhr.__listeners.loadend({
+                      type: 'loadend',
+                      loaded: xhr.__loaded,
+                      total: xhr.__total,
+                      target: xhr,
+                      lengthComputable: true
+                    });
+                  if (err === 'abort' && xhr.__listeners.abort)
+                    xhr.__listeners.abort({
+                      type: 'abort',
+                      loaded: xhr.__loaded,
+                      total: xhr.__total,
+                      target: xhr,
+                      lengthComputable: true
+                    });
+                  if (fileApiXHR.status !== undefined)
+                    redefineProp(xhr, 'status', function() {
+                      return (fileApiXHR.status === 0 && err && err !== 'abort') ? 500 : fileApiXHR.status;
+                    });
+                  if (fileApiXHR.statusText !== undefined)
+                    redefineProp(xhr, 'statusText', function() {
+                      return fileApiXHR.statusText;
+                    });
+                  redefineProp(xhr, 'readyState', function() {
+                    return 4;
+                  });
+                  if (fileApiXHR.response !== undefined)
+                    redefineProp(xhr, 'response', function() {
+                      return fileApiXHR.response;
+                    });
+                  var resp = fileApiXHR.responseText || (err && fileApiXHR.status === 0 && err !== 'abort' ? err : undefined);
+                  redefineProp(xhr, 'responseText', function() {
+                    return resp;
+                  });
+                  redefineProp(xhr, 'response', function() {
+                    return resp;
+                  });
+                  if (err)
+                    redefineProp(xhr, 'err', function() {
+                      return err;
+                    });
+                  xhr.__fileApiXHR = fileApiXHR;
+                  if (xhr.onreadystatechange)
+                    xhr.onreadystatechange();
+                  if (xhr.onload)
+                    xhr.onload();
+                },
+                progress: function(e) {
+                  e.target = xhr;
+                  if (xhr.__listeners.progress)
+                    xhr.__listeners.progress(e);
+                  xhr.__total = e.total;
+                  xhr.__loaded = e.loaded;
+                  if (e.total === e.loaded) {
+                    var _this = this;
+                    setTimeout(function() {
+                      if (!xhr.__completed) {
+                        xhr.getAllResponseHeaders = function() {};
+                        _this.complete(null, {
+                          status: 204,
+                          statusText: 'No Content'
+                        });
+                      }
+                    }, FileAPI.noContentTimeout || 10000);
+                  }
+                },
+                headers: xhr.__requestHeaders
+              };
+              config.data = {};
+              config.files = {};
+              for (var i = 0; i < formData.data.length; i++) {
+                var item = formData.data[i];
+                if (item.val != null && item.val.name != null && item.val.size != null && item.val.type != null) {
+                  config.files[item.key] = item.val;
+                } else {
+                  config.data[item.key] = item.val;
+                }
+              }
+              setTimeout(function() {
+                if (!FileAPI.hasFlash) {
+                  throw 'Adode Flash Player need to be installed. To check ahead use "FileAPI.hasFlash"';
+                }
+                xhr.__fileApiXHR = FileAPI.upload(config);
+              }, 1);
+            } else {
+              if (this.__origError) {
+                throw this.__origError;
+              }
+              orig.apply(xhr, arguments);
+            }
+          };
+        });
+        window.XMLHttpRequest.__isFileAPIShim = true;
+        window.FormData = FormData = function() {
+          return {
+            append: function(key, val, name) {
+              if (val.__isFileAPIBlobShim) {
+                val = val.data[0];
+              }
+              this.data.push({
+                key: key,
+                val: val,
+                name: name
+              });
+            },
+            data: [],
+            __isFileAPIShim: true
+          };
+        };
+        window.Blob = Blob = function(b) {
+          return {
+            data: b,
+            __isFileAPIBlobShim: true
+          };
+        };
+      }
+    })();
+    (function() {
+      function isInputTypeFile(elem) {
+        return elem[0].tagName.toLowerCase() === 'input' && elem.attr('type') && elem.attr('type').toLowerCase() === 'file';
+      }
+      function hasFlash() {
+        try {
+          var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+          if (fo)
+            return true;
+        } catch (e) {
+          if (navigator.mimeTypes['application/x-shockwave-flash'] !== undefined)
+            return true;
+        }
+        return false;
+      }
+      function getOffset(obj) {
+        var left = 0,
+            top = 0;
+        if (window.jQuery) {
+          return jQuery(obj).offset();
+        }
+        if (obj.offsetParent) {
+          do {
+            left += (obj.offsetLeft - obj.scrollLeft);
+            top += (obj.offsetTop - obj.scrollTop);
+            obj = obj.offsetParent;
+          } while (obj);
+        }
+        return {
+          left: left,
+          top: top
+        };
+      }
+      if (FileAPI.shouldLoad) {
+        if (FileAPI.forceLoad) {
+          FileAPI.html5 = false;
+        }
+        if (!FileAPI.upload) {
+          var jsUrl,
+              basePath,
+              script = document.createElement('script'),
+              allScripts = document.getElementsByTagName('script'),
+              i,
+              index,
+              src;
+          if (window.FileAPI.jsUrl) {
+            jsUrl = window.FileAPI.jsUrl;
+          } else if (window.FileAPI.jsPath) {
+            basePath = window.FileAPI.jsPath;
+          } else {
+            for (i = 0; i < allScripts.length; i++) {
+              src = allScripts[i].src;
+              index = src.search(/\/ng\-file\-upload[\-a-zA-z0-9\.]*\.js/);
+              if (index > -1) {
+                basePath = src.substring(0, index + 1);
+                break;
+              }
+            }
+          }
+          if (FileAPI.staticPath == null)
+            FileAPI.staticPath = basePath;
+          script.setAttribute('src', jsUrl || basePath + 'FileAPI.min.js');
+          document.getElementsByTagName('head')[0].appendChild(script);
+          FileAPI.hasFlash = hasFlash();
+        }
+        FileAPI.ngfFixIE = function(elem, fileElem, changeFn) {
+          if (!hasFlash()) {
+            throw 'Adode Flash Player need to be installed. To check ahead use "FileAPI.hasFlash"';
+          }
+          var fixInputStyle = function() {
+            if (elem.attr('disabled')) {
+              if (fileElem)
+                fileElem.removeClass('js-fileapi-wrapper');
+            } else {
+              if (!fileElem.attr('__ngf_flash_')) {
+                fileElem.unbind('change');
+                fileElem.unbind('click');
+                fileElem.bind('change', function(evt) {
+                  fileApiChangeFn.apply(this, [evt]);
+                  changeFn.apply(this, [evt]);
+                });
+                fileElem.attr('__ngf_flash_', 'true');
+              }
+              fileElem.addClass('js-fileapi-wrapper');
+              if (!isInputTypeFile(elem)) {
+                fileElem.css('position', 'absolute').css('top', getOffset(elem[0]).top + 'px').css('left', getOffset(elem[0]).left + 'px').css('width', elem[0].offsetWidth + 'px').css('height', elem[0].offsetHeight + 'px').css('filter', 'alpha(opacity=0)').css('display', elem.css('display')).css('overflow', 'hidden').css('z-index', '900000').css('visibility', 'visible');
+              }
+            }
+          };
+          elem.bind('mouseenter', fixInputStyle);
+          var fileApiChangeFn = function(evt) {
+            var files = FileAPI.getFiles(evt);
+            for (var i = 0; i < files.length; i++) {
+              if (files[i].size === undefined)
+                files[i].size = 0;
+              if (files[i].name === undefined)
+                files[i].name = 'file';
+              if (files[i].type === undefined)
+                files[i].type = 'undefined';
+            }
+            if (!evt.target) {
+              evt.target = {};
+            }
+            evt.target.files = files;
+            if (evt.target.files !== files) {
+              evt.__files_ = files;
+            }
+            (evt.__files_ || evt.target.files).item = function(i) {
+              return (evt.__files_ || evt.target.files)[i] || null;
+            };
+          };
+        };
+        FileAPI.disableFileInput = function(elem, disable) {
+          if (disable) {
+            elem.removeClass('js-fileapi-wrapper');
+          } else {
+            elem.addClass('js-fileapi-wrapper');
+          }
+        };
+      }
+    })();
+    if (!window.FileReader) {
+      window.FileReader = function() {
+        var _this = this,
+            loadStarted = false;
+        this.listeners = {};
+        this.addEventListener = function(type, fn) {
+          _this.listeners[type] = _this.listeners[type] || [];
+          _this.listeners[type].push(fn);
+        };
+        this.removeEventListener = function(type, fn) {
+          if (_this.listeners[type])
+            _this.listeners[type].splice(_this.listeners[type].indexOf(fn), 1);
+        };
+        this.dispatchEvent = function(evt) {
+          var list = _this.listeners[evt.type];
+          if (list) {
+            for (var i = 0; i < list.length; i++) {
+              list[i].call(_this, evt);
+            }
+          }
+        };
+        this.onabort = this.onerror = this.onload = this.onloadstart = this.onloadend = this.onprogress = null;
+        var constructEvent = function(type, evt) {
+          var e = {
+            type: type,
+            target: _this,
+            loaded: evt.loaded,
+            total: evt.total,
+            error: evt.error
+          };
+          if (evt.result != null)
+            e.target.result = evt.result;
+          return e;
+        };
+        var listener = function(evt) {
+          if (!loadStarted) {
+            loadStarted = true;
+            if (_this.onloadstart)
+              _this.onloadstart(constructEvent('loadstart', evt));
+          }
+          var e;
+          if (evt.type === 'load') {
+            if (_this.onloadend)
+              _this.onloadend(constructEvent('loadend', evt));
+            e = constructEvent('load', evt);
+            if (_this.onload)
+              _this.onload(e);
+            _this.dispatchEvent(e);
+          } else if (evt.type === 'progress') {
+            e = constructEvent('progress', evt);
+            if (_this.onprogress)
+              _this.onprogress(e);
+            _this.dispatchEvent(e);
+          } else {
+            e = constructEvent('error', evt);
+            if (_this.onerror)
+              _this.onerror(e);
+            _this.dispatchEvent(e);
+          }
+        };
+        this.readAsArrayBuffer = function(file) {
+          FileAPI.readAsBinaryString(file, listener);
+        };
+        this.readAsBinaryString = function(file) {
+          FileAPI.readAsBinaryString(file, listener);
+        };
+        this.readAsDataURL = function(file) {
+          FileAPI.readAsDataURL(file, listener);
+        };
+        this.readAsText = function(file) {
+          FileAPI.readAsText(file, listener);
+        };
+      };
+    }
+    if (window.XMLHttpRequest && !(window.FileAPI && FileAPI.shouldLoad)) {
+      window.XMLHttpRequest.prototype.setRequestHeader = (function(orig) {
+        return function(header, value) {
+          if (header === '__setXHR_') {
+            var val = value(this);
+            if (val instanceof Function) {
+              val(this);
+            }
+          } else {
+            orig.apply(this, arguments);
+          }
+        };
+      })(window.XMLHttpRequest.prototype.setRequestHeader);
+    }
+    var ngFileUpload = angular.module('ngFileUpload', []);
+    ngFileUpload.version = '7.2.1';
+    ngFileUpload.service('UploadBase', ['$http', '$q', '$timeout', function($http, $q, $timeout) {
+      function sendHttp(config) {
+        config.method = config.method || 'POST';
+        config.headers = config.headers || {};
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        config.headers.__setXHR_ = function() {
+          return function(xhr) {
+            if (!xhr)
+              return;
+            config.__XHR = xhr;
+            if (config.xhrFn)
+              config.xhrFn(xhr);
+            xhr.upload.addEventListener('progress', function(e) {
+              e.config = config;
+              if (deferred.notify) {
+                deferred.notify(e);
+              } else if (promise.progressFunc) {
+                $timeout(function() {
+                  promise.progressFunc(e);
+                });
+              }
+            }, false);
+            xhr.upload.addEventListener('load', function(e) {
+              if (e.lengthComputable) {
+                e.config = config;
+                if (deferred.notify) {
+                  deferred.notify(e);
+                } else if (promise.progressFunc) {
+                  $timeout(function() {
+                    promise.progressFunc(e);
+                  });
+                }
+              }
+            }, false);
+          };
+        };
+        $http(config).then(function(r) {
+          deferred.resolve(r);
+        }, function(e) {
+          deferred.reject(e);
+        }, function(n) {
+          deferred.notify(n);
+        });
+        promise.success = function(fn) {
+          promise.then(function(response) {
+            fn(response.data, response.status, response.headers, config);
+          });
+          return promise;
+        };
+        promise.error = function(fn) {
+          promise.then(null, function(response) {
+            fn(response.data, response.status, response.headers, config);
+          });
+          return promise;
+        };
+        promise.progress = function(fn) {
+          promise.progressFunc = fn;
+          promise.then(null, null, function(update) {
+            fn(update);
+          });
+          return promise;
+        };
+        promise.abort = function() {
+          if (config.__XHR) {
+            $timeout(function() {
+              config.__XHR.abort();
+            });
+          }
+          return promise;
+        };
+        promise.xhr = function(fn) {
+          config.xhrFn = (function(origXhrFn) {
+            return function() {
+              if (origXhrFn)
+                origXhrFn.apply(promise, arguments);
+              fn.apply(promise, arguments);
+            };
+          })(config.xhrFn);
+          return promise;
+        };
+        return promise;
+      }
+      this.upload = function(config) {
+        function addFieldToFormData(formData, val, key) {
+          if (val !== undefined) {
+            if (angular.isDate(val)) {
+              val = val.toISOString();
+            }
+            if (angular.isString(val)) {
+              formData.append(key, val);
+            } else if (config.sendFieldsAs === 'form') {
+              if (angular.isObject(val)) {
+                for (var k in val) {
+                  if (val.hasOwnProperty(k)) {
+                    addFieldToFormData(formData, val[k], key + '[' + k + ']');
+                  }
+                }
+              } else {
+                formData.append(key, val);
+              }
+            } else {
+              val = angular.isString(val) ? val : angular.toJson(val);
+              if (config.sendFieldsAs === 'json-blob') {
+                formData.append(key, new Blob([val], {type: 'application/json'}));
+              } else {
+                formData.append(key, val);
+              }
+            }
+          }
+        }
+        function isFile(file) {
+          return file instanceof Blob || (file.flashId && file.name && file.size);
+        }
+        function addFileToFormData(formData, file, key) {
+          if (isFile(file)) {
+            formData.append(key, file, file.fileName || file.name);
+          } else if (angular.isObject(file)) {
+            for (var k in file) {
+              if (file.hasOwnProperty(k)) {
+                var split = k.split(',');
+                if (split[1]) {
+                  file[k].fileName = split[1].replace(/^\s+|\s+$/g, '');
+                }
+                addFileToFormData(formData, file[k], split[0]);
+              }
+            }
+          } else {
+            throw 'Expected file object in Upload.upload file option: ' + file.toString();
+          }
+        }
+        config.headers = config.headers || {};
+        config.headers['Content-Type'] = undefined;
+        config.transformRequest = config.transformRequest ? (angular.isArray(config.transformRequest) ? config.transformRequest : [config.transformRequest]) : [];
+        config.transformRequest.push(function(data) {
+          var formData = new FormData(),
+              allFields = {},
+              key;
+          for (key in config.fields) {
+            if (config.fields.hasOwnProperty(key)) {
+              allFields[key] = config.fields[key];
+            }
+          }
+          if (data)
+            allFields.data = data;
+          for (key in allFields) {
+            if (allFields.hasOwnProperty(key)) {
+              var val = allFields[key];
+              if (config.formDataAppender) {
+                config.formDataAppender(formData, key, val);
+              } else {
+                addFieldToFormData(formData, val, key);
+              }
+            }
+          }
+          if (config.file != null) {
+            if (angular.isArray(config.file)) {
+              for (var i = 0; i < config.file.length; i++) {
+                addFileToFormData(formData, config.file[i], 'file');
+              }
+            } else {
+              addFileToFormData(formData, config.file, 'file');
+            }
+          }
+          return formData;
+        });
+        return sendHttp(config);
+      };
+      this.http = function(config) {
+        config.transformRequest = config.transformRequest || function(data) {
+          if ((window.ArrayBuffer && data instanceof window.ArrayBuffer) || data instanceof Blob) {
+            return data;
+          }
+          return $http.defaults.transformRequest[0].apply(this, arguments);
+        };
+        return sendHttp(config);
+      };
+      this.setDefaults = function(defaults) {
+        this.defaults = defaults || {};
+      };
+      this.defaults = {};
+      this.version = ngFileUpload.version;
+    }]);
+    ngFileUpload.service('Upload', ['$parse', '$timeout', '$compile', 'UploadResize', function($parse, $timeout, $compile, UploadResize) {
+      var upload = UploadResize;
+      upload.getAttrWithDefaults = function(attr, name) {
+        return attr[name] != null ? attr[name] : (upload.defaults[name] == null ? upload.defaults[name] : upload.defaults[name].toString());
+      };
+      upload.attrGetter = function(name, attr, scope, params) {
+        if (scope) {
+          try {
+            if (params) {
+              return $parse(this.getAttrWithDefaults(attr, name))(scope, params);
+            } else {
+              return $parse(this.getAttrWithDefaults(attr, name))(scope);
+            }
+          } catch (e) {
+            if (name.search(/min|max|pattern/i)) {
+              return this.getAttrWithDefaults(attr, name);
+            } else {
+              throw e;
+            }
+          }
+        } else {
+          return this.getAttrWithDefaults(attr, name);
+        }
+      };
+      upload.updateModel = function(ngModel, attr, scope, fileChange, files, evt, noDelay) {
+        function update() {
+          var file = files && files.length ? files[0] : null;
+          if (ngModel) {
+            var singleModel = !upload.attrGetter('ngfMultiple', attr, scope) && !upload.attrGetter('multiple', attr) && !keep;
+            $parse(upload.attrGetter('ngModel', attr)).assign(scope, singleModel ? file : files);
+          }
+          var ngfModel = upload.attrGetter('ngfModel', attr);
+          if (ngfModel) {
+            $parse(ngfModel).assign(scope, files);
+          }
+          if (fileChange) {
+            $parse(fileChange)(scope, {
+              $files: files,
+              $file: file,
+              $event: evt
+            });
+          }
+          $timeout(function() {});
+        }
+        var keep = upload.attrGetter('ngfKeep', attr, scope);
+        if (keep === true) {
+          if (!files || !files.length) {
+            return;
+          } else {
+            var prevFiles = ((ngModel && ngModel.$modelValue) || attr.$$ngfPrevFiles || []).slice(0),
+                hasNew = false;
+            if (upload.attrGetter('ngfKeepDistinct', attr, scope) === true) {
+              var len = prevFiles.length;
+              for (var i = 0; i < files.length; i++) {
+                for (var j = 0; j < len; j++) {
+                  if (files[i].name === prevFiles[j].name)
+                    break;
+                }
+                if (j === len) {
+                  prevFiles.push(files[i]);
+                  hasNew = true;
+                }
+              }
+              if (!hasNew)
+                return;
+              files = prevFiles;
+            } else {
+              files = prevFiles.concat(files);
+            }
+          }
+        }
+        attr.$$ngfPrevFiles = files;
+        function resize(files, callback) {
+          var param = upload.attrGetter('ngfResize', attr, scope);
+          if (!param)
+            return callback();
+          var count = files.length;
+          var checkCallback = function() {
+            count--;
+            if (count === 0)
+              callback();
+          };
+          var success = function(index) {
+            return function(resizedFile) {
+              files.splice(index, 1, resizedFile);
+              checkCallback();
+            };
+          };
+          var error = function(f) {
+            return function(e) {
+              checkCallback();
+              f.$error = 'resize';
+              f.$errorParam = (e ? (e.message ? e.message : e) + ': ' : '') + (f && f.name);
+            };
+          };
+          for (var i = 0; i < files.length; i++) {
+            var f = files[i];
+            if (!f.$error && f.type.indexOf('image') === 0) {
+              upload.resize(f, param.width, param.height, param.quality).then(success(i), error(f));
+            } else {
+              checkCallback();
+            }
+          }
+        }
+        if (noDelay) {
+          update();
+        } else if (upload.validate(files, ngModel, attr, scope, upload.attrGetter('ngfValidateLater', attr), function() {
+          resize(files, function() {
+            $timeout(function() {
+              update();
+            });
+          });
+        }))
+          ;
+      };
+      return upload;
+    }]);
+    ngFileUpload.directive('ngfSelect', ['$parse', '$timeout', '$compile', 'Upload', function($parse, $timeout, $compile, Upload) {
+      var generatedElems = [];
+      function isDelayedClickSupported(ua) {
+        var m = ua.match(/Android[^\d]*(\d+)\.(\d+)/);
+        if (m && m.length > 2) {
+          var v = Upload.defaults.androidFixMinorVersion || 4;
+          return parseInt(m[1]) < 4 || (parseInt(m[1]) === v && parseInt(m[2]) < v);
+        }
+        return ua.indexOf('Chrome') === -1 && /.*Windows.*Safari.*/.test(ua);
+      }
+      function linkFileSelect(scope, elem, attr, ngModel, $parse, $timeout, $compile, upload) {
+        var attrGetter = function(name, scope) {
+          return upload.attrGetter(name, attr, scope);
+        };
+        function isInputTypeFile() {
+          return elem[0].tagName.toLowerCase() === 'input' && attr.type && attr.type.toLowerCase() === 'file';
+        }
+        function fileChangeAttr() {
+          return attrGetter('ngfChange') || attrGetter('ngfSelect');
+        }
+        function changeFn(evt) {
+          var fileList = evt.__files_ || (evt.target && evt.target.files),
+              files = [];
+          for (var i = 0; i < fileList.length; i++) {
+            files.push(fileList[i]);
+          }
+          upload.updateModel(ngModel, attr, scope, fileChangeAttr(), files.length ? files : null, evt);
+        }
+        var unwatches = [];
+        unwatches.push(scope.$watch(attrGetter('ngfMultiple'), function() {
+          fileElem.attr('multiple', attrGetter('ngfMultiple', scope));
+        }));
+        unwatches.push(scope.$watch(attrGetter('ngfCapture'), function() {
+          fileElem.attr('capture', attrGetter('ngfCapture', scope));
+        }));
+        attr.$observe('accept', function() {
+          fileElem.attr('accept', attrGetter('accept'));
+        });
+        unwatches.push(function() {
+          if (attr.$$observers)
+            delete attr.$$observers.accept;
+        });
+        function bindAttrToFileInput(fileElem) {
+          if (elem !== fileElem) {
+            for (var i = 0; i < elem[0].attributes.length; i++) {
+              var attribute = elem[0].attributes[i];
+              if (attribute.name !== 'type' && attribute.name !== 'class' && attribute.name !== 'id' && attribute.name !== 'style') {
+                if (attribute.value == null || attribute.value === '') {
+                  if (attribute.name === 'required')
+                    attribute.value = 'required';
+                  if (attribute.name === 'multiple')
+                    attribute.value = 'multiple';
+                }
+                fileElem.attr(attribute.name, attribute.value);
+              }
+            }
+          }
+        }
+        function createFileInput() {
+          if (isInputTypeFile()) {
+            return elem;
+          }
+          var fileElem = angular.element('<input type="file">');
+          bindAttrToFileInput(fileElem);
+          fileElem.css('visibility', 'hidden').css('position', 'absolute').css('overflow', 'hidden').css('width', '0px').css('height', '0px').css('border', 'none').css('margin', '0px').css('padding', '0px').attr('tabindex', '-1');
+          generatedElems.push({
+            el: elem,
+            ref: fileElem
+          });
+          document.body.appendChild(fileElem[0]);
+          return fileElem;
+        }
+        var initialTouchStartY = 0;
+        function clickHandler(evt) {
+          if (elem.attr('disabled') || attrGetter('ngfSelectDisabled', scope))
+            return false;
+          var r = handleTouch(evt);
+          if (r != null)
+            return r;
+          resetModel(evt);
+          if (isDelayedClickSupported(navigator.userAgent)) {
+            setTimeout(function() {
+              fileElem[0].click();
+            }, 0);
+          } else {
+            fileElem[0].click();
+          }
+          return false;
+        }
+        function handleTouch(evt) {
+          var touches = evt.changedTouches || (evt.originalEvent && evt.originalEvent.changedTouches);
+          if (evt.type === 'touchstart') {
+            initialTouchStartY = touches ? touches[0].clientY : 0;
+            return true;
+          } else {
+            evt.stopPropagation();
+            evt.preventDefault();
+            if (evt.type === 'touchend') {
+              var currentLocation = touches ? touches[0].clientY : 0;
+              if (Math.abs(currentLocation - initialTouchStartY) > 20)
+                return false;
+            }
+          }
+        }
+        var fileElem = elem;
+        function resetModel(evt) {
+          if (fileElem.val()) {
+            fileElem.val(null);
+            upload.updateModel(ngModel, attr, scope, fileChangeAttr(), null, evt, true);
+          }
+        }
+        if (!isInputTypeFile()) {
+          fileElem = createFileInput();
+        }
+        fileElem.bind('change', changeFn);
+        if (!isInputTypeFile()) {
+          elem.bind('click touchstart touchend', clickHandler);
+        } else {
+          elem.bind('click', resetModel);
+        }
+        upload.registerValidators(ngModel, fileElem, attr, scope);
+        function ie10SameFileSelectFix(evt) {
+          if (fileElem && !fileElem.attr('__ngf_ie10_Fix_')) {
+            if (!fileElem[0].parentNode) {
+              fileElem = null;
+              return;
+            }
+            evt.preventDefault();
+            evt.stopPropagation();
+            fileElem.unbind('click');
+            var clone = fileElem.clone();
+            fileElem.replaceWith(clone);
+            fileElem = clone;
+            fileElem.attr('__ngf_ie10_Fix_', 'true');
+            fileElem.bind('change', changeFn);
+            fileElem.bind('click', ie10SameFileSelectFix);
+            fileElem[0].click();
+            return false;
+          } else {
+            fileElem.removeAttr('__ngf_ie10_Fix_');
+          }
+        }
+        if (navigator.appVersion.indexOf('MSIE 10') !== -1) {
+          fileElem.bind('click', ie10SameFileSelectFix);
+        }
+        scope.$on('$destroy', function() {
+          if (!isInputTypeFile())
+            fileElem.remove();
+          angular.forEach(unwatches, function(unwatch) {
+            unwatch();
+          });
+        });
+        $timeout(function() {
+          for (var i = 0; i < generatedElems.length; i++) {
+            var g = generatedElems[i];
+            if (!document.body.contains(g.el[0])) {
+              generatedElems.splice(i, 1);
+              g.ref.remove();
+            }
+          }
+        });
+        if (window.FileAPI && window.FileAPI.ngfFixIE) {
+          window.FileAPI.ngfFixIE(elem, fileElem, changeFn);
+        }
+      }
+      return {
+        restrict: 'AEC',
+        require: '?ngModel',
+        link: function(scope, elem, attr, ngModel) {
+          linkFileSelect(scope, elem, attr, ngModel, $parse, $timeout, $compile, Upload);
+        }
+      };
+    }]);
+    (function() {
+      ngFileUpload.service('UploadDataUrl', ['UploadBase', '$timeout', '$q', function(UploadBase, $timeout, $q) {
+        var upload = UploadBase;
+        upload.dataUrl = function(file, disallowObjectUrl) {
+          if ((disallowObjectUrl && file.dataUrl != null) || (!disallowObjectUrl && file.blobUrl != null)) {
+            var d = $q.defer();
+            $timeout(function() {
+              d.resolve(disallowObjectUrl ? file.dataUrl : file.blobUrl);
+            });
+            return d.promise;
+          }
+          var p = disallowObjectUrl ? file.$ngfDataUrlPromise : file.$ngfBlobUrlPromise;
+          if (p)
+            return p;
+          var deferred = $q.defer();
+          $timeout(function() {
+            if (window.FileReader && file && (!window.FileAPI || navigator.userAgent.indexOf('MSIE 8') === -1 || file.size < 20000) && (!window.FileAPI || navigator.userAgent.indexOf('MSIE 9') === -1 || file.size < 4000000)) {
+              var URL = window.URL || window.webkitURL;
+              if (URL && URL.createObjectURL && !disallowObjectUrl) {
+                var url;
+                try {
+                  url = URL.createObjectURL(file);
+                } catch (e) {
+                  $timeout(function() {
+                    file.blobUrl = '';
+                    deferred.reject();
+                  });
+                  return;
+                }
+                $timeout(function() {
+                  file.blobUrl = url;
+                  if (url)
+                    deferred.resolve(url);
+                });
+              } else {
+                var fileReader = new FileReader();
+                fileReader.onload = function(e) {
+                  $timeout(function() {
+                    file.dataUrl = e.target.result;
+                    deferred.resolve(e.target.result);
+                  });
+                };
+                fileReader.onerror = function() {
+                  $timeout(function() {
+                    file.dataUrl = '';
+                    deferred.reject();
+                  });
+                };
+                fileReader.readAsDataURL(file);
+              }
+            } else {
+              $timeout(function() {
+                file[disallowObjectUrl ? 'dataUrl' : 'blobUrl'] = '';
+                deferred.reject();
+              });
+            }
+          });
+          if (disallowObjectUrl) {
+            p = file.$ngfDataUrlPromise = deferred.promise;
+          } else {
+            p = file.$ngfBlobUrlPromise = deferred.promise;
+          }
+          p['finally'](function() {
+            delete file[disallowObjectUrl ? '$ngfDataUrlPromise' : '$ngfBlobUrlPromise'];
+          });
+          return p;
+        };
+        return upload;
+      }]);
+      function getTagType(el) {
+        if (el.tagName.toLowerCase() === 'img')
+          return 'image';
+        if (el.tagName.toLowerCase() === 'audio')
+          return 'audio';
+        if (el.tagName.toLowerCase() === 'video')
+          return 'video';
+        return /\./;
+      }
+      var style = angular.element('<style>.ngf-hide{display:none !important}</style>');
+      document.getElementsByTagName('head')[0].appendChild(style[0]);
+      ngFileUpload.directive('ngfSrc', ['$compile', '$timeout', 'Upload', function($compile, $timeout, Upload) {
+        return {
+          restrict: 'AE',
+          link: function(scope, elem, attr) {
+            $timeout(function() {
+              var unwatch = scope.$watch(attr.ngfSrc, function(file) {
+                if (angular.isString(file)) {
+                  elem.removeClass('ngf-hide');
+                  return elem.attr('src', file);
+                }
+                if (file && file.type && file.type.indexOf(getTagType(elem[0])) === 0) {
+                  var disallowObjectUrl = Upload.attrGetter('ngfNoObjectUrl', attr, scope);
+                  Upload.dataUrl(file, disallowObjectUrl)['finally'](function() {
+                    $timeout(function() {
+                      if (file.blobUrl || file.dataUrl) {
+                        elem.removeClass('ngf-hide');
+                        elem.attr('src', (disallowObjectUrl ? file.dataUrl : file.blobUrl) || file.dataUrl);
+                      } else {
+                        elem.addClass('ngf-hide');
+                      }
+                    });
+                  });
+                } else {
+                  elem.addClass('ngf-hide');
+                }
+              });
+              scope.$on('$destroy', function() {
+                unwatch();
+              });
+            });
+          }
+        };
+      }]);
+      ngFileUpload.directive('ngfBackground', ['Upload', '$compile', '$timeout', function(Upload, $compile, $timeout) {
+        return {
+          restrict: 'AE',
+          link: function(scope, elem, attr) {
+            $timeout(function() {
+              var unwatch = scope.$watch(attr.ngfBackground, function(file) {
+                if (angular.isString(file))
+                  return elem.css('background-image', 'url(\'' + file + '\')');
+                if (file && file.type && file.type.indexOf('image') === 0) {
+                  var disallowObjectUrl = Upload.attrGetter('ngfNoObjectUrl', attr, scope);
+                  Upload.dataUrl(file, disallowObjectUrl)['finally'](function() {
+                    $timeout(function() {
+                      if ((disallowObjectUrl && file.dataUrl) || (!disallowObjectUrl && file.blobUrl)) {
+                        elem.css('background-image', 'url(\'' + (disallowObjectUrl ? file.dataUrl : file.blobUrl) + '\')');
+                      } else {
+                        elem.css('background-image', '');
+                      }
+                    });
+                  });
+                } else {
+                  elem.css('background-image', '');
+                }
+              });
+              scope.$on('$destroy', function() {
+                unwatch();
+              });
+            });
+          }
+        };
+      }]);
+      ngFileUpload.config(['$compileProvider', function($compileProvider) {
+        if ($compileProvider.imgSrcSanitizationWhitelist)
+          $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|local|file|data|blob):/);
+        if ($compileProvider.aHrefSanitizationWhitelist)
+          $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|local|file|data|blob):/);
+      }]);
+      ngFileUpload.filter('ngfDataUrl', ['UploadDataUrl', '$sce', function(UploadDataUrl, $sce) {
+        return function(file, disallowObjectUrl) {
+          if (angular.isString(file)) {
+            return $sce.trustAsResourceUrl(file);
+          }
+          if (file && !file.dataUrl) {
+            if (file.dataUrl === undefined && angular.isObject(file)) {
+              file.dataUrl = null;
+              UploadDataUrl.dataUrl(file, disallowObjectUrl);
+            }
+            return '';
+          }
+          return (file && file.dataUrl ? $sce.trustAsResourceUrl(file.dataUrl) : file) || '';
+        };
+      }]);
+    })();
+    ngFileUpload.service('UploadValidate', ['UploadDataUrl', '$q', '$timeout', function(UploadDataUrl, $q, $timeout) {
+      var upload = UploadDataUrl;
+      function globStringToRegex(str) {
+        if (str.length > 2 && str[0] === '/' && str[str.length - 1] === '/') {
+          return str.substring(1, str.length - 1);
+        }
+        var split = str.split(','),
+            result = '';
+        if (split.length > 1) {
+          for (var i = 0; i < split.length; i++) {
+            result += '(' + globStringToRegex(split[i]) + ')';
+            if (i < split.length - 1) {
+              result += '|';
+            }
+          }
+        } else {
+          if (str.indexOf('.') === 0) {
+            str = '*' + str;
+          }
+          result = '^' + str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\' + '-]', 'g'), '\\$&') + '$';
+          result = result.replace(/\\\*/g, '.*').replace(/\\\?/g, '.');
+        }
+        return result;
+      }
+      function translateScalars(str) {
+        if (angular.isString(str)) {
+          if (str.search(/kb/i) === str.length - 2) {
+            return parseFloat(str.substring(0, str.length - 2) * 1000);
+          } else if (str.search(/mb/i) === str.length - 2) {
+            return parseFloat(str.substring(0, str.length - 2) * 1000000);
+          } else if (str.search(/gb/i) === str.length - 2) {
+            return parseFloat(str.substring(0, str.length - 2) * 1000000000);
+          } else if (str.search(/b/i) === str.length - 1) {
+            return parseFloat(str.substring(0, str.length - 1));
+          } else if (str.search(/s/i) === str.length - 1) {
+            return parseFloat(str.substring(0, str.length - 1));
+          } else if (str.search(/m/i) === str.length - 1) {
+            return parseFloat(str.substring(0, str.length - 1) * 60);
+          } else if (str.search(/h/i) === str.length - 1) {
+            return parseFloat(str.substring(0, str.length - 1) * 3600);
+          }
+        }
+        return str;
+      }
+      upload.registerValidators = function(ngModel, elem, attr, scope) {
+        if (!ngModel)
+          return;
+        ngModel.$ngfValidations = [];
+        function setValidities(ngModel) {
+          angular.forEach(ngModel.$ngfValidations, function(validation) {
+            ngModel.$setValidity(validation.name, validation.valid);
+          });
+        }
+        ngModel.$formatters.push(function(val) {
+          if (upload.attrGetter('ngfValidateLater', attr, scope) || !ngModel.$$ngfValidated) {
+            upload.validate(val, ngModel, attr, scope, false, function() {
+              setValidities(ngModel);
+              ngModel.$$ngfValidated = false;
+            });
+            if (val && val.length === 0) {
+              val = null;
+            }
+            if (elem && (val == null || val.length === 0)) {
+              if (elem.val()) {
+                elem.val(null);
+              }
+            }
+          } else {
+            setValidities(ngModel);
+            ngModel.$$ngfValidated = false;
+          }
+          return val;
+        });
+      };
+      upload.validatePattern = function(file, val) {
+        if (!val) {
+          return true;
+        }
+        var regexp = new RegExp(globStringToRegex(val), 'gi');
+        return (file.type != null && regexp.test(file.type.toLowerCase())) || (file.name != null && regexp.test(file.name.toLowerCase()));
+      };
+      upload.validate = function(files, ngModel, attr, scope, later, callback) {
+        ngModel = ngModel || {};
+        ngModel.$ngfValidations = ngModel.$ngfValidations || [];
+        angular.forEach(ngModel.$ngfValidations, function(v) {
+          v.valid = true;
+        });
+        var attrGetter = function(name, params) {
+          return upload.attrGetter(name, attr, scope, params);
+        };
+        if (later) {
+          callback.call(ngModel);
+          return;
+        }
+        ngModel.$$ngfValidated = true;
+        if (files == null || files.length === 0) {
+          callback.call(ngModel);
+          return;
+        }
+        files = files.length === undefined ? [files] : files.slice(0);
+        function validateSync(name, validatorVal, fn) {
+          if (files) {
+            var dName = 'ngf' + name[0].toUpperCase() + name.substr(1);
+            var i = files.length,
+                valid = null;
+            while (i--) {
+              var file = files[i];
+              var val = attrGetter(dName, {'$file': file});
+              if (val == null) {
+                val = validatorVal(attrGetter('ngfValidate') || {});
+                valid = valid == null ? true : valid;
+              }
+              if (val != null) {
+                if (!fn(file, val)) {
+                  file.$error = name;
+                  file.$errorParam = val;
+                  files.splice(i, 1);
+                  valid = false;
+                }
+              }
+            }
+            if (valid !== null) {
+              ngModel.$ngfValidations.push({
+                name: name,
+                valid: valid
+              });
+            }
+          }
+        }
+        validateSync('pattern', function(cons) {
+          return cons.pattern;
+        }, upload.validatePattern);
+        validateSync('minSize', function(cons) {
+          return cons.size && cons.size.min;
+        }, function(file, val) {
+          return file.size >= translateScalars(val);
+        });
+        validateSync('maxSize', function(cons) {
+          return cons.size && cons.size.max;
+        }, function(file, val) {
+          return file.size <= translateScalars(val);
+        });
+        validateSync('validateFn', function() {
+          return null;
+        }, function(file, r) {
+          return r === true || r === null || r === '';
+        });
+        if (!files.length) {
+          callback.call(ngModel, ngModel.$ngfValidations);
+          return;
+        }
+        var pendings = 0;
+        function validateAsync(name, validatorVal, type, asyncFn, fn) {
+          if (files) {
+            var thisPendings = 0,
+                hasError = false,
+                dName = 'ngf' + name[0].toUpperCase() + name.substr(1);
+            files = files.length === undefined ? [files] : files;
+            angular.forEach(files, function(file) {
+              if (file.type.search(type) !== 0) {
+                return true;
+              }
+              var val = attrGetter(dName, {'$file': file}) || validatorVal(attrGetter('ngfValidate', {'$file': file}) || {});
+              if (val) {
+                pendings++;
+                thisPendings++;
+                asyncFn(file, val).then(function(d) {
+                  if (!fn(d, val)) {
+                    file.$error = name;
+                    file.$errorParam = val;
+                    hasError = true;
+                  }
+                }, function() {
+                  if (attrGetter('ngfValidateForce', {'$file': file})) {
+                    file.$error = name;
+                    file.$errorParam = val;
+                    hasError = true;
+                  }
+                })['finally'](function() {
+                  pendings--;
+                  thisPendings--;
+                  if (!thisPendings) {
+                    ngModel.$ngfValidations.push({
+                      name: name,
+                      valid: !hasError
+                    });
+                  }
+                  if (!pendings) {
+                    callback.call(ngModel, ngModel.$ngfValidations);
+                  }
+                });
+              }
+            });
+          }
+        }
+        validateAsync('maxHeight', function(cons) {
+          return cons.height && cons.height.max;
+        }, /image/, this.imageDimensions, function(d, val) {
+          return d.height <= val;
+        });
+        validateAsync('minHeight', function(cons) {
+          return cons.height && cons.height.min;
+        }, /image/, this.imageDimensions, function(d, val) {
+          return d.height >= val;
+        });
+        validateAsync('maxWidth', function(cons) {
+          return cons.width && cons.width.max;
+        }, /image/, this.imageDimensions, function(d, val) {
+          return d.width <= val;
+        });
+        validateAsync('minWidth', function(cons) {
+          return cons.width && cons.width.min;
+        }, /image/, this.imageDimensions, function(d, val) {
+          return d.width >= val;
+        });
+        validateAsync('ratio', function(cons) {
+          return cons.ratio;
+        }, /image/, this.imageDimensions, function(d, val) {
+          var split = val.toString().split(','),
+              valid = false;
+          for (var i = 0; i < split.length; i++) {
+            var r = split[i],
+                xIndex = r.search(/x/i);
+            if (xIndex > -1) {
+              r = parseFloat(r.substring(0, xIndex)) / parseFloat(r.substring(xIndex + 1));
+            } else {
+              r = parseFloat(r);
+            }
+            if (Math.abs((d.width / d.height) - r) < 0.0001) {
+              valid = true;
+            }
+          }
+          return valid;
+        });
+        validateAsync('maxDuration', function(cons) {
+          return cons.duration && cons.duration.max;
+        }, /audio|video/, this.mediaDuration, function(d, val) {
+          return d <= translateScalars(val);
+        });
+        validateAsync('minDuration', function(cons) {
+          return cons.duration && cons.duration.min;
+        }, /audio|video/, this.mediaDuration, function(d, val) {
+          return d >= translateScalars(val);
+        });
+        validateAsync('validateAsyncFn', function() {
+          return null;
+        }, /./, function(file, val) {
+          return val;
+        }, function(r) {
+          return r === true || r === null || r === '';
+        });
+        if (!pendings) {
+          callback.call(ngModel, ngModel.$ngfValidations);
+        }
+      };
+      upload.imageDimensions = function(file) {
+        if (file.width && file.height) {
+          var d = $q.defer();
+          $timeout(function() {
+            d.resolve({
+              width: file.width,
+              height: file.height
+            });
+          });
+          return d.promise;
+        }
+        if (file.$ngfDimensionPromise)
+          return file.$ngfDimensionPromise;
+        var deferred = $q.defer();
+        $timeout(function() {
+          if (file.type.indexOf('image') !== 0) {
+            deferred.reject('not image');
+            return;
+          }
+          upload.dataUrl(file).then(function(dataUrl) {
+            var img = angular.element('<img>').attr('src', dataUrl).css('visibility', 'hidden').css('position', 'fixed');
+            function success() {
+              var width = img[0].clientWidth;
+              var height = img[0].clientHeight;
+              img.remove();
+              file.width = width;
+              file.height = height;
+              deferred.resolve({
+                width: width,
+                height: height
+              });
+            }
+            function error() {
+              img.remove();
+              deferred.reject('load error');
+            }
+            img.on('load', success);
+            img.on('error', error);
+            var count = 0;
+            function checkLoadError() {
+              $timeout(function() {
+                if (img[0].parentNode) {
+                  if (img[0].clientWidth) {
+                    success();
+                  } else if (count > 10) {
+                    error();
+                  } else {
+                    checkLoadError();
+                  }
+                }
+              }, 1000);
+            }
+            checkLoadError();
+            angular.element(document.getElementsByTagName('body')[0]).append(img);
+          }, function() {
+            deferred.reject('load error');
+          });
+        });
+        file.$ngfDimensionPromise = deferred.promise;
+        file.$ngfDimensionPromise['finally'](function() {
+          delete file.$ngfDimensionPromise;
+        });
+        return file.$ngfDimensionPromise;
+      };
+      upload.mediaDuration = function(file) {
+        if (file.duration) {
+          var d = $q.defer();
+          $timeout(function() {
+            d.resolve(file.duration);
+          });
+          return d.promise;
+        }
+        if (file.$ngfDurationPromise)
+          return file.$ngfDurationPromise;
+        var deferred = $q.defer();
+        $timeout(function() {
+          if (file.type.indexOf('audio') !== 0 && file.type.indexOf('video') !== 0) {
+            deferred.reject('not media');
+            return;
+          }
+          upload.dataUrl(file).then(function(dataUrl) {
+            var el = angular.element(file.type.indexOf('audio') === 0 ? '<audio>' : '<video>').attr('src', dataUrl).css('visibility', 'none').css('position', 'fixed');
+            function success() {
+              var duration = el[0].duration;
+              file.duration = duration;
+              el.remove();
+              deferred.resolve(duration);
+            }
+            function error() {
+              el.remove();
+              deferred.reject('load error');
+            }
+            el.on('loadedmetadata', success);
+            el.on('error', error);
+            var count = 0;
+            function checkLoadError() {
+              $timeout(function() {
+                if (el[0].parentNode) {
+                  if (el[0].duration) {
+                    success();
+                  } else if (count > 10) {
+                    error();
+                  } else {
+                    checkLoadError();
+                  }
+                }
+              }, 1000);
+            }
+            checkLoadError();
+            angular.element(document.body).append(el);
+          }, function() {
+            deferred.reject('load error');
+          });
+        });
+        file.$ngfDurationPromise = deferred.promise;
+        file.$ngfDurationPromise['finally'](function() {
+          delete file.$ngfDurationPromise;
+        });
+        return file.$ngfDurationPromise;
+      };
+      return upload;
+    }]);
+    ngFileUpload.service('UploadResize', ['UploadValidate', '$q', '$timeout', function(UploadValidate, $q, $timeout) {
+      var upload = UploadValidate;
+      var calculateAspectRatioFit = function(srcWidth, srcHeight, maxWidth, maxHeight) {
+        var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+        return {
+          width: srcWidth * ratio,
+          height: srcHeight * ratio
+        };
+      };
+      var resize = function(imagen, width, height, quality, type) {
+        var deferred = $q.defer();
+        var canvasElement = document.createElement('canvas');
+        var imagenElement = document.createElement('img');
+        imagenElement.onload = function() {
+          try {
+            var dimensions = calculateAspectRatioFit(imagenElement.width, imagenElement.height, width, height);
+            canvasElement.width = dimensions.width;
+            canvasElement.height = dimensions.height;
+            var context = canvasElement.getContext('2d');
+            context.drawImage(imagenElement, 0, 0, dimensions.width, dimensions.height);
+            deferred.resolve(canvasElement.toDataURL(type || 'image/WebP', quality || 1.0));
+          } catch (e) {
+            deferred.reject(e);
+          }
+        };
+        imagenElement.onerror = function() {
+          deferred.reject();
+        };
+        imagenElement.src = imagen;
+        return deferred.promise;
+      };
+      var dataURLtoBlob = function(dataurl) {
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type: mime});
+      };
+      upload.resize = function(file, width, height, quality) {
+        var deferred = $q.defer();
+        if (file.type.indexOf('image') !== 0) {
+          $timeout(function() {
+            deferred.resolve('Only images are allowed for resizing!');
+          });
+          return deferred.promise;
+        }
+        upload.dataUrl(file, true).then(function(url) {
+          resize(url, width, height, quality, file.type).then(function(dataUrl) {
+            var blob = dataURLtoBlob(dataUrl);
+            blob.name = file.name;
+            deferred.resolve(blob);
+          }, function() {
+            deferred.reject();
+          });
+        }, function() {
+          deferred.reject();
+        });
+        return deferred.promise;
+      };
+      return upload;
+    }]);
+    (function() {
+      ngFileUpload.directive('ngfDrop', ['$parse', '$timeout', '$location', 'Upload', function($parse, $timeout, $location, Upload) {
+        return {
+          restrict: 'AEC',
+          require: '?ngModel',
+          link: function(scope, elem, attr, ngModel) {
+            linkDrop(scope, elem, attr, ngModel, $parse, $timeout, $location, Upload);
+          }
+        };
+      }]);
+      ngFileUpload.directive('ngfNoFileDrop', function() {
+        return function(scope, elem) {
+          if (dropAvailable())
+            elem.css('display', 'none');
+        };
+      });
+      ngFileUpload.directive('ngfDropAvailable', ['$parse', '$timeout', 'Upload', function($parse, $timeout, Upload) {
+        return function(scope, elem, attr) {
+          if (dropAvailable()) {
+            var model = $parse(Upload.attrGetter('ngfDropAvailable', attr));
+            $timeout(function() {
+              model(scope);
+              if (model.assign) {
+                model.assign(scope, true);
+              }
+            });
+          }
+        };
+      }]);
+      function linkDrop(scope, elem, attr, ngModel, $parse, $timeout, $location, upload) {
+        var available = dropAvailable();
+        var attrGetter = function(name, scope, params) {
+          return upload.attrGetter(name, attr, scope, params);
+        };
+        if (attrGetter('dropAvailable')) {
+          $timeout(function() {
+            if (scope[attrGetter('dropAvailable')]) {
+              scope[attrGetter('dropAvailable')].value = available;
+            } else {
+              scope[attrGetter('dropAvailable')] = available;
+            }
+          });
+        }
+        if (!available) {
+          if (attrGetter('ngfHideOnDropNotAvailable', scope) === true) {
+            elem.css('display', 'none');
+          }
+          return;
+        }
+        function isDisabled() {
+          return elem.attr('disabled') || attrGetter('ngfDropDisabled', scope);
+        }
+        upload.registerValidators(ngModel, null, attr, scope);
+        var leaveTimeout = null;
+        var stopPropagation = $parse(attrGetter('ngfStopPropagation'));
+        var dragOverDelay = 1;
+        var actualDragOverClass;
+        elem[0].addEventListener('dragover', function(evt) {
+          if (isDisabled())
+            return;
+          evt.preventDefault();
+          if (stopPropagation(scope))
+            evt.stopPropagation();
+          if (navigator.userAgent.indexOf('Chrome') > -1) {
+            var b = evt.dataTransfer.effectAllowed;
+            evt.dataTransfer.dropEffect = ('move' === b || 'linkMove' === b) ? 'move' : 'copy';
+          }
+          $timeout.cancel(leaveTimeout);
+          if (!actualDragOverClass) {
+            actualDragOverClass = 'C';
+            calculateDragOverClass(scope, attr, evt, function(clazz) {
+              actualDragOverClass = clazz;
+              elem.addClass(actualDragOverClass);
+            });
+          }
+        }, false);
+        elem[0].addEventListener('dragenter', function(evt) {
+          if (isDisabled())
+            return;
+          evt.preventDefault();
+          if (stopPropagation(scope))
+            evt.stopPropagation();
+        }, false);
+        elem[0].addEventListener('dragleave', function() {
+          if (isDisabled())
+            return;
+          leaveTimeout = $timeout(function() {
+            elem.removeClass(actualDragOverClass);
+            actualDragOverClass = null;
+          }, dragOverDelay || 1);
+        }, false);
+        elem[0].addEventListener('drop', function(evt) {
+          if (isDisabled())
+            return;
+          evt.preventDefault();
+          if (stopPropagation(scope))
+            evt.stopPropagation();
+          elem.removeClass(actualDragOverClass);
+          actualDragOverClass = null;
+          extractFiles(evt, function(files) {
+            upload.updateModel(ngModel, attr, scope, attrGetter('ngfChange') || attrGetter('ngfDrop'), files, evt);
+          }, attrGetter('ngfAllowDir', scope) !== false, attrGetter('multiple') || attrGetter('ngfMultiple', scope));
+        }, false);
+        elem[0].addEventListener('paste', function(evt) {
+          if (isDisabled())
+            return;
+          var files = [];
+          var clipboard = evt.clipboardData || evt.originalEvent.clipboardData;
+          if (clipboard && clipboard.items) {
+            for (var k = 0; k < clipboard.items.length; k++) {
+              if (clipboard.items[k].type.indexOf('image') !== -1) {
+                files.push(clipboard.items[k].getAsFile());
+              }
+            }
+            upload.updateModel(ngModel, attr, scope, attrGetter('ngfChange') || attrGetter('ngfDrop'), files, evt);
+          }
+        }, false);
+        function calculateDragOverClass(scope, attr, evt, callback) {
+          var clazz = attrGetter('ngfDragOverClass', scope, {$event: evt}),
+              dClass = attrGetter('ngfDragOverClass') || 'dragover';
+          if (angular.isString(clazz)) {
+            callback(clazz);
+            return;
+          }
+          if (clazz) {
+            if (clazz.delay)
+              dragOverDelay = clazz.delay;
+            if (clazz.accept || clazz.reject) {
+              var items = evt.dataTransfer.items;
+              if (items != null) {
+                var pattern = attrGetter('ngfPattern', scope, {$event: evt});
+                for (var i = 0; i < items.length; i++) {
+                  if (items[i].kind === 'file' || items[i].kind === '') {
+                    if (!upload.validatePattern(items[i], pattern)) {
+                      dClass = clazz.reject;
+                      break;
+                    } else {
+                      dClass = clazz.accept;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          callback(dClass);
+        }
+        function extractFiles(evt, callback, allowDir, multiple) {
+          var files = [],
+              processing = 0;
+          function traverseFileTree(files, entry, path) {
+            if (entry != null) {
+              if (entry.isDirectory) {
+                var filePath = (path || '') + entry.name;
+                files.push({
+                  name: entry.name,
+                  type: 'directory',
+                  path: filePath
+                });
+                var dirReader = entry.createReader();
+                var entries = [];
+                processing++;
+                var readEntries = function() {
+                  dirReader.readEntries(function(results) {
+                    try {
+                      if (!results.length) {
+                        for (var i = 0; i < entries.length; i++) {
+                          traverseFileTree(files, entries[i], (path ? path : '') + entry.name + '/');
+                        }
+                        processing--;
+                      } else {
+                        entries = entries.concat(Array.prototype.slice.call(results || [], 0));
+                        readEntries();
+                      }
+                    } catch (e) {
+                      processing--;
+                      console.error(e);
+                    }
+                  }, function() {
+                    processing--;
+                  });
+                };
+                readEntries();
+              } else {
+                processing++;
+                entry.file(function(file) {
+                  try {
+                    processing--;
+                    file.path = (path ? path : '') + file.name;
+                    files.push(file);
+                  } catch (e) {
+                    processing--;
+                    console.error(e);
+                  }
+                }, function() {
+                  processing--;
+                });
+              }
+            }
+          }
+          var items = evt.dataTransfer.items;
+          if (items && items.length > 0 && $location.protocol() !== 'file') {
+            for (var i = 0; i < items.length; i++) {
+              if (items[i].webkitGetAsEntry && items[i].webkitGetAsEntry() && items[i].webkitGetAsEntry().isDirectory) {
+                var entry = items[i].webkitGetAsEntry();
+                if (entry.isDirectory && !allowDir) {
+                  continue;
+                }
+                if (entry != null) {
+                  traverseFileTree(files, entry);
+                }
+              } else {
+                var f = items[i].getAsFile();
+                if (f != null)
+                  files.push(f);
+              }
+              if (!multiple && files.length > 0)
+                break;
+            }
+          } else {
+            var fileList = evt.dataTransfer.files;
+            if (fileList != null) {
+              for (var j = 0; j < fileList.length; j++) {
+                files.push(fileList.item(j));
+                if (!multiple && files.length > 0) {
+                  break;
+                }
+              }
+            }
+          }
+          var delays = 0;
+          (function waitForProcess(delay) {
+            $timeout(function() {
+              if (!processing) {
+                if (!multiple && files.length > 1) {
+                  i = 0;
+                  while (files[i].type === 'directory')
+                    i++;
+                  files = [files[i]];
+                }
+                callback(files);
+              } else {
+                if (delays++ * 10 < 20 * 1000) {
+                  waitForProcess(10);
+                }
+              }
+            }, delay || 0);
+          })();
+        }
+      }
+      function dropAvailable() {
+        var div = document.createElement('div');
+        return ('draggable' in div) && ('ondrop' in div) && !/Edge\/12./i.test(navigator.userAgent);
+      }
+    })();
+    this["ngFileUpload"] = ngFileUpload;
+  })();
+  return _retrieveGlobal();
+});
+
+$__System.registerDynamic("1e", ["22"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("22"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1f", ["23"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("23"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1c", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -31908,7 +31908,7 @@ $__System.registerDynamic("20", [], true, function(require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("1d", ["24"], true, function(require, exports, module) {
+$__System.registerDynamic("20", ["24"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -31921,46 +31921,22 @@ $__System.registerDynamic("1d", ["24"], true, function(require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("21", ["25", "26", "27"], true, function(require, exports, module) {
+$__System.registerDynamic("21", ["25"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  require("25");
-  require("26");
-  module.exports = require("27");
+  module.exports = require("25");
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("22", ["25", "26", "28"], true, function(require, exports, module) {
+$__System.registerDynamic("22", ["26"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  require("25");
-  require("26");
-  module.exports = require("28");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("23", ["29"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("29");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("24", ["2a"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = require("2a");
+  var $ = require("26");
   module.exports = function defineProperty(it, key, desc) {
     return $.setDesc(it, key, desc);
   };
@@ -31968,43 +31944,82 @@ $__System.registerDynamic("24", ["2a"], true, function(require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("25", ["2b", "2c"], true, function(require, exports, module) {
+$__System.registerDynamic("24", ["27", "28", "29"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  require("2b");
-  var Iterators = require("2c");
-  Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
+  require("27");
+  require("28");
+  module.exports = require("29");
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("27", ["2d", "2e", "2f"], true, function(require, exports, module) {
+$__System.registerDynamic("23", ["27", "28", "2a"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var anObject = require("2d"),
-      get = require("2e");
-  module.exports = require("2f").getIterator = function(it) {
-    var iterFn = get(it);
-    if (typeof iterFn != 'function')
-      throw TypeError(it + ' is not iterable!');
-    return anObject(iterFn.call(it));
+  require("27");
+  require("28");
+  module.exports = require("2a");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("25", ["2b"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__System._nodeRequire ? process : require("2b");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("26", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $Object = Object;
+  module.exports = {
+    create: $Object.create,
+    getProto: $Object.getPrototypeOf,
+    isEnum: {}.propertyIsEnumerable,
+    getDesc: $Object.getOwnPropertyDescriptor,
+    setDesc: $Object.defineProperty,
+    setDescs: $Object.defineProperties,
+    getKeys: $Object.keys,
+    getNames: $Object.getOwnPropertyNames,
+    getSymbols: $Object.getOwnPropertySymbols,
+    each: [].forEach
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("26", ["30", "31"], true, function(require, exports, module) {
+$__System.registerDynamic("27", ["2c", "2d"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  require("2c");
+  var Iterators = require("2d");
+  Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("28", ["2e", "2f"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $at = require("30")(true);
-  require("31")(String, 'String', function(iterated) {
+  var $at = require("2e")(true);
+  require("2f")(String, 'String', function(iterated) {
     this._t = String(iterated);
     this._i = 0;
   }, function() {
@@ -32027,15 +32042,15 @@ $__System.registerDynamic("26", ["30", "31"], true, function(require, exports, m
   return module.exports;
 });
 
-$__System.registerDynamic("28", ["32", "33", "2c", "2f"], true, function(require, exports, module) {
+$__System.registerDynamic("29", ["30", "31", "2d", "32"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var classof = require("32"),
-      ITERATOR = require("33")('iterator'),
-      Iterators = require("2c");
-  module.exports = require("2f").isIterable = function(it) {
+  var classof = require("30"),
+      ITERATOR = require("31")('iterator'),
+      Iterators = require("2d");
+  module.exports = require("32").isIterable = function(it) {
     var O = Object(it);
     return ITERATOR in O || '@@iterator' in O || Iterators.hasOwnProperty(classof(O));
   };
@@ -32043,49 +32058,44 @@ $__System.registerDynamic("28", ["32", "33", "2c", "2f"], true, function(require
   return module.exports;
 });
 
-$__System.registerDynamic("29", ["34"], true, function(require, exports, module) {
+$__System.registerDynamic("2a", ["33", "34", "32"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__System._nodeRequire ? process : require("34");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2a", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $Object = Object;
-  module.exports = {
-    create: $Object.create,
-    getProto: $Object.getPrototypeOf,
-    isEnum: {}.propertyIsEnumerable,
-    getDesc: $Object.getOwnPropertyDescriptor,
-    setDesc: $Object.defineProperty,
-    setDescs: $Object.defineProperties,
-    getKeys: $Object.keys,
-    getNames: $Object.getOwnPropertyNames,
-    getSymbols: $Object.getOwnPropertySymbols,
-    each: [].forEach
+  var anObject = require("33"),
+      get = require("34");
+  module.exports = require("32").getIterator = function(it) {
+    var iterFn = get(it);
+    if (typeof iterFn != 'function')
+      throw TypeError(it + ' is not iterable!');
+    return anObject(iterFn.call(it));
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2b", ["35", "36", "2c", "37", "31"], true, function(require, exports, module) {
+$__System.registerDynamic("2b", ["35"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("35");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2c", ["36", "37", "2d", "38", "2f"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var setUnscope = require("35"),
-      step = require("36"),
-      Iterators = require("2c"),
-      toIObject = require("37");
-  require("31")(Array, 'Array', function(iterated, kind) {
+  var setUnscope = require("36"),
+      step = require("37"),
+      Iterators = require("2d"),
+      toIObject = require("38");
+  require("2f")(Array, 'Array', function(iterated, kind) {
     this._t = toIObject(iterated);
     this._i = 0;
     this._k = kind;
@@ -32111,7 +32121,7 @@ $__System.registerDynamic("2b", ["35", "36", "2c", "37", "31"], true, function(r
   return module.exports;
 });
 
-$__System.registerDynamic("2c", [], true, function(require, exports, module) {
+$__System.registerDynamic("2d", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -32121,50 +32131,7 @@ $__System.registerDynamic("2c", [], true, function(require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("2d", ["38"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var isObject = require("38");
-  module.exports = function(it) {
-    if (!isObject(it))
-      throw TypeError(it + ' is not an object!');
-    return it;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2e", ["32", "33", "2c", "2f"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var classof = require("32"),
-      ITERATOR = require("33")('iterator'),
-      Iterators = require("2c");
-  module.exports = require("2f").getIteratorMethod = function(it) {
-    if (it != undefined)
-      return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2f", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var core = module.exports = {};
-  if (typeof __e == 'number')
-    __e = core;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("30", ["39", "3a"], true, function(require, exports, module) {
+$__System.registerDynamic("2e", ["39", "3a"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -32188,7 +32155,7 @@ $__System.registerDynamic("30", ["39", "3a"], true, function(require, exports, m
   return module.exports;
 });
 
-$__System.registerDynamic("31", ["3b", "3c", "3d", "3e", "3f", "33", "2c", "40", "2a", "41"], true, function(require, exports, module) {
+$__System.registerDynamic("2f", ["3b", "3c", "3d", "3e", "3f", "31", "2d", "40", "26", "41"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -32199,8 +32166,8 @@ $__System.registerDynamic("31", ["3b", "3c", "3d", "3e", "3f", "33", "2c", "40",
       $redef = require("3d"),
       hide = require("3e"),
       has = require("3f"),
-      SYMBOL_ITERATOR = require("33")('iterator'),
-      Iterators = require("2c"),
+      SYMBOL_ITERATOR = require("31")('iterator'),
+      Iterators = require("2d"),
       BUGGY = !([].keys && 'next' in [].keys()),
       FF_ITERATOR = '@@iterator',
       KEYS = 'keys',
@@ -32232,7 +32199,7 @@ $__System.registerDynamic("31", ["3b", "3c", "3d", "3e", "3f", "33", "2c", "40",
         methods,
         key;
     if (_native) {
-      var IteratorPrototype = require("2a").getProto(_default.call(new Base));
+      var IteratorPrototype = require("26").getProto(_default.call(new Base));
       require("41")(IteratorPrototype, TAG, true);
       if (!LIBRARY && has(proto, FF_ITERATOR))
         hide(IteratorPrototype, SYMBOL_ITERATOR, returnThis);
@@ -32260,27 +32227,13 @@ $__System.registerDynamic("31", ["3b", "3c", "3d", "3e", "3f", "33", "2c", "40",
   return module.exports;
 });
 
-$__System.registerDynamic("33", ["42", "43", "44"], true, function(require, exports, module) {
+$__System.registerDynamic("30", ["42", "31"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var store = require("42")('wks'),
-      Symbol = require("43").Symbol;
-  module.exports = function(name) {
-    return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || require("44"))('Symbol.' + name));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("32", ["45", "33"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var cof = require("45"),
-      TAG = require("33")('toStringTag'),
+  var cof = require("42"),
+      TAG = require("31")('toStringTag'),
       ARG = cof(function() {
         return arguments;
       }()) == 'Arguments';
@@ -32294,294 +32247,64 @@ $__System.registerDynamic("32", ["45", "33"], true, function(require, exports, m
   return module.exports;
 });
 
-$__System.registerDynamic("34", ["46"], true, function(require, exports, module) {
+$__System.registerDynamic("31", ["43", "44", "45"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = require("46");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("35", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function() {};
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("37", ["47", "3a"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var IObject = require("47"),
-      defined = require("3a");
-  module.exports = function(it) {
-    return IObject(defined(it));
+  var store = require("43")('wks'),
+      Symbol = require("44").Symbol;
+  module.exports = function(name) {
+    return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || require("45"))('Symbol.' + name));
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("36", [], true, function(require, exports, module) {
+$__System.registerDynamic("32", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = function(done, value) {
-    return {
-      value: value,
-      done: !!done
-    };
-  };
+  var core = module.exports = {};
+  if (typeof __e == 'number')
+    __e = core;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("38", [], true, function(require, exports, module) {
+$__System.registerDynamic("33", ["46"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  var isObject = require("46");
   module.exports = function(it) {
-    return it !== null && (typeof it == 'object' || typeof it == 'function');
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("39", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ceil = Math.ceil,
-      floor = Math.floor;
-  module.exports = function(it) {
-    return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3a", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(it) {
-    if (it == undefined)
-      throw TypeError("Can't call method on  " + it);
+    if (!isObject(it))
+      throw TypeError(it + ' is not an object!');
     return it;
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("3c", ["43", "2f"], true, function(require, exports, module) {
+$__System.registerDynamic("34", ["30", "31", "2d", "32"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var global = require("43"),
-      core = require("2f"),
-      PROTOTYPE = 'prototype';
-  var ctx = function(fn, that) {
-    return function() {
-      return fn.apply(that, arguments);
-    };
-  };
-  var $def = function(type, name, source) {
-    var key,
-        own,
-        out,
-        exp,
-        isGlobal = type & $def.G,
-        isProto = type & $def.P,
-        target = isGlobal ? global : type & $def.S ? global[name] : (global[name] || {})[PROTOTYPE],
-        exports = isGlobal ? core : core[name] || (core[name] = {});
-    if (isGlobal)
-      source = name;
-    for (key in source) {
-      own = !(type & $def.F) && target && key in target;
-      if (own && key in exports)
-        continue;
-      out = own ? target[key] : source[key];
-      if (isGlobal && typeof target[key] != 'function')
-        exp = source[key];
-      else if (type & $def.B && own)
-        exp = ctx(out, global);
-      else if (type & $def.W && target[key] == out)
-        !function(C) {
-          exp = function(param) {
-            return this instanceof C ? new C(param) : C(param);
-          };
-          exp[PROTOTYPE] = C[PROTOTYPE];
-        }(out);
-      else
-        exp = isProto && typeof out == 'function' ? ctx(Function.call, out) : out;
-      exports[key] = exp;
-      if (isProto)
-        (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
-    }
-  };
-  $def.F = 1;
-  $def.G = 2;
-  $def.S = 4;
-  $def.P = 8;
-  $def.B = 16;
-  $def.W = 32;
-  module.exports = $def;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3b", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3e", ["2a", "48", "49"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = require("2a"),
-      createDesc = require("48");
-  module.exports = require("49") ? function(object, key, value) {
-    return $.setDesc(object, key, createDesc(1, value));
-  } : function(object, key, value) {
-    object[key] = value;
-    return object;
+  var classof = require("30"),
+      ITERATOR = require("31")('iterator'),
+      Iterators = require("2d");
+  module.exports = require("32").getIteratorMethod = function(it) {
+    if (it != undefined)
+      return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("3d", ["3e"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("3e");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3f", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var hasOwnProperty = {}.hasOwnProperty;
-  module.exports = function(it, key) {
-    return hasOwnProperty.call(it, key);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("40", ["2a", "3e", "33", "48", "41"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var $ = require("2a"),
-      IteratorPrototype = {};
-  require("3e")(IteratorPrototype, require("33")('iterator'), function() {
-    return this;
-  });
-  module.exports = function(Constructor, NAME, next) {
-    Constructor.prototype = $.create(IteratorPrototype, {next: require("48")(1, next)});
-    require("41")(Constructor, NAME + ' Iterator');
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("41", ["3f", "3e", "33"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var has = require("3f"),
-      hide = require("3e"),
-      TAG = require("33")('toStringTag');
-  module.exports = function(it, tag, stat) {
-    if (it && !has(it = stat ? it : it.prototype, TAG))
-      hide(it, TAG, tag);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("44", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var id = 0,
-      px = Math.random();
-  module.exports = function(key) {
-    return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("42", ["43"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var global = require("43"),
-      SHARED = '__core-js_shared__',
-      store = global[SHARED] || (global[SHARED] = {});
-  module.exports = function(key) {
-    return store[key] || (store[key] = {});
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("43", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var UNDEFINED = 'undefined';
-  var global = module.exports = typeof window != UNDEFINED && window.Math == Math ? window : typeof self != UNDEFINED && self.Math == Math ? self : Function('return this')();
-  if (typeof __g == 'number')
-    __g = global;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("45", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toString = {}.toString;
-  module.exports = function(it) {
-    return toString.call(it).slice(8, -1);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("46", [], true, function(require, exports, module) {
+$__System.registerDynamic("35", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -32643,29 +32366,292 @@ $__System.registerDynamic("46", [], true, function(require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("47", ["45"], true, function(require, exports, module) {
+$__System.registerDynamic("36", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var cof = require("45");
-  module.exports = 0 in Object('z') ? Object : function(it) {
-    return cof(it) == 'String' ? it.split('') : Object(it);
+  module.exports = function() {};
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("38", ["47", "3a"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var IObject = require("47"),
+      defined = require("3a");
+  module.exports = function(it) {
+    return IObject(defined(it));
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("49", ["4a"], true, function(require, exports, module) {
+$__System.registerDynamic("37", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = !require("4a")(function() {
-    return Object.defineProperty({}, 'a', {get: function() {
-        return 7;
-      }}).a != 7;
+  module.exports = function(done, value) {
+    return {
+      value: value,
+      done: !!done
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("39", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ceil = Math.ceil,
+      floor = Math.floor;
+  module.exports = function(it) {
+    return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3a", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(it) {
+    if (it == undefined)
+      throw TypeError("Can't call method on  " + it);
+    return it;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3b", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = true;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3d", ["3e"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("3e");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3c", ["44", "32"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var global = require("44"),
+      core = require("32"),
+      PROTOTYPE = 'prototype';
+  var ctx = function(fn, that) {
+    return function() {
+      return fn.apply(that, arguments);
+    };
+  };
+  var $def = function(type, name, source) {
+    var key,
+        own,
+        out,
+        exp,
+        isGlobal = type & $def.G,
+        isProto = type & $def.P,
+        target = isGlobal ? global : type & $def.S ? global[name] : (global[name] || {})[PROTOTYPE],
+        exports = isGlobal ? core : core[name] || (core[name] = {});
+    if (isGlobal)
+      source = name;
+    for (key in source) {
+      own = !(type & $def.F) && target && key in target;
+      if (own && key in exports)
+        continue;
+      out = own ? target[key] : source[key];
+      if (isGlobal && typeof target[key] != 'function')
+        exp = source[key];
+      else if (type & $def.B && own)
+        exp = ctx(out, global);
+      else if (type & $def.W && target[key] == out)
+        !function(C) {
+          exp = function(param) {
+            return this instanceof C ? new C(param) : C(param);
+          };
+          exp[PROTOTYPE] = C[PROTOTYPE];
+        }(out);
+      else
+        exp = isProto && typeof out == 'function' ? ctx(Function.call, out) : out;
+      exports[key] = exp;
+      if (isProto)
+        (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
+    }
+  };
+  $def.F = 1;
+  $def.G = 2;
+  $def.S = 4;
+  $def.P = 8;
+  $def.B = 16;
+  $def.W = 32;
+  module.exports = $def;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3e", ["26", "48", "49"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("26"),
+      createDesc = require("48");
+  module.exports = require("49") ? function(object, key, value) {
+    return $.setDesc(object, key, createDesc(1, value));
+  } : function(object, key, value) {
+    object[key] = value;
+    return object;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3f", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var hasOwnProperty = {}.hasOwnProperty;
+  module.exports = function(it, key) {
+    return hasOwnProperty.call(it, key);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("40", ["26", "3e", "31", "48", "41"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $ = require("26"),
+      IteratorPrototype = {};
+  require("3e")(IteratorPrototype, require("31")('iterator'), function() {
+    return this;
   });
+  module.exports = function(Constructor, NAME, next) {
+    Constructor.prototype = $.create(IteratorPrototype, {next: require("48")(1, next)});
+    require("41")(Constructor, NAME + ' Iterator');
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("41", ["3f", "3e", "31"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var has = require("3f"),
+      hide = require("3e"),
+      TAG = require("31")('toStringTag');
+  module.exports = function(it, tag, stat) {
+    if (it && !has(it = stat ? it : it.prototype, TAG))
+      hide(it, TAG, tag);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("42", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var toString = {}.toString;
+  module.exports = function(it) {
+    return toString.call(it).slice(8, -1);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("43", ["44"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var global = require("44"),
+      SHARED = '__core-js_shared__',
+      store = global[SHARED] || (global[SHARED] = {});
+  module.exports = function(key) {
+    return store[key] || (store[key] = {});
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("44", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var UNDEFINED = 'undefined';
+  var global = module.exports = typeof window != UNDEFINED && window.Math == Math ? window : typeof self != UNDEFINED && self.Math == Math ? self : Function('return this')();
+  if (typeof __g == 'number')
+    __g = global;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("45", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var id = 0,
+      px = Math.random();
+  module.exports = function(key) {
+    return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("46", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(it) {
+    return it !== null && (typeof it == 'object' || typeof it == 'function');
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("47", ["42"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var cof = require("42");
+  module.exports = 0 in Object('z') ? Object : function(it) {
+    return cof(it) == 'String' ? it.split('') : Object(it);
+  };
   global.define = __define;
   return module.exports;
 });
@@ -32683,6 +32669,20 @@ $__System.registerDynamic("48", [], true, function(require, exports, module) {
       value: value
     };
   };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("49", ["4a"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = !require("4a")(function() {
+    return Object.defineProperty({}, 'a', {get: function() {
+        return 7;
+      }}).a != 7;
+  });
   global.define = __define;
   return module.exports;
 });
@@ -32757,126 +32757,18 @@ $__System.register('0', ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 
         }
     };
 });
-$__System.register('7', ['16', '17', '18'], function (_export) {
-    var _, _createClass, _classCallCheck, MainService;
-
-    return {
-        setters: [function (_4) {
-            _ = _4['default'];
-        }, function (_2) {
-            _createClass = _2['default'];
-        }, function (_3) {
-            _classCallCheck = _3['default'];
-        }],
-        execute: function () {
-            'use strict';
-
-            MainService = (function () {
-                function MainService($http) {
-                    _classCallCheck(this, MainService);
-
-                    this.$http = $http;
-
-                    this.debug = !!location.host.match('localhost');
-                    // total number of points in uploaded file; used to limit number of markers shown
-                    this.trackpointCount = 0;
-                    // this will be the full data; EditorCtrl just works with the laps
-                    this.data = {};
-                }
-
-                _createClass(MainService, [{
-                    key: 'getDummyData',
-                    value: function getDummyData() {
-                        var _this = this;
-
-                        this.fname = 'dummy.tcx';
-                        return this.$http.get('/tcx/test').then(function (res) {
-                            return _this.setTcxData(res.data);
-                        });
-                    }
-                }, {
-                    key: 'getFeedback',
-                    value: function getFeedback() {
-                        return this.$http.get('/comments');
-                    }
-                }, {
-                    key: 'saveData',
-                    value: function saveData(fname) {
-                        return this.$http.post('/tcx/fromjson/' + this.fname, this.data);
-                    }
-                }, {
-                    key: 'setTcxData',
-                    value: function setTcxData(data) {
-                        var _this2 = this;
-
-                        var laps = data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
-
-                        var newLaps = _.map(laps, function (lap, idx) {
-                            var lapPoints = lap.Track[0].Trackpoint;
-
-                            // we only want points that has a Position element
-                            var newLapPoints = _.filter(lapPoints, function (elem) {
-                                return elem.Position;
-                            });
-
-                            _this2.trackpointCount += newLapPoints.length;
-
-                            if (lapPoints.length > newLapPoints.length) {
-                                console.log("Lap %s had %s positionless elements in, which have been removed", idx, lapPoints.length - newLapPoints.length);
-                            }
-                            // replace in lap
-                            lap.Track[0].Trackpoint = newLapPoints;
-                            return lap;
-                        });
-                        this.data = data;
-                        this.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap = newLaps;
-                    }
-                }]);
-
-                return MainService;
-            })();
-
-            _export('default', MainService);
-
-            // removeNullEntries(data) {
-            //     var laps;
-            //     laps = data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
-            //
-            //     // foreach????
-            //     _.map(laps, (lap, idx) => {
-            //         var lapPoints = lap.Track[0].Trackpoint;
-            //
-            //         this.trackpointCount += lapPoints.length;
-            //
-            //         // we only want points that has a Position element
-            //         var newLapPoints = _.filter(lapPoints, elem => elem.Position);
-            //
-            //         if (lapPoints.length > newLapPoints.length) {
-            //             console.log("Lap %s had %s positionless elements in, which have been removed", idx, lapPoints.length - newLapPoints.length);
-            //         }
-            //         // replace in main structure
-            //         lap.Track[0].Trackpoint = newLapPoints;
-            //         return lap.Track[0].Trackpoint;
-            //         // return lap?
-            //     });
-            //     // THIS IS WRONG
-            //     return data;
-            // };
-        }
-    };
-});
 $__System.register('8', ['16', '17', '18', '19', '1a'], function (_export) {
-    var _, _createClass, _classCallCheck, Immutable, _slicedToArray, getTimeChange, getMovingTime, totalDist, updateSelected, getLastDistFromLap, initialiseSelected, EditorCtrl;
+    var _, Immutable, _createClass, _classCallCheck, _slicedToArray, getTimeChange, getMovingTime, totalDist, updateSelected, getLastDistFromLap, initialiseSelected, EditorCtrl;
 
     return {
         setters: [function (_4) {
             _ = _4['default'];
-        }, function (_2) {
-            _createClass = _2['default'];
-        }, function (_3) {
-            _classCallCheck = _3['default'];
         }, function (_5) {
             Immutable = _5['default'];
+        }, function (_2) {
+            _createClass = _2['default'];
+        }, function (_3) {
+            _classCallCheck = _3['default'];
         }, function (_a) {
             _slicedToArray = _a['default'];
         }],
@@ -32982,7 +32874,7 @@ $__System.register('8', ['16', '17', '18', '19', '1a'], function (_export) {
 
                     this.lastChanged = [0, 0];
 
-                    this.deleteMsg = "Delete checked points";
+                    this.deleteMsg = "Delete selected points";
 
                     if (Main.debug && _.isEmpty(Main.data)) {
                         Main.getDummyData().then(function () {
@@ -33019,6 +32911,8 @@ $__System.register('8', ['16', '17', '18', '19', '1a'], function (_export) {
                     key: 'processData',
                     value: function processData() {
                         this.data = this.Main.data.TrainingCenterDatabase.Activities[0].Activity[0];
+                        // send this to store as analytics
+                        console.log(this.data.Lap[0].Track[0].Trackpoint[0].Position[0]);
                         this.createSummaryInfo();
                         this.selected = initialiseSelected(this.data.Lap.length);
                     }
@@ -33168,146 +33062,7 @@ $__System.register('8', ['16', '17', '18', '19', '1a'], function (_export) {
         }
     };
 });
-$__System.register('a', ['16', '17', '18'], function (_export) {
-    var _, _createClass, _classCallCheck, MapCtrl;
-
-    return {
-        setters: [function (_4) {
-            _ = _4['default'];
-        }, function (_2) {
-            _createClass = _2['default'];
-        }, function (_3) {
-            _classCallCheck = _3['default'];
-        }],
-        execute: function () {
-            'use strict';
-
-            MapCtrl = (function () {
-                function MapCtrl(Main, $scope, $rootScope) {
-                    var _this = this;
-
-                    _classCallCheck(this, MapCtrl);
-
-                    this.Main = Main;
-                    this.dots = [];
-                    this.map = {};
-                    // this.lap = this.Main.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap
-
-                    // $scope.$watch(this.Main.data, (newData) => {
-                    $scope.$watch(function () {
-                        return Main.data;
-                    }, function (newData) {
-                        // console.log(newData);
-                        if (!_.isEmpty(newData)) {
-                            _this.lap = Main.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
-
-                            if (!_.isEmpty(_this.map)) _this.drawCircles(_this.lap);
-                        }
-                    });
-
-                    $scope.$on('mapInitialized', function (event, map) {
-                        _this.map = map;
-
-                        if (!_.isEmpty(_this.lap)) _this.drawCircles(_this.lap);
-
-                        map.addListener('click', function (e) {
-                            // console.log(e.latLng);
-                            var closest = _this.findClosest(_this.lap, e.latLng);
-                            $rootScope.$broadcast("closest", closest);
-                        });
-                    });
-
-                    $scope.$on('redraw', function () {
-                        return _this.drawCircles(_this.lap);
-                    });
-                }
-
-                _createClass(MapCtrl, [{
-                    key: 'drawCircles',
-                    value: function drawCircles(laps) {
-                        var _this2 = this;
-
-                        var mybounds, radius, skipCount;
-                        radius = 2;
-                        skipCount = Math.floor(Math.log(this.Main.trackpointCount));
-
-                        // remove existing points
-                        if (this.dots.length) this.dots.forEach(function (dot) {
-                            return dot.setMap(null);
-                        });
-
-                        mybounds = new google.maps.LatLngBounds();
-                        laps.forEach(function (lap) {
-                            return lap.Track[0].Trackpoint.forEach(function (elem, idx) {
-                                var c, lat, lng, marker, markerOptions;
-                                if (idx % skipCount === 0) {
-                                    lat = parseFloat(elem.Position[0].LatitudeDegrees[0]);
-                                    lng = parseFloat(elem.Position[0].LongitudeDegrees[0]);
-                                    c = new google.maps.LatLng(lat, lng);
-                                    mybounds.extend(c);
-                                    markerOptions = {
-                                        position: c,
-                                        map: _this2.map
-                                    };
-                                    marker = new google.maps.Marker(markerOptions);
-                                    return _this2.dots.push(marker);
-                                }
-                            });
-                        });
-                        return this.map.fitBounds(mybounds);
-                    }
-
-                    // Iterates through Main.data to find point closest to click point
-                    // returns [lap, idx]
-                }, {
-                    key: 'findClosest',
-                    value: function findClosest(laps, point) {
-                        var plat, plng, res;
-
-                        plat = point.lat();
-                        plng = point.lng();
-
-                        res = _.reduce(laps, function (lapAcc, lap, lapCount) {
-                            var thisLap;
-
-                            // get shortest distance for this lap
-                            thisLap = _.reduce(lap.Track[0].Trackpoint, function (acc, elem, idx) {
-                                var dist, lat, lng;
-                                if (elem.Position) {
-                                    lat = parseFloat(elem.Position[0].LatitudeDegrees[0]);
-                                    lng = parseFloat(elem.Position[0].LongitudeDegrees[0]);
-                                    dist = Math.pow(plat - lat, 2) + Math.pow(plng - lng, 2);
-
-                                    if (dist < acc[1]) {
-                                        return [idx, dist];
-                                    } else {
-                                        return acc;
-                                    }
-                                }
-                            }, [0, lapAcc[2]]);
-
-                            // compare this with best so far
-                            if (thisLap[1] < lapAcc[2]) {
-                                // i.e. return [lap, index in lap, dist]
-                                return [lapCount].concat(thisLap);
-                            } else {
-                                return lapAcc;
-                            }
-                        }, [0, 0, 10000000]);
-
-                        // console.log(res);
-                        return res.slice(0, -1);
-                    }
-                }]);
-
-                return MapCtrl;
-            })();
-
-            _export('default', MapCtrl);
-        }
-    };
-});
-$__System.register('9', ['17', '18'], function (_export) {
+$__System.register('9', ['18', '19'], function (_export) {
     var _createClass, _classCallCheck, UploadCtrl;
 
     return {
@@ -33364,7 +33119,263 @@ $__System.register('9', ['17', '18'], function (_export) {
         }
     };
 });
-$__System.register("b", ["18"], function (_export) {
+$__System.register('a', ['16', '18', '19'], function (_export) {
+    var _, _createClass, _classCallCheck, MapCtrl;
+
+    return {
+        setters: [function (_4) {
+            _ = _4['default'];
+        }, function (_2) {
+            _createClass = _2['default'];
+        }, function (_3) {
+            _classCallCheck = _3['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            MapCtrl = (function () {
+                function MapCtrl(Main, $scope, $rootScope) {
+                    var _this = this;
+
+                    _classCallCheck(this, MapCtrl);
+
+                    this.Main = Main;
+                    this.dots = [];
+                    this.map = {};
+                    // this.lap = this.Main.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap
+
+                    // $scope.$watch(this.Main.data, (newData) => {
+                    $scope.$watch(function () {
+                        return Main.data;
+                    }, function (newData) {
+                        // console.log(newData);
+                        if (!_.isEmpty(newData)) {
+                            _this.lap = Main.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
+
+                            if (!_.isEmpty(_this.map)) _this.drawMarkers(_this.lap);
+                        }
+                    });
+
+                    $scope.$on('mapInitialized', function (event, map) {
+                        _this.map = map;
+
+                        if (!_.isEmpty(_this.lap)) _this.drawMarkers(_this.lap);
+
+                        map.addListener('click', function (e) {
+                            // console.log(e.latLng);
+                            var closest = _this.findClosest(_this.lap, e.latLng);
+                            $rootScope.$broadcast("closest", closest);
+                        });
+
+                        map.addListener('zoom_changed', function () {
+                            _this.drawMarkers(_this.lap, false);
+                        });
+                    });
+
+                    $scope.$on('redraw', function () {
+                        return _this.drawMarkers(_this.lap);
+                    });
+                }
+
+                _createClass(MapCtrl, [{
+                    key: 'drawMarkers',
+                    value: function drawMarkers(laps) {
+                        var _this2 = this;
+
+                        var fitBounds = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+
+                        var mybounds, radius, skipCount;
+                        radius = 2;
+                        // skipCount = Math.floor(Math.log(this.Main.trackpointCount));
+                        skipCount = (20 - Math.min(19, this.map.getZoom())) * 3 - 2;
+                        console.log("Zoom %s, skipCount %s", this.map.getZoom(), skipCount);
+
+                        // remove existing points
+                        if (this.dots.length) this.dots.forEach(function (dot) {
+                            return dot.setMap(null);
+                        });
+
+                        mybounds = new google.maps.LatLngBounds();
+                        laps.forEach(function (lap) {
+                            return lap.Track[0].Trackpoint.forEach(function (elem, idx) {
+                                var c, lat, lng, marker, markerOptions;
+                                if (idx % skipCount === 0) {
+                                    lat = parseFloat(elem.Position[0].LatitudeDegrees[0]);
+                                    lng = parseFloat(elem.Position[0].LongitudeDegrees[0]);
+                                    c = new google.maps.LatLng(lat, lng);
+                                    mybounds.extend(c);
+                                    markerOptions = {
+                                        position: c,
+                                        map: _this2.map
+                                    };
+                                    marker = new google.maps.Marker(markerOptions);
+                                    return _this2.dots.push(marker);
+                                }
+                            });
+                        });
+
+                        if (fitBounds) this.map.fitBounds(mybounds);
+                    }
+
+                    // Iterates through Main.data to find point closest to click point
+                    // returns [lap, idx]
+                }, {
+                    key: 'findClosest',
+                    value: function findClosest(laps, point) {
+                        var plat, plng, res;
+
+                        plat = point.lat();
+                        plng = point.lng();
+
+                        res = _.reduce(laps, function (lapAcc, lap, lapCount) {
+                            var thisLap;
+
+                            // get shortest distance for this lap
+                            thisLap = _.reduce(lap.Track[0].Trackpoint, function (acc, elem, idx) {
+                                var dist, lat, lng;
+                                if (elem.Position) {
+                                    lat = parseFloat(elem.Position[0].LatitudeDegrees[0]);
+                                    lng = parseFloat(elem.Position[0].LongitudeDegrees[0]);
+                                    dist = Math.pow(plat - lat, 2) + Math.pow(plng - lng, 2);
+
+                                    if (dist < acc[1]) {
+                                        return [idx, dist];
+                                    } else {
+                                        return acc;
+                                    }
+                                }
+                            }, [0, lapAcc[2]]);
+
+                            // compare this with best so far
+                            if (thisLap[1] < lapAcc[2]) {
+                                // i.e. return [lap, index in lap, dist]
+                                return [lapCount].concat(thisLap);
+                            } else {
+                                return lapAcc;
+                            }
+                        }, [0, 0, 10000000]);
+
+                        // console.log(res);
+                        return res.slice(0, -1);
+                    }
+                }]);
+
+                return MapCtrl;
+            })();
+
+            _export('default', MapCtrl);
+        }
+    };
+});
+$__System.register('7', ['16', '18', '19'], function (_export) {
+    var _, _createClass, _classCallCheck, MainService;
+
+    return {
+        setters: [function (_4) {
+            _ = _4['default'];
+        }, function (_2) {
+            _createClass = _2['default'];
+        }, function (_3) {
+            _classCallCheck = _3['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            MainService = (function () {
+                function MainService($http) {
+                    _classCallCheck(this, MainService);
+
+                    this.$http = $http;
+
+                    this.debug = !!location.host.match('localhost');
+                    // total number of points in uploaded file; used to limit number of markers shown
+                    this.trackpointCount = 0;
+                    // this will be the full data; EditorCtrl just works with the laps
+                    this.data = {};
+                }
+
+                _createClass(MainService, [{
+                    key: 'getDummyData',
+                    value: function getDummyData() {
+                        var _this = this;
+
+                        this.fname = 'dummy.tcx';
+                        return this.$http.get('/tcx/test').then(function (res) {
+                            return _this.setTcxData(res.data);
+                        });
+                    }
+                }, {
+                    key: 'getFeedback',
+                    value: function getFeedback() {
+                        return this.$http.get('/comments');
+                    }
+                }, {
+                    key: 'saveData',
+                    value: function saveData(fname) {
+                        return this.$http.post('/tcx/fromjson/' + this.fname, this.data);
+                    }
+                }, {
+                    key: 'setTcxData',
+                    value: function setTcxData(data) {
+                        var _this2 = this;
+
+                        var laps = data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
+
+                        var newLaps = _.map(laps, function (lap, idx) {
+                            var lapPoints = lap.Track[0].Trackpoint;
+
+                            // we only want points that has a Position element
+                            var newLapPoints = _.filter(lapPoints, function (elem) {
+                                return elem.Position;
+                            });
+
+                            _this2.trackpointCount += newLapPoints.length;
+
+                            if (lapPoints.length > newLapPoints.length) {
+                                console.log("Lap %s had %s positionless elements in, which have been removed", idx, lapPoints.length - newLapPoints.length);
+                            }
+                            // replace in lap
+                            lap.Track[0].Trackpoint = newLapPoints;
+                            return lap;
+                        });
+                        this.data = data;
+                        this.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap = newLaps;
+                    }
+                }]);
+
+                return MainService;
+            })();
+
+            _export('default', MainService);
+
+            // removeNullEntries(data) {
+            //     var laps;
+            //     laps = data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
+            //
+            //     // foreach????
+            //     _.map(laps, (lap, idx) => {
+            //         var lapPoints = lap.Track[0].Trackpoint;
+            //
+            //         this.trackpointCount += lapPoints.length;
+            //
+            //         // we only want points that has a Position element
+            //         var newLapPoints = _.filter(lapPoints, elem => elem.Position);
+            //
+            //         if (lapPoints.length > newLapPoints.length) {
+            //             console.log("Lap %s had %s positionless elements in, which have been removed", idx, lapPoints.length - newLapPoints.length);
+            //         }
+            //         // replace in main structure
+            //         lap.Track[0].Trackpoint = newLapPoints;
+            //         return lap.Track[0].Trackpoint;
+            //         // return lap?
+            //     });
+            //     // THIS IS WRONG
+            //     return data;
+            // };
+        }
+    };
+});
+$__System.register("b", ["19"], function (_export) {
     var _classCallCheck, FeedbackCtrl;
 
     return {
