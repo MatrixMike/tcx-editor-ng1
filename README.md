@@ -54,20 +54,20 @@ Known bugs
 ```
 In brief:
 
-    - Activities contains one Activity
-    - An Activity contains Laps
-    - Each Lap has some meta info and a Track
-    - A Track comprises an array of Trackpoints
-    - Each Trackpoint has a speed, location and accumulated distance
+- Activities contains one Activity
+- An Activity contains Laps
+- Each Lap has some meta info and a Track
+- A Track comprises an array of Trackpoints
+- Each Trackpoint has a speed, location and accumulated distance
 
 ### Change log
-    - 14 Sep 15 - 2.0.0: rewrite in ES6
-    - 24 Jan 15 - 1.3.0: &lt;shift&gt;+click functionality improved; fixed bug when deleting entire lap
-    - 31 Jan 15 - 1.2.1: fixed bug when deleting last lap
-    - &nbsp;2 Feb 15 - 1.2.0: Use colours to distinguish laps, highlight rows where speed = 0
-    - 29 Jun 14 - 1.1.0: Handles delete from start correctly; fixed potential crashes
+- 14 Sep 15 - 2.0.0: rewrite in ES6
+- 24 Jan 15 - 1.3.0: &lt;shift&gt;+click functionality improved; fixed bug when deleting entire lap
+- 31 Jan 15 - 1.2.1: fixed bug when deleting last lap
+- &nbsp;2 Feb 15 - 1.2.0: Use colours to distinguish laps, highlight rows where speed = 0
+- 29 Jun 14 - 1.1.0: Handles delete from start correctly; fixed potential crashes
 
 ### Todo
-    - Error messages for badly formatted files
-    - Provide option to change ride time (and avg speed) to time spent moving (i.e. dropping lunch stops where GPS left on)
-    - Show total distance for info
+- Error messages for badly formatted files
+- Provide option to change ride time (and avg speed) to time spent moving (i.e. dropping lunch stops where GPS left on)
+- Show total distance for info
