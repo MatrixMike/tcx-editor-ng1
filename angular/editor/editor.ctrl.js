@@ -78,7 +78,7 @@ class EditorCtrl {
 
         this.lastChanged = [0,0];
 
-    	this.deleteMsg = "Delete selected points";
+    	this.downloadMsg = "Download .tcx";
 
     	if (Main.debug && _.isEmpty(Main.data)) {
             Main.getDummyData()
@@ -151,13 +151,18 @@ class EditorCtrl {
     }
 
     saveFile() {
+        this.downloadMsg = "processing";
         this.Main.saveData()
         .then( res => {
             ga('send', 'event', 'file-download', this.Main.fname);
             console.log(res.data);
             window.location = '/' + this.Main.fname
+            this.downloadMsg = "Downloading tcx file"
         })
-        .catch( err => console.error(err) );
+        .catch( err => {
+            console.error(err);
+            this.downloadMsg = err;
+        });
     }
 
     deletePoints() {

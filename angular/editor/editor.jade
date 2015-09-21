@@ -50,8 +50,8 @@
             //- p Gaps between changes of colour (laps) are to be expected and do not affect final results
     .row
         .col-xs-12.controls
-            button(class="btn btn-danger" ng-click="vm.deletePoints()") {{vm.deleteMsg}}
-            button(class="btn btn-success btn-disabled" ng-click="vm.saveFile()") Download .tcx
+            button(class="btn btn-danger" ng-click="vm.deletePoints()") Delete selected points
+            button(class="btn btn-success btn-disabled" ng-click="vm.saveFile()") {{vm.downloadMsg}}
             a(ui-sref="upload" class="btn btn-primary") Load different file
 
     .row.feedback

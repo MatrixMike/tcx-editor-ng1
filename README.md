@@ -1,7 +1,7 @@
 Garmin .tcx GPS file editor
 =======================
 
-MEAN application (based on angular-fullstack) to decode, display and provide limited editing of Garmin biking data.
+MEAN application to decode, display and provide limited editing of Garmin biking GSP data (.tcx format).
 
 **Notes:**
     - Original .fit files need to be uploaded to Garmin Connect and then exported as .tcx files
