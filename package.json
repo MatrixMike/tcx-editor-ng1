@@ -1,6 +1,6 @@
 {
   "name": "garmin-tcx-editor",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Garmin tcx file editor",
   "scripts": {
     "start": "node --harmony --use_strict index",
