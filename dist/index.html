@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Garmin tcx file editor</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Garmin tcx editor. Select and remove trackpoints and laps">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <meta property="og:url" content="https://tcx-editor.herokuapp.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Garmin tcx online file editor">
+    <meta property="og:description" content="Remove un-wanted points from tcx tracks via simple online application; no download needed!">
+    <meta property="og:image" content="https://tcx-editor.herokuapp.com/images/editor.png">
+    <base href="/">
+  </head>
+  <body ng-app="garminEditorApp">
+    <div id="fb-root"></div>
+    <script>
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+      
+    </script>
+    <div class="container">
+      <header class="row">
+        <div class="col-xs-12">
+          <h1>Garmin GPS .tcx editor</h1>
+        </div>
+      </header>
+      <article ui-view class="row"></article>
+      <div class="row social">
+        <div class="col-xs-12">
+          <div data-href="https://tcx-editor.herokuapp.com/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true" class="fb-like"></div>
+        </div>
+      </div>
+      <footer class="row">
+        <div class="col-xs-12">
+          <hr>
+          <p>(c) <a href="http://stackoverflow.com/users/1923190/simon-h">Simon Hampton</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga')
+    if (!new RegExp('localhost').test(window.location.host)) {
+        ga('create', 'UA-58153487-1', 'auto');
+        ga('send', 'pageview');
+    }
+    
+  </script>
+  <script src="//maps.google.com/maps/api/js"></script>
+  <script src="build.js"></script>
+</html>
