@@ -5,7 +5,6 @@ var mailgun = require('mailgun-js')({
 });
 
 var oio = require('orchestrate');
-// oio.ApiEndPoint = "api.aws-eu-west-1.orchestrate.io";
 var db = oio(process.env.ORCHESTRATE_KEY, "api.aws-eu-west-1.orchestrate.io");
 var coll = (debug) ? "tcxeditor-dev" : "tcxeditor";
 
@@ -41,18 +40,13 @@ var getAllComments = function(withEmail, cb) {
 
 // Get list of feedbacks
 exports.index = function(req, res) {
-	// if (debug) console.log(req.params);
 	getAllComments(true, (err, data) => {
 		if (err) res.status(500).send(err);
 		res.send(data);
 	});
-	// getAllComments()
-	// .then( data => {
-	// 	console.log(data);
-	// 	res.send(data);
-	// });
 };
 
+// Handle new comment, including send a copy to developer
 exports.postComment = function(req, res) {
 	var now = new Date();
 	var data = {
@@ -88,19 +82,19 @@ exports.postComment = function(req, res) {
 	});
 };
 
-exports.delete = function(req, res) {
-	db.list(coll)
-	.then( result => {
-		var items = result.body.results;
-		console.log("deleting %s items", items.length);
-
-		items.forEach(item => {
-			db.remove(coll, item.path.key)
-			.then( result => {
-				console.log(item.path.key, result);
-			})
-			.fail( err => console.error(err) );
-		});
-		res.send("working on it")
-	});
-};
+// exports.delete = function(req, res) {
+// 	db.list(coll)
+// 	.then( result => {
+// 		var items = result.body.results;
+// 		console.log("deleting %s items", items.length);
+//
+// 		items.forEach(item => {
+// 			db.remove(coll, item.path.key)
+// 			.then( result => {
+// 				console.log(item.path.key, result);
+// 			})
+// 			.fail( err => console.error(err) );
+// 		});
+// 		res.send("working on it")
+// 	});
+// };
