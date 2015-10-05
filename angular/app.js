@@ -61,3 +61,5 @@ angular.module('garminEditorApp')
         controllerAs: 'vm'
     });
 });
+
+angular.bootstrap(document.getElementsByTagName('body')[0], ['garminEditorApp']);

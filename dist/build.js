@@ -811,6 +811,36 @@ $__System.registerDynamic("3", ["12"], true, function(require, exports, module) 
   return module.exports;
 });
 
+$__System.registerDynamic("4", ["13"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("13");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("6", ["14"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("14");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("5", ["15"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("15");
+  global.define = __define;
+  return module.exports;
+});
+
 $__System.registerDynamic("e", [], false, function(__require, __exports, __module) {
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
   (function() {
@@ -835,42 +865,12 @@ $__System.registerDynamic("f", [], false, function(__require, __exports, __modul
     angular.module("templates", []).run(["$templateCache", function($templateCache) {
       $templateCache.put("editor/editor.html", "\n<div class=\"col-xs-12\">\n  <div class=\"row summary\">       \n    <div class=\"col-xs-12\">\n      <h2>Summary of ride ({{vm.startTime | date: \"d MMM yy\"}})</h2>\n      <div class=\"row\">\n        <div class=\"col-xs-2 table-head\"> </div>\n        <div class=\"col-xs-2 table-head\">Start</div>\n        <div class=\"col-xs-2 table-head\">End</div>\n        <div class=\"col-xs-2 table-head\">Time</div>\n        <div class=\"col-xs-2 table-head\">Distance</div>\n        <div class=\"col-xs-2 table-head\">Avg speed</div>\n      </div>\n      <div ng-repeat=\"lap in vm.data.Lap\" class=\"row\">\n        <div class=\"col-xs-2 table-head\">Lap {{$index + 1}}</div>\n        <div class=\"col-xs-2\">{{lap.Track[0].Trackpoint[0].Time[0] | date: \"HH:mm:ss\"}}</div>\n        <div class=\"col-xs-2\">{{lap.Track[0].Trackpoint[lap.Track[0].Trackpoint.length - 1].Time[0] | date: \"HH:mm:ss\"}}</div>\n        <div class=\"col-xs-2\">{{lap.TotalTimeSeconds[0]}}s</div>\n        <div class=\"col-xs-2\">{{lap.DistanceMeters / 1000 | number : 3}} km</div>\n        <div class=\"col-xs-2\">{{lap.Extensions[0].LX[0].AvgSpeed[0] * 60 * 60 / 1000 | number : 1}} km/h</div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <h2>Trackpoint data</h2>\n      <p>Choose \'trackpoints\' to delete from the rows below or click on the map (not the markers). Use Shift+Click to select multiple rows.</p>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-5 data-table\">\n      <div scroll-to=\"scroll-to\" data-target=\"{{vm.scrollPos}}\" ng-repeat=\"lap in vm.data.Lap track by $index\"><strong>Lap {{$index+1}}</strong>\n        <lap lapdata=\"lap.Track[0].Trackpoint\" count=\"{{$index}}\" check=\"vm.checkChange(lapIdx, idx, shift)\" selected=\"vm.selected[$index]\"></lap>\n      </div>\n    </div>\n    <div class=\"col-xs-7\"><map center=\"44, 5\" zoom=\"11\" draggable=\"true\" map-type-control=\"false\" auto-refresh=\"auto-refresh\" ng-controller=\"MapCtrl as map\"></map>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12 controls\">\n      <button ng-click=\"vm.deletePoints()\" class=\"btn btn-danger\">Delete selected points</button>\n      <button ng-click=\"vm.saveFile()\" class=\"btn btn-success btn-disabled\">{{vm.downloadMsg}}</button><a ui-sref=\"upload\" class=\"btn btn-primary\">Load different file</a>\n    </div>\n  </div>\n  <div class=\"row feedback\">\n    <div class=\"col-xs-12\">\n      <feedback></feedback>\n    </div>\n  </div>\n</div>");
       $templateCache.put("editor/lap.tmpl.html", "\n<table>\n  <tr>\n    <th>Timestamp</th>\n    <th>Accum Dist. (m)</th>\n  </tr>\n  <tr ng-repeat=\"tp in vm.lapdata track by $index\" ng-class=\"{\'selected\': vm.selected[$index]}\" ng-click=\"vm.select($event, $index)\" class=\"trackpoint c{{$index}}\">\n    <td>{{tp.Time[0] | date: \'H:mm:ss\'}}</td>\n    <td>{{tp.DistanceMeters[0] | number : 1}} m</td>\n  </tr>\n</table>");
-      $templateCache.put("feedback/feedback.html", "\n<div class=\"col-xs-12 feedback\">\n  <h3>Feedback</h3>\n  <div class=\"row\">\n    <div class=\"col-sm-3 table-head\">Date</div>\n    <div class=\"col-sm-2 table-head\">Email</div>\n    <div class=\"col-sm-7 table-head\">Comments</div>\n  </div>\n  <div ng-repeat=\"comment in vm.comments\" class=\"row comments\">\n    <div class=\"col-sm-3\">{{comment.date}}</div>\n    <div class=\"col-sm-2\">{{comment.email}}</div>\n    <div class=\"col-sm-7\">{{comment.comment}}</div>\n  </div>\n</div>");
+      $templateCache.put("feedback/feedback.html", "\n<div class=\"col-xs-12 feedback\">\n  <h3>Feedback</h3>\n  <div class=\"row\">\n    <div class=\"col-sm-3 table-head\">Date</div>\n    <div class=\"col-sm-2 table-head\">Email</div>\n    <div class=\"col-sm-7 table-head\">Comments</div>\n  </div>\n  <div ng-repeat=\"comment in vm.comments\" class=\"row comments\">\n    <div class=\"col-sm-3\">{{comment.date}}</div>\n    <div class=\"col-sm-2\">{{comment.email}}</div>\n    <div class=\"col-sm-7\">{{comment.comment}}</div>\n  </div><map center=\"0,0\" zoom=\"1\">\n    <marker ng-repeat=\"location in vm.analytics\" position=\"{{location.lat}},{{location.lng}}\"></marker></map>\n</div>");
       $templateCache.put("feedback.dir/feedback.tmpl.html", "\n<div>\n  <h3>Developer feedback</h3>\n  <p>Did the app work? If so, let me now your experience. If not, please provide details of what you did and what you hoped / expected it would do.</p>\n  <form ng-hide=\"comments\" class=\"row\">\n    <div class=\"col-sm-7\">\n      <div class=\"form-group\">\n        <textarea rows=\"2\" ng-model=\"vm.feedback\" placeholder=\"Comments, suggestions,...\" class=\"form-control\"></textarea>\n      </div>\n    </div>\n    <div class=\"col-sm-3\">\n      <div class=\"form-group\">\n        <input type=\"text\" ng-model=\"vm.email\" placeholder=\"email (Optional*)\" class=\"form-control\"/>\n      </div>\n      <p>* For developer contact. Not made public.</p>\n    </div>\n    <div class=\"col-sm-2\">\n      <button ng-click=\"vm.sendFeedback()\" class=\"btn btn-primary\">Send</button>\n    </div>\n  </form>\n  <div ng-show=\"comments\" class=\"row\">\n    <div class=\"col-sm-3\">\n      <h4>Date</h4>\n    </div>\n    <div class=\"col-sm-9\">\n      <h4>Comment</h4>\n    </div>\n  </div>\n  <div ng-repeat=\"comment in vm.comments\" class=\"row comments\">\n    <div class=\"col-sm-3\">\n      <p>{{comment.date}}</p>\n    </div>\n    <div class=\"col-sm-9\">\n      <p>{{comment.comment}}</p>\n    </div>\n  </div>\n</div>");
       $templateCache.put("upload/upload.html", "\n<div class=\"col-xs-12 upload\">\n  <div class=\"row\">\n    <div class=\"col-xs-7\">\n      <p>Ever left your Garmin running at the end of a ride? All your hard earned averages declined pointlessly? </p>\n      <p>This simple editor enables you to delete points from a file, recalculates aggregate ride data, and returns a new copy of the file.</p>\n      <p>To start, upload a \'.tcx\' file. You can convert a .fit file to .tcx using <a href=\"http://connect.garmin.com/\"> Garmin Connect\'s</a> export functionality.</p>\n      <p><strong>Note:</strong> This app is tested with Edge 800 (firmware 2.6) data. YMMV, but other users (including with Garmin 610) report success. </p>\n      <p>No copy of the data processed is kept.</p>\n      <form>\n        <div ngf-select=\"vm.upload($file)\" ng-model=\"vm.file\" name=\"file\" class=\"btn btn-primary btn-upload\">{{vm.msg}}</div>\n      </form>\n    </div>\n    <div class=\"col-xs-5 img-holder\"><img src=\"images/editor.png\" alt=\"Garmin tcx editor\"/></div>\n  </div>\n</div>");
     }]);
   })();
   return _retrieveGlobal();
-});
-
-$__System.registerDynamic("6", ["18"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("18");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("4", ["19"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("19");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5", ["1a"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("1a");
-  global.define = __define;
-  return module.exports;
 });
 
 (function() {
@@ -8853,23 +8853,1641 @@ $__System.registerDynamic("12", ["2"], false, function(__require, __exports, __m
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("13", ["1b"], true, function(require, exports, module) {
+$__System.registerDynamic("13", [], false, function(__require, __exports, __module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
+  (function() {
+    angular.module('ngMap', []);
+    (function() {
+      'use strict';
+      var SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
+      var MOZ_HACK_REGEXP = /^moz([A-Z])/;
+      function camelCase(name) {
+        return name.replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
+          return offset ? letter.toUpperCase() : letter;
+        }).replace(MOZ_HACK_REGEXP, 'Moz$1');
+      }
+      function JSONize(str) {
+        try {
+          JSON.parse(str);
+          return str;
+        } catch (e) {
+          return str.replace(/([\$\w]+)\s*:/g, function(_, $1) {
+            return '"' + $1 + '":';
+          }).replace(/'([^']+)'/g, function(_, $1) {
+            return '"' + $1 + '"';
+          });
+        }
+      }
+      var Attr2Options = function($parse, $timeout, NavigatorGeolocation, GeoCoder) {
+        var orgAttributes = function(el) {
+          (el.length > 0) && (el = el[0]);
+          var orgAttributes = {};
+          for (var i = 0; i < el.attributes.length; i++) {
+            var attr = el.attributes[i];
+            orgAttributes[attr.name] = attr.value;
+          }
+          return orgAttributes;
+        };
+        var toOptionValue = function(input, options) {
+          var output,
+              key = options.key,
+              scope = options.scope;
+          try {
+            var num = Number(input);
+            if (isNaN(num)) {
+              throw "Not a number";
+            } else {
+              output = num;
+            }
+          } catch (err) {
+            try {
+              if (input.match(/^[\+\-]?[0-9\.]+,[ ]*\ ?[\+\-]?[0-9\.]+$/)) {
+                input = "[" + input + "]";
+              }
+              output = JSON.parse(JSONize(input));
+              if (output instanceof Array) {
+                var t1stEl = output[0];
+                if (t1stEl.constructor == Object) {} else if (t1stEl.constructor == Array) {
+                  output = output.map(function(el) {
+                    return new google.maps.LatLng(el[0], el[1]);
+                  });
+                } else if (!isNaN(parseFloat(t1stEl)) && isFinite(t1stEl)) {
+                  return new google.maps.LatLng(output[0], output[1]);
+                }
+              } else if (output === Object(output)) {
+                output = getOptions(output, options);
+              }
+            } catch (err2) {
+              if (input.match(/^[A-Z][a-zA-Z0-9]+\(.*\)$/)) {
+                try {
+                  var exp = "new google.maps." + input;
+                  output = eval(exp);
+                } catch (e) {
+                  output = input;
+                }
+              } else if (input.match(/^([A-Z][a-zA-Z0-9]+)\.([A-Z]+)$/)) {
+                try {
+                  var matches = input.match(/^([A-Z][a-zA-Z0-9]+)\.([A-Z]+)$/);
+                  output = google.maps[matches[1]][matches[2]];
+                } catch (e) {
+                  output = input;
+                }
+              } else if (input.match(/^[A-Z]+$/)) {
+                try {
+                  var capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
+                  if (key.match(/temperatureUnit|windSpeedUnit|labelColor/)) {
+                    capitalizedKey = capitalizedKey.replace(/s$/, "");
+                    output = google.maps.weather[capitalizedKey][input];
+                  } else {
+                    output = google.maps[capitalizedKey][input];
+                  }
+                } catch (e) {
+                  output = input;
+                }
+              } else if (input.match(/\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/)) {
+                try {
+                  output = new Date(input);
+                } catch (e) {
+                  output = input;
+                }
+              } else {
+                output = input;
+              }
+            }
+          }
+          return output;
+        };
+        var getAttrsToObserve = function(attrs) {
+          var attrsToObserve = [];
+          if (attrs["ng-repeat"] || attrs.ngRepeat) {
+            void(0);
+          } else {
+            for (var attrName in attrs) {
+              var attrValue = attrs[attrName];
+              if (attrValue && attrValue.match(/\{\{.*\}\}/)) {
+                void 0;
+                attrsToObserve.push(camelCase(attrName));
+              }
+            }
+          }
+          return attrsToObserve;
+        };
+        var filter = function(attrs) {
+          var options = {};
+          for (var key in attrs) {
+            if (key.match(/^\$/) || key.match(/^ng[A-Z]/)) {
+              void(0);
+            } else {
+              options[key] = attrs[key];
+            }
+          }
+          return options;
+        };
+        var getOptions = function(attrs, scope) {
+          var options = {};
+          for (var key in attrs) {
+            if (attrs[key]) {
+              if (key.match(/^on[A-Z]/)) {
+                continue;
+              } else if (key.match(/ControlOptions$/)) {
+                continue;
+              } else {
+                if (typeof attrs[key] !== 'string') {
+                  options[key] = attrs[key];
+                } else {
+                  options[key] = toOptionValue(attrs[key], {
+                    scope: scope,
+                    key: key
+                  });
+                }
+              }
+            }
+          }
+          return options;
+        };
+        var getEvents = function(scope, attrs) {
+          var events = {};
+          var toLowercaseFunc = function($1) {
+            return "_" + $1.toLowerCase();
+          };
+          var eventFunc = function(attrValue) {
+            var matches = attrValue.match(/([^\(]+)\(([^\)]*)\)/);
+            var funcName = matches[1];
+            var argsStr = matches[2].replace(/event[ ,]*/, '');
+            var argsExpr = $parse("[" + argsStr + "]");
+            return function(event) {
+              var args = argsExpr(scope);
+              function index(obj, i) {
+                return obj[i];
+              }
+              var f = funcName.split('.').reduce(index, scope);
+              f && f.apply(this, [event].concat(args));
+              $timeout(function() {
+                scope.$apply();
+              });
+            };
+          };
+          for (var key in attrs) {
+            if (attrs[key]) {
+              if (!key.match(/^on[A-Z]/)) {
+                continue;
+              }
+              var eventName = key.replace(/^on/, '');
+              eventName = eventName.charAt(0).toLowerCase() + eventName.slice(1);
+              eventName = eventName.replace(/([A-Z])/g, toLowercaseFunc);
+              var attrValue = attrs[key];
+              events[eventName] = new eventFunc(attrValue);
+            }
+          }
+          return events;
+        };
+        var getControlOptions = function(filtered) {
+          var controlOptions = {};
+          if (typeof filtered != 'object') {
+            return false;
+          }
+          for (var attr in filtered) {
+            if (filtered[attr]) {
+              if (!attr.match(/(.*)ControlOptions$/)) {
+                continue;
+              }
+              var orgValue = filtered[attr];
+              var newValue = orgValue.replace(/'/g, '"');
+              newValue = newValue.replace(/([^"]+)|("[^"]+")/g, function($0, $1, $2) {
+                if ($1) {
+                  return $1.replace(/([a-zA-Z0-9]+?):/g, '"$1":');
+                } else {
+                  return $2;
+                }
+              });
+              try {
+                var options = JSON.parse(newValue);
+                for (var key in options) {
+                  if (options[key]) {
+                    var value = options[key];
+                    if (typeof value === 'string') {
+                      value = value.toUpperCase();
+                    } else if (key === "mapTypeIds") {
+                      value = value.map(function(str) {
+                        if (str.match(/^[A-Z]+$/)) {
+                          return google.maps.MapTypeId[str.toUpperCase()];
+                        } else {
+                          return str;
+                        }
+                      });
+                    }
+                    if (key === "style") {
+                      var str = attr.charAt(0).toUpperCase() + attr.slice(1);
+                      var objName = str.replace(/Options$/, '') + "Style";
+                      options[key] = google.maps[objName][value];
+                    } else if (key === "position") {
+                      options[key] = google.maps.ControlPosition[value];
+                    } else {
+                      options[key] = value;
+                    }
+                  }
+                }
+                controlOptions[attr] = options;
+              } catch (e) {
+                void 0;
+              }
+            }
+          }
+          return controlOptions;
+        };
+        return {
+          camelCase: camelCase,
+          filter: filter,
+          getOptions: getOptions,
+          getEvents: getEvents,
+          getControlOptions: getControlOptions,
+          toOptionValue: toOptionValue,
+          getAttrsToObserve: getAttrsToObserve,
+          orgAttributes: orgAttributes
+        };
+      };
+      Attr2Options.$inject = ['$parse', '$timeout', 'NavigatorGeolocation', 'GeoCoder'];
+      angular.module('ngMap').service('Attr2Options', Attr2Options);
+    })();
+    (function() {
+      'use strict';
+      var GeoCoder = function($q) {
+        return {geocode: function(options) {
+            var deferred = $q.defer();
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode(options, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                deferred.resolve(results);
+              } else {
+                deferred.reject('Geocoder failed due to: ' + status);
+              }
+            });
+            return deferred.promise;
+          }};
+      };
+      GeoCoder.$inject = ['$q'];
+      angular.module('ngMap').service('GeoCoder', GeoCoder);
+    })();
+    (function() {
+      'use strict';
+      var NavigatorGeolocation = function($q) {
+        return {
+          getCurrentPosition: function() {
+            var deferred = $q.defer();
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function(position) {
+                deferred.resolve(position);
+              }, function(evt) {
+                void 0;
+                deferred.reject(evt);
+              });
+            } else {
+              deferred.reject("Browser Geolocation service failed.");
+            }
+            return deferred.promise;
+          },
+          watchPosition: function() {
+            return "TODO";
+          },
+          clearWatch: function() {
+            return "TODO";
+          }
+        };
+      };
+      NavigatorGeolocation.$inject = ['$q'];
+      angular.module('ngMap').service('NavigatorGeolocation', NavigatorGeolocation);
+    })();
+    (function() {
+      'use strict';
+      var StreetView = function($q) {
+        var getPanorama = function(map, latlng) {
+          latlng = latlng || map.getCenter();
+          var deferred = $q.defer();
+          var svs = new google.maps.StreetViewService();
+          svs.getPanoramaByLocation((latlng || map.getCenter), 100, function(data, status) {
+            if (status === google.maps.StreetViewStatus.OK) {
+              deferred.resolve(data.location.pano);
+            } else {
+              deferred.resolve(false);
+            }
+          });
+          return deferred.promise;
+        };
+        var setPanorama = function(map, panoId) {
+          var svp = new google.maps.StreetViewPanorama(map.getDiv(), {enableCloseButton: true});
+          svp.setPano(panoId);
+        };
+        return {
+          getPanorama: getPanorama,
+          setPanorama: setPanorama
+        };
+      };
+      StreetView.$inject = ['$q'];
+      angular.module('ngMap').service('StreetView', StreetView);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('bicyclingLayer', ['Attr2Options', function(Attr2Options) {
+        var parser = Attr2Options;
+        var getLayer = function(options, events) {
+          var layer = new google.maps.BicyclingLayer(options);
+          for (var eventName in events) {
+            google.maps.event.addListener(layer, eventName, events[eventName]);
+          }
+          return layer;
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var orgAttrs = parser.orgAttributes(element);
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            var events = parser.getEvents(scope, filtered);
+            void 0;
+            var layer = getLayer(options, events);
+            mapController.addObject('bicyclingLayers', layer);
+            mapController.observeAttrSetObj(orgAttrs, attrs, layer);
+            element.bind('$destroy', function() {
+              mapController.deleteObject('bicyclingLayers', layer);
+            });
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('cloudLayer', ['Attr2Options', function(Attr2Options) {
+        var parser = Attr2Options;
+        var getLayer = function(options, events) {
+          var layer = new google.maps.weather.CloudLayer(options);
+          for (var eventName in events) {
+            google.maps.event.addListener(layer, eventName, events[eventName]);
+          }
+          return layer;
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var orgAttrs = parser.orgAttributes(element);
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            var events = parser.getEvents(scope, filtered);
+            void 0;
+            var layer = getLayer(options, events);
+            mapController.addObject('cloudLayers', layer);
+            mapController.observeAttrSetObj(orgAttrs, attrs, layer);
+            element.bind('$destroy', function() {
+              mapController.deleteObject('cloudLayers', layer);
+            });
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('customControl', ['Attr2Options', '$compile', function(Attr2Options, $compile) {
+        'use strict';
+        var parser = Attr2Options;
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var orgAttrs = parser.orgAttributes(element);
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered, scope);
+            var events = parser.getEvents(scope, filtered);
+            void 0;
+            var customControlEl = element[0].parentElement.removeChild(element[0]);
+            $compile(customControlEl.innerHTML.trim())(scope);
+            for (var eventName in events) {
+              google.maps.event.addDomListener(customControlEl, eventName, events[eventName]);
+            }
+            mapController.addObject('customControls', customControlEl);
+            scope.$on('mapInitialized', function(evt, map) {
+              var position = options.position;
+              map.controls[google.maps.ControlPosition[position]].push(customControlEl);
+            });
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      var parser,
+          $compile,
+          $timeout;
+      var cAbortEvent = function(e) {
+        e.preventDefault && e.preventDefault();
+        e.cancelBubble = true;
+        e.stopPropagation && e.stopPropagation();
+      };
+      var CustomMarker = function(options) {
+        options = options || {};
+        this.el = document.createElement('div');
+        this.el.style.display = 'inline-block';
+        this.visible = true;
+        for (var key in options) {
+          this[key] = options[key];
+        }
+      };
+      var setCustomMarker = function() {
+        CustomMarker.prototype = new google.maps.OverlayView();
+        CustomMarker.prototype.setContent = function(html, scope) {
+          this.html = html;
+          if (scope) {
+            var compiledEl = $compile(html)(scope);
+            var customMarkerEl = compiledEl[0];
+            var me = this;
+            $timeout(function() {
+              me.content = customMarkerEl.innerHTML;
+              me.el.innerHTML = me.content;
+            });
+          } else {
+            this.content = html;
+            this.el.innerHTML = this.content;
+          }
+          this.el.style.position = 'relative';
+          this.el.className = 'custom-marker';
+        };
+        CustomMarker.prototype.setPosition = function(position) {
+          position && (this.position = position);
+          if (this.getProjection() && typeof this.position.lng == 'function') {
+            var posPixel = this.getProjection().fromLatLngToDivPixel(this.position);
+            var x = Math.round(posPixel.x - (this.el.offsetWidth / 2));
+            var y = Math.round(posPixel.y - this.el.offsetHeight - 10);
+            this.el.style.left = x + "px";
+            this.el.style.top = y + "px";
+          }
+        };
+        CustomMarker.prototype.setZIndex = function(zIndex) {
+          zIndex && (this.zIndex = zIndex);
+          this.el.style.zIndex = this.zIndex;
+        };
+        CustomMarker.prototype.setVisible = function(visible) {
+          this.el.style.display = visible ? 'inline-block' : 'none';
+          this.visible = visible;
+        };
+        CustomMarker.prototype.addClass = function(className) {
+          var classNames = this.el.className.split(' ');
+          (classNames.indexOf(className) == -1) && classNames.push(className);
+          this.el.className = classNames.join(' ');
+        };
+        CustomMarker.prototype.removeClass = function(className) {
+          var classNames = this.el.className.split(' ');
+          var index = classNames.indexOf(className);
+          (index > -1) && classNames.splice(index, 1);
+          this.el.className = classNames.join(' ');
+        };
+        CustomMarker.prototype.onAdd = function() {
+          this.getPanes().overlayMouseTarget.appendChild(this.el);
+        };
+        CustomMarker.prototype.draw = function() {
+          this.setPosition();
+          this.setZIndex(this.zIndex);
+          this.setVisible(this.visible);
+        };
+        CustomMarker.prototype.onRemove = function() {
+          this.el.parentNode.removeChild(this.el);
+          this.el = null;
+        };
+      };
+      var customMarkerDirective = function(Attr2Options, _$compile_, _$timeout_) {
+        parser = Attr2Options;
+        $compile = _$compile_;
+        $timeout = _$timeout_;
+        setCustomMarker();
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var orgAttrs = parser.orgAttributes(element);
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered, scope);
+            var events = parser.getEvents(scope, filtered);
+            var removedEl = element[0].parentElement.removeChild(element[0]);
+            void 0;
+            var customMarker = new CustomMarker(options);
+            customMarker.setContent(removedEl.innerHTML, scope);
+            void 0;
+            void 0;
+            for (var eventName in events) {
+              google.maps.event.addDomListener(customMarker.el, eventName, events[eventName]);
+            }
+            mapController.addObject('customMarkers', customMarker);
+            if (!(options.position instanceof google.maps.LatLng)) {
+              mapController.getGeoLocation(options.position).then(function(latlng) {
+                customMarker.setPosition(latlng);
+              });
+            }
+            element.bind('$destroy', function() {
+              mapController.deleteObject('customMarkers', marker);
+            });
+          }
+        };
+      };
+      customMarkerDirective.$inject = ['Attr2Options', '$compile', '$timeout'];
+      angular.module('ngMap').directive('customMarker', customMarkerDirective);
+    })();
+    (function() {
+      'use strict';
+      var getDirectionsRenderer = function(options, events) {
+        if (options.panel) {
+          options.panel = document.getElementById(options.panel) || document.querySelector(options.panel);
+        }
+        var renderer = new google.maps.DirectionsRenderer(options);
+        for (var eventName in events) {
+          google.maps.event.addListener(renderer, eventName, events[eventName]);
+        }
+        return renderer;
+      };
+      var directions = function(Attr2Options, $timeout, NavigatorGeolocation) {
+        var parser = Attr2Options;
+        var directionsService = new google.maps.DirectionsService();
+        var updateRoute = function(renderer, options) {
+          var request = options;
+          request.travelMode = request.travelMode || 'DRIVING';
+          var validKeys = ['origin', 'destination', 'travelMode', 'transitOptions', 'unitSystem', 'durationInTraffic', 'waypoints', 'optimizeWaypoints', 'provideRouteAlternatives', 'avoidHighways', 'avoidTolls', 'region'];
+          for (var key in request) {
+            (validKeys.indexOf(key) === -1) && (delete request[key]);
+          }
+          if (request.waypoints) {
+            if (request.waypoints == "[]" || request.waypoints == "")
+              delete request.waypoints;
+          }
+          var showDirections = function(request) {
+            void 0;
+            directionsService.route(request, function(response, status) {
+              if (status == google.maps.DirectionsStatus.OK) {
+                $timeout(function() {
+                  renderer.setDirections(response);
+                });
+              }
+            });
+          };
+          if (request.origin && request.destination) {
+            if (request.origin == 'current-location') {
+              NavigatorGeolocation.getCurrentPosition().then(function(ll) {
+                request.origin = new google.maps.LatLng(ll.coords.latitude, ll.coords.longitude);
+                showDirections(request);
+              });
+            } else if (request.destination == 'current-location') {
+              NavigatorGeolocation.getCurrentPosition().then(function(ll) {
+                request.destination = new google.maps.LatLng(ll.coords.latitude, ll.coords.longitude);
+                showDirections(request);
+              });
+            } else {
+              showDirections(request);
+            }
+          }
+        };
+        var linkFunc = function(scope, element, attrs, mapController) {
+          var orgAttrs = parser.orgAttributes(element);
+          var filtered = parser.filter(attrs);
+          var options = parser.getOptions(filtered);
+          var events = parser.getEvents(scope, filtered);
+          var attrsToObserve = parser.getAttrsToObserve(orgAttrs);
+          var renderer = getDirectionsRenderer(options, events);
+          mapController.addObject('directionsRenderers', renderer);
+          attrsToObserve.forEach(function(attrName) {
+            (function(attrName) {
+              attrs.$observe(attrName, function(val) {
+                if (attrName == 'panel') {
+                  $timeout(function() {
+                    var panel = document.getElementById(val) || document.querySelector(val);
+                    void 0;
+                    panel && renderer.setPanel(panel);
+                  });
+                } else if (options[attrName] !== val) {
+                  var optionValue = parser.toOptionValue(val, {key: attrName});
+                  void 0;
+                  options[attrName] = optionValue;
+                  updateRoute(renderer, options);
+                }
+              });
+            })(attrName);
+          });
+          scope.$on('mapInitialized', function(event, map) {
+            updateRoute(renderer, options);
+          });
+          scope.$on('$destroy', function(event, map) {
+            mapController.deleteObject('directionsRenderers', renderer);
+          });
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: linkFunc
+        };
+      };
+      directions.$inject = ['Attr2Options', '$timeout', 'NavigatorGeolocation'];
+      angular.module('ngMap').directive('directions', directions);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('drawingManager', ['Attr2Options', function(Attr2Options) {
+        var parser = Attr2Options;
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var orgAttrs = parser.orgAttributes(element);
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            var controlOptions = parser.getControlOptions(filtered);
+            var events = parser.getEvents(scope, filtered);
+            void 0;
+            var drawingManager = new google.maps.drawing.DrawingManager({
+              drawingMode: options.drawingmode,
+              drawingControl: options.drawingcontrol,
+              drawingControlOptions: controlOptions.drawingControlOptions,
+              circleOptions: options.circleoptions,
+              markerOptions: options.markeroptions,
+              polygonOptions: options.polygonoptions,
+              polylineOptions: options.polylineoptions,
+              rectangleOptions: options.rectangleoptions
+            });
+            var events = parser.getEvents(scope, filtered);
+            for (var eventName in events) {
+              google.maps.event.addListener(drawingManager, eventName, events[eventName]);
+            }
+            mapController.addObject('mapDrawingManager', drawingManager);
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('dynamicMapsEngineLayer', ['Attr2Options', function(Attr2Options) {
+        var parser = Attr2Options;
+        var getDynamicMapsEngineLayer = function(options, events) {
+          var layer = new google.maps.visualization.DynamicMapsEngineLayer(options);
+          for (var eventName in events) {
+            google.maps.event.addListener(layer, eventName, events[eventName]);
+          }
+          return layer;
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            var events = parser.getEvents(scope, filtered, events);
+            void 0;
+            var layer = getDynamicMapsEngineLayer(options, events);
+            mapController.addObject('mapsEngineLayers', layer);
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('fusionTablesLayer', ['Attr2Options', function(Attr2Options) {
+        var parser = Attr2Options;
+        var getLayer = function(options, events) {
+          var layer = new google.maps.FusionTablesLayer(options);
+          for (var eventName in events) {
+            google.maps.event.addListener(layer, eventName, events[eventName]);
+          }
+          return layer;
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            var events = parser.getEvents(scope, filtered, events);
+            void 0;
+            var layer = getLayer(options, events);
+            mapController.addObject('fusionTablesLayers', layer);
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('heatmapLayer', ['Attr2Options', '$window', function(Attr2Options, $window) {
+        var parser = Attr2Options;
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            options.data = $window[attrs.data] || scope[attrs.data];
+            if (options.data instanceof Array) {
+              options.data = new google.maps.MVCArray(options.data);
+            } else {
+              throw "invalid heatmap data";
+            }
+            var layer = new google.maps.visualization.HeatmapLayer(options);
+            var events = parser.getEvents(scope, filtered);
+            void 0;
+            mapController.addObject('heatmapLayers', layer);
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      var infoWindow = function(Attr2Options, $compile, $timeout, $parse) {
+        var parser = Attr2Options;
+        var getInfoWindow = function(options, events, element) {
+          var infoWindow;
+          if (options.position && !(options.position instanceof google.maps.LatLng)) {
+            delete options.position;
+          }
+          infoWindow = new google.maps.InfoWindow(options);
+          if (Object.keys(events).length > 0) {
+            void 0;
+          }
+          for (var eventName in events) {
+            if (eventName) {
+              google.maps.event.addListener(infoWindow, eventName, events[eventName]);
+            }
+          }
+          var template = element.html().trim();
+          if (angular.element(template).length != 1) {
+            throw "info-window working as a template must have a container";
+          }
+          infoWindow.__template = template.replace(/\s?ng-non-bindable[='"]+/, "");
+          infoWindow.__compile = function(scope, anchor) {
+            anchor && (scope['this'] = anchor);
+            var el = $compile(infoWindow.__template)(scope);
+            infoWindow.setContent(el[0]);
+            scope.$apply();
+          };
+          infoWindow.__open = function(map, scope, anchor) {
+            $timeout(function() {
+              infoWindow.__compile(scope, anchor);
+              if (anchor && anchor.getPosition) {
+                infoWindow.open(map, anchor);
+              } else if (anchor && anchor instanceof google.maps.LatLng) {
+                infoWindow.open(map);
+                infoWindow.setPosition(anchor);
+              } else {
+                infoWindow.open(map);
+              }
+            });
+          };
+          return infoWindow;
+        };
+        var linkFunc = function(scope, element, attrs, mapController) {
+          element.css('display', 'none');
+          var orgAttrs = parser.orgAttributes(element);
+          var filtered = parser.filter(attrs);
+          var options = parser.getOptions(filtered, scope);
+          var events = parser.getEvents(scope, filtered);
+          void 0;
+          var address;
+          if (options.position && !(options.position instanceof google.maps.LatLng)) {
+            address = options.position;
+          }
+          var infoWindow = getInfoWindow(options, events, element);
+          if (address) {
+            mapController.getGeoLocation(address).then(function(latlng) {
+              infoWindow.setPosition(latlng);
+              infoWindow.__open(mapController.map, scope, latlng);
+              var geoCallback = attrs.geoCallback;
+              geoCallback && $parse(geoCallback)(scope);
+            });
+          }
+          mapController.addObject('infoWindows', infoWindow);
+          mapController.observeAttrSetObj(orgAttrs, attrs, infoWindow);
+          scope.$on('mapInitialized', function(evt, map) {
+            infoWindow.visible && infoWindow.__open(map, scope);
+            if (infoWindow.visibleOnMarker) {
+              var markerId = infoWindow.visibleOnMarker;
+              infoWindow.__open(map, scope, map.markers[markerId]);
+            }
+          });
+          scope.showInfoWindow = function(e, id, marker) {
+            var infoWindow = mapController.map.infoWindows[id];
+            var anchor = marker ? marker : (this.getPosition ? this : null);
+            infoWindow.__open(mapController.map, scope, anchor);
+          };
+          scope.hideInfoWindow = scope.hideInfoWindow || function(event, id) {
+            var infoWindow = mapController.map.infoWindows[id];
+            infoWindow.close();
+          };
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: linkFunc
+        };
+      };
+      infoWindow.$inject = ['Attr2Options', '$compile', '$timeout', '$parse'];
+      angular.module('ngMap').directive('infoWindow', infoWindow);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('kmlLayer', ['Attr2Options', function(Attr2Options) {
+        var parser = Attr2Options;
+        var getKmlLayer = function(options, events) {
+          var kmlLayer = new google.maps.KmlLayer(options);
+          for (var eventName in events) {
+            google.maps.event.addListener(kmlLayer, eventName, events[eventName]);
+          }
+          return kmlLayer;
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var orgAttrs = parser.orgAttributes(element);
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            var events = parser.getEvents(scope, filtered);
+            void 0;
+            var kmlLayer = getKmlLayer(options, events);
+            mapController.addObject('kmlLayers', kmlLayer);
+            mapController.observeAttrSetObj(orgAttrs, attrs, kmlLayer);
+            element.bind('$destroy', function() {
+              mapController.deleteObject('kmlLayers', kmlLayer);
+            });
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('mapData', ['Attr2Options', function(Attr2Options) {
+        var parser = Attr2Options;
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            var events = parser.getEvents(scope, filtered, events);
+            void 0;
+            scope.$on('mapInitialized', function(event, map) {
+              for (var key in options) {
+                if (key) {
+                  var val = options[key];
+                  if (typeof scope[val] === "function") {
+                    map.data[key](scope[val]);
+                  } else {
+                    map.data[key](val);
+                  }
+                }
+              }
+              for (var eventName in events) {
+                if (events[eventName]) {
+                  map.data.addListener(eventName, events[eventName]);
+                }
+              }
+            });
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      var $timeout,
+          $compile,
+          src,
+          savedHtml;
+      var preLinkFunc = function(scope, element, attrs) {
+        var mapsUrl = attrs.mapLazyLoadParams || attrs.mapLazyLoad;
+        window.lazyLoadCallback = function() {
+          void 0;
+          $timeout(function() {
+            element.html(savedHtml);
+            $compile(element.contents())(scope);
+          }, 100);
+        };
+        if (window.google === undefined || window.google.maps === undefined) {
+          var scriptEl = document.createElement('script');
+          void 0;
+          scriptEl.src = mapsUrl + (mapsUrl.indexOf('?') > -1 ? '&' : '?') + 'callback=lazyLoadCallback';
+          document.body.appendChild(scriptEl);
+        } else {
+          element.html(savedHtml);
+          $compile(element.contents())(scope);
+        }
+      };
+      var compileFunc = function(tElement, tAttrs) {
+        (!tAttrs.mapLazyLoad) && void 0;
+        savedHtml = tElement.html();
+        src = tAttrs.mapLazyLoad;
+        if (document.querySelector('script[src="' + src + (src.indexOf('?') > -1 ? '&' : '?') + 'callback=lazyLoadCallback"]')) {
+          return false;
+        }
+        tElement.html('');
+        return {pre: preLinkFunc};
+      };
+      var mapLazyLoad = function(_$compile_, _$timeout_) {
+        $compile = _$compile_, $timeout = _$timeout_;
+        return {compile: compileFunc};
+      };
+      mapLazyLoad.$inject = ['$compile', '$timeout'];
+      angular.module('ngMap').directive('mapLazyLoad', mapLazyLoad);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('mapType', ['Attr2Options', '$window', function(Attr2Options, $window) {
+        var parser = Attr2Options;
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var mapTypeName = attrs.name,
+                mapTypeObject;
+            if (!mapTypeName) {
+              throw "invalid map-type name";
+            }
+            if (attrs.object) {
+              var __scope = scope[attrs.object] ? scope : $window;
+              mapTypeObject = __scope[attrs.object];
+              if (typeof mapTypeObject == "function") {
+                mapTypeObject = new mapTypeObject();
+              }
+            }
+            if (!mapTypeObject) {
+              throw "invalid map-type object";
+            }
+            scope.$on('mapInitialized', function(evt, map) {
+              map.mapTypes.set(mapTypeName, mapTypeObject);
+            });
+            mapController.addObject('mapTypes', mapTypeObject);
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      function getStyle(el, styleProp) {
+        var y;
+        if (el.currentStyle) {
+          y = el.currentStyle[styleProp];
+        } else if (window.getComputedStyle) {
+          y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+        }
+        return y;
+      }
+      var mapDirective = function(Attr2Options, $timeout, $parse) {
+        var parser = Attr2Options;
+        var linkFunc = function(scope, element, attrs, ctrl) {
+          var orgAttrs = parser.orgAttributes(element);
+          scope.google = google;
+          var el = document.createElement("div");
+          el.style.width = "100%";
+          el.style.height = "100%";
+          element.prepend(el);
+          if (attrs.defaultStyle !== 'false') {
+            if (getStyle(element[0], 'display') != "block") {
+              element.css('display', 'block');
+            }
+            if (getStyle(element[0], 'height').match(/^(0|auto)/)) {
+              element.css('height', '300px');
+            }
+          }
+          element[0].addEventListener('dragstart', function(event) {
+            event.preventDefault();
+            return false;
+          });
+          var initializeMap = function(mapOptions, mapEvents) {
+            var map = new google.maps.Map(el, {});
+            map.markers = {};
+            map.shapes = {};
+            $timeout(function() {
+              google.maps.event.trigger(map, "resize");
+            });
+            mapOptions.zoom = mapOptions.zoom || 15;
+            var center = mapOptions.center;
+            if (!center) {
+              mapOptions.center = new google.maps.LatLng(0, 0);
+            } else if (!(center instanceof google.maps.LatLng)) {
+              delete mapOptions.center;
+              ctrl.getGeoLocation(center).then(function(latlng) {
+                map.setCenter(latlng);
+                var geoCallback = attrs.geoCallback;
+                geoCallback && $parse(geoCallback)(scope);
+              }, function(error) {
+                map.setCenter(options.geoFallbackCenter);
+              });
+            }
+            map.setOptions(mapOptions);
+            for (var eventName in mapEvents) {
+              if (eventName) {
+                google.maps.event.addListener(map, eventName, mapEvents[eventName]);
+              }
+            }
+            ctrl.observeAttrSetObj(orgAttrs, attrs, map);
+            ctrl.map = map;
+            ctrl.addObjects(ctrl._objects);
+            scope.map = map;
+            scope.map.scope = scope;
+            google.maps.event.addListenerOnce(map, "idle", function() {
+              scope.$emit('mapInitialized', map);
+              if (attrs.zoomToIncludeMarkers) {
+                ctrl.zoomToIncludeMarkers();
+                if (attrs.zoomToIncludeMarkers == 'auto') {
+                  scope.$on('objectChanged', function(evt, msg) {
+                    msg[0] == 'markers' && ctrl.zoomToIncludeMarkers();
+                  });
+                }
+              }
+            });
+          };
+          var filtered = parser.filter(attrs);
+          var options = parser.getOptions(filtered, scope);
+          var controlOptions = parser.getControlOptions(filtered);
+          var mapOptions = angular.extend(options, controlOptions);
+          var mapEvents = parser.getEvents(scope, filtered);
+          void 0;
+          if (attrs.initEvent) {
+            scope.$on(attrs.initEvent, function() {
+              !ctrl.map && initializeMap(mapOptions, mapEvents);
+            });
+          } else {
+            initializeMap(mapOptions, mapEvents);
+          }
+        };
+        return {
+          restrict: 'AE',
+          controller: 'MapController',
+          link: linkFunc
+        };
+      };
+      angular.module('ngMap').directive('map', ['Attr2Options', '$timeout', '$parse', mapDirective]);
+    })();
+    (function() {
+      'use strict';
+      var MapController = function($scope, $q, NavigatorGeolocation, GeoCoder, Attr2Options) {
+        var parser = Attr2Options;
+        var _this = this;
+        var observeAndSet = function(attrs, attrName, object) {
+          attrs.$observe(attrName, function(val) {
+            if (val) {
+              void 0;
+              var setMethod = parser.camelCase('set-' + attrName);
+              var optionValue = parser.toOptionValue(val, {key: attrName});
+              void 0;
+              if (object[setMethod]) {
+                if (attrName.match(/center|position/) && typeof optionValue == 'string') {
+                  _this.getGeoLocation(optionValue).then(function(latlng) {
+                    object[setMethod](latlng);
+                  });
+                } else {
+                  object[setMethod](optionValue);
+                }
+              }
+            }
+          });
+        };
+        this.map = null;
+        this._objects = [];
+        this.addObject = function(groupName, obj) {
+          if (this.map) {
+            this.map[groupName] = this.map[groupName] || {};
+            var len = Object.keys(this.map[groupName]).length;
+            this.map[groupName][obj.id || len] = obj;
+            if (groupName != "infoWindows" && obj.setMap) {
+              obj.setMap && obj.setMap(this.map);
+            }
+            if (obj.centered && obj.position) {
+              this.map.setCenter(obj.position);
+            }
+            $scope.$emit('objectChanged', [groupName, this.map[groupName]]);
+          } else {
+            obj.groupName = groupName;
+            this._objects.push(obj);
+          }
+        };
+        this.deleteObject = function(groupName, obj) {
+          if (obj.map) {
+            var objs = obj.map[groupName];
+            for (var name in objs) {
+              objs[name] === obj && (delete objs[name]);
+            }
+            obj.map && obj.setMap && obj.setMap(null);
+            $scope.$emit('objectChanged', [groupName, this.map[groupName]]);
+          }
+        };
+        this.addObjects = function(objects) {
+          for (var i = 0; i < objects.length; i++) {
+            var obj = objects[i];
+            if (obj instanceof google.maps.Marker) {
+              this.addObject('markers', obj);
+            } else if (obj instanceof google.maps.Circle || obj instanceof google.maps.Polygon || obj instanceof google.maps.Polyline || obj instanceof google.maps.Rectangle || obj instanceof google.maps.GroundOverlay) {
+              this.addObject('shapes', obj);
+            } else {
+              this.addObject(obj.groupName, obj);
+            }
+          }
+        };
+        this.getGeoLocation = function(string) {
+          var deferred = $q.defer();
+          if (!string || string.match(/^current/i)) {
+            NavigatorGeolocation.getCurrentPosition().then(function(position) {
+              var lat = position.coords.latitude;
+              var lng = position.coords.longitude;
+              var latLng = new google.maps.LatLng(lat, lng);
+              deferred.resolve(latLng);
+            }, function(error) {
+              deferred.reject(error);
+            });
+          } else {
+            GeoCoder.geocode({address: string}).then(function(results) {
+              deferred.resolve(results[0].geometry.location);
+            }, function(error) {
+              deferred.reject(error);
+            });
+          }
+          return deferred.promise;
+        };
+        this.observeAttrSetObj = function(orgAttrs, attrs, obj) {
+          var attrsToObserve = parser.getAttrsToObserve(orgAttrs);
+          if (Object.keys(attrsToObserve).length) {
+            void 0;
+          }
+          for (var i = 0; i < attrsToObserve.length; i++) {
+            observeAndSet(attrs, attrsToObserve[i], obj);
+          }
+        };
+        this.zoomToIncludeMarkers = function() {
+          var bounds = new google.maps.LatLngBounds();
+          for (var marker in this.map.markers) {
+            bounds.extend(this.map.markers[marker].getPosition());
+          }
+          this.map.fitBounds(bounds);
+        };
+      };
+      MapController.$inject = ['$scope', '$q', 'NavigatorGeolocation', 'GeoCoder', 'Attr2Options'];
+      angular.module('ngMap').controller('MapController', MapController);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('mapsEngineLayer', ['Attr2Options', function(Attr2Options) {
+        var parser = Attr2Options;
+        var getMapsEngineLayer = function(options, events) {
+          var layer = new google.maps.visualization.MapsEngineLayer(options);
+          for (var eventName in events) {
+            google.maps.event.addListener(layer, eventName, events[eventName]);
+          }
+          return layer;
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            var events = parser.getEvents(scope, filtered, events);
+            void 0;
+            var layer = getMapsEngineLayer(options, events);
+            mapController.addObject('mapsEngineLayers', layer);
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      var getMarker = function(options, events) {
+        var marker;
+        if (options.icon instanceof Object) {
+          if (("" + options.icon.path).match(/^[A-Z_]+$/)) {
+            options.icon.path = google.maps.SymbolPath[options.icon.path];
+          }
+          for (var key in options.icon) {
+            var arr = options.icon[key];
+            if (key == "anchor" || key == "origin") {
+              options.icon[key] = new google.maps.Point(arr[0], arr[1]);
+            } else if (key == "size" || key == "scaledSize") {
+              options.icon[key] = new google.maps.Size(arr[0], arr[1]);
+            }
+          }
+        }
+        if (!(options.position instanceof google.maps.LatLng)) {
+          options.position = new google.maps.LatLng(0, 0);
+        }
+        marker = new google.maps.Marker(options);
+        if (Object.keys(events).length > 0) {
+          void 0;
+        }
+        for (var eventName in events) {
+          if (eventName) {
+            google.maps.event.addListener(marker, eventName, events[eventName]);
+          }
+        }
+        return marker;
+      };
+      var marker = function(Attr2Options, $parse) {
+        var parser = Attr2Options;
+        var linkFunc = function(scope, element, attrs, mapController) {
+          var orgAttrs = parser.orgAttributes(element);
+          var filtered = parser.filter(attrs);
+          var markerOptions = parser.getOptions(filtered, scope);
+          var markerEvents = parser.getEvents(scope, filtered);
+          void 0;
+          var address;
+          if (!(markerOptions.position instanceof google.maps.LatLng)) {
+            address = markerOptions.position;
+          }
+          var marker = getMarker(markerOptions, markerEvents);
+          mapController.addObject('markers', marker);
+          if (address) {
+            mapController.getGeoLocation(address).then(function(latlng) {
+              marker.setPosition(latlng);
+              markerOptions.centered && marker.map.setCenter(latlng);
+              var geoCallback = attrs.geoCallback;
+              geoCallback && $parse(geoCallback)(scope);
+            });
+          }
+          mapController.observeAttrSetObj(orgAttrs, attrs, marker);
+          element.bind('$destroy', function() {
+            mapController.deleteObject('markers', marker);
+          });
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: linkFunc
+        };
+      };
+      marker.$inject = ['Attr2Options', '$parse'];
+      angular.module('ngMap').directive('marker', marker);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('overlayMapType', ['Attr2Options', '$window', function(Attr2Options, $window) {
+        var parser = Attr2Options;
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var overlayMapTypeObject;
+            var initMethod = attrs.initMethod || "insertAt";
+            if (attrs.object) {
+              var __scope = scope[attrs.object] ? scope : $window;
+              overlayMapTypeObject = __scope[attrs.object];
+              if (typeof overlayMapTypeObject == "function") {
+                overlayMapTypeObject = new overlayMapTypeObject();
+              }
+            }
+            if (!overlayMapTypeObject) {
+              throw "invalid map-type object";
+            }
+            scope.$on('mapInitialized', function(evt, map) {
+              if (initMethod == "insertAt") {
+                var index = parseInt(attrs.index, 10);
+                map.overlayMapTypes.insertAt(index, overlayMapTypeObject);
+              } else if (initMethod == "push") {
+                map.overlayMapTypes.push(overlayMapTypeObject);
+              }
+            });
+            mapController.addObject('overlayMapTypes', overlayMapTypeObject);
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      var placesAutoComplete = function(Attr2Options, $timeout) {
+        var parser = Attr2Options;
+        var linkFunc = function(scope, element, attrs, ngModelCtrl) {
+          var filtered = parser.filter(attrs);
+          var options = parser.getOptions(filtered);
+          var events = parser.getEvents(scope, filtered);
+          void 0;
+          var autocomplete = new google.maps.places.Autocomplete(element[0], options);
+          for (var eventName in events) {
+            google.maps.event.addListener(autocomplete, eventName, events[eventName]);
+          }
+          var updateModel = function() {
+            $timeout(function() {
+              ngModelCtrl && ngModelCtrl.$setViewValue(element.val());
+            }, 100);
+          };
+          google.maps.event.addListener(autocomplete, 'place_changed', updateModel);
+          element[0].addEventListener('change', updateModel);
+          attrs.$observe('types', function(val) {
+            if (val) {
+              void 0;
+              var optionValue = parser.toOptionValue(val, {key: 'types'});
+              void 0;
+              autocomplete.setTypes(optionValue);
+            }
+          });
+        };
+        return {
+          restrict: 'A',
+          require: '?ngModel',
+          link: linkFunc
+        };
+      };
+      placesAutoComplete.$inject = ['Attr2Options', '$timeout'];
+      angular.module('ngMap').directive('placesAutoComplete', placesAutoComplete);
+    })();
+    (function() {
+      'use strict';
+      var getBounds = function(points) {
+        return new google.maps.LatLngBounds(points[0], points[1]);
+      };
+      var getShape = function(options, events) {
+        var shape;
+        var shapeName = options.name;
+        delete options.name;
+        void 0;
+        if (options.icons) {
+          for (var i = 0; i < options.icons.length; i++) {
+            var el = options.icons[i];
+            if (el.icon.path.match(/^[A-Z_]+$/)) {
+              el.icon.path = google.maps.SymbolPath[el.icon.path];
+            }
+          }
+        }
+        switch (shapeName) {
+          case "circle":
+            if (!(options.center instanceof google.maps.LatLng)) {
+              options.center = new google.maps.LatLng(0, 0);
+            }
+            shape = new google.maps.Circle(options);
+            break;
+          case "polygon":
+            shape = new google.maps.Polygon(options);
+            break;
+          case "polyline":
+            shape = new google.maps.Polyline(options);
+            break;
+          case "rectangle":
+            if (options.bounds) {
+              options.bounds = getBounds(options.bounds);
+            }
+            shape = new google.maps.Rectangle(options);
+            break;
+          case "groundOverlay":
+          case "image":
+            var url = options.url;
+            var bounds = getBounds(options.bounds);
+            var opts = {
+              opacity: options.opacity,
+              clickable: options.clickable,
+              id: options.id
+            };
+            shape = new google.maps.GroundOverlay(url, bounds, opts);
+            break;
+        }
+        for (var eventName in events) {
+          if (events[eventName]) {
+            google.maps.event.addListener(shape, eventName, events[eventName]);
+          }
+        }
+        return shape;
+      };
+      var shape = function(Attr2Options, $parse) {
+        var parser = Attr2Options;
+        var linkFunc = function(scope, element, attrs, mapController) {
+          var orgAttrs = parser.orgAttributes(element);
+          var filtered = parser.filter(attrs);
+          var shapeOptions = parser.getOptions(filtered);
+          var shapeEvents = parser.getEvents(scope, filtered);
+          var address,
+              shapeType;
+          shapeType = shapeOptions.name;
+          if (!(shapeOptions.center instanceof google.maps.LatLng)) {
+            address = shapeOptions.center;
+          }
+          var shape = getShape(shapeOptions, shapeEvents);
+          mapController.addObject('shapes', shape);
+          if (address && shapeType == 'circle') {
+            mapController.getGeoLocation(address).then(function(latlng) {
+              shape.setCenter(latlng);
+              shape.centered && shape.map.setCenter(latlng);
+              var geoCallback = attrs.geoCallback;
+              geoCallback && $parse(geoCallback)(scope);
+            });
+          }
+          mapController.observeAttrSetObj(orgAttrs, attrs, shape);
+          element.bind('$destroy', function() {
+            mapController.deleteObject('shapes', shape);
+          });
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: linkFunc
+        };
+      };
+      shape.$inject = ['Attr2Options', '$parse'];
+      angular.module('ngMap').directive('shape', shape);
+    })();
+    (function() {
+      'use strict';
+      var streetViewPanorama = function(Attr2Options) {
+        var parser = Attr2Options;
+        var getStreetViewPanorama = function(map, options, events) {
+          var svp,
+              container;
+          if (options.container) {
+            container = document.getElementById(options.container);
+            container = container || document.querySelector(options.container);
+          }
+          if (container) {
+            svp = new google.maps.StreetViewPanorama(container, options);
+          } else {
+            svp = map.getStreetView();
+            svp.setOptions(options);
+          }
+          for (var eventName in events) {
+            eventName && google.maps.event.addListener(svp, eventName, events[eventName]);
+          }
+          return svp;
+        };
+        var linkFunc = function(scope, element, attrs, mapController) {
+          var orgAttrs = parser.orgAttributes(element);
+          var filtered = parser.filter(attrs);
+          var options = parser.getOptions(filtered);
+          var controlOptions = parser.getControlOptions(filtered);
+          var svpOptions = angular.extend(options, controlOptions);
+          var svpEvents = parser.getEvents(scope, filtered);
+          void 0;
+          scope.$on('mapInitialized', function(evt, map) {
+            var svp = getStreetViewPanorama(map, svpOptions, svpEvents);
+            map.setStreetView(svp);
+            (!svp.getPosition()) && svp.setPosition(map.getCenter());
+            google.maps.event.addListener(svp, 'position_changed', function() {
+              if (svp.getPosition() !== map.getCenter()) {
+                map.setCenter(svp.getPosition());
+              }
+            });
+            var listener = google.maps.event.addListener(map, 'center_changed', function() {
+              svp.setPosition(map.getCenter());
+              google.maps.event.removeListener(listener);
+            });
+          });
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: linkFunc
+        };
+      };
+      streetViewPanorama.$inject = ['Attr2Options'];
+      angular.module('ngMap').directive('streetViewPanorama', streetViewPanorama);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('trafficLayer', ['Attr2Options', function(Attr2Options) {
+        var parser = Attr2Options;
+        var getLayer = function(options, events) {
+          var layer = new google.maps.TrafficLayer(options);
+          for (var eventName in events) {
+            google.maps.event.addListener(layer, eventName, events[eventName]);
+          }
+          return layer;
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var orgAttrs = parser.orgAttributes(element);
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            var events = parser.getEvents(scope, filtered);
+            void 0;
+            var layer = getLayer(options, events);
+            mapController.addObject('trafficLayers', layer);
+            mapController.observeAttrSetObj(orgAttrs, attrs, layer);
+            element.bind('$destroy', function() {
+              mapController.deleteObject('trafficLayers', layer);
+            });
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('transitLayer', ['Attr2Options', function(Attr2Options) {
+        var parser = Attr2Options;
+        var getLayer = function(options, events) {
+          var layer = new google.maps.TransitLayer(options);
+          for (var eventName in events) {
+            google.maps.event.addListener(layer, eventName, events[eventName]);
+          }
+          return layer;
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var orgAttrs = parser.orgAttributes(element);
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            var events = parser.getEvents(scope, filtered);
+            void 0;
+            var layer = getLayer(options, events);
+            mapController.addObject('transitLayers', layer);
+            mapController.observeAttrSetObj(orgAttrs, attrs, layer);
+            element.bind('$destroy', function() {
+              mapController.deleteObject('transitLayers', layer);
+            });
+          }
+        };
+      }]);
+    })();
+    (function() {
+      'use strict';
+      angular.module('ngMap').directive('weatherLayer', ['Attr2Options', function(Attr2Options) {
+        var parser = Attr2Options;
+        var getLayer = function(options, events) {
+          var layer = new google.maps.weather.WeatherLayer(options);
+          for (var eventName in events) {
+            google.maps.event.addListener(layer, eventName, events[eventName]);
+          }
+          return layer;
+        };
+        return {
+          restrict: 'E',
+          require: '^map',
+          link: function(scope, element, attrs, mapController) {
+            var orgAttrs = parser.orgAttributes(element);
+            var filtered = parser.filter(attrs);
+            var options = parser.getOptions(filtered);
+            var events = parser.getEvents(scope, filtered);
+            void 0;
+            var layer = getLayer(options, events);
+            mapController.addObject('weatherLayers', layer);
+            mapController.observeAttrSetObj(orgAttrs, attrs, layer);
+            element.bind('$destroy', function() {
+              mapController.deleteObject('weatherLayers', layer);
+            });
+          }
+        };
+      }]);
+    })();
+  })();
+  return _retrieveGlobal();
+});
+
+$__System.registerDynamic("14", [], false, function(__require, __exports, __module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
+  (function() {
+    (function() {
+      "use strict";
+      var immutableDirective = (function() {
+        var priority = 2000;
+        var scope = true;
+        var link = (function(scope, el, attrs) {
+          var immutable = attrs.immutable;
+          if (!(/^[a-zA-Z0-9_$]+$/).test(immutable)) {
+            return;
+          }
+          if (!scope[immutable]) {
+            console.warn(("No " + immutable + " property found."));
+          }
+          scope.$watch((function() {
+            return scope.$parent[immutable];
+          }), (function(val) {
+            scope[immutable] = val.toJS();
+          }));
+        });
+        return {
+          priority: priority,
+          scope: scope,
+          link: link
+        };
+      });
+      angular.module('immutable', []).directive('immutable', immutableDirective);
+    }());
+  })();
+  return _retrieveGlobal();
+});
+
+$__System.registerDynamic("15", ["1b"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = require("1b");
+  require("1b");
+  module.exports = 'ngFileUpload';
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("14", ["1c"], true, function(require, exports, module) {
+$__System.registerDynamic("16", ["1c"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("1c");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("17", ["1d"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   "use strict";
-  var _Object$defineProperty = require("1c")["default"];
+  var _Object$defineProperty = require("1d")["default"];
   exports["default"] = (function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -8894,7 +10512,7 @@ $__System.registerDynamic("14", ["1c"], true, function(require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("15", [], true, function(require, exports, module) {
+$__System.registerDynamic("18", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -8910,24 +10528,24 @@ $__System.registerDynamic("15", [], true, function(require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("16", ["1d"], true, function(require, exports, module) {
+$__System.registerDynamic("19", ["1e"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = require("1d");
+  module.exports = require("1e");
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("17", ["1e", "1f"], true, function(require, exports, module) {
+$__System.registerDynamic("1a", ["1f", "20"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   "use strict";
-  var _getIterator = require("1e")["default"];
-  var _isIterable = require("1f")["default"];
+  var _getIterator = require("1f")["default"];
+  var _isIterable = require("20")["default"];
   exports["default"] = (function() {
     function sliceIterator(arr, i) {
       var _arr = [];
@@ -8968,40 +10586,6 @@ $__System.registerDynamic("17", ["1e", "1f"], true, function(require, exports, m
   exports.__esModule = true;
   global.define = __define;
   return module.exports;
-});
-
-$__System.registerDynamic("18", [], false, function(__require, __exports, __module) {
-  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
-  (function() {
-    (function() {
-      "use strict";
-      var immutableDirective = (function() {
-        var priority = 2000;
-        var scope = true;
-        var link = (function(scope, el, attrs) {
-          var immutable = attrs.immutable;
-          if (!(/^[a-zA-Z0-9_$]+$/).test(immutable)) {
-            return;
-          }
-          if (!scope[immutable]) {
-            console.warn(("No " + immutable + " property found."));
-          }
-          scope.$watch((function() {
-            return scope.$parent[immutable];
-          }), (function(val) {
-            scope[immutable] = val.toJS();
-          }));
-        });
-        return {
-          priority: priority,
-          scope: scope,
-          link: link
-        };
-      });
-      angular.module('immutable', []).directive('immutable', immutableDirective);
-    }());
-  })();
-  return _retrieveGlobal();
 });
 
 $__System.registerDynamic("11", [], false, function(__require, __exports, __module) {
@@ -20324,5525 +21908,1772 @@ $__System.registerDynamic("11", [], false, function(__require, __exports, __modu
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("1a", ["20"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  require("20");
-  module.exports = 'ngFileUpload';
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("19", [], false, function(__require, __exports, __module) {
+$__System.registerDynamic("1b", [], false, function(__require, __exports, __module) {
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
   (function() {
-    angular.module('ngMap', []);
+    var ngFileUpload = this["ngFileUpload"];
     (function() {
-      'use strict';
-      var SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
-      var MOZ_HACK_REGEXP = /^moz([A-Z])/;
-      function camelCase(name) {
-        return name.replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
-          return offset ? letter.toUpperCase() : letter;
-        }).replace(MOZ_HACK_REGEXP, 'Moz$1');
+      function patchXHR(fnName, newFn) {
+        window.XMLHttpRequest.prototype[fnName] = newFn(window.XMLHttpRequest.prototype[fnName]);
       }
-      function JSONize(str) {
+      function redefineProp(xhr, prop, fn) {
         try {
-          JSON.parse(str);
-          return str;
-        } catch (e) {
-          return str.replace(/([\$\w]+)\s*:/g, function(_, $1) {
-            return '"' + $1 + '":';
-          }).replace(/'([^']+)'/g, function(_, $1) {
-            return '"' + $1 + '"';
-          });
-        }
+          Object.defineProperty(xhr, prop, {get: fn});
+        } catch (e) {}
       }
-      var Attr2Options = function($parse, $timeout, NavigatorGeolocation, GeoCoder) {
-        var orgAttributes = function(el) {
-          (el.length > 0) && (el = el[0]);
-          var orgAttributes = {};
-          for (var i = 0; i < el.attributes.length; i++) {
-            var attr = el.attributes[i];
-            orgAttributes[attr.name] = attr.value;
+      if (!window.FileAPI) {
+        window.FileAPI = {};
+      }
+      FileAPI.shouldLoad = (window.XMLHttpRequest && !window.FormData) || FileAPI.forceLoad;
+      if (FileAPI.shouldLoad) {
+        var initializeUploadListener = function(xhr) {
+          if (!xhr.__listeners) {
+            if (!xhr.upload)
+              xhr.upload = {};
+            xhr.__listeners = [];
+            var origAddEventListener = xhr.upload.addEventListener;
+            xhr.upload.addEventListener = function(t, fn) {
+              xhr.__listeners[t] = fn;
+              if (origAddEventListener)
+                origAddEventListener.apply(this, arguments);
+            };
           }
-          return orgAttributes;
         };
-        var toOptionValue = function(input, options) {
-          var output,
-              key = options.key,
-              scope = options.scope;
-          try {
-            var num = Number(input);
-            if (isNaN(num)) {
-              throw "Not a number";
-            } else {
-              output = num;
-            }
-          } catch (err) {
+        patchXHR('open', function(orig) {
+          return function(m, url, b) {
+            initializeUploadListener(this);
+            this.__url = url;
             try {
-              if (input.match(/^[\+\-]?[0-9\.]+,[ ]*\ ?[\+\-]?[0-9\.]+$/)) {
-                input = "[" + input + "]";
-              }
-              output = JSON.parse(JSONize(input));
-              if (output instanceof Array) {
-                var t1stEl = output[0];
-                if (t1stEl.constructor == Object) {} else if (t1stEl.constructor == Array) {
-                  output = output.map(function(el) {
-                    return new google.maps.LatLng(el[0], el[1]);
-                  });
-                } else if (!isNaN(parseFloat(t1stEl)) && isFinite(t1stEl)) {
-                  return new google.maps.LatLng(output[0], output[1]);
-                }
-              } else if (output === Object(output)) {
-                output = getOptions(output, options);
-              }
-            } catch (err2) {
-              if (input.match(/^[A-Z][a-zA-Z0-9]+\(.*\)$/)) {
-                try {
-                  var exp = "new google.maps." + input;
-                  output = eval(exp);
-                } catch (e) {
-                  output = input;
-                }
-              } else if (input.match(/^([A-Z][a-zA-Z0-9]+)\.([A-Z]+)$/)) {
-                try {
-                  var matches = input.match(/^([A-Z][a-zA-Z0-9]+)\.([A-Z]+)$/);
-                  output = google.maps[matches[1]][matches[2]];
-                } catch (e) {
-                  output = input;
-                }
-              } else if (input.match(/^[A-Z]+$/)) {
-                try {
-                  var capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
-                  if (key.match(/temperatureUnit|windSpeedUnit|labelColor/)) {
-                    capitalizedKey = capitalizedKey.replace(/s$/, "");
-                    output = google.maps.weather[capitalizedKey][input];
-                  } else {
-                    output = google.maps[capitalizedKey][input];
-                  }
-                } catch (e) {
-                  output = input;
-                }
-              } else if (input.match(/\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/)) {
-                try {
-                  output = new Date(input);
-                } catch (e) {
-                  output = input;
-                }
-              } else {
-                output = input;
+              orig.apply(this, [m, url, b]);
+            } catch (e) {
+              if (e.message.indexOf('Access is denied') > -1) {
+                this.__origError = e;
+                orig.apply(this, [m, '_fix_for_ie_crossdomain__', b]);
               }
             }
-          }
-          return output;
-        };
-        var getAttrsToObserve = function(attrs) {
-          var attrsToObserve = [];
-          if (attrs["ng-repeat"] || attrs.ngRepeat) {
-            void(0);
-          } else {
-            for (var attrName in attrs) {
-              var attrValue = attrs[attrName];
-              if (attrValue && attrValue.match(/\{\{.*\}\}/)) {
-                void 0;
-                attrsToObserve.push(camelCase(attrName));
-              }
-            }
-          }
-          return attrsToObserve;
-        };
-        var filter = function(attrs) {
-          var options = {};
-          for (var key in attrs) {
-            if (key.match(/^\$/) || key.match(/^ng[A-Z]/)) {
-              void(0);
-            } else {
-              options[key] = attrs[key];
-            }
-          }
-          return options;
-        };
-        var getOptions = function(attrs, scope) {
-          var options = {};
-          for (var key in attrs) {
-            if (attrs[key]) {
-              if (key.match(/^on[A-Z]/)) {
-                continue;
-              } else if (key.match(/ControlOptions$/)) {
-                continue;
-              } else {
-                if (typeof attrs[key] !== 'string') {
-                  options[key] = attrs[key];
-                } else {
-                  options[key] = toOptionValue(attrs[key], {
-                    scope: scope,
-                    key: key
-                  });
-                }
-              }
-            }
-          }
-          return options;
-        };
-        var getEvents = function(scope, attrs) {
-          var events = {};
-          var toLowercaseFunc = function($1) {
-            return "_" + $1.toLowerCase();
           };
-          var eventFunc = function(attrValue) {
-            var matches = attrValue.match(/([^\(]+)\(([^\)]*)\)/);
-            var funcName = matches[1];
-            var argsStr = matches[2].replace(/event[ ,]*/, '');
-            var argsExpr = $parse("[" + argsStr + "]");
-            return function(event) {
-              var args = argsExpr(scope);
-              function index(obj, i) {
-                return obj[i];
+        });
+        patchXHR('getResponseHeader', function(orig) {
+          return function(h) {
+            return this.__fileApiXHR && this.__fileApiXHR.getResponseHeader ? this.__fileApiXHR.getResponseHeader(h) : (orig == null ? null : orig.apply(this, [h]));
+          };
+        });
+        patchXHR('getAllResponseHeaders', function(orig) {
+          return function() {
+            return this.__fileApiXHR && this.__fileApiXHR.getAllResponseHeaders ? this.__fileApiXHR.getAllResponseHeaders() : (orig == null ? null : orig.apply(this));
+          };
+        });
+        patchXHR('abort', function(orig) {
+          return function() {
+            return this.__fileApiXHR && this.__fileApiXHR.abort ? this.__fileApiXHR.abort() : (orig == null ? null : orig.apply(this));
+          };
+        });
+        patchXHR('setRequestHeader', function(orig) {
+          return function(header, value) {
+            if (header === '__setXHR_') {
+              initializeUploadListener(this);
+              var val = value(this);
+              if (val instanceof Function) {
+                val(this);
               }
-              var f = funcName.split('.').reduce(index, scope);
-              f && f.apply(this, [event].concat(args));
-              $timeout(function() {
-                scope.$apply();
+            } else {
+              this.__requestHeaders = this.__requestHeaders || {};
+              this.__requestHeaders[header] = value;
+              orig.apply(this, arguments);
+            }
+          };
+        });
+        patchXHR('send', function(orig) {
+          return function() {
+            var xhr = this;
+            if (arguments[0] && arguments[0].__isFileAPIShim) {
+              var formData = arguments[0];
+              var config = {
+                url: xhr.__url,
+                jsonp: false,
+                cache: true,
+                complete: function(err, fileApiXHR) {
+                  if (err && angular.isString(err) && err.indexOf('#2174') !== -1) {
+                    err = null;
+                  }
+                  xhr.__completed = true;
+                  if (!err && xhr.__listeners.load)
+                    xhr.__listeners.load({
+                      type: 'load',
+                      loaded: xhr.__loaded,
+                      total: xhr.__total,
+                      target: xhr,
+                      lengthComputable: true
+                    });
+                  if (!err && xhr.__listeners.loadend)
+                    xhr.__listeners.loadend({
+                      type: 'loadend',
+                      loaded: xhr.__loaded,
+                      total: xhr.__total,
+                      target: xhr,
+                      lengthComputable: true
+                    });
+                  if (err === 'abort' && xhr.__listeners.abort)
+                    xhr.__listeners.abort({
+                      type: 'abort',
+                      loaded: xhr.__loaded,
+                      total: xhr.__total,
+                      target: xhr,
+                      lengthComputable: true
+                    });
+                  if (fileApiXHR.status !== undefined)
+                    redefineProp(xhr, 'status', function() {
+                      return (fileApiXHR.status === 0 && err && err !== 'abort') ? 500 : fileApiXHR.status;
+                    });
+                  if (fileApiXHR.statusText !== undefined)
+                    redefineProp(xhr, 'statusText', function() {
+                      return fileApiXHR.statusText;
+                    });
+                  redefineProp(xhr, 'readyState', function() {
+                    return 4;
+                  });
+                  if (fileApiXHR.response !== undefined)
+                    redefineProp(xhr, 'response', function() {
+                      return fileApiXHR.response;
+                    });
+                  var resp = fileApiXHR.responseText || (err && fileApiXHR.status === 0 && err !== 'abort' ? err : undefined);
+                  redefineProp(xhr, 'responseText', function() {
+                    return resp;
+                  });
+                  redefineProp(xhr, 'response', function() {
+                    return resp;
+                  });
+                  if (err)
+                    redefineProp(xhr, 'err', function() {
+                      return err;
+                    });
+                  xhr.__fileApiXHR = fileApiXHR;
+                  if (xhr.onreadystatechange)
+                    xhr.onreadystatechange();
+                  if (xhr.onload)
+                    xhr.onload();
+                },
+                progress: function(e) {
+                  e.target = xhr;
+                  if (xhr.__listeners.progress)
+                    xhr.__listeners.progress(e);
+                  xhr.__total = e.total;
+                  xhr.__loaded = e.loaded;
+                  if (e.total === e.loaded) {
+                    var _this = this;
+                    setTimeout(function() {
+                      if (!xhr.__completed) {
+                        xhr.getAllResponseHeaders = function() {};
+                        _this.complete(null, {
+                          status: 204,
+                          statusText: 'No Content'
+                        });
+                      }
+                    }, FileAPI.noContentTimeout || 10000);
+                  }
+                },
+                headers: xhr.__requestHeaders
+              };
+              config.data = {};
+              config.files = {};
+              for (var i = 0; i < formData.data.length; i++) {
+                var item = formData.data[i];
+                if (item.val != null && item.val.name != null && item.val.size != null && item.val.type != null) {
+                  config.files[item.key] = item.val;
+                } else {
+                  config.data[item.key] = item.val;
+                }
+              }
+              setTimeout(function() {
+                if (!FileAPI.hasFlash) {
+                  throw 'Adode Flash Player need to be installed. To check ahead use "FileAPI.hasFlash"';
+                }
+                xhr.__fileApiXHR = FileAPI.upload(config);
+              }, 1);
+            } else {
+              if (this.__origError) {
+                throw this.__origError;
+              }
+              orig.apply(xhr, arguments);
+            }
+          };
+        });
+        window.XMLHttpRequest.__isFileAPIShim = true;
+        window.FormData = FormData = function() {
+          return {
+            append: function(key, val, name) {
+              if (val.__isFileAPIBlobShim) {
+                val = val.data[0];
+              }
+              this.data.push({
+                key: key,
+                val: val,
+                name: name
               });
+            },
+            data: [],
+            __isFileAPIShim: true
+          };
+        };
+        window.Blob = Blob = function(b) {
+          return {
+            data: b,
+            __isFileAPIBlobShim: true
+          };
+        };
+      }
+    })();
+    (function() {
+      function isInputTypeFile(elem) {
+        return elem[0].tagName.toLowerCase() === 'input' && elem.attr('type') && elem.attr('type').toLowerCase() === 'file';
+      }
+      function hasFlash() {
+        try {
+          var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+          if (fo)
+            return true;
+        } catch (e) {
+          if (navigator.mimeTypes['application/x-shockwave-flash'] !== undefined)
+            return true;
+        }
+        return false;
+      }
+      function getOffset(obj) {
+        var left = 0,
+            top = 0;
+        if (window.jQuery) {
+          return jQuery(obj).offset();
+        }
+        if (obj.offsetParent) {
+          do {
+            left += (obj.offsetLeft - obj.scrollLeft);
+            top += (obj.offsetTop - obj.scrollTop);
+            obj = obj.offsetParent;
+          } while (obj);
+        }
+        return {
+          left: left,
+          top: top
+        };
+      }
+      if (FileAPI.shouldLoad) {
+        if (FileAPI.forceLoad) {
+          FileAPI.html5 = false;
+        }
+        if (!FileAPI.upload) {
+          var jsUrl,
+              basePath,
+              script = document.createElement('script'),
+              allScripts = document.getElementsByTagName('script'),
+              i,
+              index,
+              src;
+          if (window.FileAPI.jsUrl) {
+            jsUrl = window.FileAPI.jsUrl;
+          } else if (window.FileAPI.jsPath) {
+            basePath = window.FileAPI.jsPath;
+          } else {
+            for (i = 0; i < allScripts.length; i++) {
+              src = allScripts[i].src;
+              index = src.search(/\/ng\-file\-upload[\-a-zA-z0-9\.]*\.js/);
+              if (index > -1) {
+                basePath = src.substring(0, index + 1);
+                break;
+              }
+            }
+          }
+          if (FileAPI.staticPath == null)
+            FileAPI.staticPath = basePath;
+          script.setAttribute('src', jsUrl || basePath + 'FileAPI.min.js');
+          document.getElementsByTagName('head')[0].appendChild(script);
+          FileAPI.hasFlash = hasFlash();
+        }
+        FileAPI.ngfFixIE = function(elem, fileElem, changeFn) {
+          if (!hasFlash()) {
+            throw 'Adode Flash Player need to be installed. To check ahead use "FileAPI.hasFlash"';
+          }
+          var fixInputStyle = function() {
+            if (elem.attr('disabled')) {
+              if (fileElem)
+                fileElem.removeClass('js-fileapi-wrapper');
+            } else {
+              if (!fileElem.attr('__ngf_flash_')) {
+                fileElem.unbind('change');
+                fileElem.unbind('click');
+                fileElem.bind('change', function(evt) {
+                  fileApiChangeFn.apply(this, [evt]);
+                  changeFn.apply(this, [evt]);
+                });
+                fileElem.attr('__ngf_flash_', 'true');
+              }
+              fileElem.addClass('js-fileapi-wrapper');
+              if (!isInputTypeFile(elem)) {
+                fileElem.css('position', 'absolute').css('top', getOffset(elem[0]).top + 'px').css('left', getOffset(elem[0]).left + 'px').css('width', elem[0].offsetWidth + 'px').css('height', elem[0].offsetHeight + 'px').css('filter', 'alpha(opacity=0)').css('display', elem.css('display')).css('overflow', 'hidden').css('z-index', '900000').css('visibility', 'visible');
+              }
+            }
+          };
+          elem.bind('mouseenter', fixInputStyle);
+          var fileApiChangeFn = function(evt) {
+            var files = FileAPI.getFiles(evt);
+            for (var i = 0; i < files.length; i++) {
+              if (files[i].size === undefined)
+                files[i].size = 0;
+              if (files[i].name === undefined)
+                files[i].name = 'file';
+              if (files[i].type === undefined)
+                files[i].type = 'undefined';
+            }
+            if (!evt.target) {
+              evt.target = {};
+            }
+            evt.target.files = files;
+            if (evt.target.files !== files) {
+              evt.__files_ = files;
+            }
+            (evt.__files_ || evt.target.files).item = function(i) {
+              return (evt.__files_ || evt.target.files)[i] || null;
             };
           };
-          for (var key in attrs) {
-            if (attrs[key]) {
-              if (!key.match(/^on[A-Z]/)) {
-                continue;
-              }
-              var eventName = key.replace(/^on/, '');
-              eventName = eventName.charAt(0).toLowerCase() + eventName.slice(1);
-              eventName = eventName.replace(/([A-Z])/g, toLowercaseFunc);
-              var attrValue = attrs[key];
-              events[eventName] = new eventFunc(attrValue);
+        };
+        FileAPI.disableFileInput = function(elem, disable) {
+          if (disable) {
+            elem.removeClass('js-fileapi-wrapper');
+          } else {
+            elem.addClass('js-fileapi-wrapper');
+          }
+        };
+      }
+    })();
+    if (!window.FileReader) {
+      window.FileReader = function() {
+        var _this = this,
+            loadStarted = false;
+        this.listeners = {};
+        this.addEventListener = function(type, fn) {
+          _this.listeners[type] = _this.listeners[type] || [];
+          _this.listeners[type].push(fn);
+        };
+        this.removeEventListener = function(type, fn) {
+          if (_this.listeners[type])
+            _this.listeners[type].splice(_this.listeners[type].indexOf(fn), 1);
+        };
+        this.dispatchEvent = function(evt) {
+          var list = _this.listeners[evt.type];
+          if (list) {
+            for (var i = 0; i < list.length; i++) {
+              list[i].call(_this, evt);
             }
           }
-          return events;
         };
-        var getControlOptions = function(filtered) {
-          var controlOptions = {};
-          if (typeof filtered != 'object') {
-            return false;
+        this.onabort = this.onerror = this.onload = this.onloadstart = this.onloadend = this.onprogress = null;
+        var constructEvent = function(type, evt) {
+          var e = {
+            type: type,
+            target: _this,
+            loaded: evt.loaded,
+            total: evt.total,
+            error: evt.error
+          };
+          if (evt.result != null)
+            e.target.result = evt.result;
+          return e;
+        };
+        var listener = function(evt) {
+          if (!loadStarted) {
+            loadStarted = true;
+            if (_this.onloadstart)
+              _this.onloadstart(constructEvent('loadstart', evt));
           }
-          for (var attr in filtered) {
-            if (filtered[attr]) {
-              if (!attr.match(/(.*)ControlOptions$/)) {
-                continue;
+          var e;
+          if (evt.type === 'load') {
+            if (_this.onloadend)
+              _this.onloadend(constructEvent('loadend', evt));
+            e = constructEvent('load', evt);
+            if (_this.onload)
+              _this.onload(e);
+            _this.dispatchEvent(e);
+          } else if (evt.type === 'progress') {
+            e = constructEvent('progress', evt);
+            if (_this.onprogress)
+              _this.onprogress(e);
+            _this.dispatchEvent(e);
+          } else {
+            e = constructEvent('error', evt);
+            if (_this.onerror)
+              _this.onerror(e);
+            _this.dispatchEvent(e);
+          }
+        };
+        this.readAsArrayBuffer = function(file) {
+          FileAPI.readAsBinaryString(file, listener);
+        };
+        this.readAsBinaryString = function(file) {
+          FileAPI.readAsBinaryString(file, listener);
+        };
+        this.readAsDataURL = function(file) {
+          FileAPI.readAsDataURL(file, listener);
+        };
+        this.readAsText = function(file) {
+          FileAPI.readAsText(file, listener);
+        };
+      };
+    }
+    if (window.XMLHttpRequest && !(window.FileAPI && FileAPI.shouldLoad)) {
+      window.XMLHttpRequest.prototype.setRequestHeader = (function(orig) {
+        return function(header, value) {
+          if (header === '__setXHR_') {
+            var val = value(this);
+            if (val instanceof Function) {
+              val(this);
+            }
+          } else {
+            orig.apply(this, arguments);
+          }
+        };
+      })(window.XMLHttpRequest.prototype.setRequestHeader);
+    }
+    var ngFileUpload = angular.module('ngFileUpload', []);
+    ngFileUpload.version = '7.2.1';
+    ngFileUpload.service('UploadBase', ['$http', '$q', '$timeout', function($http, $q, $timeout) {
+      function sendHttp(config) {
+        config.method = config.method || 'POST';
+        config.headers = config.headers || {};
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        config.headers.__setXHR_ = function() {
+          return function(xhr) {
+            if (!xhr)
+              return;
+            config.__XHR = xhr;
+            if (config.xhrFn)
+              config.xhrFn(xhr);
+            xhr.upload.addEventListener('progress', function(e) {
+              e.config = config;
+              if (deferred.notify) {
+                deferred.notify(e);
+              } else if (promise.progressFunc) {
+                $timeout(function() {
+                  promise.progressFunc(e);
+                });
               }
-              var orgValue = filtered[attr];
-              var newValue = orgValue.replace(/'/g, '"');
-              newValue = newValue.replace(/([^"]+)|("[^"]+")/g, function($0, $1, $2) {
-                if ($1) {
-                  return $1.replace(/([a-zA-Z0-9]+?):/g, '"$1":');
-                } else {
-                  return $2;
+            }, false);
+            xhr.upload.addEventListener('load', function(e) {
+              if (e.lengthComputable) {
+                e.config = config;
+                if (deferred.notify) {
+                  deferred.notify(e);
+                } else if (promise.progressFunc) {
+                  $timeout(function() {
+                    promise.progressFunc(e);
+                  });
                 }
-              });
-              try {
-                var options = JSON.parse(newValue);
-                for (var key in options) {
-                  if (options[key]) {
-                    var value = options[key];
-                    if (typeof value === 'string') {
-                      value = value.toUpperCase();
-                    } else if (key === "mapTypeIds") {
-                      value = value.map(function(str) {
-                        if (str.match(/^[A-Z]+$/)) {
-                          return google.maps.MapTypeId[str.toUpperCase()];
-                        } else {
-                          return str;
-                        }
-                      });
-                    }
-                    if (key === "style") {
-                      var str = attr.charAt(0).toUpperCase() + attr.slice(1);
-                      var objName = str.replace(/Options$/, '') + "Style";
-                      options[key] = google.maps[objName][value];
-                    } else if (key === "position") {
-                      options[key] = google.maps.ControlPosition[value];
-                    } else {
-                      options[key] = value;
-                    }
+              }
+            }, false);
+          };
+        };
+        $http(config).then(function(r) {
+          deferred.resolve(r);
+        }, function(e) {
+          deferred.reject(e);
+        }, function(n) {
+          deferred.notify(n);
+        });
+        promise.success = function(fn) {
+          promise.then(function(response) {
+            fn(response.data, response.status, response.headers, config);
+          });
+          return promise;
+        };
+        promise.error = function(fn) {
+          promise.then(null, function(response) {
+            fn(response.data, response.status, response.headers, config);
+          });
+          return promise;
+        };
+        promise.progress = function(fn) {
+          promise.progressFunc = fn;
+          promise.then(null, null, function(update) {
+            fn(update);
+          });
+          return promise;
+        };
+        promise.abort = function() {
+          if (config.__XHR) {
+            $timeout(function() {
+              config.__XHR.abort();
+            });
+          }
+          return promise;
+        };
+        promise.xhr = function(fn) {
+          config.xhrFn = (function(origXhrFn) {
+            return function() {
+              if (origXhrFn)
+                origXhrFn.apply(promise, arguments);
+              fn.apply(promise, arguments);
+            };
+          })(config.xhrFn);
+          return promise;
+        };
+        return promise;
+      }
+      this.upload = function(config) {
+        function addFieldToFormData(formData, val, key) {
+          if (val !== undefined) {
+            if (angular.isDate(val)) {
+              val = val.toISOString();
+            }
+            if (angular.isString(val)) {
+              formData.append(key, val);
+            } else if (config.sendFieldsAs === 'form') {
+              if (angular.isObject(val)) {
+                for (var k in val) {
+                  if (val.hasOwnProperty(k)) {
+                    addFieldToFormData(formData, val[k], key + '[' + k + ']');
                   }
                 }
-                controlOptions[attr] = options;
-              } catch (e) {
-                void 0;
-              }
-            }
-          }
-          return controlOptions;
-        };
-        return {
-          camelCase: camelCase,
-          filter: filter,
-          getOptions: getOptions,
-          getEvents: getEvents,
-          getControlOptions: getControlOptions,
-          toOptionValue: toOptionValue,
-          getAttrsToObserve: getAttrsToObserve,
-          orgAttributes: orgAttributes
-        };
-      };
-      Attr2Options.$inject = ['$parse', '$timeout', 'NavigatorGeolocation', 'GeoCoder'];
-      angular.module('ngMap').service('Attr2Options', Attr2Options);
-    })();
-    (function() {
-      'use strict';
-      var GeoCoder = function($q) {
-        return {geocode: function(options) {
-            var deferred = $q.defer();
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode(options, function(results, status) {
-              if (status == google.maps.GeocoderStatus.OK) {
-                deferred.resolve(results);
               } else {
-                deferred.reject('Geocoder failed due to: ' + status);
+                formData.append(key, val);
               }
-            });
-            return deferred.promise;
-          }};
-      };
-      GeoCoder.$inject = ['$q'];
-      angular.module('ngMap').service('GeoCoder', GeoCoder);
-    })();
-    (function() {
-      'use strict';
-      var NavigatorGeolocation = function($q) {
-        return {
-          getCurrentPosition: function() {
-            var deferred = $q.defer();
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(function(position) {
-                deferred.resolve(position);
-              }, function(evt) {
-                void 0;
-                deferred.reject(evt);
-              });
             } else {
-              deferred.reject("Browser Geolocation service failed.");
+              val = angular.isString(val) ? val : angular.toJson(val);
+              if (config.sendFieldsAs === 'json-blob') {
+                formData.append(key, new Blob([val], {type: 'application/json'}));
+              } else {
+                formData.append(key, val);
+              }
             }
-            return deferred.promise;
-          },
-          watchPosition: function() {
-            return "TODO";
-          },
-          clearWatch: function() {
-            return "TODO";
           }
-        };
-      };
-      NavigatorGeolocation.$inject = ['$q'];
-      angular.module('ngMap').service('NavigatorGeolocation', NavigatorGeolocation);
-    })();
-    (function() {
-      'use strict';
-      var StreetView = function($q) {
-        var getPanorama = function(map, latlng) {
-          latlng = latlng || map.getCenter();
-          var deferred = $q.defer();
-          var svs = new google.maps.StreetViewService();
-          svs.getPanoramaByLocation((latlng || map.getCenter), 100, function(data, status) {
-            if (status === google.maps.StreetViewStatus.OK) {
-              deferred.resolve(data.location.pano);
+        }
+        function isFile(file) {
+          return file instanceof Blob || (file.flashId && file.name && file.size);
+        }
+        function addFileToFormData(formData, file, key) {
+          if (isFile(file)) {
+            formData.append(key, file, file.fileName || file.name);
+          } else if (angular.isObject(file)) {
+            for (var k in file) {
+              if (file.hasOwnProperty(k)) {
+                var split = k.split(',');
+                if (split[1]) {
+                  file[k].fileName = split[1].replace(/^\s+|\s+$/g, '');
+                }
+                addFileToFormData(formData, file[k], split[0]);
+              }
+            }
+          } else {
+            throw 'Expected file object in Upload.upload file option: ' + file.toString();
+          }
+        }
+        config.headers = config.headers || {};
+        config.headers['Content-Type'] = undefined;
+        config.transformRequest = config.transformRequest ? (angular.isArray(config.transformRequest) ? config.transformRequest : [config.transformRequest]) : [];
+        config.transformRequest.push(function(data) {
+          var formData = new FormData(),
+              allFields = {},
+              key;
+          for (key in config.fields) {
+            if (config.fields.hasOwnProperty(key)) {
+              allFields[key] = config.fields[key];
+            }
+          }
+          if (data)
+            allFields.data = data;
+          for (key in allFields) {
+            if (allFields.hasOwnProperty(key)) {
+              var val = allFields[key];
+              if (config.formDataAppender) {
+                config.formDataAppender(formData, key, val);
+              } else {
+                addFieldToFormData(formData, val, key);
+              }
+            }
+          }
+          if (config.file != null) {
+            if (angular.isArray(config.file)) {
+              for (var i = 0; i < config.file.length; i++) {
+                addFileToFormData(formData, config.file[i], 'file');
+              }
             } else {
-              deferred.resolve(false);
+              addFileToFormData(formData, config.file, 'file');
+            }
+          }
+          return formData;
+        });
+        return sendHttp(config);
+      };
+      this.http = function(config) {
+        config.transformRequest = config.transformRequest || function(data) {
+          if ((window.ArrayBuffer && data instanceof window.ArrayBuffer) || data instanceof Blob) {
+            return data;
+          }
+          return $http.defaults.transformRequest[0].apply(this, arguments);
+        };
+        return sendHttp(config);
+      };
+      this.setDefaults = function(defaults) {
+        this.defaults = defaults || {};
+      };
+      this.defaults = {};
+      this.version = ngFileUpload.version;
+    }]);
+    ngFileUpload.service('Upload', ['$parse', '$timeout', '$compile', 'UploadResize', function($parse, $timeout, $compile, UploadResize) {
+      var upload = UploadResize;
+      upload.getAttrWithDefaults = function(attr, name) {
+        return attr[name] != null ? attr[name] : (upload.defaults[name] == null ? upload.defaults[name] : upload.defaults[name].toString());
+      };
+      upload.attrGetter = function(name, attr, scope, params) {
+        if (scope) {
+          try {
+            if (params) {
+              return $parse(this.getAttrWithDefaults(attr, name))(scope, params);
+            } else {
+              return $parse(this.getAttrWithDefaults(attr, name))(scope);
+            }
+          } catch (e) {
+            if (name.search(/min|max|pattern/i)) {
+              return this.getAttrWithDefaults(attr, name);
+            } else {
+              throw e;
+            }
+          }
+        } else {
+          return this.getAttrWithDefaults(attr, name);
+        }
+      };
+      upload.updateModel = function(ngModel, attr, scope, fileChange, files, evt, noDelay) {
+        function update() {
+          var file = files && files.length ? files[0] : null;
+          if (ngModel) {
+            var singleModel = !upload.attrGetter('ngfMultiple', attr, scope) && !upload.attrGetter('multiple', attr) && !keep;
+            $parse(upload.attrGetter('ngModel', attr)).assign(scope, singleModel ? file : files);
+          }
+          var ngfModel = upload.attrGetter('ngfModel', attr);
+          if (ngfModel) {
+            $parse(ngfModel).assign(scope, files);
+          }
+          if (fileChange) {
+            $parse(fileChange)(scope, {
+              $files: files,
+              $file: file,
+              $event: evt
+            });
+          }
+          $timeout(function() {});
+        }
+        var keep = upload.attrGetter('ngfKeep', attr, scope);
+        if (keep === true) {
+          if (!files || !files.length) {
+            return;
+          } else {
+            var prevFiles = ((ngModel && ngModel.$modelValue) || attr.$$ngfPrevFiles || []).slice(0),
+                hasNew = false;
+            if (upload.attrGetter('ngfKeepDistinct', attr, scope) === true) {
+              var len = prevFiles.length;
+              for (var i = 0; i < files.length; i++) {
+                for (var j = 0; j < len; j++) {
+                  if (files[i].name === prevFiles[j].name)
+                    break;
+                }
+                if (j === len) {
+                  prevFiles.push(files[i]);
+                  hasNew = true;
+                }
+              }
+              if (!hasNew)
+                return;
+              files = prevFiles;
+            } else {
+              files = prevFiles.concat(files);
+            }
+          }
+        }
+        attr.$$ngfPrevFiles = files;
+        function resize(files, callback) {
+          var param = upload.attrGetter('ngfResize', attr, scope);
+          if (!param)
+            return callback();
+          var count = files.length;
+          var checkCallback = function() {
+            count--;
+            if (count === 0)
+              callback();
+          };
+          var success = function(index) {
+            return function(resizedFile) {
+              files.splice(index, 1, resizedFile);
+              checkCallback();
+            };
+          };
+          var error = function(f) {
+            return function(e) {
+              checkCallback();
+              f.$error = 'resize';
+              f.$errorParam = (e ? (e.message ? e.message : e) + ': ' : '') + (f && f.name);
+            };
+          };
+          for (var i = 0; i < files.length; i++) {
+            var f = files[i];
+            if (!f.$error && f.type.indexOf('image') === 0) {
+              upload.resize(f, param.width, param.height, param.quality).then(success(i), error(f));
+            } else {
+              checkCallback();
+            }
+          }
+        }
+        if (noDelay) {
+          update();
+        } else if (upload.validate(files, ngModel, attr, scope, upload.attrGetter('ngfValidateLater', attr), function() {
+          resize(files, function() {
+            $timeout(function() {
+              update();
+            });
+          });
+        }))
+          ;
+      };
+      return upload;
+    }]);
+    ngFileUpload.directive('ngfSelect', ['$parse', '$timeout', '$compile', 'Upload', function($parse, $timeout, $compile, Upload) {
+      var generatedElems = [];
+      function isDelayedClickSupported(ua) {
+        var m = ua.match(/Android[^\d]*(\d+)\.(\d+)/);
+        if (m && m.length > 2) {
+          var v = Upload.defaults.androidFixMinorVersion || 4;
+          return parseInt(m[1]) < 4 || (parseInt(m[1]) === v && parseInt(m[2]) < v);
+        }
+        return ua.indexOf('Chrome') === -1 && /.*Windows.*Safari.*/.test(ua);
+      }
+      function linkFileSelect(scope, elem, attr, ngModel, $parse, $timeout, $compile, upload) {
+        var attrGetter = function(name, scope) {
+          return upload.attrGetter(name, attr, scope);
+        };
+        function isInputTypeFile() {
+          return elem[0].tagName.toLowerCase() === 'input' && attr.type && attr.type.toLowerCase() === 'file';
+        }
+        function fileChangeAttr() {
+          return attrGetter('ngfChange') || attrGetter('ngfSelect');
+        }
+        function changeFn(evt) {
+          var fileList = evt.__files_ || (evt.target && evt.target.files),
+              files = [];
+          for (var i = 0; i < fileList.length; i++) {
+            files.push(fileList[i]);
+          }
+          upload.updateModel(ngModel, attr, scope, fileChangeAttr(), files.length ? files : null, evt);
+        }
+        var unwatches = [];
+        unwatches.push(scope.$watch(attrGetter('ngfMultiple'), function() {
+          fileElem.attr('multiple', attrGetter('ngfMultiple', scope));
+        }));
+        unwatches.push(scope.$watch(attrGetter('ngfCapture'), function() {
+          fileElem.attr('capture', attrGetter('ngfCapture', scope));
+        }));
+        attr.$observe('accept', function() {
+          fileElem.attr('accept', attrGetter('accept'));
+        });
+        unwatches.push(function() {
+          if (attr.$$observers)
+            delete attr.$$observers.accept;
+        });
+        function bindAttrToFileInput(fileElem) {
+          if (elem !== fileElem) {
+            for (var i = 0; i < elem[0].attributes.length; i++) {
+              var attribute = elem[0].attributes[i];
+              if (attribute.name !== 'type' && attribute.name !== 'class' && attribute.name !== 'id' && attribute.name !== 'style') {
+                if (attribute.value == null || attribute.value === '') {
+                  if (attribute.name === 'required')
+                    attribute.value = 'required';
+                  if (attribute.name === 'multiple')
+                    attribute.value = 'multiple';
+                }
+                fileElem.attr(attribute.name, attribute.value);
+              }
+            }
+          }
+        }
+        function createFileInput() {
+          if (isInputTypeFile()) {
+            return elem;
+          }
+          var fileElem = angular.element('<input type="file">');
+          bindAttrToFileInput(fileElem);
+          fileElem.css('visibility', 'hidden').css('position', 'absolute').css('overflow', 'hidden').css('width', '0px').css('height', '0px').css('border', 'none').css('margin', '0px').css('padding', '0px').attr('tabindex', '-1');
+          generatedElems.push({
+            el: elem,
+            ref: fileElem
+          });
+          document.body.appendChild(fileElem[0]);
+          return fileElem;
+        }
+        var initialTouchStartY = 0;
+        function clickHandler(evt) {
+          if (elem.attr('disabled') || attrGetter('ngfSelectDisabled', scope))
+            return false;
+          var r = handleTouch(evt);
+          if (r != null)
+            return r;
+          resetModel(evt);
+          if (isDelayedClickSupported(navigator.userAgent)) {
+            setTimeout(function() {
+              fileElem[0].click();
+            }, 0);
+          } else {
+            fileElem[0].click();
+          }
+          return false;
+        }
+        function handleTouch(evt) {
+          var touches = evt.changedTouches || (evt.originalEvent && evt.originalEvent.changedTouches);
+          if (evt.type === 'touchstart') {
+            initialTouchStartY = touches ? touches[0].clientY : 0;
+            return true;
+          } else {
+            evt.stopPropagation();
+            evt.preventDefault();
+            if (evt.type === 'touchend') {
+              var currentLocation = touches ? touches[0].clientY : 0;
+              if (Math.abs(currentLocation - initialTouchStartY) > 20)
+                return false;
+            }
+          }
+        }
+        var fileElem = elem;
+        function resetModel(evt) {
+          if (fileElem.val()) {
+            fileElem.val(null);
+            upload.updateModel(ngModel, attr, scope, fileChangeAttr(), null, evt, true);
+          }
+        }
+        if (!isInputTypeFile()) {
+          fileElem = createFileInput();
+        }
+        fileElem.bind('change', changeFn);
+        if (!isInputTypeFile()) {
+          elem.bind('click touchstart touchend', clickHandler);
+        } else {
+          elem.bind('click', resetModel);
+        }
+        upload.registerValidators(ngModel, fileElem, attr, scope);
+        function ie10SameFileSelectFix(evt) {
+          if (fileElem && !fileElem.attr('__ngf_ie10_Fix_')) {
+            if (!fileElem[0].parentNode) {
+              fileElem = null;
+              return;
+            }
+            evt.preventDefault();
+            evt.stopPropagation();
+            fileElem.unbind('click');
+            var clone = fileElem.clone();
+            fileElem.replaceWith(clone);
+            fileElem = clone;
+            fileElem.attr('__ngf_ie10_Fix_', 'true');
+            fileElem.bind('change', changeFn);
+            fileElem.bind('click', ie10SameFileSelectFix);
+            fileElem[0].click();
+            return false;
+          } else {
+            fileElem.removeAttr('__ngf_ie10_Fix_');
+          }
+        }
+        if (navigator.appVersion.indexOf('MSIE 10') !== -1) {
+          fileElem.bind('click', ie10SameFileSelectFix);
+        }
+        scope.$on('$destroy', function() {
+          if (!isInputTypeFile())
+            fileElem.remove();
+          angular.forEach(unwatches, function(unwatch) {
+            unwatch();
+          });
+        });
+        $timeout(function() {
+          for (var i = 0; i < generatedElems.length; i++) {
+            var g = generatedElems[i];
+            if (!document.body.contains(g.el[0])) {
+              generatedElems.splice(i, 1);
+              g.ref.remove();
+            }
+          }
+        });
+        if (window.FileAPI && window.FileAPI.ngfFixIE) {
+          window.FileAPI.ngfFixIE(elem, fileElem, changeFn);
+        }
+      }
+      return {
+        restrict: 'AEC',
+        require: '?ngModel',
+        link: function(scope, elem, attr, ngModel) {
+          linkFileSelect(scope, elem, attr, ngModel, $parse, $timeout, $compile, Upload);
+        }
+      };
+    }]);
+    (function() {
+      ngFileUpload.service('UploadDataUrl', ['UploadBase', '$timeout', '$q', function(UploadBase, $timeout, $q) {
+        var upload = UploadBase;
+        upload.dataUrl = function(file, disallowObjectUrl) {
+          if ((disallowObjectUrl && file.dataUrl != null) || (!disallowObjectUrl && file.blobUrl != null)) {
+            var d = $q.defer();
+            $timeout(function() {
+              d.resolve(disallowObjectUrl ? file.dataUrl : file.blobUrl);
+            });
+            return d.promise;
+          }
+          var p = disallowObjectUrl ? file.$ngfDataUrlPromise : file.$ngfBlobUrlPromise;
+          if (p)
+            return p;
+          var deferred = $q.defer();
+          $timeout(function() {
+            if (window.FileReader && file && (!window.FileAPI || navigator.userAgent.indexOf('MSIE 8') === -1 || file.size < 20000) && (!window.FileAPI || navigator.userAgent.indexOf('MSIE 9') === -1 || file.size < 4000000)) {
+              var URL = window.URL || window.webkitURL;
+              if (URL && URL.createObjectURL && !disallowObjectUrl) {
+                var url;
+                try {
+                  url = URL.createObjectURL(file);
+                } catch (e) {
+                  $timeout(function() {
+                    file.blobUrl = '';
+                    deferred.reject();
+                  });
+                  return;
+                }
+                $timeout(function() {
+                  file.blobUrl = url;
+                  if (url)
+                    deferred.resolve(url);
+                });
+              } else {
+                var fileReader = new FileReader();
+                fileReader.onload = function(e) {
+                  $timeout(function() {
+                    file.dataUrl = e.target.result;
+                    deferred.resolve(e.target.result);
+                  });
+                };
+                fileReader.onerror = function() {
+                  $timeout(function() {
+                    file.dataUrl = '';
+                    deferred.reject();
+                  });
+                };
+                fileReader.readAsDataURL(file);
+              }
+            } else {
+              $timeout(function() {
+                file[disallowObjectUrl ? 'dataUrl' : 'blobUrl'] = '';
+                deferred.reject();
+              });
             }
           });
-          return deferred.promise;
-        };
-        var setPanorama = function(map, panoId) {
-          var svp = new google.maps.StreetViewPanorama(map.getDiv(), {enableCloseButton: true});
-          svp.setPano(panoId);
-        };
-        return {
-          getPanorama: getPanorama,
-          setPanorama: setPanorama
-        };
-      };
-      StreetView.$inject = ['$q'];
-      angular.module('ngMap').service('StreetView', StreetView);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('bicyclingLayer', ['Attr2Options', function(Attr2Options) {
-        var parser = Attr2Options;
-        var getLayer = function(options, events) {
-          var layer = new google.maps.BicyclingLayer(options);
-          for (var eventName in events) {
-            google.maps.event.addListener(layer, eventName, events[eventName]);
-          }
-          return layer;
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var orgAttrs = parser.orgAttributes(element);
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            var events = parser.getEvents(scope, filtered);
-            void 0;
-            var layer = getLayer(options, events);
-            mapController.addObject('bicyclingLayers', layer);
-            mapController.observeAttrSetObj(orgAttrs, attrs, layer);
-            element.bind('$destroy', function() {
-              mapController.deleteObject('bicyclingLayers', layer);
-            });
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('cloudLayer', ['Attr2Options', function(Attr2Options) {
-        var parser = Attr2Options;
-        var getLayer = function(options, events) {
-          var layer = new google.maps.weather.CloudLayer(options);
-          for (var eventName in events) {
-            google.maps.event.addListener(layer, eventName, events[eventName]);
-          }
-          return layer;
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var orgAttrs = parser.orgAttributes(element);
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            var events = parser.getEvents(scope, filtered);
-            void 0;
-            var layer = getLayer(options, events);
-            mapController.addObject('cloudLayers', layer);
-            mapController.observeAttrSetObj(orgAttrs, attrs, layer);
-            element.bind('$destroy', function() {
-              mapController.deleteObject('cloudLayers', layer);
-            });
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('customControl', ['Attr2Options', '$compile', function(Attr2Options, $compile) {
-        'use strict';
-        var parser = Attr2Options;
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var orgAttrs = parser.orgAttributes(element);
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered, scope);
-            var events = parser.getEvents(scope, filtered);
-            void 0;
-            var customControlEl = element[0].parentElement.removeChild(element[0]);
-            $compile(customControlEl.innerHTML.trim())(scope);
-            for (var eventName in events) {
-              google.maps.event.addDomListener(customControlEl, eventName, events[eventName]);
-            }
-            mapController.addObject('customControls', customControlEl);
-            scope.$on('mapInitialized', function(evt, map) {
-              var position = options.position;
-              map.controls[google.maps.ControlPosition[position]].push(customControlEl);
-            });
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      var parser,
-          $compile,
-          $timeout;
-      var cAbortEvent = function(e) {
-        e.preventDefault && e.preventDefault();
-        e.cancelBubble = true;
-        e.stopPropagation && e.stopPropagation();
-      };
-      var CustomMarker = function(options) {
-        options = options || {};
-        this.el = document.createElement('div');
-        this.el.style.display = 'inline-block';
-        this.visible = true;
-        for (var key in options) {
-          this[key] = options[key];
-        }
-      };
-      var setCustomMarker = function() {
-        CustomMarker.prototype = new google.maps.OverlayView();
-        CustomMarker.prototype.setContent = function(html, scope) {
-          this.html = html;
-          if (scope) {
-            var compiledEl = $compile(html)(scope);
-            var customMarkerEl = compiledEl[0];
-            var me = this;
-            $timeout(function() {
-              me.content = customMarkerEl.innerHTML;
-              me.el.innerHTML = me.content;
-            });
+          if (disallowObjectUrl) {
+            p = file.$ngfDataUrlPromise = deferred.promise;
           } else {
-            this.content = html;
-            this.el.innerHTML = this.content;
+            p = file.$ngfBlobUrlPromise = deferred.promise;
           }
-          this.el.style.position = 'relative';
-          this.el.className = 'custom-marker';
+          p['finally'](function() {
+            delete file[disallowObjectUrl ? '$ngfDataUrlPromise' : '$ngfBlobUrlPromise'];
+          });
+          return p;
         };
-        CustomMarker.prototype.setPosition = function(position) {
-          position && (this.position = position);
-          if (this.getProjection() && typeof this.position.lng == 'function') {
-            var posPixel = this.getProjection().fromLatLngToDivPixel(this.position);
-            var x = Math.round(posPixel.x - (this.el.offsetWidth / 2));
-            var y = Math.round(posPixel.y - this.el.offsetHeight - 10);
-            this.el.style.left = x + "px";
-            this.el.style.top = y + "px";
-          }
-        };
-        CustomMarker.prototype.setZIndex = function(zIndex) {
-          zIndex && (this.zIndex = zIndex);
-          this.el.style.zIndex = this.zIndex;
-        };
-        CustomMarker.prototype.setVisible = function(visible) {
-          this.el.style.display = visible ? 'inline-block' : 'none';
-          this.visible = visible;
-        };
-        CustomMarker.prototype.addClass = function(className) {
-          var classNames = this.el.className.split(' ');
-          (classNames.indexOf(className) == -1) && classNames.push(className);
-          this.el.className = classNames.join(' ');
-        };
-        CustomMarker.prototype.removeClass = function(className) {
-          var classNames = this.el.className.split(' ');
-          var index = classNames.indexOf(className);
-          (index > -1) && classNames.splice(index, 1);
-          this.el.className = classNames.join(' ');
-        };
-        CustomMarker.prototype.onAdd = function() {
-          this.getPanes().overlayMouseTarget.appendChild(this.el);
-        };
-        CustomMarker.prototype.draw = function() {
-          this.setPosition();
-          this.setZIndex(this.zIndex);
-          this.setVisible(this.visible);
-        };
-        CustomMarker.prototype.onRemove = function() {
-          this.el.parentNode.removeChild(this.el);
-          this.el = null;
-        };
-      };
-      var customMarkerDirective = function(Attr2Options, _$compile_, _$timeout_) {
-        parser = Attr2Options;
-        $compile = _$compile_;
-        $timeout = _$timeout_;
-        setCustomMarker();
+        return upload;
+      }]);
+      function getTagType(el) {
+        if (el.tagName.toLowerCase() === 'img')
+          return 'image';
+        if (el.tagName.toLowerCase() === 'audio')
+          return 'audio';
+        if (el.tagName.toLowerCase() === 'video')
+          return 'video';
+        return /\./;
+      }
+      var style = angular.element('<style>.ngf-hide{display:none !important}</style>');
+      document.getElementsByTagName('head')[0].appendChild(style[0]);
+      ngFileUpload.directive('ngfSrc', ['$compile', '$timeout', 'Upload', function($compile, $timeout, Upload) {
         return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var orgAttrs = parser.orgAttributes(element);
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered, scope);
-            var events = parser.getEvents(scope, filtered);
-            var removedEl = element[0].parentElement.removeChild(element[0]);
-            void 0;
-            var customMarker = new CustomMarker(options);
-            customMarker.setContent(removedEl.innerHTML, scope);
-            void 0;
-            void 0;
-            for (var eventName in events) {
-              google.maps.event.addDomListener(customMarker.el, eventName, events[eventName]);
+          restrict: 'AE',
+          link: function(scope, elem, attr) {
+            $timeout(function() {
+              var unwatch = scope.$watch(attr.ngfSrc, function(file) {
+                if (angular.isString(file)) {
+                  elem.removeClass('ngf-hide');
+                  return elem.attr('src', file);
+                }
+                if (file && file.type && file.type.indexOf(getTagType(elem[0])) === 0) {
+                  var disallowObjectUrl = Upload.attrGetter('ngfNoObjectUrl', attr, scope);
+                  Upload.dataUrl(file, disallowObjectUrl)['finally'](function() {
+                    $timeout(function() {
+                      if (file.blobUrl || file.dataUrl) {
+                        elem.removeClass('ngf-hide');
+                        elem.attr('src', (disallowObjectUrl ? file.dataUrl : file.blobUrl) || file.dataUrl);
+                      } else {
+                        elem.addClass('ngf-hide');
+                      }
+                    });
+                  });
+                } else {
+                  elem.addClass('ngf-hide');
+                }
+              });
+              scope.$on('$destroy', function() {
+                unwatch();
+              });
+            });
+          }
+        };
+      }]);
+      ngFileUpload.directive('ngfBackground', ['Upload', '$compile', '$timeout', function(Upload, $compile, $timeout) {
+        return {
+          restrict: 'AE',
+          link: function(scope, elem, attr) {
+            $timeout(function() {
+              var unwatch = scope.$watch(attr.ngfBackground, function(file) {
+                if (angular.isString(file))
+                  return elem.css('background-image', 'url(\'' + file + '\')');
+                if (file && file.type && file.type.indexOf('image') === 0) {
+                  var disallowObjectUrl = Upload.attrGetter('ngfNoObjectUrl', attr, scope);
+                  Upload.dataUrl(file, disallowObjectUrl)['finally'](function() {
+                    $timeout(function() {
+                      if ((disallowObjectUrl && file.dataUrl) || (!disallowObjectUrl && file.blobUrl)) {
+                        elem.css('background-image', 'url(\'' + (disallowObjectUrl ? file.dataUrl : file.blobUrl) + '\')');
+                      } else {
+                        elem.css('background-image', '');
+                      }
+                    });
+                  });
+                } else {
+                  elem.css('background-image', '');
+                }
+              });
+              scope.$on('$destroy', function() {
+                unwatch();
+              });
+            });
+          }
+        };
+      }]);
+      ngFileUpload.config(['$compileProvider', function($compileProvider) {
+        if ($compileProvider.imgSrcSanitizationWhitelist)
+          $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|local|file|data|blob):/);
+        if ($compileProvider.aHrefSanitizationWhitelist)
+          $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|local|file|data|blob):/);
+      }]);
+      ngFileUpload.filter('ngfDataUrl', ['UploadDataUrl', '$sce', function(UploadDataUrl, $sce) {
+        return function(file, disallowObjectUrl) {
+          if (angular.isString(file)) {
+            return $sce.trustAsResourceUrl(file);
+          }
+          if (file && !file.dataUrl) {
+            if (file.dataUrl === undefined && angular.isObject(file)) {
+              file.dataUrl = null;
+              UploadDataUrl.dataUrl(file, disallowObjectUrl);
             }
-            mapController.addObject('customMarkers', customMarker);
-            if (!(options.position instanceof google.maps.LatLng)) {
-              mapController.getGeoLocation(options.position).then(function(latlng) {
-                customMarker.setPosition(latlng);
+            return '';
+          }
+          return (file && file.dataUrl ? $sce.trustAsResourceUrl(file.dataUrl) : file) || '';
+        };
+      }]);
+    })();
+    ngFileUpload.service('UploadValidate', ['UploadDataUrl', '$q', '$timeout', function(UploadDataUrl, $q, $timeout) {
+      var upload = UploadDataUrl;
+      function globStringToRegex(str) {
+        if (str.length > 2 && str[0] === '/' && str[str.length - 1] === '/') {
+          return str.substring(1, str.length - 1);
+        }
+        var split = str.split(','),
+            result = '';
+        if (split.length > 1) {
+          for (var i = 0; i < split.length; i++) {
+            result += '(' + globStringToRegex(split[i]) + ')';
+            if (i < split.length - 1) {
+              result += '|';
+            }
+          }
+        } else {
+          if (str.indexOf('.') === 0) {
+            str = '*' + str;
+          }
+          result = '^' + str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\' + '-]', 'g'), '\\$&') + '$';
+          result = result.replace(/\\\*/g, '.*').replace(/\\\?/g, '.');
+        }
+        return result;
+      }
+      function translateScalars(str) {
+        if (angular.isString(str)) {
+          if (str.search(/kb/i) === str.length - 2) {
+            return parseFloat(str.substring(0, str.length - 2) * 1000);
+          } else if (str.search(/mb/i) === str.length - 2) {
+            return parseFloat(str.substring(0, str.length - 2) * 1000000);
+          } else if (str.search(/gb/i) === str.length - 2) {
+            return parseFloat(str.substring(0, str.length - 2) * 1000000000);
+          } else if (str.search(/b/i) === str.length - 1) {
+            return parseFloat(str.substring(0, str.length - 1));
+          } else if (str.search(/s/i) === str.length - 1) {
+            return parseFloat(str.substring(0, str.length - 1));
+          } else if (str.search(/m/i) === str.length - 1) {
+            return parseFloat(str.substring(0, str.length - 1) * 60);
+          } else if (str.search(/h/i) === str.length - 1) {
+            return parseFloat(str.substring(0, str.length - 1) * 3600);
+          }
+        }
+        return str;
+      }
+      upload.registerValidators = function(ngModel, elem, attr, scope) {
+        if (!ngModel)
+          return;
+        ngModel.$ngfValidations = [];
+        function setValidities(ngModel) {
+          angular.forEach(ngModel.$ngfValidations, function(validation) {
+            ngModel.$setValidity(validation.name, validation.valid);
+          });
+        }
+        ngModel.$formatters.push(function(val) {
+          if (upload.attrGetter('ngfValidateLater', attr, scope) || !ngModel.$$ngfValidated) {
+            upload.validate(val, ngModel, attr, scope, false, function() {
+              setValidities(ngModel);
+              ngModel.$$ngfValidated = false;
+            });
+            if (val && val.length === 0) {
+              val = null;
+            }
+            if (elem && (val == null || val.length === 0)) {
+              if (elem.val()) {
+                elem.val(null);
+              }
+            }
+          } else {
+            setValidities(ngModel);
+            ngModel.$$ngfValidated = false;
+          }
+          return val;
+        });
+      };
+      upload.validatePattern = function(file, val) {
+        if (!val) {
+          return true;
+        }
+        var regexp = new RegExp(globStringToRegex(val), 'gi');
+        return (file.type != null && regexp.test(file.type.toLowerCase())) || (file.name != null && regexp.test(file.name.toLowerCase()));
+      };
+      upload.validate = function(files, ngModel, attr, scope, later, callback) {
+        ngModel = ngModel || {};
+        ngModel.$ngfValidations = ngModel.$ngfValidations || [];
+        angular.forEach(ngModel.$ngfValidations, function(v) {
+          v.valid = true;
+        });
+        var attrGetter = function(name, params) {
+          return upload.attrGetter(name, attr, scope, params);
+        };
+        if (later) {
+          callback.call(ngModel);
+          return;
+        }
+        ngModel.$$ngfValidated = true;
+        if (files == null || files.length === 0) {
+          callback.call(ngModel);
+          return;
+        }
+        files = files.length === undefined ? [files] : files.slice(0);
+        function validateSync(name, validatorVal, fn) {
+          if (files) {
+            var dName = 'ngf' + name[0].toUpperCase() + name.substr(1);
+            var i = files.length,
+                valid = null;
+            while (i--) {
+              var file = files[i];
+              var val = attrGetter(dName, {'$file': file});
+              if (val == null) {
+                val = validatorVal(attrGetter('ngfValidate') || {});
+                valid = valid == null ? true : valid;
+              }
+              if (val != null) {
+                if (!fn(file, val)) {
+                  file.$error = name;
+                  file.$errorParam = val;
+                  files.splice(i, 1);
+                  valid = false;
+                }
+              }
+            }
+            if (valid !== null) {
+              ngModel.$ngfValidations.push({
+                name: name,
+                valid: valid
               });
             }
-            element.bind('$destroy', function() {
-              mapController.deleteObject('customMarkers', marker);
-            });
           }
-        };
-      };
-      customMarkerDirective.$inject = ['Attr2Options', '$compile', '$timeout'];
-      angular.module('ngMap').directive('customMarker', customMarkerDirective);
-    })();
-    (function() {
-      'use strict';
-      var getDirectionsRenderer = function(options, events) {
-        if (options.panel) {
-          options.panel = document.getElementById(options.panel) || document.querySelector(options.panel);
         }
-        var renderer = new google.maps.DirectionsRenderer(options);
-        for (var eventName in events) {
-          google.maps.event.addListener(renderer, eventName, events[eventName]);
+        validateSync('pattern', function(cons) {
+          return cons.pattern;
+        }, upload.validatePattern);
+        validateSync('minSize', function(cons) {
+          return cons.size && cons.size.min;
+        }, function(file, val) {
+          return file.size >= translateScalars(val);
+        });
+        validateSync('maxSize', function(cons) {
+          return cons.size && cons.size.max;
+        }, function(file, val) {
+          return file.size <= translateScalars(val);
+        });
+        validateSync('validateFn', function() {
+          return null;
+        }, function(file, r) {
+          return r === true || r === null || r === '';
+        });
+        if (!files.length) {
+          callback.call(ngModel, ngModel.$ngfValidations);
+          return;
         }
-        return renderer;
-      };
-      var directions = function(Attr2Options, $timeout, NavigatorGeolocation) {
-        var parser = Attr2Options;
-        var directionsService = new google.maps.DirectionsService();
-        var updateRoute = function(renderer, options) {
-          var request = options;
-          request.travelMode = request.travelMode || 'DRIVING';
-          var validKeys = ['origin', 'destination', 'travelMode', 'transitOptions', 'unitSystem', 'durationInTraffic', 'waypoints', 'optimizeWaypoints', 'provideRouteAlternatives', 'avoidHighways', 'avoidTolls', 'region'];
-          for (var key in request) {
-            (validKeys.indexOf(key) === -1) && (delete request[key]);
-          }
-          if (request.waypoints) {
-            if (request.waypoints == "[]" || request.waypoints == "")
-              delete request.waypoints;
-          }
-          var showDirections = function(request) {
-            void 0;
-            directionsService.route(request, function(response, status) {
-              if (status == google.maps.DirectionsStatus.OK) {
-                $timeout(function() {
-                  renderer.setDirections(response);
+        var pendings = 0;
+        function validateAsync(name, validatorVal, type, asyncFn, fn) {
+          if (files) {
+            var thisPendings = 0,
+                hasError = false,
+                dName = 'ngf' + name[0].toUpperCase() + name.substr(1);
+            files = files.length === undefined ? [files] : files;
+            angular.forEach(files, function(file) {
+              if (file.type.search(type) !== 0) {
+                return true;
+              }
+              var val = attrGetter(dName, {'$file': file}) || validatorVal(attrGetter('ngfValidate', {'$file': file}) || {});
+              if (val) {
+                pendings++;
+                thisPendings++;
+                asyncFn(file, val).then(function(d) {
+                  if (!fn(d, val)) {
+                    file.$error = name;
+                    file.$errorParam = val;
+                    hasError = true;
+                  }
+                }, function() {
+                  if (attrGetter('ngfValidateForce', {'$file': file})) {
+                    file.$error = name;
+                    file.$errorParam = val;
+                    hasError = true;
+                  }
+                })['finally'](function() {
+                  pendings--;
+                  thisPendings--;
+                  if (!thisPendings) {
+                    ngModel.$ngfValidations.push({
+                      name: name,
+                      valid: !hasError
+                    });
+                  }
+                  if (!pendings) {
+                    callback.call(ngModel, ngModel.$ngfValidations);
+                  }
                 });
               }
             });
-          };
-          if (request.origin && request.destination) {
-            if (request.origin == 'current-location') {
-              NavigatorGeolocation.getCurrentPosition().then(function(ll) {
-                request.origin = new google.maps.LatLng(ll.coords.latitude, ll.coords.longitude);
-                showDirections(request);
-              });
-            } else if (request.destination == 'current-location') {
-              NavigatorGeolocation.getCurrentPosition().then(function(ll) {
-                request.destination = new google.maps.LatLng(ll.coords.latitude, ll.coords.longitude);
-                showDirections(request);
-              });
+          }
+        }
+        validateAsync('maxHeight', function(cons) {
+          return cons.height && cons.height.max;
+        }, /image/, this.imageDimensions, function(d, val) {
+          return d.height <= val;
+        });
+        validateAsync('minHeight', function(cons) {
+          return cons.height && cons.height.min;
+        }, /image/, this.imageDimensions, function(d, val) {
+          return d.height >= val;
+        });
+        validateAsync('maxWidth', function(cons) {
+          return cons.width && cons.width.max;
+        }, /image/, this.imageDimensions, function(d, val) {
+          return d.width <= val;
+        });
+        validateAsync('minWidth', function(cons) {
+          return cons.width && cons.width.min;
+        }, /image/, this.imageDimensions, function(d, val) {
+          return d.width >= val;
+        });
+        validateAsync('ratio', function(cons) {
+          return cons.ratio;
+        }, /image/, this.imageDimensions, function(d, val) {
+          var split = val.toString().split(','),
+              valid = false;
+          for (var i = 0; i < split.length; i++) {
+            var r = split[i],
+                xIndex = r.search(/x/i);
+            if (xIndex > -1) {
+              r = parseFloat(r.substring(0, xIndex)) / parseFloat(r.substring(xIndex + 1));
             } else {
-              showDirections(request);
+              r = parseFloat(r);
+            }
+            if (Math.abs((d.width / d.height) - r) < 0.0001) {
+              valid = true;
             }
           }
-        };
-        var linkFunc = function(scope, element, attrs, mapController) {
-          var orgAttrs = parser.orgAttributes(element);
-          var filtered = parser.filter(attrs);
-          var options = parser.getOptions(filtered);
-          var events = parser.getEvents(scope, filtered);
-          var attrsToObserve = parser.getAttrsToObserve(orgAttrs);
-          var renderer = getDirectionsRenderer(options, events);
-          mapController.addObject('directionsRenderers', renderer);
-          attrsToObserve.forEach(function(attrName) {
-            (function(attrName) {
-              attrs.$observe(attrName, function(val) {
-                if (attrName == 'panel') {
-                  $timeout(function() {
-                    var panel = document.getElementById(val) || document.querySelector(val);
-                    void 0;
-                    panel && renderer.setPanel(panel);
-                  });
-                } else if (options[attrName] !== val) {
-                  var optionValue = parser.toOptionValue(val, {key: attrName});
-                  void 0;
-                  options[attrName] = optionValue;
-                  updateRoute(renderer, options);
-                }
+          return valid;
+        });
+        validateAsync('maxDuration', function(cons) {
+          return cons.duration && cons.duration.max;
+        }, /audio|video/, this.mediaDuration, function(d, val) {
+          return d <= translateScalars(val);
+        });
+        validateAsync('minDuration', function(cons) {
+          return cons.duration && cons.duration.min;
+        }, /audio|video/, this.mediaDuration, function(d, val) {
+          return d >= translateScalars(val);
+        });
+        validateAsync('validateAsyncFn', function() {
+          return null;
+        }, /./, function(file, val) {
+          return val;
+        }, function(r) {
+          return r === true || r === null || r === '';
+        });
+        if (!pendings) {
+          callback.call(ngModel, ngModel.$ngfValidations);
+        }
+      };
+      upload.imageDimensions = function(file) {
+        if (file.width && file.height) {
+          var d = $q.defer();
+          $timeout(function() {
+            d.resolve({
+              width: file.width,
+              height: file.height
+            });
+          });
+          return d.promise;
+        }
+        if (file.$ngfDimensionPromise)
+          return file.$ngfDimensionPromise;
+        var deferred = $q.defer();
+        $timeout(function() {
+          if (file.type.indexOf('image') !== 0) {
+            deferred.reject('not image');
+            return;
+          }
+          upload.dataUrl(file).then(function(dataUrl) {
+            var img = angular.element('<img>').attr('src', dataUrl).css('visibility', 'hidden').css('position', 'fixed');
+            function success() {
+              var width = img[0].clientWidth;
+              var height = img[0].clientHeight;
+              img.remove();
+              file.width = width;
+              file.height = height;
+              deferred.resolve({
+                width: width,
+                height: height
               });
-            })(attrName);
+            }
+            function error() {
+              img.remove();
+              deferred.reject('load error');
+            }
+            img.on('load', success);
+            img.on('error', error);
+            var count = 0;
+            function checkLoadError() {
+              $timeout(function() {
+                if (img[0].parentNode) {
+                  if (img[0].clientWidth) {
+                    success();
+                  } else if (count > 10) {
+                    error();
+                  } else {
+                    checkLoadError();
+                  }
+                }
+              }, 1000);
+            }
+            checkLoadError();
+            angular.element(document.getElementsByTagName('body')[0]).append(img);
+          }, function() {
+            deferred.reject('load error');
           });
-          scope.$on('mapInitialized', function(event, map) {
-            updateRoute(renderer, options);
+        });
+        file.$ngfDimensionPromise = deferred.promise;
+        file.$ngfDimensionPromise['finally'](function() {
+          delete file.$ngfDimensionPromise;
+        });
+        return file.$ngfDimensionPromise;
+      };
+      upload.mediaDuration = function(file) {
+        if (file.duration) {
+          var d = $q.defer();
+          $timeout(function() {
+            d.resolve(file.duration);
           });
-          scope.$on('$destroy', function(event, map) {
-            mapController.deleteObject('directionsRenderers', renderer);
+          return d.promise;
+        }
+        if (file.$ngfDurationPromise)
+          return file.$ngfDurationPromise;
+        var deferred = $q.defer();
+        $timeout(function() {
+          if (file.type.indexOf('audio') !== 0 && file.type.indexOf('video') !== 0) {
+            deferred.reject('not media');
+            return;
+          }
+          upload.dataUrl(file).then(function(dataUrl) {
+            var el = angular.element(file.type.indexOf('audio') === 0 ? '<audio>' : '<video>').attr('src', dataUrl).css('visibility', 'none').css('position', 'fixed');
+            function success() {
+              var duration = el[0].duration;
+              file.duration = duration;
+              el.remove();
+              deferred.resolve(duration);
+            }
+            function error() {
+              el.remove();
+              deferred.reject('load error');
+            }
+            el.on('loadedmetadata', success);
+            el.on('error', error);
+            var count = 0;
+            function checkLoadError() {
+              $timeout(function() {
+                if (el[0].parentNode) {
+                  if (el[0].duration) {
+                    success();
+                  } else if (count > 10) {
+                    error();
+                  } else {
+                    checkLoadError();
+                  }
+                }
+              }, 1000);
+            }
+            checkLoadError();
+            angular.element(document.body).append(el);
+          }, function() {
+            deferred.reject('load error');
           });
-        };
+        });
+        file.$ngfDurationPromise = deferred.promise;
+        file.$ngfDurationPromise['finally'](function() {
+          delete file.$ngfDurationPromise;
+        });
+        return file.$ngfDurationPromise;
+      };
+      return upload;
+    }]);
+    ngFileUpload.service('UploadResize', ['UploadValidate', '$q', '$timeout', function(UploadValidate, $q, $timeout) {
+      var upload = UploadValidate;
+      var calculateAspectRatioFit = function(srcWidth, srcHeight, maxWidth, maxHeight) {
+        var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
         return {
-          restrict: 'E',
-          require: '^map',
-          link: linkFunc
+          width: srcWidth * ratio,
+          height: srcHeight * ratio
         };
       };
-      directions.$inject = ['Attr2Options', '$timeout', 'NavigatorGeolocation'];
-      angular.module('ngMap').directive('directions', directions);
-    })();
+      var resize = function(imagen, width, height, quality, type) {
+        var deferred = $q.defer();
+        var canvasElement = document.createElement('canvas');
+        var imagenElement = document.createElement('img');
+        imagenElement.onload = function() {
+          try {
+            var dimensions = calculateAspectRatioFit(imagenElement.width, imagenElement.height, width, height);
+            canvasElement.width = dimensions.width;
+            canvasElement.height = dimensions.height;
+            var context = canvasElement.getContext('2d');
+            context.drawImage(imagenElement, 0, 0, dimensions.width, dimensions.height);
+            deferred.resolve(canvasElement.toDataURL(type || 'image/WebP', quality || 1.0));
+          } catch (e) {
+            deferred.reject(e);
+          }
+        };
+        imagenElement.onerror = function() {
+          deferred.reject();
+        };
+        imagenElement.src = imagen;
+        return deferred.promise;
+      };
+      var dataURLtoBlob = function(dataurl) {
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type: mime});
+      };
+      upload.resize = function(file, width, height, quality) {
+        var deferred = $q.defer();
+        if (file.type.indexOf('image') !== 0) {
+          $timeout(function() {
+            deferred.resolve('Only images are allowed for resizing!');
+          });
+          return deferred.promise;
+        }
+        upload.dataUrl(file, true).then(function(url) {
+          resize(url, width, height, quality, file.type).then(function(dataUrl) {
+            var blob = dataURLtoBlob(dataUrl);
+            blob.name = file.name;
+            deferred.resolve(blob);
+          }, function() {
+            deferred.reject();
+          });
+        }, function() {
+          deferred.reject();
+        });
+        return deferred.promise;
+      };
+      return upload;
+    }]);
     (function() {
-      'use strict';
-      angular.module('ngMap').directive('drawingManager', ['Attr2Options', function(Attr2Options) {
-        var parser = Attr2Options;
+      ngFileUpload.directive('ngfDrop', ['$parse', '$timeout', '$location', 'Upload', function($parse, $timeout, $location, Upload) {
         return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var orgAttrs = parser.orgAttributes(element);
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            var controlOptions = parser.getControlOptions(filtered);
-            var events = parser.getEvents(scope, filtered);
-            void 0;
-            var drawingManager = new google.maps.drawing.DrawingManager({
-              drawingMode: options.drawingmode,
-              drawingControl: options.drawingcontrol,
-              drawingControlOptions: controlOptions.drawingControlOptions,
-              circleOptions: options.circleoptions,
-              markerOptions: options.markeroptions,
-              polygonOptions: options.polygonoptions,
-              polylineOptions: options.polylineoptions,
-              rectangleOptions: options.rectangleoptions
-            });
-            var events = parser.getEvents(scope, filtered);
-            for (var eventName in events) {
-              google.maps.event.addListener(drawingManager, eventName, events[eventName]);
-            }
-            mapController.addObject('mapDrawingManager', drawingManager);
+          restrict: 'AEC',
+          require: '?ngModel',
+          link: function(scope, elem, attr, ngModel) {
+            linkDrop(scope, elem, attr, ngModel, $parse, $timeout, $location, Upload);
           }
         };
       }]);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('dynamicMapsEngineLayer', ['Attr2Options', function(Attr2Options) {
-        var parser = Attr2Options;
-        var getDynamicMapsEngineLayer = function(options, events) {
-          var layer = new google.maps.visualization.DynamicMapsEngineLayer(options);
-          for (var eventName in events) {
-            google.maps.event.addListener(layer, eventName, events[eventName]);
-          }
-          return layer;
+      ngFileUpload.directive('ngfNoFileDrop', function() {
+        return function(scope, elem) {
+          if (dropAvailable())
+            elem.css('display', 'none');
         };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            var events = parser.getEvents(scope, filtered, events);
-            void 0;
-            var layer = getDynamicMapsEngineLayer(options, events);
-            mapController.addObject('mapsEngineLayers', layer);
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('fusionTablesLayer', ['Attr2Options', function(Attr2Options) {
-        var parser = Attr2Options;
-        var getLayer = function(options, events) {
-          var layer = new google.maps.FusionTablesLayer(options);
-          for (var eventName in events) {
-            google.maps.event.addListener(layer, eventName, events[eventName]);
-          }
-          return layer;
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            var events = parser.getEvents(scope, filtered, events);
-            void 0;
-            var layer = getLayer(options, events);
-            mapController.addObject('fusionTablesLayers', layer);
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('heatmapLayer', ['Attr2Options', '$window', function(Attr2Options, $window) {
-        var parser = Attr2Options;
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            options.data = $window[attrs.data] || scope[attrs.data];
-            if (options.data instanceof Array) {
-              options.data = new google.maps.MVCArray(options.data);
-            } else {
-              throw "invalid heatmap data";
-            }
-            var layer = new google.maps.visualization.HeatmapLayer(options);
-            var events = parser.getEvents(scope, filtered);
-            void 0;
-            mapController.addObject('heatmapLayers', layer);
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      var infoWindow = function(Attr2Options, $compile, $timeout, $parse) {
-        var parser = Attr2Options;
-        var getInfoWindow = function(options, events, element) {
-          var infoWindow;
-          if (options.position && !(options.position instanceof google.maps.LatLng)) {
-            delete options.position;
-          }
-          infoWindow = new google.maps.InfoWindow(options);
-          if (Object.keys(events).length > 0) {
-            void 0;
-          }
-          for (var eventName in events) {
-            if (eventName) {
-              google.maps.event.addListener(infoWindow, eventName, events[eventName]);
-            }
-          }
-          var template = element.html().trim();
-          if (angular.element(template).length != 1) {
-            throw "info-window working as a template must have a container";
-          }
-          infoWindow.__template = template.replace(/\s?ng-non-bindable[='"]+/, "");
-          infoWindow.__compile = function(scope, anchor) {
-            anchor && (scope['this'] = anchor);
-            var el = $compile(infoWindow.__template)(scope);
-            infoWindow.setContent(el[0]);
-            scope.$apply();
-          };
-          infoWindow.__open = function(map, scope, anchor) {
+      });
+      ngFileUpload.directive('ngfDropAvailable', ['$parse', '$timeout', 'Upload', function($parse, $timeout, Upload) {
+        return function(scope, elem, attr) {
+          if (dropAvailable()) {
+            var model = $parse(Upload.attrGetter('ngfDropAvailable', attr));
             $timeout(function() {
-              infoWindow.__compile(scope, anchor);
-              if (anchor && anchor.getPosition) {
-                infoWindow.open(map, anchor);
-              } else if (anchor && anchor instanceof google.maps.LatLng) {
-                infoWindow.open(map);
-                infoWindow.setPosition(anchor);
-              } else {
-                infoWindow.open(map);
+              model(scope);
+              if (model.assign) {
+                model.assign(scope, true);
               }
             });
-          };
-          return infoWindow;
-        };
-        var linkFunc = function(scope, element, attrs, mapController) {
-          element.css('display', 'none');
-          var orgAttrs = parser.orgAttributes(element);
-          var filtered = parser.filter(attrs);
-          var options = parser.getOptions(filtered, scope);
-          var events = parser.getEvents(scope, filtered);
-          void 0;
-          var address;
-          if (options.position && !(options.position instanceof google.maps.LatLng)) {
-            address = options.position;
-          }
-          var infoWindow = getInfoWindow(options, events, element);
-          if (address) {
-            mapController.getGeoLocation(address).then(function(latlng) {
-              infoWindow.setPosition(latlng);
-              infoWindow.__open(mapController.map, scope, latlng);
-              var geoCallback = attrs.geoCallback;
-              geoCallback && $parse(geoCallback)(scope);
-            });
-          }
-          mapController.addObject('infoWindows', infoWindow);
-          mapController.observeAttrSetObj(orgAttrs, attrs, infoWindow);
-          scope.$on('mapInitialized', function(evt, map) {
-            infoWindow.visible && infoWindow.__open(map, scope);
-            if (infoWindow.visibleOnMarker) {
-              var markerId = infoWindow.visibleOnMarker;
-              infoWindow.__open(map, scope, map.markers[markerId]);
-            }
-          });
-          scope.showInfoWindow = function(e, id, marker) {
-            var infoWindow = mapController.map.infoWindows[id];
-            var anchor = marker ? marker : (this.getPosition ? this : null);
-            infoWindow.__open(mapController.map, scope, anchor);
-          };
-          scope.hideInfoWindow = scope.hideInfoWindow || function(event, id) {
-            var infoWindow = mapController.map.infoWindows[id];
-            infoWindow.close();
-          };
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: linkFunc
-        };
-      };
-      infoWindow.$inject = ['Attr2Options', '$compile', '$timeout', '$parse'];
-      angular.module('ngMap').directive('infoWindow', infoWindow);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('kmlLayer', ['Attr2Options', function(Attr2Options) {
-        var parser = Attr2Options;
-        var getKmlLayer = function(options, events) {
-          var kmlLayer = new google.maps.KmlLayer(options);
-          for (var eventName in events) {
-            google.maps.event.addListener(kmlLayer, eventName, events[eventName]);
-          }
-          return kmlLayer;
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var orgAttrs = parser.orgAttributes(element);
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            var events = parser.getEvents(scope, filtered);
-            void 0;
-            var kmlLayer = getKmlLayer(options, events);
-            mapController.addObject('kmlLayers', kmlLayer);
-            mapController.observeAttrSetObj(orgAttrs, attrs, kmlLayer);
-            element.bind('$destroy', function() {
-              mapController.deleteObject('kmlLayers', kmlLayer);
-            });
           }
         };
       }]);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('mapData', ['Attr2Options', function(Attr2Options) {
-        var parser = Attr2Options;
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            var events = parser.getEvents(scope, filtered, events);
-            void 0;
-            scope.$on('mapInitialized', function(event, map) {
-              for (var key in options) {
-                if (key) {
-                  var val = options[key];
-                  if (typeof scope[val] === "function") {
-                    map.data[key](scope[val]);
-                  } else {
-                    map.data[key](val);
+      function linkDrop(scope, elem, attr, ngModel, $parse, $timeout, $location, upload) {
+        var available = dropAvailable();
+        var attrGetter = function(name, scope, params) {
+          return upload.attrGetter(name, attr, scope, params);
+        };
+        if (attrGetter('dropAvailable')) {
+          $timeout(function() {
+            if (scope[attrGetter('dropAvailable')]) {
+              scope[attrGetter('dropAvailable')].value = available;
+            } else {
+              scope[attrGetter('dropAvailable')] = available;
+            }
+          });
+        }
+        if (!available) {
+          if (attrGetter('ngfHideOnDropNotAvailable', scope) === true) {
+            elem.css('display', 'none');
+          }
+          return;
+        }
+        function isDisabled() {
+          return elem.attr('disabled') || attrGetter('ngfDropDisabled', scope);
+        }
+        upload.registerValidators(ngModel, null, attr, scope);
+        var leaveTimeout = null;
+        var stopPropagation = $parse(attrGetter('ngfStopPropagation'));
+        var dragOverDelay = 1;
+        var actualDragOverClass;
+        elem[0].addEventListener('dragover', function(evt) {
+          if (isDisabled())
+            return;
+          evt.preventDefault();
+          if (stopPropagation(scope))
+            evt.stopPropagation();
+          if (navigator.userAgent.indexOf('Chrome') > -1) {
+            var b = evt.dataTransfer.effectAllowed;
+            evt.dataTransfer.dropEffect = ('move' === b || 'linkMove' === b) ? 'move' : 'copy';
+          }
+          $timeout.cancel(leaveTimeout);
+          if (!actualDragOverClass) {
+            actualDragOverClass = 'C';
+            calculateDragOverClass(scope, attr, evt, function(clazz) {
+              actualDragOverClass = clazz;
+              elem.addClass(actualDragOverClass);
+            });
+          }
+        }, false);
+        elem[0].addEventListener('dragenter', function(evt) {
+          if (isDisabled())
+            return;
+          evt.preventDefault();
+          if (stopPropagation(scope))
+            evt.stopPropagation();
+        }, false);
+        elem[0].addEventListener('dragleave', function() {
+          if (isDisabled())
+            return;
+          leaveTimeout = $timeout(function() {
+            elem.removeClass(actualDragOverClass);
+            actualDragOverClass = null;
+          }, dragOverDelay || 1);
+        }, false);
+        elem[0].addEventListener('drop', function(evt) {
+          if (isDisabled())
+            return;
+          evt.preventDefault();
+          if (stopPropagation(scope))
+            evt.stopPropagation();
+          elem.removeClass(actualDragOverClass);
+          actualDragOverClass = null;
+          extractFiles(evt, function(files) {
+            upload.updateModel(ngModel, attr, scope, attrGetter('ngfChange') || attrGetter('ngfDrop'), files, evt);
+          }, attrGetter('ngfAllowDir', scope) !== false, attrGetter('multiple') || attrGetter('ngfMultiple', scope));
+        }, false);
+        elem[0].addEventListener('paste', function(evt) {
+          if (isDisabled())
+            return;
+          var files = [];
+          var clipboard = evt.clipboardData || evt.originalEvent.clipboardData;
+          if (clipboard && clipboard.items) {
+            for (var k = 0; k < clipboard.items.length; k++) {
+              if (clipboard.items[k].type.indexOf('image') !== -1) {
+                files.push(clipboard.items[k].getAsFile());
+              }
+            }
+            upload.updateModel(ngModel, attr, scope, attrGetter('ngfChange') || attrGetter('ngfDrop'), files, evt);
+          }
+        }, false);
+        function calculateDragOverClass(scope, attr, evt, callback) {
+          var clazz = attrGetter('ngfDragOverClass', scope, {$event: evt}),
+              dClass = attrGetter('ngfDragOverClass') || 'dragover';
+          if (angular.isString(clazz)) {
+            callback(clazz);
+            return;
+          }
+          if (clazz) {
+            if (clazz.delay)
+              dragOverDelay = clazz.delay;
+            if (clazz.accept || clazz.reject) {
+              var items = evt.dataTransfer.items;
+              if (items != null) {
+                var pattern = attrGetter('ngfPattern', scope, {$event: evt});
+                for (var i = 0; i < items.length; i++) {
+                  if (items[i].kind === 'file' || items[i].kind === '') {
+                    if (!upload.validatePattern(items[i], pattern)) {
+                      dClass = clazz.reject;
+                      break;
+                    } else {
+                      dClass = clazz.accept;
+                    }
                   }
                 }
               }
-              for (var eventName in events) {
-                if (events[eventName]) {
-                  map.data.addListener(eventName, events[eventName]);
+            }
+          }
+          callback(dClass);
+        }
+        function extractFiles(evt, callback, allowDir, multiple) {
+          var files = [],
+              processing = 0;
+          function traverseFileTree(files, entry, path) {
+            if (entry != null) {
+              if (entry.isDirectory) {
+                var filePath = (path || '') + entry.name;
+                files.push({
+                  name: entry.name,
+                  type: 'directory',
+                  path: filePath
+                });
+                var dirReader = entry.createReader();
+                var entries = [];
+                processing++;
+                var readEntries = function() {
+                  dirReader.readEntries(function(results) {
+                    try {
+                      if (!results.length) {
+                        for (var i = 0; i < entries.length; i++) {
+                          traverseFileTree(files, entries[i], (path ? path : '') + entry.name + '/');
+                        }
+                        processing--;
+                      } else {
+                        entries = entries.concat(Array.prototype.slice.call(results || [], 0));
+                        readEntries();
+                      }
+                    } catch (e) {
+                      processing--;
+                      console.error(e);
+                    }
+                  }, function() {
+                    processing--;
+                  });
+                };
+                readEntries();
+              } else {
+                processing++;
+                entry.file(function(file) {
+                  try {
+                    processing--;
+                    file.path = (path ? path : '') + file.name;
+                    files.push(file);
+                  } catch (e) {
+                    processing--;
+                    console.error(e);
+                  }
+                }, function() {
+                  processing--;
+                });
+              }
+            }
+          }
+          var items = evt.dataTransfer.items;
+          if (items && items.length > 0 && $location.protocol() !== 'file') {
+            for (var i = 0; i < items.length; i++) {
+              if (items[i].webkitGetAsEntry && items[i].webkitGetAsEntry() && items[i].webkitGetAsEntry().isDirectory) {
+                var entry = items[i].webkitGetAsEntry();
+                if (entry.isDirectory && !allowDir) {
+                  continue;
+                }
+                if (entry != null) {
+                  traverseFileTree(files, entry);
+                }
+              } else {
+                var f = items[i].getAsFile();
+                if (f != null)
+                  files.push(f);
+              }
+              if (!multiple && files.length > 0)
+                break;
+            }
+          } else {
+            var fileList = evt.dataTransfer.files;
+            if (fileList != null) {
+              for (var j = 0; j < fileList.length; j++) {
+                files.push(fileList.item(j));
+                if (!multiple && files.length > 0) {
+                  break;
                 }
               }
-            });
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      var $timeout,
-          $compile,
-          src,
-          savedHtml;
-      var preLinkFunc = function(scope, element, attrs) {
-        var mapsUrl = attrs.mapLazyLoadParams || attrs.mapLazyLoad;
-        window.lazyLoadCallback = function() {
-          void 0;
-          $timeout(function() {
-            element.html(savedHtml);
-            $compile(element.contents())(scope);
-          }, 100);
-        };
-        if (window.google === undefined || window.google.maps === undefined) {
-          var scriptEl = document.createElement('script');
-          void 0;
-          scriptEl.src = mapsUrl + (mapsUrl.indexOf('?') > -1 ? '&' : '?') + 'callback=lazyLoadCallback';
-          document.body.appendChild(scriptEl);
-        } else {
-          element.html(savedHtml);
-          $compile(element.contents())(scope);
-        }
-      };
-      var compileFunc = function(tElement, tAttrs) {
-        (!tAttrs.mapLazyLoad) && void 0;
-        savedHtml = tElement.html();
-        src = tAttrs.mapLazyLoad;
-        if (document.querySelector('script[src="' + src + (src.indexOf('?') > -1 ? '&' : '?') + 'callback=lazyLoadCallback"]')) {
-          return false;
-        }
-        tElement.html('');
-        return {pre: preLinkFunc};
-      };
-      var mapLazyLoad = function(_$compile_, _$timeout_) {
-        $compile = _$compile_, $timeout = _$timeout_;
-        return {compile: compileFunc};
-      };
-      mapLazyLoad.$inject = ['$compile', '$timeout'];
-      angular.module('ngMap').directive('mapLazyLoad', mapLazyLoad);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('mapType', ['Attr2Options', '$window', function(Attr2Options, $window) {
-        var parser = Attr2Options;
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var mapTypeName = attrs.name,
-                mapTypeObject;
-            if (!mapTypeName) {
-              throw "invalid map-type name";
             }
-            if (attrs.object) {
-              var __scope = scope[attrs.object] ? scope : $window;
-              mapTypeObject = __scope[attrs.object];
-              if (typeof mapTypeObject == "function") {
-                mapTypeObject = new mapTypeObject();
+          }
+          var delays = 0;
+          (function waitForProcess(delay) {
+            $timeout(function() {
+              if (!processing) {
+                if (!multiple && files.length > 1) {
+                  i = 0;
+                  while (files[i].type === 'directory')
+                    i++;
+                  files = [files[i]];
+                }
+                callback(files);
+              } else {
+                if (delays++ * 10 < 20 * 1000) {
+                  waitForProcess(10);
+                }
               }
-            }
-            if (!mapTypeObject) {
-              throw "invalid map-type object";
-            }
-            scope.$on('mapInitialized', function(evt, map) {
-              map.mapTypes.set(mapTypeName, mapTypeObject);
-            });
-            mapController.addObject('mapTypes', mapTypeObject);
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      function getStyle(el, styleProp) {
-        var y;
-        if (el.currentStyle) {
-          y = el.currentStyle[styleProp];
-        } else if (window.getComputedStyle) {
-          y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+            }, delay || 0);
+          })();
         }
-        return y;
       }
-      var mapDirective = function(Attr2Options, $timeout, $parse) {
-        var parser = Attr2Options;
-        var linkFunc = function(scope, element, attrs, ctrl) {
-          var orgAttrs = parser.orgAttributes(element);
-          scope.google = google;
-          var el = document.createElement("div");
-          el.style.width = "100%";
-          el.style.height = "100%";
-          element.prepend(el);
-          if (attrs.defaultStyle !== 'false') {
-            if (getStyle(element[0], 'display') != "block") {
-              element.css('display', 'block');
-            }
-            if (getStyle(element[0], 'height').match(/^(0|auto)/)) {
-              element.css('height', '300px');
-            }
-          }
-          element[0].addEventListener('dragstart', function(event) {
-            event.preventDefault();
-            return false;
-          });
-          var initializeMap = function(mapOptions, mapEvents) {
-            var map = new google.maps.Map(el, {});
-            map.markers = {};
-            map.shapes = {};
-            $timeout(function() {
-              google.maps.event.trigger(map, "resize");
-            });
-            mapOptions.zoom = mapOptions.zoom || 15;
-            var center = mapOptions.center;
-            if (!center) {
-              mapOptions.center = new google.maps.LatLng(0, 0);
-            } else if (!(center instanceof google.maps.LatLng)) {
-              delete mapOptions.center;
-              ctrl.getGeoLocation(center).then(function(latlng) {
-                map.setCenter(latlng);
-                var geoCallback = attrs.geoCallback;
-                geoCallback && $parse(geoCallback)(scope);
-              }, function(error) {
-                map.setCenter(options.geoFallbackCenter);
-              });
-            }
-            map.setOptions(mapOptions);
-            for (var eventName in mapEvents) {
-              if (eventName) {
-                google.maps.event.addListener(map, eventName, mapEvents[eventName]);
-              }
-            }
-            ctrl.observeAttrSetObj(orgAttrs, attrs, map);
-            ctrl.map = map;
-            ctrl.addObjects(ctrl._objects);
-            scope.map = map;
-            scope.map.scope = scope;
-            google.maps.event.addListenerOnce(map, "idle", function() {
-              scope.$emit('mapInitialized', map);
-              if (attrs.zoomToIncludeMarkers) {
-                ctrl.zoomToIncludeMarkers();
-                if (attrs.zoomToIncludeMarkers == 'auto') {
-                  scope.$on('objectChanged', function(evt, msg) {
-                    msg[0] == 'markers' && ctrl.zoomToIncludeMarkers();
-                  });
-                }
-              }
-            });
-          };
-          var filtered = parser.filter(attrs);
-          var options = parser.getOptions(filtered, scope);
-          var controlOptions = parser.getControlOptions(filtered);
-          var mapOptions = angular.extend(options, controlOptions);
-          var mapEvents = parser.getEvents(scope, filtered);
-          void 0;
-          if (attrs.initEvent) {
-            scope.$on(attrs.initEvent, function() {
-              !ctrl.map && initializeMap(mapOptions, mapEvents);
-            });
-          } else {
-            initializeMap(mapOptions, mapEvents);
-          }
-        };
-        return {
-          restrict: 'AE',
-          controller: 'MapController',
-          link: linkFunc
-        };
-      };
-      angular.module('ngMap').directive('map', ['Attr2Options', '$timeout', '$parse', mapDirective]);
+      function dropAvailable() {
+        var div = document.createElement('div');
+        return ('draggable' in div) && ('ondrop' in div) && !/Edge\/12./i.test(navigator.userAgent);
+      }
     })();
-    (function() {
-      'use strict';
-      var MapController = function($scope, $q, NavigatorGeolocation, GeoCoder, Attr2Options) {
-        var parser = Attr2Options;
-        var _this = this;
-        var observeAndSet = function(attrs, attrName, object) {
-          attrs.$observe(attrName, function(val) {
-            if (val) {
-              void 0;
-              var setMethod = parser.camelCase('set-' + attrName);
-              var optionValue = parser.toOptionValue(val, {key: attrName});
-              void 0;
-              if (object[setMethod]) {
-                if (attrName.match(/center|position/) && typeof optionValue == 'string') {
-                  _this.getGeoLocation(optionValue).then(function(latlng) {
-                    object[setMethod](latlng);
-                  });
-                } else {
-                  object[setMethod](optionValue);
-                }
-              }
-            }
-          });
-        };
-        this.map = null;
-        this._objects = [];
-        this.addObject = function(groupName, obj) {
-          if (this.map) {
-            this.map[groupName] = this.map[groupName] || {};
-            var len = Object.keys(this.map[groupName]).length;
-            this.map[groupName][obj.id || len] = obj;
-            if (groupName != "infoWindows" && obj.setMap) {
-              obj.setMap && obj.setMap(this.map);
-            }
-            if (obj.centered && obj.position) {
-              this.map.setCenter(obj.position);
-            }
-            $scope.$emit('objectChanged', [groupName, this.map[groupName]]);
-          } else {
-            obj.groupName = groupName;
-            this._objects.push(obj);
-          }
-        };
-        this.deleteObject = function(groupName, obj) {
-          if (obj.map) {
-            var objs = obj.map[groupName];
-            for (var name in objs) {
-              objs[name] === obj && (delete objs[name]);
-            }
-            obj.map && obj.setMap && obj.setMap(null);
-            $scope.$emit('objectChanged', [groupName, this.map[groupName]]);
-          }
-        };
-        this.addObjects = function(objects) {
-          for (var i = 0; i < objects.length; i++) {
-            var obj = objects[i];
-            if (obj instanceof google.maps.Marker) {
-              this.addObject('markers', obj);
-            } else if (obj instanceof google.maps.Circle || obj instanceof google.maps.Polygon || obj instanceof google.maps.Polyline || obj instanceof google.maps.Rectangle || obj instanceof google.maps.GroundOverlay) {
-              this.addObject('shapes', obj);
-            } else {
-              this.addObject(obj.groupName, obj);
-            }
-          }
-        };
-        this.getGeoLocation = function(string) {
-          var deferred = $q.defer();
-          if (!string || string.match(/^current/i)) {
-            NavigatorGeolocation.getCurrentPosition().then(function(position) {
-              var lat = position.coords.latitude;
-              var lng = position.coords.longitude;
-              var latLng = new google.maps.LatLng(lat, lng);
-              deferred.resolve(latLng);
-            }, function(error) {
-              deferred.reject(error);
-            });
-          } else {
-            GeoCoder.geocode({address: string}).then(function(results) {
-              deferred.resolve(results[0].geometry.location);
-            }, function(error) {
-              deferred.reject(error);
-            });
-          }
-          return deferred.promise;
-        };
-        this.observeAttrSetObj = function(orgAttrs, attrs, obj) {
-          var attrsToObserve = parser.getAttrsToObserve(orgAttrs);
-          if (Object.keys(attrsToObserve).length) {
-            void 0;
-          }
-          for (var i = 0; i < attrsToObserve.length; i++) {
-            observeAndSet(attrs, attrsToObserve[i], obj);
-          }
-        };
-        this.zoomToIncludeMarkers = function() {
-          var bounds = new google.maps.LatLngBounds();
-          for (var marker in this.map.markers) {
-            bounds.extend(this.map.markers[marker].getPosition());
-          }
-          this.map.fitBounds(bounds);
-        };
-      };
-      MapController.$inject = ['$scope', '$q', 'NavigatorGeolocation', 'GeoCoder', 'Attr2Options'];
-      angular.module('ngMap').controller('MapController', MapController);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('mapsEngineLayer', ['Attr2Options', function(Attr2Options) {
-        var parser = Attr2Options;
-        var getMapsEngineLayer = function(options, events) {
-          var layer = new google.maps.visualization.MapsEngineLayer(options);
-          for (var eventName in events) {
-            google.maps.event.addListener(layer, eventName, events[eventName]);
-          }
-          return layer;
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            var events = parser.getEvents(scope, filtered, events);
-            void 0;
-            var layer = getMapsEngineLayer(options, events);
-            mapController.addObject('mapsEngineLayers', layer);
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      var getMarker = function(options, events) {
-        var marker;
-        if (options.icon instanceof Object) {
-          if (("" + options.icon.path).match(/^[A-Z_]+$/)) {
-            options.icon.path = google.maps.SymbolPath[options.icon.path];
-          }
-          for (var key in options.icon) {
-            var arr = options.icon[key];
-            if (key == "anchor" || key == "origin") {
-              options.icon[key] = new google.maps.Point(arr[0], arr[1]);
-            } else if (key == "size" || key == "scaledSize") {
-              options.icon[key] = new google.maps.Size(arr[0], arr[1]);
-            }
-          }
-        }
-        if (!(options.position instanceof google.maps.LatLng)) {
-          options.position = new google.maps.LatLng(0, 0);
-        }
-        marker = new google.maps.Marker(options);
-        if (Object.keys(events).length > 0) {
-          void 0;
-        }
-        for (var eventName in events) {
-          if (eventName) {
-            google.maps.event.addListener(marker, eventName, events[eventName]);
-          }
-        }
-        return marker;
-      };
-      var marker = function(Attr2Options, $parse) {
-        var parser = Attr2Options;
-        var linkFunc = function(scope, element, attrs, mapController) {
-          var orgAttrs = parser.orgAttributes(element);
-          var filtered = parser.filter(attrs);
-          var markerOptions = parser.getOptions(filtered, scope);
-          var markerEvents = parser.getEvents(scope, filtered);
-          void 0;
-          var address;
-          if (!(markerOptions.position instanceof google.maps.LatLng)) {
-            address = markerOptions.position;
-          }
-          var marker = getMarker(markerOptions, markerEvents);
-          mapController.addObject('markers', marker);
-          if (address) {
-            mapController.getGeoLocation(address).then(function(latlng) {
-              marker.setPosition(latlng);
-              markerOptions.centered && marker.map.setCenter(latlng);
-              var geoCallback = attrs.geoCallback;
-              geoCallback && $parse(geoCallback)(scope);
-            });
-          }
-          mapController.observeAttrSetObj(orgAttrs, attrs, marker);
-          element.bind('$destroy', function() {
-            mapController.deleteObject('markers', marker);
-          });
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: linkFunc
-        };
-      };
-      marker.$inject = ['Attr2Options', '$parse'];
-      angular.module('ngMap').directive('marker', marker);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('overlayMapType', ['Attr2Options', '$window', function(Attr2Options, $window) {
-        var parser = Attr2Options;
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var overlayMapTypeObject;
-            var initMethod = attrs.initMethod || "insertAt";
-            if (attrs.object) {
-              var __scope = scope[attrs.object] ? scope : $window;
-              overlayMapTypeObject = __scope[attrs.object];
-              if (typeof overlayMapTypeObject == "function") {
-                overlayMapTypeObject = new overlayMapTypeObject();
-              }
-            }
-            if (!overlayMapTypeObject) {
-              throw "invalid map-type object";
-            }
-            scope.$on('mapInitialized', function(evt, map) {
-              if (initMethod == "insertAt") {
-                var index = parseInt(attrs.index, 10);
-                map.overlayMapTypes.insertAt(index, overlayMapTypeObject);
-              } else if (initMethod == "push") {
-                map.overlayMapTypes.push(overlayMapTypeObject);
-              }
-            });
-            mapController.addObject('overlayMapTypes', overlayMapTypeObject);
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      var placesAutoComplete = function(Attr2Options, $timeout) {
-        var parser = Attr2Options;
-        var linkFunc = function(scope, element, attrs, ngModelCtrl) {
-          var filtered = parser.filter(attrs);
-          var options = parser.getOptions(filtered);
-          var events = parser.getEvents(scope, filtered);
-          void 0;
-          var autocomplete = new google.maps.places.Autocomplete(element[0], options);
-          for (var eventName in events) {
-            google.maps.event.addListener(autocomplete, eventName, events[eventName]);
-          }
-          var updateModel = function() {
-            $timeout(function() {
-              ngModelCtrl && ngModelCtrl.$setViewValue(element.val());
-            }, 100);
-          };
-          google.maps.event.addListener(autocomplete, 'place_changed', updateModel);
-          element[0].addEventListener('change', updateModel);
-          attrs.$observe('types', function(val) {
-            if (val) {
-              void 0;
-              var optionValue = parser.toOptionValue(val, {key: 'types'});
-              void 0;
-              autocomplete.setTypes(optionValue);
-            }
-          });
-        };
-        return {
-          restrict: 'A',
-          require: '?ngModel',
-          link: linkFunc
-        };
-      };
-      placesAutoComplete.$inject = ['Attr2Options', '$timeout'];
-      angular.module('ngMap').directive('placesAutoComplete', placesAutoComplete);
-    })();
-    (function() {
-      'use strict';
-      var getBounds = function(points) {
-        return new google.maps.LatLngBounds(points[0], points[1]);
-      };
-      var getShape = function(options, events) {
-        var shape;
-        var shapeName = options.name;
-        delete options.name;
-        void 0;
-        if (options.icons) {
-          for (var i = 0; i < options.icons.length; i++) {
-            var el = options.icons[i];
-            if (el.icon.path.match(/^[A-Z_]+$/)) {
-              el.icon.path = google.maps.SymbolPath[el.icon.path];
-            }
-          }
-        }
-        switch (shapeName) {
-          case "circle":
-            if (!(options.center instanceof google.maps.LatLng)) {
-              options.center = new google.maps.LatLng(0, 0);
-            }
-            shape = new google.maps.Circle(options);
-            break;
-          case "polygon":
-            shape = new google.maps.Polygon(options);
-            break;
-          case "polyline":
-            shape = new google.maps.Polyline(options);
-            break;
-          case "rectangle":
-            if (options.bounds) {
-              options.bounds = getBounds(options.bounds);
-            }
-            shape = new google.maps.Rectangle(options);
-            break;
-          case "groundOverlay":
-          case "image":
-            var url = options.url;
-            var bounds = getBounds(options.bounds);
-            var opts = {
-              opacity: options.opacity,
-              clickable: options.clickable,
-              id: options.id
-            };
-            shape = new google.maps.GroundOverlay(url, bounds, opts);
-            break;
-        }
-        for (var eventName in events) {
-          if (events[eventName]) {
-            google.maps.event.addListener(shape, eventName, events[eventName]);
-          }
-        }
-        return shape;
-      };
-      var shape = function(Attr2Options, $parse) {
-        var parser = Attr2Options;
-        var linkFunc = function(scope, element, attrs, mapController) {
-          var orgAttrs = parser.orgAttributes(element);
-          var filtered = parser.filter(attrs);
-          var shapeOptions = parser.getOptions(filtered);
-          var shapeEvents = parser.getEvents(scope, filtered);
-          var address,
-              shapeType;
-          shapeType = shapeOptions.name;
-          if (!(shapeOptions.center instanceof google.maps.LatLng)) {
-            address = shapeOptions.center;
-          }
-          var shape = getShape(shapeOptions, shapeEvents);
-          mapController.addObject('shapes', shape);
-          if (address && shapeType == 'circle') {
-            mapController.getGeoLocation(address).then(function(latlng) {
-              shape.setCenter(latlng);
-              shape.centered && shape.map.setCenter(latlng);
-              var geoCallback = attrs.geoCallback;
-              geoCallback && $parse(geoCallback)(scope);
-            });
-          }
-          mapController.observeAttrSetObj(orgAttrs, attrs, shape);
-          element.bind('$destroy', function() {
-            mapController.deleteObject('shapes', shape);
-          });
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: linkFunc
-        };
-      };
-      shape.$inject = ['Attr2Options', '$parse'];
-      angular.module('ngMap').directive('shape', shape);
-    })();
-    (function() {
-      'use strict';
-      var streetViewPanorama = function(Attr2Options) {
-        var parser = Attr2Options;
-        var getStreetViewPanorama = function(map, options, events) {
-          var svp,
-              container;
-          if (options.container) {
-            container = document.getElementById(options.container);
-            container = container || document.querySelector(options.container);
-          }
-          if (container) {
-            svp = new google.maps.StreetViewPanorama(container, options);
-          } else {
-            svp = map.getStreetView();
-            svp.setOptions(options);
-          }
-          for (var eventName in events) {
-            eventName && google.maps.event.addListener(svp, eventName, events[eventName]);
-          }
-          return svp;
-        };
-        var linkFunc = function(scope, element, attrs, mapController) {
-          var orgAttrs = parser.orgAttributes(element);
-          var filtered = parser.filter(attrs);
-          var options = parser.getOptions(filtered);
-          var controlOptions = parser.getControlOptions(filtered);
-          var svpOptions = angular.extend(options, controlOptions);
-          var svpEvents = parser.getEvents(scope, filtered);
-          void 0;
-          scope.$on('mapInitialized', function(evt, map) {
-            var svp = getStreetViewPanorama(map, svpOptions, svpEvents);
-            map.setStreetView(svp);
-            (!svp.getPosition()) && svp.setPosition(map.getCenter());
-            google.maps.event.addListener(svp, 'position_changed', function() {
-              if (svp.getPosition() !== map.getCenter()) {
-                map.setCenter(svp.getPosition());
-              }
-            });
-            var listener = google.maps.event.addListener(map, 'center_changed', function() {
-              svp.setPosition(map.getCenter());
-              google.maps.event.removeListener(listener);
-            });
-          });
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: linkFunc
-        };
-      };
-      streetViewPanorama.$inject = ['Attr2Options'];
-      angular.module('ngMap').directive('streetViewPanorama', streetViewPanorama);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('trafficLayer', ['Attr2Options', function(Attr2Options) {
-        var parser = Attr2Options;
-        var getLayer = function(options, events) {
-          var layer = new google.maps.TrafficLayer(options);
-          for (var eventName in events) {
-            google.maps.event.addListener(layer, eventName, events[eventName]);
-          }
-          return layer;
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var orgAttrs = parser.orgAttributes(element);
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            var events = parser.getEvents(scope, filtered);
-            void 0;
-            var layer = getLayer(options, events);
-            mapController.addObject('trafficLayers', layer);
-            mapController.observeAttrSetObj(orgAttrs, attrs, layer);
-            element.bind('$destroy', function() {
-              mapController.deleteObject('trafficLayers', layer);
-            });
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('transitLayer', ['Attr2Options', function(Attr2Options) {
-        var parser = Attr2Options;
-        var getLayer = function(options, events) {
-          var layer = new google.maps.TransitLayer(options);
-          for (var eventName in events) {
-            google.maps.event.addListener(layer, eventName, events[eventName]);
-          }
-          return layer;
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var orgAttrs = parser.orgAttributes(element);
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            var events = parser.getEvents(scope, filtered);
-            void 0;
-            var layer = getLayer(options, events);
-            mapController.addObject('transitLayers', layer);
-            mapController.observeAttrSetObj(orgAttrs, attrs, layer);
-            element.bind('$destroy', function() {
-              mapController.deleteObject('transitLayers', layer);
-            });
-          }
-        };
-      }]);
-    })();
-    (function() {
-      'use strict';
-      angular.module('ngMap').directive('weatherLayer', ['Attr2Options', function(Attr2Options) {
-        var parser = Attr2Options;
-        var getLayer = function(options, events) {
-          var layer = new google.maps.weather.WeatherLayer(options);
-          for (var eventName in events) {
-            google.maps.event.addListener(layer, eventName, events[eventName]);
-          }
-          return layer;
-        };
-        return {
-          restrict: 'E',
-          require: '^map',
-          link: function(scope, element, attrs, mapController) {
-            var orgAttrs = parser.orgAttributes(element);
-            var filtered = parser.filter(attrs);
-            var options = parser.getOptions(filtered);
-            var events = parser.getEvents(scope, filtered);
-            void 0;
-            var layer = getLayer(options, events);
-            mapController.addObject('weatherLayers', layer);
-            mapController.observeAttrSetObj(orgAttrs, attrs, layer);
-            element.bind('$destroy', function() {
-              mapController.deleteObject('weatherLayers', layer);
-            });
-          }
-        };
-      }]);
-    })();
+    this["ngFileUpload"] = ngFileUpload;
   })();
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("1e", ["21"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": require("21"),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("1f", ["22"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": require("22"),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("1c", ["23"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": require("23"),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("1d", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  "format cjs";
-  (function(global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : global.Immutable = factory();
-  }(this, function() {
-    'use strict';
-    var SLICE$0 = Array.prototype.slice;
-    function createClass(ctor, superClass) {
-      if (superClass) {
-        ctor.prototype = Object.create(superClass.prototype);
-      }
-      ctor.prototype.constructor = ctor;
-    }
-    var DELETE = 'delete';
-    var SHIFT = 5;
-    var SIZE = 1 << SHIFT;
-    var MASK = SIZE - 1;
-    var NOT_SET = {};
-    var CHANGE_LENGTH = {value: false};
-    var DID_ALTER = {value: false};
-    function MakeRef(ref) {
-      ref.value = false;
-      return ref;
-    }
-    function SetRef(ref) {
-      ref && (ref.value = true);
-    }
-    function OwnerID() {}
-    function arrCopy(arr, offset) {
-      offset = offset || 0;
-      var len = Math.max(0, arr.length - offset);
-      var newArr = new Array(len);
-      for (var ii = 0; ii < len; ii++) {
-        newArr[ii] = arr[ii + offset];
-      }
-      return newArr;
-    }
-    function ensureSize(iter) {
-      if (iter.size === undefined) {
-        iter.size = iter.__iterate(returnTrue);
-      }
-      return iter.size;
-    }
-    function wrapIndex(iter, index) {
-      if (typeof index !== 'number') {
-        var numIndex = +index;
-        if ('' + numIndex !== index) {
-          return NaN;
-        }
-        index = numIndex;
-      }
-      return index < 0 ? ensureSize(iter) + index : index;
-    }
-    function returnTrue() {
-      return true;
-    }
-    function wholeSlice(begin, end, size) {
-      return (begin === 0 || (size !== undefined && begin <= -size)) && (end === undefined || (size !== undefined && end >= size));
-    }
-    function resolveBegin(begin, size) {
-      return resolveIndex(begin, size, 0);
-    }
-    function resolveEnd(end, size) {
-      return resolveIndex(end, size, size);
-    }
-    function resolveIndex(index, size, defaultIndex) {
-      return index === undefined ? defaultIndex : index < 0 ? Math.max(0, size + index) : size === undefined ? index : Math.min(size, index);
-    }
-    function Iterable(value) {
-      return isIterable(value) ? value : Seq(value);
-    }
-    createClass(KeyedIterable, Iterable);
-    function KeyedIterable(value) {
-      return isKeyed(value) ? value : KeyedSeq(value);
-    }
-    createClass(IndexedIterable, Iterable);
-    function IndexedIterable(value) {
-      return isIndexed(value) ? value : IndexedSeq(value);
-    }
-    createClass(SetIterable, Iterable);
-    function SetIterable(value) {
-      return isIterable(value) && !isAssociative(value) ? value : SetSeq(value);
-    }
-    function isIterable(maybeIterable) {
-      return !!(maybeIterable && maybeIterable[IS_ITERABLE_SENTINEL]);
-    }
-    function isKeyed(maybeKeyed) {
-      return !!(maybeKeyed && maybeKeyed[IS_KEYED_SENTINEL]);
-    }
-    function isIndexed(maybeIndexed) {
-      return !!(maybeIndexed && maybeIndexed[IS_INDEXED_SENTINEL]);
-    }
-    function isAssociative(maybeAssociative) {
-      return isKeyed(maybeAssociative) || isIndexed(maybeAssociative);
-    }
-    function isOrdered(maybeOrdered) {
-      return !!(maybeOrdered && maybeOrdered[IS_ORDERED_SENTINEL]);
-    }
-    Iterable.isIterable = isIterable;
-    Iterable.isKeyed = isKeyed;
-    Iterable.isIndexed = isIndexed;
-    Iterable.isAssociative = isAssociative;
-    Iterable.isOrdered = isOrdered;
-    Iterable.Keyed = KeyedIterable;
-    Iterable.Indexed = IndexedIterable;
-    Iterable.Set = SetIterable;
-    var IS_ITERABLE_SENTINEL = '@@__IMMUTABLE_ITERABLE__@@';
-    var IS_KEYED_SENTINEL = '@@__IMMUTABLE_KEYED__@@';
-    var IS_INDEXED_SENTINEL = '@@__IMMUTABLE_INDEXED__@@';
-    var IS_ORDERED_SENTINEL = '@@__IMMUTABLE_ORDERED__@@';
-    var ITERATE_KEYS = 0;
-    var ITERATE_VALUES = 1;
-    var ITERATE_ENTRIES = 2;
-    var REAL_ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-    var FAUX_ITERATOR_SYMBOL = '@@iterator';
-    var ITERATOR_SYMBOL = REAL_ITERATOR_SYMBOL || FAUX_ITERATOR_SYMBOL;
-    function src_Iterator__Iterator(next) {
-      this.next = next;
-    }
-    src_Iterator__Iterator.prototype.toString = function() {
-      return '[Iterator]';
-    };
-    src_Iterator__Iterator.KEYS = ITERATE_KEYS;
-    src_Iterator__Iterator.VALUES = ITERATE_VALUES;
-    src_Iterator__Iterator.ENTRIES = ITERATE_ENTRIES;
-    src_Iterator__Iterator.prototype.inspect = src_Iterator__Iterator.prototype.toSource = function() {
-      return this.toString();
-    };
-    src_Iterator__Iterator.prototype[ITERATOR_SYMBOL] = function() {
-      return this;
-    };
-    function iteratorValue(type, k, v, iteratorResult) {
-      var value = type === 0 ? k : type === 1 ? v : [k, v];
-      iteratorResult ? (iteratorResult.value = value) : (iteratorResult = {
-        value: value,
-        done: false
-      });
-      return iteratorResult;
-    }
-    function iteratorDone() {
-      return {
-        value: undefined,
-        done: true
-      };
-    }
-    function hasIterator(maybeIterable) {
-      return !!getIteratorFn(maybeIterable);
-    }
-    function isIterator(maybeIterator) {
-      return maybeIterator && typeof maybeIterator.next === 'function';
-    }
-    function getIterator(iterable) {
-      var iteratorFn = getIteratorFn(iterable);
-      return iteratorFn && iteratorFn.call(iterable);
-    }
-    function getIteratorFn(iterable) {
-      var iteratorFn = iterable && ((REAL_ITERATOR_SYMBOL && iterable[REAL_ITERATOR_SYMBOL]) || iterable[FAUX_ITERATOR_SYMBOL]);
-      if (typeof iteratorFn === 'function') {
-        return iteratorFn;
-      }
-    }
-    function isArrayLike(value) {
-      return value && typeof value.length === 'number';
-    }
-    createClass(Seq, Iterable);
-    function Seq(value) {
-      return value === null || value === undefined ? emptySequence() : isIterable(value) ? value.toSeq() : seqFromValue(value);
-    }
-    Seq.of = function() {
-      return Seq(arguments);
-    };
-    Seq.prototype.toSeq = function() {
-      return this;
-    };
-    Seq.prototype.toString = function() {
-      return this.__toString('Seq {', '}');
-    };
-    Seq.prototype.cacheResult = function() {
-      if (!this._cache && this.__iterateUncached) {
-        this._cache = this.entrySeq().toArray();
-        this.size = this._cache.length;
-      }
-      return this;
-    };
-    Seq.prototype.__iterate = function(fn, reverse) {
-      return seqIterate(this, fn, reverse, true);
-    };
-    Seq.prototype.__iterator = function(type, reverse) {
-      return seqIterator(this, type, reverse, true);
-    };
-    createClass(KeyedSeq, Seq);
-    function KeyedSeq(value) {
-      return value === null || value === undefined ? emptySequence().toKeyedSeq() : isIterable(value) ? (isKeyed(value) ? value.toSeq() : value.fromEntrySeq()) : keyedSeqFromValue(value);
-    }
-    KeyedSeq.prototype.toKeyedSeq = function() {
-      return this;
-    };
-    createClass(IndexedSeq, Seq);
-    function IndexedSeq(value) {
-      return value === null || value === undefined ? emptySequence() : !isIterable(value) ? indexedSeqFromValue(value) : isKeyed(value) ? value.entrySeq() : value.toIndexedSeq();
-    }
-    IndexedSeq.of = function() {
-      return IndexedSeq(arguments);
-    };
-    IndexedSeq.prototype.toIndexedSeq = function() {
-      return this;
-    };
-    IndexedSeq.prototype.toString = function() {
-      return this.__toString('Seq [', ']');
-    };
-    IndexedSeq.prototype.__iterate = function(fn, reverse) {
-      return seqIterate(this, fn, reverse, false);
-    };
-    IndexedSeq.prototype.__iterator = function(type, reverse) {
-      return seqIterator(this, type, reverse, false);
-    };
-    createClass(SetSeq, Seq);
-    function SetSeq(value) {
-      return (value === null || value === undefined ? emptySequence() : !isIterable(value) ? indexedSeqFromValue(value) : isKeyed(value) ? value.entrySeq() : value).toSetSeq();
-    }
-    SetSeq.of = function() {
-      return SetSeq(arguments);
-    };
-    SetSeq.prototype.toSetSeq = function() {
-      return this;
-    };
-    Seq.isSeq = isSeq;
-    Seq.Keyed = KeyedSeq;
-    Seq.Set = SetSeq;
-    Seq.Indexed = IndexedSeq;
-    var IS_SEQ_SENTINEL = '@@__IMMUTABLE_SEQ__@@';
-    Seq.prototype[IS_SEQ_SENTINEL] = true;
-    createClass(ArraySeq, IndexedSeq);
-    function ArraySeq(array) {
-      this._array = array;
-      this.size = array.length;
-    }
-    ArraySeq.prototype.get = function(index, notSetValue) {
-      return this.has(index) ? this._array[wrapIndex(this, index)] : notSetValue;
-    };
-    ArraySeq.prototype.__iterate = function(fn, reverse) {
-      var array = this._array;
-      var maxIndex = array.length - 1;
-      for (var ii = 0; ii <= maxIndex; ii++) {
-        if (fn(array[reverse ? maxIndex - ii : ii], ii, this) === false) {
-          return ii + 1;
-        }
-      }
-      return ii;
-    };
-    ArraySeq.prototype.__iterator = function(type, reverse) {
-      var array = this._array;
-      var maxIndex = array.length - 1;
-      var ii = 0;
-      return new src_Iterator__Iterator(function() {
-        return ii > maxIndex ? iteratorDone() : iteratorValue(type, ii, array[reverse ? maxIndex - ii++ : ii++]);
-      });
-    };
-    createClass(ObjectSeq, KeyedSeq);
-    function ObjectSeq(object) {
-      var keys = Object.keys(object);
-      this._object = object;
-      this._keys = keys;
-      this.size = keys.length;
-    }
-    ObjectSeq.prototype.get = function(key, notSetValue) {
-      if (notSetValue !== undefined && !this.has(key)) {
-        return notSetValue;
-      }
-      return this._object[key];
-    };
-    ObjectSeq.prototype.has = function(key) {
-      return this._object.hasOwnProperty(key);
-    };
-    ObjectSeq.prototype.__iterate = function(fn, reverse) {
-      var object = this._object;
-      var keys = this._keys;
-      var maxIndex = keys.length - 1;
-      for (var ii = 0; ii <= maxIndex; ii++) {
-        var key = keys[reverse ? maxIndex - ii : ii];
-        if (fn(object[key], key, this) === false) {
-          return ii + 1;
-        }
-      }
-      return ii;
-    };
-    ObjectSeq.prototype.__iterator = function(type, reverse) {
-      var object = this._object;
-      var keys = this._keys;
-      var maxIndex = keys.length - 1;
-      var ii = 0;
-      return new src_Iterator__Iterator(function() {
-        var key = keys[reverse ? maxIndex - ii : ii];
-        return ii++ > maxIndex ? iteratorDone() : iteratorValue(type, key, object[key]);
-      });
-    };
-    ObjectSeq.prototype[IS_ORDERED_SENTINEL] = true;
-    createClass(IterableSeq, IndexedSeq);
-    function IterableSeq(iterable) {
-      this._iterable = iterable;
-      this.size = iterable.length || iterable.size;
-    }
-    IterableSeq.prototype.__iterateUncached = function(fn, reverse) {
-      if (reverse) {
-        return this.cacheResult().__iterate(fn, reverse);
-      }
-      var iterable = this._iterable;
-      var iterator = getIterator(iterable);
-      var iterations = 0;
-      if (isIterator(iterator)) {
-        var step;
-        while (!(step = iterator.next()).done) {
-          if (fn(step.value, iterations++, this) === false) {
-            break;
-          }
-        }
-      }
-      return iterations;
-    };
-    IterableSeq.prototype.__iteratorUncached = function(type, reverse) {
-      if (reverse) {
-        return this.cacheResult().__iterator(type, reverse);
-      }
-      var iterable = this._iterable;
-      var iterator = getIterator(iterable);
-      if (!isIterator(iterator)) {
-        return new src_Iterator__Iterator(iteratorDone);
-      }
-      var iterations = 0;
-      return new src_Iterator__Iterator(function() {
-        var step = iterator.next();
-        return step.done ? step : iteratorValue(type, iterations++, step.value);
-      });
-    };
-    createClass(IteratorSeq, IndexedSeq);
-    function IteratorSeq(iterator) {
-      this._iterator = iterator;
-      this._iteratorCache = [];
-    }
-    IteratorSeq.prototype.__iterateUncached = function(fn, reverse) {
-      if (reverse) {
-        return this.cacheResult().__iterate(fn, reverse);
-      }
-      var iterator = this._iterator;
-      var cache = this._iteratorCache;
-      var iterations = 0;
-      while (iterations < cache.length) {
-        if (fn(cache[iterations], iterations++, this) === false) {
-          return iterations;
-        }
-      }
-      var step;
-      while (!(step = iterator.next()).done) {
-        var val = step.value;
-        cache[iterations] = val;
-        if (fn(val, iterations++, this) === false) {
-          break;
-        }
-      }
-      return iterations;
-    };
-    IteratorSeq.prototype.__iteratorUncached = function(type, reverse) {
-      if (reverse) {
-        return this.cacheResult().__iterator(type, reverse);
-      }
-      var iterator = this._iterator;
-      var cache = this._iteratorCache;
-      var iterations = 0;
-      return new src_Iterator__Iterator(function() {
-        if (iterations >= cache.length) {
-          var step = iterator.next();
-          if (step.done) {
-            return step;
-          }
-          cache[iterations] = step.value;
-        }
-        return iteratorValue(type, iterations, cache[iterations++]);
-      });
-    };
-    function isSeq(maybeSeq) {
-      return !!(maybeSeq && maybeSeq[IS_SEQ_SENTINEL]);
-    }
-    var EMPTY_SEQ;
-    function emptySequence() {
-      return EMPTY_SEQ || (EMPTY_SEQ = new ArraySeq([]));
-    }
-    function keyedSeqFromValue(value) {
-      var seq = Array.isArray(value) ? new ArraySeq(value).fromEntrySeq() : isIterator(value) ? new IteratorSeq(value).fromEntrySeq() : hasIterator(value) ? new IterableSeq(value).fromEntrySeq() : typeof value === 'object' ? new ObjectSeq(value) : undefined;
-      if (!seq) {
-        throw new TypeError('Expected Array or iterable object of [k, v] entries, ' + 'or keyed object: ' + value);
-      }
-      return seq;
-    }
-    function indexedSeqFromValue(value) {
-      var seq = maybeIndexedSeqFromValue(value);
-      if (!seq) {
-        throw new TypeError('Expected Array or iterable object of values: ' + value);
-      }
-      return seq;
-    }
-    function seqFromValue(value) {
-      var seq = maybeIndexedSeqFromValue(value) || (typeof value === 'object' && new ObjectSeq(value));
-      if (!seq) {
-        throw new TypeError('Expected Array or iterable object of values, or keyed object: ' + value);
-      }
-      return seq;
-    }
-    function maybeIndexedSeqFromValue(value) {
-      return (isArrayLike(value) ? new ArraySeq(value) : isIterator(value) ? new IteratorSeq(value) : hasIterator(value) ? new IterableSeq(value) : undefined);
-    }
-    function seqIterate(seq, fn, reverse, useKeys) {
-      var cache = seq._cache;
-      if (cache) {
-        var maxIndex = cache.length - 1;
-        for (var ii = 0; ii <= maxIndex; ii++) {
-          var entry = cache[reverse ? maxIndex - ii : ii];
-          if (fn(entry[1], useKeys ? entry[0] : ii, seq) === false) {
-            return ii + 1;
-          }
-        }
-        return ii;
-      }
-      return seq.__iterateUncached(fn, reverse);
-    }
-    function seqIterator(seq, type, reverse, useKeys) {
-      var cache = seq._cache;
-      if (cache) {
-        var maxIndex = cache.length - 1;
-        var ii = 0;
-        return new src_Iterator__Iterator(function() {
-          var entry = cache[reverse ? maxIndex - ii : ii];
-          return ii++ > maxIndex ? iteratorDone() : iteratorValue(type, useKeys ? entry[0] : ii - 1, entry[1]);
-        });
-      }
-      return seq.__iteratorUncached(type, reverse);
-    }
-    createClass(Collection, Iterable);
-    function Collection() {
-      throw TypeError('Abstract');
-    }
-    createClass(KeyedCollection, Collection);
-    function KeyedCollection() {}
-    createClass(IndexedCollection, Collection);
-    function IndexedCollection() {}
-    createClass(SetCollection, Collection);
-    function SetCollection() {}
-    Collection.Keyed = KeyedCollection;
-    Collection.Indexed = IndexedCollection;
-    Collection.Set = SetCollection;
-    function is(valueA, valueB) {
-      if (valueA === valueB || (valueA !== valueA && valueB !== valueB)) {
-        return true;
-      }
-      if (!valueA || !valueB) {
-        return false;
-      }
-      if (typeof valueA.valueOf === 'function' && typeof valueB.valueOf === 'function') {
-        valueA = valueA.valueOf();
-        valueB = valueB.valueOf();
-        if (valueA === valueB || (valueA !== valueA && valueB !== valueB)) {
-          return true;
-        }
-        if (!valueA || !valueB) {
-          return false;
-        }
-      }
-      if (typeof valueA.equals === 'function' && typeof valueB.equals === 'function' && valueA.equals(valueB)) {
-        return true;
-      }
-      return false;
-    }
-    function fromJS(json, converter) {
-      return converter ? fromJSWith(converter, json, '', {'': json}) : fromJSDefault(json);
-    }
-    function fromJSWith(converter, json, key, parentJSON) {
-      if (Array.isArray(json)) {
-        return converter.call(parentJSON, key, IndexedSeq(json).map(function(v, k) {
-          return fromJSWith(converter, v, k, json);
-        }));
-      }
-      if (isPlainObj(json)) {
-        return converter.call(parentJSON, key, KeyedSeq(json).map(function(v, k) {
-          return fromJSWith(converter, v, k, json);
-        }));
-      }
-      return json;
-    }
-    function fromJSDefault(json) {
-      if (Array.isArray(json)) {
-        return IndexedSeq(json).map(fromJSDefault).toList();
-      }
-      if (isPlainObj(json)) {
-        return KeyedSeq(json).map(fromJSDefault).toMap();
-      }
-      return json;
-    }
-    function isPlainObj(value) {
-      return value && (value.constructor === Object || value.constructor === undefined);
-    }
-    var src_Math__imul = typeof Math.imul === 'function' && Math.imul(0xffffffff, 2) === -2 ? Math.imul : function imul(a, b) {
-      a = a | 0;
-      b = b | 0;
-      var c = a & 0xffff;
-      var d = b & 0xffff;
-      return (c * d) + ((((a >>> 16) * d + c * (b >>> 16)) << 16) >>> 0) | 0;
-    };
-    function smi(i32) {
-      return ((i32 >>> 1) & 0x40000000) | (i32 & 0xBFFFFFFF);
-    }
-    function hash(o) {
-      if (o === false || o === null || o === undefined) {
-        return 0;
-      }
-      if (typeof o.valueOf === 'function') {
-        o = o.valueOf();
-        if (o === false || o === null || o === undefined) {
-          return 0;
-        }
-      }
-      if (o === true) {
-        return 1;
-      }
-      var type = typeof o;
-      if (type === 'number') {
-        var h = o | 0;
-        if (h !== o) {
-          h ^= o * 0xFFFFFFFF;
-        }
-        while (o > 0xFFFFFFFF) {
-          o /= 0xFFFFFFFF;
-          h ^= o;
-        }
-        return smi(h);
-      }
-      if (type === 'string') {
-        return o.length > STRING_HASH_CACHE_MIN_STRLEN ? cachedHashString(o) : hashString(o);
-      }
-      if (typeof o.hashCode === 'function') {
-        return o.hashCode();
-      }
-      return hashJSObj(o);
-    }
-    function cachedHashString(string) {
-      var hash = stringHashCache[string];
-      if (hash === undefined) {
-        hash = hashString(string);
-        if (STRING_HASH_CACHE_SIZE === STRING_HASH_CACHE_MAX_SIZE) {
-          STRING_HASH_CACHE_SIZE = 0;
-          stringHashCache = {};
-        }
-        STRING_HASH_CACHE_SIZE++;
-        stringHashCache[string] = hash;
-      }
-      return hash;
-    }
-    function hashString(string) {
-      var hash = 0;
-      for (var ii = 0; ii < string.length; ii++) {
-        hash = 31 * hash + string.charCodeAt(ii) | 0;
-      }
-      return smi(hash);
-    }
-    function hashJSObj(obj) {
-      var hash;
-      if (usingWeakMap) {
-        hash = weakMap.get(obj);
-        if (hash !== undefined) {
-          return hash;
-        }
-      }
-      hash = obj[UID_HASH_KEY];
-      if (hash !== undefined) {
-        return hash;
-      }
-      if (!canDefineProperty) {
-        hash = obj.propertyIsEnumerable && obj.propertyIsEnumerable[UID_HASH_KEY];
-        if (hash !== undefined) {
-          return hash;
-        }
-        hash = getIENodeHash(obj);
-        if (hash !== undefined) {
-          return hash;
-        }
-      }
-      hash = ++objHashUID;
-      if (objHashUID & 0x40000000) {
-        objHashUID = 0;
-      }
-      if (usingWeakMap) {
-        weakMap.set(obj, hash);
-      } else if (isExtensible !== undefined && isExtensible(obj) === false) {
-        throw new Error('Non-extensible objects are not allowed as keys.');
-      } else if (canDefineProperty) {
-        Object.defineProperty(obj, UID_HASH_KEY, {
-          'enumerable': false,
-          'configurable': false,
-          'writable': false,
-          'value': hash
-        });
-      } else if (obj.propertyIsEnumerable !== undefined && obj.propertyIsEnumerable === obj.constructor.prototype.propertyIsEnumerable) {
-        obj.propertyIsEnumerable = function() {
-          return this.constructor.prototype.propertyIsEnumerable.apply(this, arguments);
-        };
-        obj.propertyIsEnumerable[UID_HASH_KEY] = hash;
-      } else if (obj.nodeType !== undefined) {
-        obj[UID_HASH_KEY] = hash;
-      } else {
-        throw new Error('Unable to set a non-enumerable property on object.');
-      }
-      return hash;
-    }
-    var isExtensible = Object.isExtensible;
-    var canDefineProperty = (function() {
-      try {
-        Object.defineProperty({}, '@', {});
-        return true;
-      } catch (e) {
-        return false;
-      }
-    }());
-    function getIENodeHash(node) {
-      if (node && node.nodeType > 0) {
-        switch (node.nodeType) {
-          case 1:
-            return node.uniqueID;
-          case 9:
-            return node.documentElement && node.documentElement.uniqueID;
-        }
-      }
-    }
-    var usingWeakMap = typeof WeakMap === 'function';
-    var weakMap;
-    if (usingWeakMap) {
-      weakMap = new WeakMap();
-    }
-    var objHashUID = 0;
-    var UID_HASH_KEY = '__immutablehash__';
-    if (typeof Symbol === 'function') {
-      UID_HASH_KEY = Symbol(UID_HASH_KEY);
-    }
-    var STRING_HASH_CACHE_MIN_STRLEN = 16;
-    var STRING_HASH_CACHE_MAX_SIZE = 255;
-    var STRING_HASH_CACHE_SIZE = 0;
-    var stringHashCache = {};
-    function invariant(condition, error) {
-      if (!condition)
-        throw new Error(error);
-    }
-    function assertNotInfinite(size) {
-      invariant(size !== Infinity, 'Cannot perform this action with an infinite size.');
-    }
-    createClass(ToKeyedSequence, KeyedSeq);
-    function ToKeyedSequence(indexed, useKeys) {
-      this._iter = indexed;
-      this._useKeys = useKeys;
-      this.size = indexed.size;
-    }
-    ToKeyedSequence.prototype.get = function(key, notSetValue) {
-      return this._iter.get(key, notSetValue);
-    };
-    ToKeyedSequence.prototype.has = function(key) {
-      return this._iter.has(key);
-    };
-    ToKeyedSequence.prototype.valueSeq = function() {
-      return this._iter.valueSeq();
-    };
-    ToKeyedSequence.prototype.reverse = function() {
-      var this$0 = this;
-      var reversedSequence = reverseFactory(this, true);
-      if (!this._useKeys) {
-        reversedSequence.valueSeq = function() {
-          return this$0._iter.toSeq().reverse();
-        };
-      }
-      return reversedSequence;
-    };
-    ToKeyedSequence.prototype.map = function(mapper, context) {
-      var this$0 = this;
-      var mappedSequence = mapFactory(this, mapper, context);
-      if (!this._useKeys) {
-        mappedSequence.valueSeq = function() {
-          return this$0._iter.toSeq().map(mapper, context);
-        };
-      }
-      return mappedSequence;
-    };
-    ToKeyedSequence.prototype.__iterate = function(fn, reverse) {
-      var this$0 = this;
-      var ii;
-      return this._iter.__iterate(this._useKeys ? function(v, k) {
-        return fn(v, k, this$0);
-      } : ((ii = reverse ? resolveSize(this) : 0), function(v) {
-        return fn(v, reverse ? --ii : ii++, this$0);
-      }), reverse);
-    };
-    ToKeyedSequence.prototype.__iterator = function(type, reverse) {
-      if (this._useKeys) {
-        return this._iter.__iterator(type, reverse);
-      }
-      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
-      var ii = reverse ? resolveSize(this) : 0;
-      return new src_Iterator__Iterator(function() {
-        var step = iterator.next();
-        return step.done ? step : iteratorValue(type, reverse ? --ii : ii++, step.value, step);
-      });
-    };
-    ToKeyedSequence.prototype[IS_ORDERED_SENTINEL] = true;
-    createClass(ToIndexedSequence, IndexedSeq);
-    function ToIndexedSequence(iter) {
-      this._iter = iter;
-      this.size = iter.size;
-    }
-    ToIndexedSequence.prototype.includes = function(value) {
-      return this._iter.includes(value);
-    };
-    ToIndexedSequence.prototype.__iterate = function(fn, reverse) {
-      var this$0 = this;
-      var iterations = 0;
-      return this._iter.__iterate(function(v) {
-        return fn(v, iterations++, this$0);
-      }, reverse);
-    };
-    ToIndexedSequence.prototype.__iterator = function(type, reverse) {
-      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
-      var iterations = 0;
-      return new src_Iterator__Iterator(function() {
-        var step = iterator.next();
-        return step.done ? step : iteratorValue(type, iterations++, step.value, step);
-      });
-    };
-    createClass(ToSetSequence, SetSeq);
-    function ToSetSequence(iter) {
-      this._iter = iter;
-      this.size = iter.size;
-    }
-    ToSetSequence.prototype.has = function(key) {
-      return this._iter.includes(key);
-    };
-    ToSetSequence.prototype.__iterate = function(fn, reverse) {
-      var this$0 = this;
-      return this._iter.__iterate(function(v) {
-        return fn(v, v, this$0);
-      }, reverse);
-    };
-    ToSetSequence.prototype.__iterator = function(type, reverse) {
-      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
-      return new src_Iterator__Iterator(function() {
-        var step = iterator.next();
-        return step.done ? step : iteratorValue(type, step.value, step.value, step);
-      });
-    };
-    createClass(FromEntriesSequence, KeyedSeq);
-    function FromEntriesSequence(entries) {
-      this._iter = entries;
-      this.size = entries.size;
-    }
-    FromEntriesSequence.prototype.entrySeq = function() {
-      return this._iter.toSeq();
-    };
-    FromEntriesSequence.prototype.__iterate = function(fn, reverse) {
-      var this$0 = this;
-      return this._iter.__iterate(function(entry) {
-        if (entry) {
-          validateEntry(entry);
-          var indexedIterable = isIterable(entry);
-          return fn(indexedIterable ? entry.get(1) : entry[1], indexedIterable ? entry.get(0) : entry[0], this$0);
-        }
-      }, reverse);
-    };
-    FromEntriesSequence.prototype.__iterator = function(type, reverse) {
-      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
-      return new src_Iterator__Iterator(function() {
-        while (true) {
-          var step = iterator.next();
-          if (step.done) {
-            return step;
-          }
-          var entry = step.value;
-          if (entry) {
-            validateEntry(entry);
-            var indexedIterable = isIterable(entry);
-            return iteratorValue(type, indexedIterable ? entry.get(0) : entry[0], indexedIterable ? entry.get(1) : entry[1], step);
-          }
-        }
-      });
-    };
-    ToIndexedSequence.prototype.cacheResult = ToKeyedSequence.prototype.cacheResult = ToSetSequence.prototype.cacheResult = FromEntriesSequence.prototype.cacheResult = cacheResultThrough;
-    function flipFactory(iterable) {
-      var flipSequence = makeSequence(iterable);
-      flipSequence._iter = iterable;
-      flipSequence.size = iterable.size;
-      flipSequence.flip = function() {
-        return iterable;
-      };
-      flipSequence.reverse = function() {
-        var reversedSequence = iterable.reverse.apply(this);
-        reversedSequence.flip = function() {
-          return iterable.reverse();
-        };
-        return reversedSequence;
-      };
-      flipSequence.has = function(key) {
-        return iterable.includes(key);
-      };
-      flipSequence.includes = function(key) {
-        return iterable.has(key);
-      };
-      flipSequence.cacheResult = cacheResultThrough;
-      flipSequence.__iterateUncached = function(fn, reverse) {
-        var this$0 = this;
-        return iterable.__iterate(function(v, k) {
-          return fn(k, v, this$0) !== false;
-        }, reverse);
-      };
-      flipSequence.__iteratorUncached = function(type, reverse) {
-        if (type === ITERATE_ENTRIES) {
-          var iterator = iterable.__iterator(type, reverse);
-          return new src_Iterator__Iterator(function() {
-            var step = iterator.next();
-            if (!step.done) {
-              var k = step.value[0];
-              step.value[0] = step.value[1];
-              step.value[1] = k;
-            }
-            return step;
-          });
-        }
-        return iterable.__iterator(type === ITERATE_VALUES ? ITERATE_KEYS : ITERATE_VALUES, reverse);
-      };
-      return flipSequence;
-    }
-    function mapFactory(iterable, mapper, context) {
-      var mappedSequence = makeSequence(iterable);
-      mappedSequence.size = iterable.size;
-      mappedSequence.has = function(key) {
-        return iterable.has(key);
-      };
-      mappedSequence.get = function(key, notSetValue) {
-        var v = iterable.get(key, NOT_SET);
-        return v === NOT_SET ? notSetValue : mapper.call(context, v, key, iterable);
-      };
-      mappedSequence.__iterateUncached = function(fn, reverse) {
-        var this$0 = this;
-        return iterable.__iterate(function(v, k, c) {
-          return fn(mapper.call(context, v, k, c), k, this$0) !== false;
-        }, reverse);
-      };
-      mappedSequence.__iteratorUncached = function(type, reverse) {
-        var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
-        return new src_Iterator__Iterator(function() {
-          var step = iterator.next();
-          if (step.done) {
-            return step;
-          }
-          var entry = step.value;
-          var key = entry[0];
-          return iteratorValue(type, key, mapper.call(context, entry[1], key, iterable), step);
-        });
-      };
-      return mappedSequence;
-    }
-    function reverseFactory(iterable, useKeys) {
-      var reversedSequence = makeSequence(iterable);
-      reversedSequence._iter = iterable;
-      reversedSequence.size = iterable.size;
-      reversedSequence.reverse = function() {
-        return iterable;
-      };
-      if (iterable.flip) {
-        reversedSequence.flip = function() {
-          var flipSequence = flipFactory(iterable);
-          flipSequence.reverse = function() {
-            return iterable.flip();
-          };
-          return flipSequence;
-        };
-      }
-      reversedSequence.get = function(key, notSetValue) {
-        return iterable.get(useKeys ? key : -1 - key, notSetValue);
-      };
-      reversedSequence.has = function(key) {
-        return iterable.has(useKeys ? key : -1 - key);
-      };
-      reversedSequence.includes = function(value) {
-        return iterable.includes(value);
-      };
-      reversedSequence.cacheResult = cacheResultThrough;
-      reversedSequence.__iterate = function(fn, reverse) {
-        var this$0 = this;
-        return iterable.__iterate(function(v, k) {
-          return fn(v, k, this$0);
-        }, !reverse);
-      };
-      reversedSequence.__iterator = function(type, reverse) {
-        return iterable.__iterator(type, !reverse);
-      };
-      return reversedSequence;
-    }
-    function filterFactory(iterable, predicate, context, useKeys) {
-      var filterSequence = makeSequence(iterable);
-      if (useKeys) {
-        filterSequence.has = function(key) {
-          var v = iterable.get(key, NOT_SET);
-          return v !== NOT_SET && !!predicate.call(context, v, key, iterable);
-        };
-        filterSequence.get = function(key, notSetValue) {
-          var v = iterable.get(key, NOT_SET);
-          return v !== NOT_SET && predicate.call(context, v, key, iterable) ? v : notSetValue;
-        };
-      }
-      filterSequence.__iterateUncached = function(fn, reverse) {
-        var this$0 = this;
-        var iterations = 0;
-        iterable.__iterate(function(v, k, c) {
-          if (predicate.call(context, v, k, c)) {
-            iterations++;
-            return fn(v, useKeys ? k : iterations - 1, this$0);
-          }
-        }, reverse);
-        return iterations;
-      };
-      filterSequence.__iteratorUncached = function(type, reverse) {
-        var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
-        var iterations = 0;
-        return new src_Iterator__Iterator(function() {
-          while (true) {
-            var step = iterator.next();
-            if (step.done) {
-              return step;
-            }
-            var entry = step.value;
-            var key = entry[0];
-            var value = entry[1];
-            if (predicate.call(context, value, key, iterable)) {
-              return iteratorValue(type, useKeys ? key : iterations++, value, step);
-            }
-          }
-        });
-      };
-      return filterSequence;
-    }
-    function countByFactory(iterable, grouper, context) {
-      var groups = src_Map__Map().asMutable();
-      iterable.__iterate(function(v, k) {
-        groups.update(grouper.call(context, v, k, iterable), 0, function(a) {
-          return a + 1;
-        });
-      });
-      return groups.asImmutable();
-    }
-    function groupByFactory(iterable, grouper, context) {
-      var isKeyedIter = isKeyed(iterable);
-      var groups = (isOrdered(iterable) ? OrderedMap() : src_Map__Map()).asMutable();
-      iterable.__iterate(function(v, k) {
-        groups.update(grouper.call(context, v, k, iterable), function(a) {
-          return (a = a || [], a.push(isKeyedIter ? [k, v] : v), a);
-        });
-      });
-      var coerce = iterableClass(iterable);
-      return groups.map(function(arr) {
-        return reify(iterable, coerce(arr));
-      });
-    }
-    function sliceFactory(iterable, begin, end, useKeys) {
-      var originalSize = iterable.size;
-      if (begin !== undefined) {
-        begin = begin | 0;
-      }
-      if (end !== undefined) {
-        end = end | 0;
-      }
-      if (wholeSlice(begin, end, originalSize)) {
-        return iterable;
-      }
-      var resolvedBegin = resolveBegin(begin, originalSize);
-      var resolvedEnd = resolveEnd(end, originalSize);
-      if (resolvedBegin !== resolvedBegin || resolvedEnd !== resolvedEnd) {
-        return sliceFactory(iterable.toSeq().cacheResult(), begin, end, useKeys);
-      }
-      var resolvedSize = resolvedEnd - resolvedBegin;
-      var sliceSize;
-      if (resolvedSize === resolvedSize) {
-        sliceSize = resolvedSize < 0 ? 0 : resolvedSize;
-      }
-      var sliceSeq = makeSequence(iterable);
-      sliceSeq.size = sliceSize === 0 ? sliceSize : iterable.size && sliceSize || undefined;
-      if (!useKeys && isSeq(iterable) && sliceSize >= 0) {
-        sliceSeq.get = function(index, notSetValue) {
-          index = wrapIndex(this, index);
-          return index >= 0 && index < sliceSize ? iterable.get(index + resolvedBegin, notSetValue) : notSetValue;
-        };
-      }
-      sliceSeq.__iterateUncached = function(fn, reverse) {
-        var this$0 = this;
-        if (sliceSize === 0) {
-          return 0;
-        }
-        if (reverse) {
-          return this.cacheResult().__iterate(fn, reverse);
-        }
-        var skipped = 0;
-        var isSkipping = true;
-        var iterations = 0;
-        iterable.__iterate(function(v, k) {
-          if (!(isSkipping && (isSkipping = skipped++ < resolvedBegin))) {
-            iterations++;
-            return fn(v, useKeys ? k : iterations - 1, this$0) !== false && iterations !== sliceSize;
-          }
-        });
-        return iterations;
-      };
-      sliceSeq.__iteratorUncached = function(type, reverse) {
-        if (sliceSize !== 0 && reverse) {
-          return this.cacheResult().__iterator(type, reverse);
-        }
-        var iterator = sliceSize !== 0 && iterable.__iterator(type, reverse);
-        var skipped = 0;
-        var iterations = 0;
-        return new src_Iterator__Iterator(function() {
-          while (skipped++ < resolvedBegin) {
-            iterator.next();
-          }
-          if (++iterations > sliceSize) {
-            return iteratorDone();
-          }
-          var step = iterator.next();
-          if (useKeys || type === ITERATE_VALUES) {
-            return step;
-          } else if (type === ITERATE_KEYS) {
-            return iteratorValue(type, iterations - 1, undefined, step);
-          } else {
-            return iteratorValue(type, iterations - 1, step.value[1], step);
-          }
-        });
-      };
-      return sliceSeq;
-    }
-    function takeWhileFactory(iterable, predicate, context) {
-      var takeSequence = makeSequence(iterable);
-      takeSequence.__iterateUncached = function(fn, reverse) {
-        var this$0 = this;
-        if (reverse) {
-          return this.cacheResult().__iterate(fn, reverse);
-        }
-        var iterations = 0;
-        iterable.__iterate(function(v, k, c) {
-          return predicate.call(context, v, k, c) && ++iterations && fn(v, k, this$0);
-        });
-        return iterations;
-      };
-      takeSequence.__iteratorUncached = function(type, reverse) {
-        var this$0 = this;
-        if (reverse) {
-          return this.cacheResult().__iterator(type, reverse);
-        }
-        var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
-        var iterating = true;
-        return new src_Iterator__Iterator(function() {
-          if (!iterating) {
-            return iteratorDone();
-          }
-          var step = iterator.next();
-          if (step.done) {
-            return step;
-          }
-          var entry = step.value;
-          var k = entry[0];
-          var v = entry[1];
-          if (!predicate.call(context, v, k, this$0)) {
-            iterating = false;
-            return iteratorDone();
-          }
-          return type === ITERATE_ENTRIES ? step : iteratorValue(type, k, v, step);
-        });
-      };
-      return takeSequence;
-    }
-    function skipWhileFactory(iterable, predicate, context, useKeys) {
-      var skipSequence = makeSequence(iterable);
-      skipSequence.__iterateUncached = function(fn, reverse) {
-        var this$0 = this;
-        if (reverse) {
-          return this.cacheResult().__iterate(fn, reverse);
-        }
-        var isSkipping = true;
-        var iterations = 0;
-        iterable.__iterate(function(v, k, c) {
-          if (!(isSkipping && (isSkipping = predicate.call(context, v, k, c)))) {
-            iterations++;
-            return fn(v, useKeys ? k : iterations - 1, this$0);
-          }
-        });
-        return iterations;
-      };
-      skipSequence.__iteratorUncached = function(type, reverse) {
-        var this$0 = this;
-        if (reverse) {
-          return this.cacheResult().__iterator(type, reverse);
-        }
-        var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
-        var skipping = true;
-        var iterations = 0;
-        return new src_Iterator__Iterator(function() {
-          var step,
-              k,
-              v;
-          do {
-            step = iterator.next();
-            if (step.done) {
-              if (useKeys || type === ITERATE_VALUES) {
-                return step;
-              } else if (type === ITERATE_KEYS) {
-                return iteratorValue(type, iterations++, undefined, step);
-              } else {
-                return iteratorValue(type, iterations++, step.value[1], step);
-              }
-            }
-            var entry = step.value;
-            k = entry[0];
-            v = entry[1];
-            skipping && (skipping = predicate.call(context, v, k, this$0));
-          } while (skipping);
-          return type === ITERATE_ENTRIES ? step : iteratorValue(type, k, v, step);
-        });
-      };
-      return skipSequence;
-    }
-    function concatFactory(iterable, values) {
-      var isKeyedIterable = isKeyed(iterable);
-      var iters = [iterable].concat(values).map(function(v) {
-        if (!isIterable(v)) {
-          v = isKeyedIterable ? keyedSeqFromValue(v) : indexedSeqFromValue(Array.isArray(v) ? v : [v]);
-        } else if (isKeyedIterable) {
-          v = KeyedIterable(v);
-        }
-        return v;
-      }).filter(function(v) {
-        return v.size !== 0;
-      });
-      if (iters.length === 0) {
-        return iterable;
-      }
-      if (iters.length === 1) {
-        var singleton = iters[0];
-        if (singleton === iterable || isKeyedIterable && isKeyed(singleton) || isIndexed(iterable) && isIndexed(singleton)) {
-          return singleton;
-        }
-      }
-      var concatSeq = new ArraySeq(iters);
-      if (isKeyedIterable) {
-        concatSeq = concatSeq.toKeyedSeq();
-      } else if (!isIndexed(iterable)) {
-        concatSeq = concatSeq.toSetSeq();
-      }
-      concatSeq = concatSeq.flatten(true);
-      concatSeq.size = iters.reduce(function(sum, seq) {
-        if (sum !== undefined) {
-          var size = seq.size;
-          if (size !== undefined) {
-            return sum + size;
-          }
-        }
-      }, 0);
-      return concatSeq;
-    }
-    function flattenFactory(iterable, depth, useKeys) {
-      var flatSequence = makeSequence(iterable);
-      flatSequence.__iterateUncached = function(fn, reverse) {
-        var iterations = 0;
-        var stopped = false;
-        function flatDeep(iter, currentDepth) {
-          var this$0 = this;
-          iter.__iterate(function(v, k) {
-            if ((!depth || currentDepth < depth) && isIterable(v)) {
-              flatDeep(v, currentDepth + 1);
-            } else if (fn(v, useKeys ? k : iterations++, this$0) === false) {
-              stopped = true;
-            }
-            return !stopped;
-          }, reverse);
-        }
-        flatDeep(iterable, 0);
-        return iterations;
-      };
-      flatSequence.__iteratorUncached = function(type, reverse) {
-        var iterator = iterable.__iterator(type, reverse);
-        var stack = [];
-        var iterations = 0;
-        return new src_Iterator__Iterator(function() {
-          while (iterator) {
-            var step = iterator.next();
-            if (step.done !== false) {
-              iterator = stack.pop();
-              continue;
-            }
-            var v = step.value;
-            if (type === ITERATE_ENTRIES) {
-              v = v[1];
-            }
-            if ((!depth || stack.length < depth) && isIterable(v)) {
-              stack.push(iterator);
-              iterator = v.__iterator(type, reverse);
-            } else {
-              return useKeys ? step : iteratorValue(type, iterations++, v, step);
-            }
-          }
-          return iteratorDone();
-        });
-      };
-      return flatSequence;
-    }
-    function flatMapFactory(iterable, mapper, context) {
-      var coerce = iterableClass(iterable);
-      return iterable.toSeq().map(function(v, k) {
-        return coerce(mapper.call(context, v, k, iterable));
-      }).flatten(true);
-    }
-    function interposeFactory(iterable, separator) {
-      var interposedSequence = makeSequence(iterable);
-      interposedSequence.size = iterable.size && iterable.size * 2 - 1;
-      interposedSequence.__iterateUncached = function(fn, reverse) {
-        var this$0 = this;
-        var iterations = 0;
-        iterable.__iterate(function(v, k) {
-          return (!iterations || fn(separator, iterations++, this$0) !== false) && fn(v, iterations++, this$0) !== false;
-        }, reverse);
-        return iterations;
-      };
-      interposedSequence.__iteratorUncached = function(type, reverse) {
-        var iterator = iterable.__iterator(ITERATE_VALUES, reverse);
-        var iterations = 0;
-        var step;
-        return new src_Iterator__Iterator(function() {
-          if (!step || iterations % 2) {
-            step = iterator.next();
-            if (step.done) {
-              return step;
-            }
-          }
-          return iterations % 2 ? iteratorValue(type, iterations++, separator) : iteratorValue(type, iterations++, step.value, step);
-        });
-      };
-      return interposedSequence;
-    }
-    function sortFactory(iterable, comparator, mapper) {
-      if (!comparator) {
-        comparator = defaultComparator;
-      }
-      var isKeyedIterable = isKeyed(iterable);
-      var index = 0;
-      var entries = iterable.toSeq().map(function(v, k) {
-        return [k, v, index++, mapper ? mapper(v, k, iterable) : v];
-      }).toArray();
-      entries.sort(function(a, b) {
-        return comparator(a[3], b[3]) || a[2] - b[2];
-      }).forEach(isKeyedIterable ? function(v, i) {
-        entries[i].length = 2;
-      } : function(v, i) {
-        entries[i] = v[1];
-      });
-      return isKeyedIterable ? KeyedSeq(entries) : isIndexed(iterable) ? IndexedSeq(entries) : SetSeq(entries);
-    }
-    function maxFactory(iterable, comparator, mapper) {
-      if (!comparator) {
-        comparator = defaultComparator;
-      }
-      if (mapper) {
-        var entry = iterable.toSeq().map(function(v, k) {
-          return [v, mapper(v, k, iterable)];
-        }).reduce(function(a, b) {
-          return maxCompare(comparator, a[1], b[1]) ? b : a;
-        });
-        return entry && entry[0];
-      } else {
-        return iterable.reduce(function(a, b) {
-          return maxCompare(comparator, a, b) ? b : a;
-        });
-      }
-    }
-    function maxCompare(comparator, a, b) {
-      var comp = comparator(b, a);
-      return (comp === 0 && b !== a && (b === undefined || b === null || b !== b)) || comp > 0;
-    }
-    function zipWithFactory(keyIter, zipper, iters) {
-      var zipSequence = makeSequence(keyIter);
-      zipSequence.size = new ArraySeq(iters).map(function(i) {
-        return i.size;
-      }).min();
-      zipSequence.__iterate = function(fn, reverse) {
-        var iterator = this.__iterator(ITERATE_VALUES, reverse);
-        var step;
-        var iterations = 0;
-        while (!(step = iterator.next()).done) {
-          if (fn(step.value, iterations++, this) === false) {
-            break;
-          }
-        }
-        return iterations;
-      };
-      zipSequence.__iteratorUncached = function(type, reverse) {
-        var iterators = iters.map(function(i) {
-          return (i = Iterable(i), getIterator(reverse ? i.reverse() : i));
-        });
-        var iterations = 0;
-        var isDone = false;
-        return new src_Iterator__Iterator(function() {
-          var steps;
-          if (!isDone) {
-            steps = iterators.map(function(i) {
-              return i.next();
-            });
-            isDone = steps.some(function(s) {
-              return s.done;
-            });
-          }
-          if (isDone) {
-            return iteratorDone();
-          }
-          return iteratorValue(type, iterations++, zipper.apply(null, steps.map(function(s) {
-            return s.value;
-          })));
-        });
-      };
-      return zipSequence;
-    }
-    function reify(iter, seq) {
-      return isSeq(iter) ? seq : iter.constructor(seq);
-    }
-    function validateEntry(entry) {
-      if (entry !== Object(entry)) {
-        throw new TypeError('Expected [K, V] tuple: ' + entry);
-      }
-    }
-    function resolveSize(iter) {
-      assertNotInfinite(iter.size);
-      return ensureSize(iter);
-    }
-    function iterableClass(iterable) {
-      return isKeyed(iterable) ? KeyedIterable : isIndexed(iterable) ? IndexedIterable : SetIterable;
-    }
-    function makeSequence(iterable) {
-      return Object.create((isKeyed(iterable) ? KeyedSeq : isIndexed(iterable) ? IndexedSeq : SetSeq).prototype);
-    }
-    function cacheResultThrough() {
-      if (this._iter.cacheResult) {
-        this._iter.cacheResult();
-        this.size = this._iter.size;
-        return this;
-      } else {
-        return Seq.prototype.cacheResult.call(this);
-      }
-    }
-    function defaultComparator(a, b) {
-      return a > b ? 1 : a < b ? -1 : 0;
-    }
-    function forceIterator(keyPath) {
-      var iter = getIterator(keyPath);
-      if (!iter) {
-        if (!isArrayLike(keyPath)) {
-          throw new TypeError('Expected iterable or array-like: ' + keyPath);
-        }
-        iter = getIterator(Iterable(keyPath));
-      }
-      return iter;
-    }
-    createClass(src_Map__Map, KeyedCollection);
-    function src_Map__Map(value) {
-      return value === null || value === undefined ? emptyMap() : isMap(value) && !isOrdered(value) ? value : emptyMap().withMutations(function(map) {
-        var iter = KeyedIterable(value);
-        assertNotInfinite(iter.size);
-        iter.forEach(function(v, k) {
-          return map.set(k, v);
-        });
-      });
-    }
-    src_Map__Map.prototype.toString = function() {
-      return this.__toString('Map {', '}');
-    };
-    src_Map__Map.prototype.get = function(k, notSetValue) {
-      return this._root ? this._root.get(0, undefined, k, notSetValue) : notSetValue;
-    };
-    src_Map__Map.prototype.set = function(k, v) {
-      return updateMap(this, k, v);
-    };
-    src_Map__Map.prototype.setIn = function(keyPath, v) {
-      return this.updateIn(keyPath, NOT_SET, function() {
-        return v;
-      });
-    };
-    src_Map__Map.prototype.remove = function(k) {
-      return updateMap(this, k, NOT_SET);
-    };
-    src_Map__Map.prototype.deleteIn = function(keyPath) {
-      return this.updateIn(keyPath, function() {
-        return NOT_SET;
-      });
-    };
-    src_Map__Map.prototype.update = function(k, notSetValue, updater) {
-      return arguments.length === 1 ? k(this) : this.updateIn([k], notSetValue, updater);
-    };
-    src_Map__Map.prototype.updateIn = function(keyPath, notSetValue, updater) {
-      if (!updater) {
-        updater = notSetValue;
-        notSetValue = undefined;
-      }
-      var updatedValue = updateInDeepMap(this, forceIterator(keyPath), notSetValue, updater);
-      return updatedValue === NOT_SET ? undefined : updatedValue;
-    };
-    src_Map__Map.prototype.clear = function() {
-      if (this.size === 0) {
-        return this;
-      }
-      if (this.__ownerID) {
-        this.size = 0;
-        this._root = null;
-        this.__hash = undefined;
-        this.__altered = true;
-        return this;
-      }
-      return emptyMap();
-    };
-    src_Map__Map.prototype.merge = function() {
-      return mergeIntoMapWith(this, undefined, arguments);
-    };
-    src_Map__Map.prototype.mergeWith = function(merger) {
-      var iters = SLICE$0.call(arguments, 1);
-      return mergeIntoMapWith(this, merger, iters);
-    };
-    src_Map__Map.prototype.mergeIn = function(keyPath) {
-      var iters = SLICE$0.call(arguments, 1);
-      return this.updateIn(keyPath, emptyMap(), function(m) {
-        return typeof m.merge === 'function' ? m.merge.apply(m, iters) : iters[iters.length - 1];
-      });
-    };
-    src_Map__Map.prototype.mergeDeep = function() {
-      return mergeIntoMapWith(this, deepMerger(undefined), arguments);
-    };
-    src_Map__Map.prototype.mergeDeepWith = function(merger) {
-      var iters = SLICE$0.call(arguments, 1);
-      return mergeIntoMapWith(this, deepMerger(merger), iters);
-    };
-    src_Map__Map.prototype.mergeDeepIn = function(keyPath) {
-      var iters = SLICE$0.call(arguments, 1);
-      return this.updateIn(keyPath, emptyMap(), function(m) {
-        return typeof m.mergeDeep === 'function' ? m.mergeDeep.apply(m, iters) : iters[iters.length - 1];
-      });
-    };
-    src_Map__Map.prototype.sort = function(comparator) {
-      return OrderedMap(sortFactory(this, comparator));
-    };
-    src_Map__Map.prototype.sortBy = function(mapper, comparator) {
-      return OrderedMap(sortFactory(this, comparator, mapper));
-    };
-    src_Map__Map.prototype.withMutations = function(fn) {
-      var mutable = this.asMutable();
-      fn(mutable);
-      return mutable.wasAltered() ? mutable.__ensureOwner(this.__ownerID) : this;
-    };
-    src_Map__Map.prototype.asMutable = function() {
-      return this.__ownerID ? this : this.__ensureOwner(new OwnerID());
-    };
-    src_Map__Map.prototype.asImmutable = function() {
-      return this.__ensureOwner();
-    };
-    src_Map__Map.prototype.wasAltered = function() {
-      return this.__altered;
-    };
-    src_Map__Map.prototype.__iterator = function(type, reverse) {
-      return new MapIterator(this, type, reverse);
-    };
-    src_Map__Map.prototype.__iterate = function(fn, reverse) {
-      var this$0 = this;
-      var iterations = 0;
-      this._root && this._root.iterate(function(entry) {
-        iterations++;
-        return fn(entry[1], entry[0], this$0);
-      }, reverse);
-      return iterations;
-    };
-    src_Map__Map.prototype.__ensureOwner = function(ownerID) {
-      if (ownerID === this.__ownerID) {
-        return this;
-      }
-      if (!ownerID) {
-        this.__ownerID = ownerID;
-        this.__altered = false;
-        return this;
-      }
-      return makeMap(this.size, this._root, ownerID, this.__hash);
-    };
-    function isMap(maybeMap) {
-      return !!(maybeMap && maybeMap[IS_MAP_SENTINEL]);
-    }
-    src_Map__Map.isMap = isMap;
-    var IS_MAP_SENTINEL = '@@__IMMUTABLE_MAP__@@';
-    var MapPrototype = src_Map__Map.prototype;
-    MapPrototype[IS_MAP_SENTINEL] = true;
-    MapPrototype[DELETE] = MapPrototype.remove;
-    MapPrototype.removeIn = MapPrototype.deleteIn;
-    function ArrayMapNode(ownerID, entries) {
-      this.ownerID = ownerID;
-      this.entries = entries;
-    }
-    ArrayMapNode.prototype.get = function(shift, keyHash, key, notSetValue) {
-      var entries = this.entries;
-      for (var ii = 0,
-          len = entries.length; ii < len; ii++) {
-        if (is(key, entries[ii][0])) {
-          return entries[ii][1];
-        }
-      }
-      return notSetValue;
-    };
-    ArrayMapNode.prototype.update = function(ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
-      var removed = value === NOT_SET;
-      var entries = this.entries;
-      var idx = 0;
-      for (var len = entries.length; idx < len; idx++) {
-        if (is(key, entries[idx][0])) {
-          break;
-        }
-      }
-      var exists = idx < len;
-      if (exists ? entries[idx][1] === value : removed) {
-        return this;
-      }
-      SetRef(didAlter);
-      (removed || !exists) && SetRef(didChangeSize);
-      if (removed && entries.length === 1) {
-        return;
-      }
-      if (!exists && !removed && entries.length >= MAX_ARRAY_MAP_SIZE) {
-        return createNodes(ownerID, entries, key, value);
-      }
-      var isEditable = ownerID && ownerID === this.ownerID;
-      var newEntries = isEditable ? entries : arrCopy(entries);
-      if (exists) {
-        if (removed) {
-          idx === len - 1 ? newEntries.pop() : (newEntries[idx] = newEntries.pop());
-        } else {
-          newEntries[idx] = [key, value];
-        }
-      } else {
-        newEntries.push([key, value]);
-      }
-      if (isEditable) {
-        this.entries = newEntries;
-        return this;
-      }
-      return new ArrayMapNode(ownerID, newEntries);
-    };
-    function BitmapIndexedNode(ownerID, bitmap, nodes) {
-      this.ownerID = ownerID;
-      this.bitmap = bitmap;
-      this.nodes = nodes;
-    }
-    BitmapIndexedNode.prototype.get = function(shift, keyHash, key, notSetValue) {
-      if (keyHash === undefined) {
-        keyHash = hash(key);
-      }
-      var bit = (1 << ((shift === 0 ? keyHash : keyHash >>> shift) & MASK));
-      var bitmap = this.bitmap;
-      return (bitmap & bit) === 0 ? notSetValue : this.nodes[popCount(bitmap & (bit - 1))].get(shift + SHIFT, keyHash, key, notSetValue);
-    };
-    BitmapIndexedNode.prototype.update = function(ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
-      if (keyHash === undefined) {
-        keyHash = hash(key);
-      }
-      var keyHashFrag = (shift === 0 ? keyHash : keyHash >>> shift) & MASK;
-      var bit = 1 << keyHashFrag;
-      var bitmap = this.bitmap;
-      var exists = (bitmap & bit) !== 0;
-      if (!exists && value === NOT_SET) {
-        return this;
-      }
-      var idx = popCount(bitmap & (bit - 1));
-      var nodes = this.nodes;
-      var node = exists ? nodes[idx] : undefined;
-      var newNode = updateNode(node, ownerID, shift + SHIFT, keyHash, key, value, didChangeSize, didAlter);
-      if (newNode === node) {
-        return this;
-      }
-      if (!exists && newNode && nodes.length >= MAX_BITMAP_INDEXED_SIZE) {
-        return expandNodes(ownerID, nodes, bitmap, keyHashFrag, newNode);
-      }
-      if (exists && !newNode && nodes.length === 2 && isLeafNode(nodes[idx ^ 1])) {
-        return nodes[idx ^ 1];
-      }
-      if (exists && newNode && nodes.length === 1 && isLeafNode(newNode)) {
-        return newNode;
-      }
-      var isEditable = ownerID && ownerID === this.ownerID;
-      var newBitmap = exists ? newNode ? bitmap : bitmap ^ bit : bitmap | bit;
-      var newNodes = exists ? newNode ? setIn(nodes, idx, newNode, isEditable) : spliceOut(nodes, idx, isEditable) : spliceIn(nodes, idx, newNode, isEditable);
-      if (isEditable) {
-        this.bitmap = newBitmap;
-        this.nodes = newNodes;
-        return this;
-      }
-      return new BitmapIndexedNode(ownerID, newBitmap, newNodes);
-    };
-    function HashArrayMapNode(ownerID, count, nodes) {
-      this.ownerID = ownerID;
-      this.count = count;
-      this.nodes = nodes;
-    }
-    HashArrayMapNode.prototype.get = function(shift, keyHash, key, notSetValue) {
-      if (keyHash === undefined) {
-        keyHash = hash(key);
-      }
-      var idx = (shift === 0 ? keyHash : keyHash >>> shift) & MASK;
-      var node = this.nodes[idx];
-      return node ? node.get(shift + SHIFT, keyHash, key, notSetValue) : notSetValue;
-    };
-    HashArrayMapNode.prototype.update = function(ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
-      if (keyHash === undefined) {
-        keyHash = hash(key);
-      }
-      var idx = (shift === 0 ? keyHash : keyHash >>> shift) & MASK;
-      var removed = value === NOT_SET;
-      var nodes = this.nodes;
-      var node = nodes[idx];
-      if (removed && !node) {
-        return this;
-      }
-      var newNode = updateNode(node, ownerID, shift + SHIFT, keyHash, key, value, didChangeSize, didAlter);
-      if (newNode === node) {
-        return this;
-      }
-      var newCount = this.count;
-      if (!node) {
-        newCount++;
-      } else if (!newNode) {
-        newCount--;
-        if (newCount < MIN_HASH_ARRAY_MAP_SIZE) {
-          return packNodes(ownerID, nodes, newCount, idx);
-        }
-      }
-      var isEditable = ownerID && ownerID === this.ownerID;
-      var newNodes = setIn(nodes, idx, newNode, isEditable);
-      if (isEditable) {
-        this.count = newCount;
-        this.nodes = newNodes;
-        return this;
-      }
-      return new HashArrayMapNode(ownerID, newCount, newNodes);
-    };
-    function HashCollisionNode(ownerID, keyHash, entries) {
-      this.ownerID = ownerID;
-      this.keyHash = keyHash;
-      this.entries = entries;
-    }
-    HashCollisionNode.prototype.get = function(shift, keyHash, key, notSetValue) {
-      var entries = this.entries;
-      for (var ii = 0,
-          len = entries.length; ii < len; ii++) {
-        if (is(key, entries[ii][0])) {
-          return entries[ii][1];
-        }
-      }
-      return notSetValue;
-    };
-    HashCollisionNode.prototype.update = function(ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
-      if (keyHash === undefined) {
-        keyHash = hash(key);
-      }
-      var removed = value === NOT_SET;
-      if (keyHash !== this.keyHash) {
-        if (removed) {
-          return this;
-        }
-        SetRef(didAlter);
-        SetRef(didChangeSize);
-        return mergeIntoNode(this, ownerID, shift, keyHash, [key, value]);
-      }
-      var entries = this.entries;
-      var idx = 0;
-      for (var len = entries.length; idx < len; idx++) {
-        if (is(key, entries[idx][0])) {
-          break;
-        }
-      }
-      var exists = idx < len;
-      if (exists ? entries[idx][1] === value : removed) {
-        return this;
-      }
-      SetRef(didAlter);
-      (removed || !exists) && SetRef(didChangeSize);
-      if (removed && len === 2) {
-        return new ValueNode(ownerID, this.keyHash, entries[idx ^ 1]);
-      }
-      var isEditable = ownerID && ownerID === this.ownerID;
-      var newEntries = isEditable ? entries : arrCopy(entries);
-      if (exists) {
-        if (removed) {
-          idx === len - 1 ? newEntries.pop() : (newEntries[idx] = newEntries.pop());
-        } else {
-          newEntries[idx] = [key, value];
-        }
-      } else {
-        newEntries.push([key, value]);
-      }
-      if (isEditable) {
-        this.entries = newEntries;
-        return this;
-      }
-      return new HashCollisionNode(ownerID, this.keyHash, newEntries);
-    };
-    function ValueNode(ownerID, keyHash, entry) {
-      this.ownerID = ownerID;
-      this.keyHash = keyHash;
-      this.entry = entry;
-    }
-    ValueNode.prototype.get = function(shift, keyHash, key, notSetValue) {
-      return is(key, this.entry[0]) ? this.entry[1] : notSetValue;
-    };
-    ValueNode.prototype.update = function(ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
-      var removed = value === NOT_SET;
-      var keyMatch = is(key, this.entry[0]);
-      if (keyMatch ? value === this.entry[1] : removed) {
-        return this;
-      }
-      SetRef(didAlter);
-      if (removed) {
-        SetRef(didChangeSize);
-        return;
-      }
-      if (keyMatch) {
-        if (ownerID && ownerID === this.ownerID) {
-          this.entry[1] = value;
-          return this;
-        }
-        return new ValueNode(ownerID, this.keyHash, [key, value]);
-      }
-      SetRef(didChangeSize);
-      return mergeIntoNode(this, ownerID, shift, hash(key), [key, value]);
-    };
-    ArrayMapNode.prototype.iterate = HashCollisionNode.prototype.iterate = function(fn, reverse) {
-      var entries = this.entries;
-      for (var ii = 0,
-          maxIndex = entries.length - 1; ii <= maxIndex; ii++) {
-        if (fn(entries[reverse ? maxIndex - ii : ii]) === false) {
-          return false;
-        }
-      }
-    };
-    BitmapIndexedNode.prototype.iterate = HashArrayMapNode.prototype.iterate = function(fn, reverse) {
-      var nodes = this.nodes;
-      for (var ii = 0,
-          maxIndex = nodes.length - 1; ii <= maxIndex; ii++) {
-        var node = nodes[reverse ? maxIndex - ii : ii];
-        if (node && node.iterate(fn, reverse) === false) {
-          return false;
-        }
-      }
-    };
-    ValueNode.prototype.iterate = function(fn, reverse) {
-      return fn(this.entry);
-    };
-    createClass(MapIterator, src_Iterator__Iterator);
-    function MapIterator(map, type, reverse) {
-      this._type = type;
-      this._reverse = reverse;
-      this._stack = map._root && mapIteratorFrame(map._root);
-    }
-    MapIterator.prototype.next = function() {
-      var type = this._type;
-      var stack = this._stack;
-      while (stack) {
-        var node = stack.node;
-        var index = stack.index++;
-        var maxIndex;
-        if (node.entry) {
-          if (index === 0) {
-            return mapIteratorValue(type, node.entry);
-          }
-        } else if (node.entries) {
-          maxIndex = node.entries.length - 1;
-          if (index <= maxIndex) {
-            return mapIteratorValue(type, node.entries[this._reverse ? maxIndex - index : index]);
-          }
-        } else {
-          maxIndex = node.nodes.length - 1;
-          if (index <= maxIndex) {
-            var subNode = node.nodes[this._reverse ? maxIndex - index : index];
-            if (subNode) {
-              if (subNode.entry) {
-                return mapIteratorValue(type, subNode.entry);
-              }
-              stack = this._stack = mapIteratorFrame(subNode, stack);
-            }
-            continue;
-          }
-        }
-        stack = this._stack = this._stack.__prev;
-      }
-      return iteratorDone();
-    };
-    function mapIteratorValue(type, entry) {
-      return iteratorValue(type, entry[0], entry[1]);
-    }
-    function mapIteratorFrame(node, prev) {
-      return {
-        node: node,
-        index: 0,
-        __prev: prev
-      };
-    }
-    function makeMap(size, root, ownerID, hash) {
-      var map = Object.create(MapPrototype);
-      map.size = size;
-      map._root = root;
-      map.__ownerID = ownerID;
-      map.__hash = hash;
-      map.__altered = false;
-      return map;
-    }
-    var EMPTY_MAP;
-    function emptyMap() {
-      return EMPTY_MAP || (EMPTY_MAP = makeMap(0));
-    }
-    function updateMap(map, k, v) {
-      var newRoot;
-      var newSize;
-      if (!map._root) {
-        if (v === NOT_SET) {
-          return map;
-        }
-        newSize = 1;
-        newRoot = new ArrayMapNode(map.__ownerID, [[k, v]]);
-      } else {
-        var didChangeSize = MakeRef(CHANGE_LENGTH);
-        var didAlter = MakeRef(DID_ALTER);
-        newRoot = updateNode(map._root, map.__ownerID, 0, undefined, k, v, didChangeSize, didAlter);
-        if (!didAlter.value) {
-          return map;
-        }
-        newSize = map.size + (didChangeSize.value ? v === NOT_SET ? -1 : 1 : 0);
-      }
-      if (map.__ownerID) {
-        map.size = newSize;
-        map._root = newRoot;
-        map.__hash = undefined;
-        map.__altered = true;
-        return map;
-      }
-      return newRoot ? makeMap(newSize, newRoot) : emptyMap();
-    }
-    function updateNode(node, ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
-      if (!node) {
-        if (value === NOT_SET) {
-          return node;
-        }
-        SetRef(didAlter);
-        SetRef(didChangeSize);
-        return new ValueNode(ownerID, keyHash, [key, value]);
-      }
-      return node.update(ownerID, shift, keyHash, key, value, didChangeSize, didAlter);
-    }
-    function isLeafNode(node) {
-      return node.constructor === ValueNode || node.constructor === HashCollisionNode;
-    }
-    function mergeIntoNode(node, ownerID, shift, keyHash, entry) {
-      if (node.keyHash === keyHash) {
-        return new HashCollisionNode(ownerID, keyHash, [node.entry, entry]);
-      }
-      var idx1 = (shift === 0 ? node.keyHash : node.keyHash >>> shift) & MASK;
-      var idx2 = (shift === 0 ? keyHash : keyHash >>> shift) & MASK;
-      var newNode;
-      var nodes = idx1 === idx2 ? [mergeIntoNode(node, ownerID, shift + SHIFT, keyHash, entry)] : ((newNode = new ValueNode(ownerID, keyHash, entry)), idx1 < idx2 ? [node, newNode] : [newNode, node]);
-      return new BitmapIndexedNode(ownerID, (1 << idx1) | (1 << idx2), nodes);
-    }
-    function createNodes(ownerID, entries, key, value) {
-      if (!ownerID) {
-        ownerID = new OwnerID();
-      }
-      var node = new ValueNode(ownerID, hash(key), [key, value]);
-      for (var ii = 0; ii < entries.length; ii++) {
-        var entry = entries[ii];
-        node = node.update(ownerID, 0, undefined, entry[0], entry[1]);
-      }
-      return node;
-    }
-    function packNodes(ownerID, nodes, count, excluding) {
-      var bitmap = 0;
-      var packedII = 0;
-      var packedNodes = new Array(count);
-      for (var ii = 0,
-          bit = 1,
-          len = nodes.length; ii < len; ii++, bit <<= 1) {
-        var node = nodes[ii];
-        if (node !== undefined && ii !== excluding) {
-          bitmap |= bit;
-          packedNodes[packedII++] = node;
-        }
-      }
-      return new BitmapIndexedNode(ownerID, bitmap, packedNodes);
-    }
-    function expandNodes(ownerID, nodes, bitmap, including, node) {
-      var count = 0;
-      var expandedNodes = new Array(SIZE);
-      for (var ii = 0; bitmap !== 0; ii++, bitmap >>>= 1) {
-        expandedNodes[ii] = bitmap & 1 ? nodes[count++] : undefined;
-      }
-      expandedNodes[including] = node;
-      return new HashArrayMapNode(ownerID, count + 1, expandedNodes);
-    }
-    function mergeIntoMapWith(map, merger, iterables) {
-      var iters = [];
-      for (var ii = 0; ii < iterables.length; ii++) {
-        var value = iterables[ii];
-        var iter = KeyedIterable(value);
-        if (!isIterable(value)) {
-          iter = iter.map(function(v) {
-            return fromJS(v);
-          });
-        }
-        iters.push(iter);
-      }
-      return mergeIntoCollectionWith(map, merger, iters);
-    }
-    function deepMerger(merger) {
-      return function(existing, value, key) {
-        return existing && existing.mergeDeepWith && isIterable(value) ? existing.mergeDeepWith(merger, value) : merger ? merger(existing, value, key) : value;
-      };
-    }
-    function mergeIntoCollectionWith(collection, merger, iters) {
-      iters = iters.filter(function(x) {
-        return x.size !== 0;
-      });
-      if (iters.length === 0) {
-        return collection;
-      }
-      if (collection.size === 0 && !collection.__ownerID && iters.length === 1) {
-        return collection.constructor(iters[0]);
-      }
-      return collection.withMutations(function(collection) {
-        var mergeIntoMap = merger ? function(value, key) {
-          collection.update(key, NOT_SET, function(existing) {
-            return existing === NOT_SET ? value : merger(existing, value, key);
-          });
-        } : function(value, key) {
-          collection.set(key, value);
-        };
-        for (var ii = 0; ii < iters.length; ii++) {
-          iters[ii].forEach(mergeIntoMap);
-        }
-      });
-    }
-    function updateInDeepMap(existing, keyPathIter, notSetValue, updater) {
-      var isNotSet = existing === NOT_SET;
-      var step = keyPathIter.next();
-      if (step.done) {
-        var existingValue = isNotSet ? notSetValue : existing;
-        var newValue = updater(existingValue);
-        return newValue === existingValue ? existing : newValue;
-      }
-      invariant(isNotSet || (existing && existing.set), 'invalid keyPath');
-      var key = step.value;
-      var nextExisting = isNotSet ? NOT_SET : existing.get(key, NOT_SET);
-      var nextUpdated = updateInDeepMap(nextExisting, keyPathIter, notSetValue, updater);
-      return nextUpdated === nextExisting ? existing : nextUpdated === NOT_SET ? existing.remove(key) : (isNotSet ? emptyMap() : existing).set(key, nextUpdated);
-    }
-    function popCount(x) {
-      x = x - ((x >> 1) & 0x55555555);
-      x = (x & 0x33333333) + ((x >> 2) & 0x33333333);
-      x = (x + (x >> 4)) & 0x0f0f0f0f;
-      x = x + (x >> 8);
-      x = x + (x >> 16);
-      return x & 0x7f;
-    }
-    function setIn(array, idx, val, canEdit) {
-      var newArray = canEdit ? array : arrCopy(array);
-      newArray[idx] = val;
-      return newArray;
-    }
-    function spliceIn(array, idx, val, canEdit) {
-      var newLen = array.length + 1;
-      if (canEdit && idx + 1 === newLen) {
-        array[idx] = val;
-        return array;
-      }
-      var newArray = new Array(newLen);
-      var after = 0;
-      for (var ii = 0; ii < newLen; ii++) {
-        if (ii === idx) {
-          newArray[ii] = val;
-          after = -1;
-        } else {
-          newArray[ii] = array[ii + after];
-        }
-      }
-      return newArray;
-    }
-    function spliceOut(array, idx, canEdit) {
-      var newLen = array.length - 1;
-      if (canEdit && idx === newLen) {
-        array.pop();
-        return array;
-      }
-      var newArray = new Array(newLen);
-      var after = 0;
-      for (var ii = 0; ii < newLen; ii++) {
-        if (ii === idx) {
-          after = 1;
-        }
-        newArray[ii] = array[ii + after];
-      }
-      return newArray;
-    }
-    var MAX_ARRAY_MAP_SIZE = SIZE / 4;
-    var MAX_BITMAP_INDEXED_SIZE = SIZE / 2;
-    var MIN_HASH_ARRAY_MAP_SIZE = SIZE / 4;
-    createClass(List, IndexedCollection);
-    function List(value) {
-      var empty = emptyList();
-      if (value === null || value === undefined) {
-        return empty;
-      }
-      if (isList(value)) {
-        return value;
-      }
-      var iter = IndexedIterable(value);
-      var size = iter.size;
-      if (size === 0) {
-        return empty;
-      }
-      assertNotInfinite(size);
-      if (size > 0 && size < SIZE) {
-        return makeList(0, size, SHIFT, null, new VNode(iter.toArray()));
-      }
-      return empty.withMutations(function(list) {
-        list.setSize(size);
-        iter.forEach(function(v, i) {
-          return list.set(i, v);
-        });
-      });
-    }
-    List.of = function() {
-      return this(arguments);
-    };
-    List.prototype.toString = function() {
-      return this.__toString('List [', ']');
-    };
-    List.prototype.get = function(index, notSetValue) {
-      index = wrapIndex(this, index);
-      if (index >= 0 && index < this.size) {
-        index += this._origin;
-        var node = listNodeFor(this, index);
-        return node && node.array[index & MASK];
-      }
-      return notSetValue;
-    };
-    List.prototype.set = function(index, value) {
-      return updateList(this, index, value);
-    };
-    List.prototype.remove = function(index) {
-      return !this.has(index) ? this : index === 0 ? this.shift() : index === this.size - 1 ? this.pop() : this.splice(index, 1);
-    };
-    List.prototype.clear = function() {
-      if (this.size === 0) {
-        return this;
-      }
-      if (this.__ownerID) {
-        this.size = this._origin = this._capacity = 0;
-        this._level = SHIFT;
-        this._root = this._tail = null;
-        this.__hash = undefined;
-        this.__altered = true;
-        return this;
-      }
-      return emptyList();
-    };
-    List.prototype.push = function() {
-      var values = arguments;
-      var oldSize = this.size;
-      return this.withMutations(function(list) {
-        setListBounds(list, 0, oldSize + values.length);
-        for (var ii = 0; ii < values.length; ii++) {
-          list.set(oldSize + ii, values[ii]);
-        }
-      });
-    };
-    List.prototype.pop = function() {
-      return setListBounds(this, 0, -1);
-    };
-    List.prototype.unshift = function() {
-      var values = arguments;
-      return this.withMutations(function(list) {
-        setListBounds(list, -values.length);
-        for (var ii = 0; ii < values.length; ii++) {
-          list.set(ii, values[ii]);
-        }
-      });
-    };
-    List.prototype.shift = function() {
-      return setListBounds(this, 1);
-    };
-    List.prototype.merge = function() {
-      return mergeIntoListWith(this, undefined, arguments);
-    };
-    List.prototype.mergeWith = function(merger) {
-      var iters = SLICE$0.call(arguments, 1);
-      return mergeIntoListWith(this, merger, iters);
-    };
-    List.prototype.mergeDeep = function() {
-      return mergeIntoListWith(this, deepMerger(undefined), arguments);
-    };
-    List.prototype.mergeDeepWith = function(merger) {
-      var iters = SLICE$0.call(arguments, 1);
-      return mergeIntoListWith(this, deepMerger(merger), iters);
-    };
-    List.prototype.setSize = function(size) {
-      return setListBounds(this, 0, size);
-    };
-    List.prototype.slice = function(begin, end) {
-      var size = this.size;
-      if (wholeSlice(begin, end, size)) {
-        return this;
-      }
-      return setListBounds(this, resolveBegin(begin, size), resolveEnd(end, size));
-    };
-    List.prototype.__iterator = function(type, reverse) {
-      var index = 0;
-      var values = iterateList(this, reverse);
-      return new src_Iterator__Iterator(function() {
-        var value = values();
-        return value === DONE ? iteratorDone() : iteratorValue(type, index++, value);
-      });
-    };
-    List.prototype.__iterate = function(fn, reverse) {
-      var index = 0;
-      var values = iterateList(this, reverse);
-      var value;
-      while ((value = values()) !== DONE) {
-        if (fn(value, index++, this) === false) {
-          break;
-        }
-      }
-      return index;
-    };
-    List.prototype.__ensureOwner = function(ownerID) {
-      if (ownerID === this.__ownerID) {
-        return this;
-      }
-      if (!ownerID) {
-        this.__ownerID = ownerID;
-        return this;
-      }
-      return makeList(this._origin, this._capacity, this._level, this._root, this._tail, ownerID, this.__hash);
-    };
-    function isList(maybeList) {
-      return !!(maybeList && maybeList[IS_LIST_SENTINEL]);
-    }
-    List.isList = isList;
-    var IS_LIST_SENTINEL = '@@__IMMUTABLE_LIST__@@';
-    var ListPrototype = List.prototype;
-    ListPrototype[IS_LIST_SENTINEL] = true;
-    ListPrototype[DELETE] = ListPrototype.remove;
-    ListPrototype.setIn = MapPrototype.setIn;
-    ListPrototype.deleteIn = ListPrototype.removeIn = MapPrototype.removeIn;
-    ListPrototype.update = MapPrototype.update;
-    ListPrototype.updateIn = MapPrototype.updateIn;
-    ListPrototype.mergeIn = MapPrototype.mergeIn;
-    ListPrototype.mergeDeepIn = MapPrototype.mergeDeepIn;
-    ListPrototype.withMutations = MapPrototype.withMutations;
-    ListPrototype.asMutable = MapPrototype.asMutable;
-    ListPrototype.asImmutable = MapPrototype.asImmutable;
-    ListPrototype.wasAltered = MapPrototype.wasAltered;
-    function VNode(array, ownerID) {
-      this.array = array;
-      this.ownerID = ownerID;
-    }
-    VNode.prototype.removeBefore = function(ownerID, level, index) {
-      if (index === level ? 1 << level : 0 || this.array.length === 0) {
-        return this;
-      }
-      var originIndex = (index >>> level) & MASK;
-      if (originIndex >= this.array.length) {
-        return new VNode([], ownerID);
-      }
-      var removingFirst = originIndex === 0;
-      var newChild;
-      if (level > 0) {
-        var oldChild = this.array[originIndex];
-        newChild = oldChild && oldChild.removeBefore(ownerID, level - SHIFT, index);
-        if (newChild === oldChild && removingFirst) {
-          return this;
-        }
-      }
-      if (removingFirst && !newChild) {
-        return this;
-      }
-      var editable = editableVNode(this, ownerID);
-      if (!removingFirst) {
-        for (var ii = 0; ii < originIndex; ii++) {
-          editable.array[ii] = undefined;
-        }
-      }
-      if (newChild) {
-        editable.array[originIndex] = newChild;
-      }
-      return editable;
-    };
-    VNode.prototype.removeAfter = function(ownerID, level, index) {
-      if (index === (level ? 1 << level : 0) || this.array.length === 0) {
-        return this;
-      }
-      var sizeIndex = ((index - 1) >>> level) & MASK;
-      if (sizeIndex >= this.array.length) {
-        return this;
-      }
-      var newChild;
-      if (level > 0) {
-        var oldChild = this.array[sizeIndex];
-        newChild = oldChild && oldChild.removeAfter(ownerID, level - SHIFT, index);
-        if (newChild === oldChild && sizeIndex === this.array.length - 1) {
-          return this;
-        }
-      }
-      var editable = editableVNode(this, ownerID);
-      editable.array.splice(sizeIndex + 1);
-      if (newChild) {
-        editable.array[sizeIndex] = newChild;
-      }
-      return editable;
-    };
-    var DONE = {};
-    function iterateList(list, reverse) {
-      var left = list._origin;
-      var right = list._capacity;
-      var tailPos = getTailOffset(right);
-      var tail = list._tail;
-      return iterateNodeOrLeaf(list._root, list._level, 0);
-      function iterateNodeOrLeaf(node, level, offset) {
-        return level === 0 ? iterateLeaf(node, offset) : iterateNode(node, level, offset);
-      }
-      function iterateLeaf(node, offset) {
-        var array = offset === tailPos ? tail && tail.array : node && node.array;
-        var from = offset > left ? 0 : left - offset;
-        var to = right - offset;
-        if (to > SIZE) {
-          to = SIZE;
-        }
-        return function() {
-          if (from === to) {
-            return DONE;
-          }
-          var idx = reverse ? --to : from++;
-          return array && array[idx];
-        };
-      }
-      function iterateNode(node, level, offset) {
-        var values;
-        var array = node && node.array;
-        var from = offset > left ? 0 : (left - offset) >> level;
-        var to = ((right - offset) >> level) + 1;
-        if (to > SIZE) {
-          to = SIZE;
-        }
-        return function() {
-          do {
-            if (values) {
-              var value = values();
-              if (value !== DONE) {
-                return value;
-              }
-              values = null;
-            }
-            if (from === to) {
-              return DONE;
-            }
-            var idx = reverse ? --to : from++;
-            values = iterateNodeOrLeaf(array && array[idx], level - SHIFT, offset + (idx << level));
-          } while (true);
-        };
-      }
-    }
-    function makeList(origin, capacity, level, root, tail, ownerID, hash) {
-      var list = Object.create(ListPrototype);
-      list.size = capacity - origin;
-      list._origin = origin;
-      list._capacity = capacity;
-      list._level = level;
-      list._root = root;
-      list._tail = tail;
-      list.__ownerID = ownerID;
-      list.__hash = hash;
-      list.__altered = false;
-      return list;
-    }
-    var EMPTY_LIST;
-    function emptyList() {
-      return EMPTY_LIST || (EMPTY_LIST = makeList(0, 0, SHIFT));
-    }
-    function updateList(list, index, value) {
-      index = wrapIndex(list, index);
-      if (index !== index) {
-        return list;
-      }
-      if (index >= list.size || index < 0) {
-        return list.withMutations(function(list) {
-          index < 0 ? setListBounds(list, index).set(0, value) : setListBounds(list, 0, index + 1).set(index, value);
-        });
-      }
-      index += list._origin;
-      var newTail = list._tail;
-      var newRoot = list._root;
-      var didAlter = MakeRef(DID_ALTER);
-      if (index >= getTailOffset(list._capacity)) {
-        newTail = updateVNode(newTail, list.__ownerID, 0, index, value, didAlter);
-      } else {
-        newRoot = updateVNode(newRoot, list.__ownerID, list._level, index, value, didAlter);
-      }
-      if (!didAlter.value) {
-        return list;
-      }
-      if (list.__ownerID) {
-        list._root = newRoot;
-        list._tail = newTail;
-        list.__hash = undefined;
-        list.__altered = true;
-        return list;
-      }
-      return makeList(list._origin, list._capacity, list._level, newRoot, newTail);
-    }
-    function updateVNode(node, ownerID, level, index, value, didAlter) {
-      var idx = (index >>> level) & MASK;
-      var nodeHas = node && idx < node.array.length;
-      if (!nodeHas && value === undefined) {
-        return node;
-      }
-      var newNode;
-      if (level > 0) {
-        var lowerNode = node && node.array[idx];
-        var newLowerNode = updateVNode(lowerNode, ownerID, level - SHIFT, index, value, didAlter);
-        if (newLowerNode === lowerNode) {
-          return node;
-        }
-        newNode = editableVNode(node, ownerID);
-        newNode.array[idx] = newLowerNode;
-        return newNode;
-      }
-      if (nodeHas && node.array[idx] === value) {
-        return node;
-      }
-      SetRef(didAlter);
-      newNode = editableVNode(node, ownerID);
-      if (value === undefined && idx === newNode.array.length - 1) {
-        newNode.array.pop();
-      } else {
-        newNode.array[idx] = value;
-      }
-      return newNode;
-    }
-    function editableVNode(node, ownerID) {
-      if (ownerID && node && ownerID === node.ownerID) {
-        return node;
-      }
-      return new VNode(node ? node.array.slice() : [], ownerID);
-    }
-    function listNodeFor(list, rawIndex) {
-      if (rawIndex >= getTailOffset(list._capacity)) {
-        return list._tail;
-      }
-      if (rawIndex < 1 << (list._level + SHIFT)) {
-        var node = list._root;
-        var level = list._level;
-        while (node && level > 0) {
-          node = node.array[(rawIndex >>> level) & MASK];
-          level -= SHIFT;
-        }
-        return node;
-      }
-    }
-    function setListBounds(list, begin, end) {
-      if (begin !== undefined) {
-        begin = begin | 0;
-      }
-      if (end !== undefined) {
-        end = end | 0;
-      }
-      var owner = list.__ownerID || new OwnerID();
-      var oldOrigin = list._origin;
-      var oldCapacity = list._capacity;
-      var newOrigin = oldOrigin + begin;
-      var newCapacity = end === undefined ? oldCapacity : end < 0 ? oldCapacity + end : oldOrigin + end;
-      if (newOrigin === oldOrigin && newCapacity === oldCapacity) {
-        return list;
-      }
-      if (newOrigin >= newCapacity) {
-        return list.clear();
-      }
-      var newLevel = list._level;
-      var newRoot = list._root;
-      var offsetShift = 0;
-      while (newOrigin + offsetShift < 0) {
-        newRoot = new VNode(newRoot && newRoot.array.length ? [undefined, newRoot] : [], owner);
-        newLevel += SHIFT;
-        offsetShift += 1 << newLevel;
-      }
-      if (offsetShift) {
-        newOrigin += offsetShift;
-        oldOrigin += offsetShift;
-        newCapacity += offsetShift;
-        oldCapacity += offsetShift;
-      }
-      var oldTailOffset = getTailOffset(oldCapacity);
-      var newTailOffset = getTailOffset(newCapacity);
-      while (newTailOffset >= 1 << (newLevel + SHIFT)) {
-        newRoot = new VNode(newRoot && newRoot.array.length ? [newRoot] : [], owner);
-        newLevel += SHIFT;
-      }
-      var oldTail = list._tail;
-      var newTail = newTailOffset < oldTailOffset ? listNodeFor(list, newCapacity - 1) : newTailOffset > oldTailOffset ? new VNode([], owner) : oldTail;
-      if (oldTail && newTailOffset > oldTailOffset && newOrigin < oldCapacity && oldTail.array.length) {
-        newRoot = editableVNode(newRoot, owner);
-        var node = newRoot;
-        for (var level = newLevel; level > SHIFT; level -= SHIFT) {
-          var idx = (oldTailOffset >>> level) & MASK;
-          node = node.array[idx] = editableVNode(node.array[idx], owner);
-        }
-        node.array[(oldTailOffset >>> SHIFT) & MASK] = oldTail;
-      }
-      if (newCapacity < oldCapacity) {
-        newTail = newTail && newTail.removeAfter(owner, 0, newCapacity);
-      }
-      if (newOrigin >= newTailOffset) {
-        newOrigin -= newTailOffset;
-        newCapacity -= newTailOffset;
-        newLevel = SHIFT;
-        newRoot = null;
-        newTail = newTail && newTail.removeBefore(owner, 0, newOrigin);
-      } else if (newOrigin > oldOrigin || newTailOffset < oldTailOffset) {
-        offsetShift = 0;
-        while (newRoot) {
-          var beginIndex = (newOrigin >>> newLevel) & MASK;
-          if (beginIndex !== (newTailOffset >>> newLevel) & MASK) {
-            break;
-          }
-          if (beginIndex) {
-            offsetShift += (1 << newLevel) * beginIndex;
-          }
-          newLevel -= SHIFT;
-          newRoot = newRoot.array[beginIndex];
-        }
-        if (newRoot && newOrigin > oldOrigin) {
-          newRoot = newRoot.removeBefore(owner, newLevel, newOrigin - offsetShift);
-        }
-        if (newRoot && newTailOffset < oldTailOffset) {
-          newRoot = newRoot.removeAfter(owner, newLevel, newTailOffset - offsetShift);
-        }
-        if (offsetShift) {
-          newOrigin -= offsetShift;
-          newCapacity -= offsetShift;
-        }
-      }
-      if (list.__ownerID) {
-        list.size = newCapacity - newOrigin;
-        list._origin = newOrigin;
-        list._capacity = newCapacity;
-        list._level = newLevel;
-        list._root = newRoot;
-        list._tail = newTail;
-        list.__hash = undefined;
-        list.__altered = true;
-        return list;
-      }
-      return makeList(newOrigin, newCapacity, newLevel, newRoot, newTail);
-    }
-    function mergeIntoListWith(list, merger, iterables) {
-      var iters = [];
-      var maxSize = 0;
-      for (var ii = 0; ii < iterables.length; ii++) {
-        var value = iterables[ii];
-        var iter = IndexedIterable(value);
-        if (iter.size > maxSize) {
-          maxSize = iter.size;
-        }
-        if (!isIterable(value)) {
-          iter = iter.map(function(v) {
-            return fromJS(v);
-          });
-        }
-        iters.push(iter);
-      }
-      if (maxSize > list.size) {
-        list = list.setSize(maxSize);
-      }
-      return mergeIntoCollectionWith(list, merger, iters);
-    }
-    function getTailOffset(size) {
-      return size < SIZE ? 0 : (((size - 1) >>> SHIFT) << SHIFT);
-    }
-    createClass(OrderedMap, src_Map__Map);
-    function OrderedMap(value) {
-      return value === null || value === undefined ? emptyOrderedMap() : isOrderedMap(value) ? value : emptyOrderedMap().withMutations(function(map) {
-        var iter = KeyedIterable(value);
-        assertNotInfinite(iter.size);
-        iter.forEach(function(v, k) {
-          return map.set(k, v);
-        });
-      });
-    }
-    OrderedMap.of = function() {
-      return this(arguments);
-    };
-    OrderedMap.prototype.toString = function() {
-      return this.__toString('OrderedMap {', '}');
-    };
-    OrderedMap.prototype.get = function(k, notSetValue) {
-      var index = this._map.get(k);
-      return index !== undefined ? this._list.get(index)[1] : notSetValue;
-    };
-    OrderedMap.prototype.clear = function() {
-      if (this.size === 0) {
-        return this;
-      }
-      if (this.__ownerID) {
-        this.size = 0;
-        this._map.clear();
-        this._list.clear();
-        return this;
-      }
-      return emptyOrderedMap();
-    };
-    OrderedMap.prototype.set = function(k, v) {
-      return updateOrderedMap(this, k, v);
-    };
-    OrderedMap.prototype.remove = function(k) {
-      return updateOrderedMap(this, k, NOT_SET);
-    };
-    OrderedMap.prototype.wasAltered = function() {
-      return this._map.wasAltered() || this._list.wasAltered();
-    };
-    OrderedMap.prototype.__iterate = function(fn, reverse) {
-      var this$0 = this;
-      return this._list.__iterate(function(entry) {
-        return entry && fn(entry[1], entry[0], this$0);
-      }, reverse);
-    };
-    OrderedMap.prototype.__iterator = function(type, reverse) {
-      return this._list.fromEntrySeq().__iterator(type, reverse);
-    };
-    OrderedMap.prototype.__ensureOwner = function(ownerID) {
-      if (ownerID === this.__ownerID) {
-        return this;
-      }
-      var newMap = this._map.__ensureOwner(ownerID);
-      var newList = this._list.__ensureOwner(ownerID);
-      if (!ownerID) {
-        this.__ownerID = ownerID;
-        this._map = newMap;
-        this._list = newList;
-        return this;
-      }
-      return makeOrderedMap(newMap, newList, ownerID, this.__hash);
-    };
-    function isOrderedMap(maybeOrderedMap) {
-      return isMap(maybeOrderedMap) && isOrdered(maybeOrderedMap);
-    }
-    OrderedMap.isOrderedMap = isOrderedMap;
-    OrderedMap.prototype[IS_ORDERED_SENTINEL] = true;
-    OrderedMap.prototype[DELETE] = OrderedMap.prototype.remove;
-    function makeOrderedMap(map, list, ownerID, hash) {
-      var omap = Object.create(OrderedMap.prototype);
-      omap.size = map ? map.size : 0;
-      omap._map = map;
-      omap._list = list;
-      omap.__ownerID = ownerID;
-      omap.__hash = hash;
-      return omap;
-    }
-    var EMPTY_ORDERED_MAP;
-    function emptyOrderedMap() {
-      return EMPTY_ORDERED_MAP || (EMPTY_ORDERED_MAP = makeOrderedMap(emptyMap(), emptyList()));
-    }
-    function updateOrderedMap(omap, k, v) {
-      var map = omap._map;
-      var list = omap._list;
-      var i = map.get(k);
-      var has = i !== undefined;
-      var newMap;
-      var newList;
-      if (v === NOT_SET) {
-        if (!has) {
-          return omap;
-        }
-        if (list.size >= SIZE && list.size >= map.size * 2) {
-          newList = list.filter(function(entry, idx) {
-            return entry !== undefined && i !== idx;
-          });
-          newMap = newList.toKeyedSeq().map(function(entry) {
-            return entry[0];
-          }).flip().toMap();
-          if (omap.__ownerID) {
-            newMap.__ownerID = newList.__ownerID = omap.__ownerID;
-          }
-        } else {
-          newMap = map.remove(k);
-          newList = i === list.size - 1 ? list.pop() : list.set(i, undefined);
-        }
-      } else {
-        if (has) {
-          if (v === list.get(i)[1]) {
-            return omap;
-          }
-          newMap = map;
-          newList = list.set(i, [k, v]);
-        } else {
-          newMap = map.set(k, list.size);
-          newList = list.set(list.size, [k, v]);
-        }
-      }
-      if (omap.__ownerID) {
-        omap.size = newMap.size;
-        omap._map = newMap;
-        omap._list = newList;
-        omap.__hash = undefined;
-        return omap;
-      }
-      return makeOrderedMap(newMap, newList);
-    }
-    createClass(Stack, IndexedCollection);
-    function Stack(value) {
-      return value === null || value === undefined ? emptyStack() : isStack(value) ? value : emptyStack().unshiftAll(value);
-    }
-    Stack.of = function() {
-      return this(arguments);
-    };
-    Stack.prototype.toString = function() {
-      return this.__toString('Stack [', ']');
-    };
-    Stack.prototype.get = function(index, notSetValue) {
-      var head = this._head;
-      index = wrapIndex(this, index);
-      while (head && index--) {
-        head = head.next;
-      }
-      return head ? head.value : notSetValue;
-    };
-    Stack.prototype.peek = function() {
-      return this._head && this._head.value;
-    };
-    Stack.prototype.push = function() {
-      if (arguments.length === 0) {
-        return this;
-      }
-      var newSize = this.size + arguments.length;
-      var head = this._head;
-      for (var ii = arguments.length - 1; ii >= 0; ii--) {
-        head = {
-          value: arguments[ii],
-          next: head
-        };
-      }
-      if (this.__ownerID) {
-        this.size = newSize;
-        this._head = head;
-        this.__hash = undefined;
-        this.__altered = true;
-        return this;
-      }
-      return makeStack(newSize, head);
-    };
-    Stack.prototype.pushAll = function(iter) {
-      iter = IndexedIterable(iter);
-      if (iter.size === 0) {
-        return this;
-      }
-      assertNotInfinite(iter.size);
-      var newSize = this.size;
-      var head = this._head;
-      iter.reverse().forEach(function(value) {
-        newSize++;
-        head = {
-          value: value,
-          next: head
-        };
-      });
-      if (this.__ownerID) {
-        this.size = newSize;
-        this._head = head;
-        this.__hash = undefined;
-        this.__altered = true;
-        return this;
-      }
-      return makeStack(newSize, head);
-    };
-    Stack.prototype.pop = function() {
-      return this.slice(1);
-    };
-    Stack.prototype.unshift = function() {
-      return this.push.apply(this, arguments);
-    };
-    Stack.prototype.unshiftAll = function(iter) {
-      return this.pushAll(iter);
-    };
-    Stack.prototype.shift = function() {
-      return this.pop.apply(this, arguments);
-    };
-    Stack.prototype.clear = function() {
-      if (this.size === 0) {
-        return this;
-      }
-      if (this.__ownerID) {
-        this.size = 0;
-        this._head = undefined;
-        this.__hash = undefined;
-        this.__altered = true;
-        return this;
-      }
-      return emptyStack();
-    };
-    Stack.prototype.slice = function(begin, end) {
-      if (wholeSlice(begin, end, this.size)) {
-        return this;
-      }
-      var resolvedBegin = resolveBegin(begin, this.size);
-      var resolvedEnd = resolveEnd(end, this.size);
-      if (resolvedEnd !== this.size) {
-        return IndexedCollection.prototype.slice.call(this, begin, end);
-      }
-      var newSize = this.size - resolvedBegin;
-      var head = this._head;
-      while (resolvedBegin--) {
-        head = head.next;
-      }
-      if (this.__ownerID) {
-        this.size = newSize;
-        this._head = head;
-        this.__hash = undefined;
-        this.__altered = true;
-        return this;
-      }
-      return makeStack(newSize, head);
-    };
-    Stack.prototype.__ensureOwner = function(ownerID) {
-      if (ownerID === this.__ownerID) {
-        return this;
-      }
-      if (!ownerID) {
-        this.__ownerID = ownerID;
-        this.__altered = false;
-        return this;
-      }
-      return makeStack(this.size, this._head, ownerID, this.__hash);
-    };
-    Stack.prototype.__iterate = function(fn, reverse) {
-      if (reverse) {
-        return this.reverse().__iterate(fn);
-      }
-      var iterations = 0;
-      var node = this._head;
-      while (node) {
-        if (fn(node.value, iterations++, this) === false) {
-          break;
-        }
-        node = node.next;
-      }
-      return iterations;
-    };
-    Stack.prototype.__iterator = function(type, reverse) {
-      if (reverse) {
-        return this.reverse().__iterator(type);
-      }
-      var iterations = 0;
-      var node = this._head;
-      return new src_Iterator__Iterator(function() {
-        if (node) {
-          var value = node.value;
-          node = node.next;
-          return iteratorValue(type, iterations++, value);
-        }
-        return iteratorDone();
-      });
-    };
-    function isStack(maybeStack) {
-      return !!(maybeStack && maybeStack[IS_STACK_SENTINEL]);
-    }
-    Stack.isStack = isStack;
-    var IS_STACK_SENTINEL = '@@__IMMUTABLE_STACK__@@';
-    var StackPrototype = Stack.prototype;
-    StackPrototype[IS_STACK_SENTINEL] = true;
-    StackPrototype.withMutations = MapPrototype.withMutations;
-    StackPrototype.asMutable = MapPrototype.asMutable;
-    StackPrototype.asImmutable = MapPrototype.asImmutable;
-    StackPrototype.wasAltered = MapPrototype.wasAltered;
-    function makeStack(size, head, ownerID, hash) {
-      var map = Object.create(StackPrototype);
-      map.size = size;
-      map._head = head;
-      map.__ownerID = ownerID;
-      map.__hash = hash;
-      map.__altered = false;
-      return map;
-    }
-    var EMPTY_STACK;
-    function emptyStack() {
-      return EMPTY_STACK || (EMPTY_STACK = makeStack(0));
-    }
-    createClass(src_Set__Set, SetCollection);
-    function src_Set__Set(value) {
-      return value === null || value === undefined ? emptySet() : isSet(value) && !isOrdered(value) ? value : emptySet().withMutations(function(set) {
-        var iter = SetIterable(value);
-        assertNotInfinite(iter.size);
-        iter.forEach(function(v) {
-          return set.add(v);
-        });
-      });
-    }
-    src_Set__Set.of = function() {
-      return this(arguments);
-    };
-    src_Set__Set.fromKeys = function(value) {
-      return this(KeyedIterable(value).keySeq());
-    };
-    src_Set__Set.prototype.toString = function() {
-      return this.__toString('Set {', '}');
-    };
-    src_Set__Set.prototype.has = function(value) {
-      return this._map.has(value);
-    };
-    src_Set__Set.prototype.add = function(value) {
-      return updateSet(this, this._map.set(value, true));
-    };
-    src_Set__Set.prototype.remove = function(value) {
-      return updateSet(this, this._map.remove(value));
-    };
-    src_Set__Set.prototype.clear = function() {
-      return updateSet(this, this._map.clear());
-    };
-    src_Set__Set.prototype.union = function() {
-      var iters = SLICE$0.call(arguments, 0);
-      iters = iters.filter(function(x) {
-        return x.size !== 0;
-      });
-      if (iters.length === 0) {
-        return this;
-      }
-      if (this.size === 0 && !this.__ownerID && iters.length === 1) {
-        return this.constructor(iters[0]);
-      }
-      return this.withMutations(function(set) {
-        for (var ii = 0; ii < iters.length; ii++) {
-          SetIterable(iters[ii]).forEach(function(value) {
-            return set.add(value);
-          });
-        }
-      });
-    };
-    src_Set__Set.prototype.intersect = function() {
-      var iters = SLICE$0.call(arguments, 0);
-      if (iters.length === 0) {
-        return this;
-      }
-      iters = iters.map(function(iter) {
-        return SetIterable(iter);
-      });
-      var originalSet = this;
-      return this.withMutations(function(set) {
-        originalSet.forEach(function(value) {
-          if (!iters.every(function(iter) {
-            return iter.includes(value);
-          })) {
-            set.remove(value);
-          }
-        });
-      });
-    };
-    src_Set__Set.prototype.subtract = function() {
-      var iters = SLICE$0.call(arguments, 0);
-      if (iters.length === 0) {
-        return this;
-      }
-      iters = iters.map(function(iter) {
-        return SetIterable(iter);
-      });
-      var originalSet = this;
-      return this.withMutations(function(set) {
-        originalSet.forEach(function(value) {
-          if (iters.some(function(iter) {
-            return iter.includes(value);
-          })) {
-            set.remove(value);
-          }
-        });
-      });
-    };
-    src_Set__Set.prototype.merge = function() {
-      return this.union.apply(this, arguments);
-    };
-    src_Set__Set.prototype.mergeWith = function(merger) {
-      var iters = SLICE$0.call(arguments, 1);
-      return this.union.apply(this, iters);
-    };
-    src_Set__Set.prototype.sort = function(comparator) {
-      return OrderedSet(sortFactory(this, comparator));
-    };
-    src_Set__Set.prototype.sortBy = function(mapper, comparator) {
-      return OrderedSet(sortFactory(this, comparator, mapper));
-    };
-    src_Set__Set.prototype.wasAltered = function() {
-      return this._map.wasAltered();
-    };
-    src_Set__Set.prototype.__iterate = function(fn, reverse) {
-      var this$0 = this;
-      return this._map.__iterate(function(_, k) {
-        return fn(k, k, this$0);
-      }, reverse);
-    };
-    src_Set__Set.prototype.__iterator = function(type, reverse) {
-      return this._map.map(function(_, k) {
-        return k;
-      }).__iterator(type, reverse);
-    };
-    src_Set__Set.prototype.__ensureOwner = function(ownerID) {
-      if (ownerID === this.__ownerID) {
-        return this;
-      }
-      var newMap = this._map.__ensureOwner(ownerID);
-      if (!ownerID) {
-        this.__ownerID = ownerID;
-        this._map = newMap;
-        return this;
-      }
-      return this.__make(newMap, ownerID);
-    };
-    function isSet(maybeSet) {
-      return !!(maybeSet && maybeSet[IS_SET_SENTINEL]);
-    }
-    src_Set__Set.isSet = isSet;
-    var IS_SET_SENTINEL = '@@__IMMUTABLE_SET__@@';
-    var SetPrototype = src_Set__Set.prototype;
-    SetPrototype[IS_SET_SENTINEL] = true;
-    SetPrototype[DELETE] = SetPrototype.remove;
-    SetPrototype.mergeDeep = SetPrototype.merge;
-    SetPrototype.mergeDeepWith = SetPrototype.mergeWith;
-    SetPrototype.withMutations = MapPrototype.withMutations;
-    SetPrototype.asMutable = MapPrototype.asMutable;
-    SetPrototype.asImmutable = MapPrototype.asImmutable;
-    SetPrototype.__empty = emptySet;
-    SetPrototype.__make = makeSet;
-    function updateSet(set, newMap) {
-      if (set.__ownerID) {
-        set.size = newMap.size;
-        set._map = newMap;
-        return set;
-      }
-      return newMap === set._map ? set : newMap.size === 0 ? set.__empty() : set.__make(newMap);
-    }
-    function makeSet(map, ownerID) {
-      var set = Object.create(SetPrototype);
-      set.size = map ? map.size : 0;
-      set._map = map;
-      set.__ownerID = ownerID;
-      return set;
-    }
-    var EMPTY_SET;
-    function emptySet() {
-      return EMPTY_SET || (EMPTY_SET = makeSet(emptyMap()));
-    }
-    createClass(OrderedSet, src_Set__Set);
-    function OrderedSet(value) {
-      return value === null || value === undefined ? emptyOrderedSet() : isOrderedSet(value) ? value : emptyOrderedSet().withMutations(function(set) {
-        var iter = SetIterable(value);
-        assertNotInfinite(iter.size);
-        iter.forEach(function(v) {
-          return set.add(v);
-        });
-      });
-    }
-    OrderedSet.of = function() {
-      return this(arguments);
-    };
-    OrderedSet.fromKeys = function(value) {
-      return this(KeyedIterable(value).keySeq());
-    };
-    OrderedSet.prototype.toString = function() {
-      return this.__toString('OrderedSet {', '}');
-    };
-    function isOrderedSet(maybeOrderedSet) {
-      return isSet(maybeOrderedSet) && isOrdered(maybeOrderedSet);
-    }
-    OrderedSet.isOrderedSet = isOrderedSet;
-    var OrderedSetPrototype = OrderedSet.prototype;
-    OrderedSetPrototype[IS_ORDERED_SENTINEL] = true;
-    OrderedSetPrototype.__empty = emptyOrderedSet;
-    OrderedSetPrototype.__make = makeOrderedSet;
-    function makeOrderedSet(map, ownerID) {
-      var set = Object.create(OrderedSetPrototype);
-      set.size = map ? map.size : 0;
-      set._map = map;
-      set.__ownerID = ownerID;
-      return set;
-    }
-    var EMPTY_ORDERED_SET;
-    function emptyOrderedSet() {
-      return EMPTY_ORDERED_SET || (EMPTY_ORDERED_SET = makeOrderedSet(emptyOrderedMap()));
-    }
-    createClass(Record, KeyedCollection);
-    function Record(defaultValues, name) {
-      var hasInitialized;
-      var RecordType = function Record(values) {
-        if (values instanceof RecordType) {
-          return values;
-        }
-        if (!(this instanceof RecordType)) {
-          return new RecordType(values);
-        }
-        if (!hasInitialized) {
-          hasInitialized = true;
-          var keys = Object.keys(defaultValues);
-          setProps(RecordTypePrototype, keys);
-          RecordTypePrototype.size = keys.length;
-          RecordTypePrototype._name = name;
-          RecordTypePrototype._keys = keys;
-          RecordTypePrototype._defaultValues = defaultValues;
-        }
-        this._map = src_Map__Map(values);
-      };
-      var RecordTypePrototype = RecordType.prototype = Object.create(RecordPrototype);
-      RecordTypePrototype.constructor = RecordType;
-      return RecordType;
-    }
-    Record.prototype.toString = function() {
-      return this.__toString(recordName(this) + ' {', '}');
-    };
-    Record.prototype.has = function(k) {
-      return this._defaultValues.hasOwnProperty(k);
-    };
-    Record.prototype.get = function(k, notSetValue) {
-      if (!this.has(k)) {
-        return notSetValue;
-      }
-      var defaultVal = this._defaultValues[k];
-      return this._map ? this._map.get(k, defaultVal) : defaultVal;
-    };
-    Record.prototype.clear = function() {
-      if (this.__ownerID) {
-        this._map && this._map.clear();
-        return this;
-      }
-      var RecordType = this.constructor;
-      return RecordType._empty || (RecordType._empty = makeRecord(this, emptyMap()));
-    };
-    Record.prototype.set = function(k, v) {
-      if (!this.has(k)) {
-        throw new Error('Cannot set unknown key "' + k + '" on ' + recordName(this));
-      }
-      var newMap = this._map && this._map.set(k, v);
-      if (this.__ownerID || newMap === this._map) {
-        return this;
-      }
-      return makeRecord(this, newMap);
-    };
-    Record.prototype.remove = function(k) {
-      if (!this.has(k)) {
-        return this;
-      }
-      var newMap = this._map && this._map.remove(k);
-      if (this.__ownerID || newMap === this._map) {
-        return this;
-      }
-      return makeRecord(this, newMap);
-    };
-    Record.prototype.wasAltered = function() {
-      return this._map.wasAltered();
-    };
-    Record.prototype.__iterator = function(type, reverse) {
-      var this$0 = this;
-      return KeyedIterable(this._defaultValues).map(function(_, k) {
-        return this$0.get(k);
-      }).__iterator(type, reverse);
-    };
-    Record.prototype.__iterate = function(fn, reverse) {
-      var this$0 = this;
-      return KeyedIterable(this._defaultValues).map(function(_, k) {
-        return this$0.get(k);
-      }).__iterate(fn, reverse);
-    };
-    Record.prototype.__ensureOwner = function(ownerID) {
-      if (ownerID === this.__ownerID) {
-        return this;
-      }
-      var newMap = this._map && this._map.__ensureOwner(ownerID);
-      if (!ownerID) {
-        this.__ownerID = ownerID;
-        this._map = newMap;
-        return this;
-      }
-      return makeRecord(this, newMap, ownerID);
-    };
-    var RecordPrototype = Record.prototype;
-    RecordPrototype[DELETE] = RecordPrototype.remove;
-    RecordPrototype.deleteIn = RecordPrototype.removeIn = MapPrototype.removeIn;
-    RecordPrototype.merge = MapPrototype.merge;
-    RecordPrototype.mergeWith = MapPrototype.mergeWith;
-    RecordPrototype.mergeIn = MapPrototype.mergeIn;
-    RecordPrototype.mergeDeep = MapPrototype.mergeDeep;
-    RecordPrototype.mergeDeepWith = MapPrototype.mergeDeepWith;
-    RecordPrototype.mergeDeepIn = MapPrototype.mergeDeepIn;
-    RecordPrototype.setIn = MapPrototype.setIn;
-    RecordPrototype.update = MapPrototype.update;
-    RecordPrototype.updateIn = MapPrototype.updateIn;
-    RecordPrototype.withMutations = MapPrototype.withMutations;
-    RecordPrototype.asMutable = MapPrototype.asMutable;
-    RecordPrototype.asImmutable = MapPrototype.asImmutable;
-    function makeRecord(likeRecord, map, ownerID) {
-      var record = Object.create(Object.getPrototypeOf(likeRecord));
-      record._map = map;
-      record.__ownerID = ownerID;
-      return record;
-    }
-    function recordName(record) {
-      return record._name || record.constructor.name || 'Record';
-    }
-    function setProps(prototype, names) {
-      try {
-        names.forEach(setProp.bind(undefined, prototype));
-      } catch (error) {}
-    }
-    function setProp(prototype, name) {
-      Object.defineProperty(prototype, name, {
-        get: function() {
-          return this.get(name);
-        },
-        set: function(value) {
-          invariant(this.__ownerID, 'Cannot set on an immutable record.');
-          this.set(name, value);
-        }
-      });
-    }
-    function deepEqual(a, b) {
-      if (a === b) {
-        return true;
-      }
-      if (!isIterable(b) || a.size !== undefined && b.size !== undefined && a.size !== b.size || a.__hash !== undefined && b.__hash !== undefined && a.__hash !== b.__hash || isKeyed(a) !== isKeyed(b) || isIndexed(a) !== isIndexed(b) || isOrdered(a) !== isOrdered(b)) {
-        return false;
-      }
-      if (a.size === 0 && b.size === 0) {
-        return true;
-      }
-      var notAssociative = !isAssociative(a);
-      if (isOrdered(a)) {
-        var entries = a.entries();
-        return b.every(function(v, k) {
-          var entry = entries.next().value;
-          return entry && is(entry[1], v) && (notAssociative || is(entry[0], k));
-        }) && entries.next().done;
-      }
-      var flipped = false;
-      if (a.size === undefined) {
-        if (b.size === undefined) {
-          if (typeof a.cacheResult === 'function') {
-            a.cacheResult();
-          }
-        } else {
-          flipped = true;
-          var _ = a;
-          a = b;
-          b = _;
-        }
-      }
-      var allEqual = true;
-      var bSize = b.__iterate(function(v, k) {
-        if (notAssociative ? !a.has(v) : flipped ? !is(v, a.get(k, NOT_SET)) : !is(a.get(k, NOT_SET), v)) {
-          allEqual = false;
-          return false;
-        }
-      });
-      return allEqual && a.size === bSize;
-    }
-    createClass(Range, IndexedSeq);
-    function Range(start, end, step) {
-      if (!(this instanceof Range)) {
-        return new Range(start, end, step);
-      }
-      invariant(step !== 0, 'Cannot step a Range by 0');
-      start = start || 0;
-      if (end === undefined) {
-        end = Infinity;
-      }
-      step = step === undefined ? 1 : Math.abs(step);
-      if (end < start) {
-        step = -step;
-      }
-      this._start = start;
-      this._end = end;
-      this._step = step;
-      this.size = Math.max(0, Math.ceil((end - start) / step - 1) + 1);
-      if (this.size === 0) {
-        if (EMPTY_RANGE) {
-          return EMPTY_RANGE;
-        }
-        EMPTY_RANGE = this;
-      }
-    }
-    Range.prototype.toString = function() {
-      if (this.size === 0) {
-        return 'Range []';
-      }
-      return 'Range [ ' + this._start + '...' + this._end + (this._step > 1 ? ' by ' + this._step : '') + ' ]';
-    };
-    Range.prototype.get = function(index, notSetValue) {
-      return this.has(index) ? this._start + wrapIndex(this, index) * this._step : notSetValue;
-    };
-    Range.prototype.includes = function(searchValue) {
-      var possibleIndex = (searchValue - this._start) / this._step;
-      return possibleIndex >= 0 && possibleIndex < this.size && possibleIndex === Math.floor(possibleIndex);
-    };
-    Range.prototype.slice = function(begin, end) {
-      if (wholeSlice(begin, end, this.size)) {
-        return this;
-      }
-      begin = resolveBegin(begin, this.size);
-      end = resolveEnd(end, this.size);
-      if (end <= begin) {
-        return new Range(0, 0);
-      }
-      return new Range(this.get(begin, this._end), this.get(end, this._end), this._step);
-    };
-    Range.prototype.indexOf = function(searchValue) {
-      var offsetValue = searchValue - this._start;
-      if (offsetValue % this._step === 0) {
-        var index = offsetValue / this._step;
-        if (index >= 0 && index < this.size) {
-          return index;
-        }
-      }
-      return -1;
-    };
-    Range.prototype.lastIndexOf = function(searchValue) {
-      return this.indexOf(searchValue);
-    };
-    Range.prototype.__iterate = function(fn, reverse) {
-      var maxIndex = this.size - 1;
-      var step = this._step;
-      var value = reverse ? this._start + maxIndex * step : this._start;
-      for (var ii = 0; ii <= maxIndex; ii++) {
-        if (fn(value, ii, this) === false) {
-          return ii + 1;
-        }
-        value += reverse ? -step : step;
-      }
-      return ii;
-    };
-    Range.prototype.__iterator = function(type, reverse) {
-      var maxIndex = this.size - 1;
-      var step = this._step;
-      var value = reverse ? this._start + maxIndex * step : this._start;
-      var ii = 0;
-      return new src_Iterator__Iterator(function() {
-        var v = value;
-        value += reverse ? -step : step;
-        return ii > maxIndex ? iteratorDone() : iteratorValue(type, ii++, v);
-      });
-    };
-    Range.prototype.equals = function(other) {
-      return other instanceof Range ? this._start === other._start && this._end === other._end && this._step === other._step : deepEqual(this, other);
-    };
-    var EMPTY_RANGE;
-    createClass(Repeat, IndexedSeq);
-    function Repeat(value, times) {
-      if (!(this instanceof Repeat)) {
-        return new Repeat(value, times);
-      }
-      this._value = value;
-      this.size = times === undefined ? Infinity : Math.max(0, times);
-      if (this.size === 0) {
-        if (EMPTY_REPEAT) {
-          return EMPTY_REPEAT;
-        }
-        EMPTY_REPEAT = this;
-      }
-    }
-    Repeat.prototype.toString = function() {
-      if (this.size === 0) {
-        return 'Repeat []';
-      }
-      return 'Repeat [ ' + this._value + ' ' + this.size + ' times ]';
-    };
-    Repeat.prototype.get = function(index, notSetValue) {
-      return this.has(index) ? this._value : notSetValue;
-    };
-    Repeat.prototype.includes = function(searchValue) {
-      return is(this._value, searchValue);
-    };
-    Repeat.prototype.slice = function(begin, end) {
-      var size = this.size;
-      return wholeSlice(begin, end, size) ? this : new Repeat(this._value, resolveEnd(end, size) - resolveBegin(begin, size));
-    };
-    Repeat.prototype.reverse = function() {
-      return this;
-    };
-    Repeat.prototype.indexOf = function(searchValue) {
-      if (is(this._value, searchValue)) {
-        return 0;
-      }
-      return -1;
-    };
-    Repeat.prototype.lastIndexOf = function(searchValue) {
-      if (is(this._value, searchValue)) {
-        return this.size;
-      }
-      return -1;
-    };
-    Repeat.prototype.__iterate = function(fn, reverse) {
-      for (var ii = 0; ii < this.size; ii++) {
-        if (fn(this._value, ii, this) === false) {
-          return ii + 1;
-        }
-      }
-      return ii;
-    };
-    Repeat.prototype.__iterator = function(type, reverse) {
-      var this$0 = this;
-      var ii = 0;
-      return new src_Iterator__Iterator(function() {
-        return ii < this$0.size ? iteratorValue(type, ii++, this$0._value) : iteratorDone();
-      });
-    };
-    Repeat.prototype.equals = function(other) {
-      return other instanceof Repeat ? is(this._value, other._value) : deepEqual(other);
-    };
-    var EMPTY_REPEAT;
-    function mixin(ctor, methods) {
-      var keyCopier = function(key) {
-        ctor.prototype[key] = methods[key];
-      };
-      Object.keys(methods).forEach(keyCopier);
-      Object.getOwnPropertySymbols && Object.getOwnPropertySymbols(methods).forEach(keyCopier);
-      return ctor;
-    }
-    Iterable.Iterator = src_Iterator__Iterator;
-    mixin(Iterable, {
-      toArray: function() {
-        assertNotInfinite(this.size);
-        var array = new Array(this.size || 0);
-        this.valueSeq().__iterate(function(v, i) {
-          array[i] = v;
-        });
-        return array;
-      },
-      toIndexedSeq: function() {
-        return new ToIndexedSequence(this);
-      },
-      toJS: function() {
-        return this.toSeq().map(function(value) {
-          return value && typeof value.toJS === 'function' ? value.toJS() : value;
-        }).__toJS();
-      },
-      toJSON: function() {
-        return this.toSeq().map(function(value) {
-          return value && typeof value.toJSON === 'function' ? value.toJSON() : value;
-        }).__toJS();
-      },
-      toKeyedSeq: function() {
-        return new ToKeyedSequence(this, true);
-      },
-      toMap: function() {
-        return src_Map__Map(this.toKeyedSeq());
-      },
-      toObject: function() {
-        assertNotInfinite(this.size);
-        var object = {};
-        this.__iterate(function(v, k) {
-          object[k] = v;
-        });
-        return object;
-      },
-      toOrderedMap: function() {
-        return OrderedMap(this.toKeyedSeq());
-      },
-      toOrderedSet: function() {
-        return OrderedSet(isKeyed(this) ? this.valueSeq() : this);
-      },
-      toSet: function() {
-        return src_Set__Set(isKeyed(this) ? this.valueSeq() : this);
-      },
-      toSetSeq: function() {
-        return new ToSetSequence(this);
-      },
-      toSeq: function() {
-        return isIndexed(this) ? this.toIndexedSeq() : isKeyed(this) ? this.toKeyedSeq() : this.toSetSeq();
-      },
-      toStack: function() {
-        return Stack(isKeyed(this) ? this.valueSeq() : this);
-      },
-      toList: function() {
-        return List(isKeyed(this) ? this.valueSeq() : this);
-      },
-      toString: function() {
-        return '[Iterable]';
-      },
-      __toString: function(head, tail) {
-        if (this.size === 0) {
-          return head + tail;
-        }
-        return head + ' ' + this.toSeq().map(this.__toStringMapper).join(', ') + ' ' + tail;
-      },
-      concat: function() {
-        var values = SLICE$0.call(arguments, 0);
-        return reify(this, concatFactory(this, values));
-      },
-      includes: function(searchValue) {
-        return this.some(function(value) {
-          return is(value, searchValue);
-        });
-      },
-      entries: function() {
-        return this.__iterator(ITERATE_ENTRIES);
-      },
-      every: function(predicate, context) {
-        assertNotInfinite(this.size);
-        var returnValue = true;
-        this.__iterate(function(v, k, c) {
-          if (!predicate.call(context, v, k, c)) {
-            returnValue = false;
-            return false;
-          }
-        });
-        return returnValue;
-      },
-      filter: function(predicate, context) {
-        return reify(this, filterFactory(this, predicate, context, true));
-      },
-      find: function(predicate, context, notSetValue) {
-        var entry = this.findEntry(predicate, context);
-        return entry ? entry[1] : notSetValue;
-      },
-      findEntry: function(predicate, context) {
-        var found;
-        this.__iterate(function(v, k, c) {
-          if (predicate.call(context, v, k, c)) {
-            found = [k, v];
-            return false;
-          }
-        });
-        return found;
-      },
-      findLastEntry: function(predicate, context) {
-        return this.toSeq().reverse().findEntry(predicate, context);
-      },
-      forEach: function(sideEffect, context) {
-        assertNotInfinite(this.size);
-        return this.__iterate(context ? sideEffect.bind(context) : sideEffect);
-      },
-      join: function(separator) {
-        assertNotInfinite(this.size);
-        separator = separator !== undefined ? '' + separator : ',';
-        var joined = '';
-        var isFirst = true;
-        this.__iterate(function(v) {
-          isFirst ? (isFirst = false) : (joined += separator);
-          joined += v !== null && v !== undefined ? v.toString() : '';
-        });
-        return joined;
-      },
-      keys: function() {
-        return this.__iterator(ITERATE_KEYS);
-      },
-      map: function(mapper, context) {
-        return reify(this, mapFactory(this, mapper, context));
-      },
-      reduce: function(reducer, initialReduction, context) {
-        assertNotInfinite(this.size);
-        var reduction;
-        var useFirst;
-        if (arguments.length < 2) {
-          useFirst = true;
-        } else {
-          reduction = initialReduction;
-        }
-        this.__iterate(function(v, k, c) {
-          if (useFirst) {
-            useFirst = false;
-            reduction = v;
-          } else {
-            reduction = reducer.call(context, reduction, v, k, c);
-          }
-        });
-        return reduction;
-      },
-      reduceRight: function(reducer, initialReduction, context) {
-        var reversed = this.toKeyedSeq().reverse();
-        return reversed.reduce.apply(reversed, arguments);
-      },
-      reverse: function() {
-        return reify(this, reverseFactory(this, true));
-      },
-      slice: function(begin, end) {
-        return reify(this, sliceFactory(this, begin, end, true));
-      },
-      some: function(predicate, context) {
-        return !this.every(not(predicate), context);
-      },
-      sort: function(comparator) {
-        return reify(this, sortFactory(this, comparator));
-      },
-      values: function() {
-        return this.__iterator(ITERATE_VALUES);
-      },
-      butLast: function() {
-        return this.slice(0, -1);
-      },
-      isEmpty: function() {
-        return this.size !== undefined ? this.size === 0 : !this.some(function() {
-          return true;
-        });
-      },
-      count: function(predicate, context) {
-        return ensureSize(predicate ? this.toSeq().filter(predicate, context) : this);
-      },
-      countBy: function(grouper, context) {
-        return countByFactory(this, grouper, context);
-      },
-      equals: function(other) {
-        return deepEqual(this, other);
-      },
-      entrySeq: function() {
-        var iterable = this;
-        if (iterable._cache) {
-          return new ArraySeq(iterable._cache);
-        }
-        var entriesSequence = iterable.toSeq().map(entryMapper).toIndexedSeq();
-        entriesSequence.fromEntrySeq = function() {
-          return iterable.toSeq();
-        };
-        return entriesSequence;
-      },
-      filterNot: function(predicate, context) {
-        return this.filter(not(predicate), context);
-      },
-      findLast: function(predicate, context, notSetValue) {
-        return this.toKeyedSeq().reverse().find(predicate, context, notSetValue);
-      },
-      first: function() {
-        return this.find(returnTrue);
-      },
-      flatMap: function(mapper, context) {
-        return reify(this, flatMapFactory(this, mapper, context));
-      },
-      flatten: function(depth) {
-        return reify(this, flattenFactory(this, depth, true));
-      },
-      fromEntrySeq: function() {
-        return new FromEntriesSequence(this);
-      },
-      get: function(searchKey, notSetValue) {
-        return this.find(function(_, key) {
-          return is(key, searchKey);
-        }, undefined, notSetValue);
-      },
-      getIn: function(searchKeyPath, notSetValue) {
-        var nested = this;
-        var iter = forceIterator(searchKeyPath);
-        var step;
-        while (!(step = iter.next()).done) {
-          var key = step.value;
-          nested = nested && nested.get ? nested.get(key, NOT_SET) : NOT_SET;
-          if (nested === NOT_SET) {
-            return notSetValue;
-          }
-        }
-        return nested;
-      },
-      groupBy: function(grouper, context) {
-        return groupByFactory(this, grouper, context);
-      },
-      has: function(searchKey) {
-        return this.get(searchKey, NOT_SET) !== NOT_SET;
-      },
-      hasIn: function(searchKeyPath) {
-        return this.getIn(searchKeyPath, NOT_SET) !== NOT_SET;
-      },
-      isSubset: function(iter) {
-        iter = typeof iter.includes === 'function' ? iter : Iterable(iter);
-        return this.every(function(value) {
-          return iter.includes(value);
-        });
-      },
-      isSuperset: function(iter) {
-        iter = typeof iter.isSubset === 'function' ? iter : Iterable(iter);
-        return iter.isSubset(this);
-      },
-      keySeq: function() {
-        return this.toSeq().map(keyMapper).toIndexedSeq();
-      },
-      last: function() {
-        return this.toSeq().reverse().first();
-      },
-      max: function(comparator) {
-        return maxFactory(this, comparator);
-      },
-      maxBy: function(mapper, comparator) {
-        return maxFactory(this, comparator, mapper);
-      },
-      min: function(comparator) {
-        return maxFactory(this, comparator ? neg(comparator) : defaultNegComparator);
-      },
-      minBy: function(mapper, comparator) {
-        return maxFactory(this, comparator ? neg(comparator) : defaultNegComparator, mapper);
-      },
-      rest: function() {
-        return this.slice(1);
-      },
-      skip: function(amount) {
-        return this.slice(Math.max(0, amount));
-      },
-      skipLast: function(amount) {
-        return reify(this, this.toSeq().reverse().skip(amount).reverse());
-      },
-      skipWhile: function(predicate, context) {
-        return reify(this, skipWhileFactory(this, predicate, context, true));
-      },
-      skipUntil: function(predicate, context) {
-        return this.skipWhile(not(predicate), context);
-      },
-      sortBy: function(mapper, comparator) {
-        return reify(this, sortFactory(this, comparator, mapper));
-      },
-      take: function(amount) {
-        return this.slice(0, Math.max(0, amount));
-      },
-      takeLast: function(amount) {
-        return reify(this, this.toSeq().reverse().take(amount).reverse());
-      },
-      takeWhile: function(predicate, context) {
-        return reify(this, takeWhileFactory(this, predicate, context));
-      },
-      takeUntil: function(predicate, context) {
-        return this.takeWhile(not(predicate), context);
-      },
-      valueSeq: function() {
-        return this.toIndexedSeq();
-      },
-      hashCode: function() {
-        return this.__hash || (this.__hash = hashIterable(this));
-      }
-    });
-    var IterablePrototype = Iterable.prototype;
-    IterablePrototype[IS_ITERABLE_SENTINEL] = true;
-    IterablePrototype[ITERATOR_SYMBOL] = IterablePrototype.values;
-    IterablePrototype.__toJS = IterablePrototype.toArray;
-    IterablePrototype.__toStringMapper = quoteString;
-    IterablePrototype.inspect = IterablePrototype.toSource = function() {
-      return this.toString();
-    };
-    IterablePrototype.chain = IterablePrototype.flatMap;
-    IterablePrototype.contains = IterablePrototype.includes;
-    (function() {
-      try {
-        Object.defineProperty(IterablePrototype, 'length', {get: function() {
-            if (!Iterable.noLengthWarning) {
-              var stack;
-              try {
-                throw new Error();
-              } catch (error) {
-                stack = error.stack;
-              }
-              if (stack.indexOf('_wrapObject') === -1) {
-                console && console.warn && console.warn('iterable.length has been deprecated, ' + 'use iterable.size or iterable.count(). ' + 'This warning will become a silent error in a future version. ' + stack);
-                return this.size;
-              }
-            }
-          }});
-      } catch (e) {}
-    })();
-    mixin(KeyedIterable, {
-      flip: function() {
-        return reify(this, flipFactory(this));
-      },
-      findKey: function(predicate, context) {
-        var entry = this.findEntry(predicate, context);
-        return entry && entry[0];
-      },
-      findLastKey: function(predicate, context) {
-        return this.toSeq().reverse().findKey(predicate, context);
-      },
-      keyOf: function(searchValue) {
-        return this.findKey(function(value) {
-          return is(value, searchValue);
-        });
-      },
-      lastKeyOf: function(searchValue) {
-        return this.findLastKey(function(value) {
-          return is(value, searchValue);
-        });
-      },
-      mapEntries: function(mapper, context) {
-        var this$0 = this;
-        var iterations = 0;
-        return reify(this, this.toSeq().map(function(v, k) {
-          return mapper.call(context, [k, v], iterations++, this$0);
-        }).fromEntrySeq());
-      },
-      mapKeys: function(mapper, context) {
-        var this$0 = this;
-        return reify(this, this.toSeq().flip().map(function(k, v) {
-          return mapper.call(context, k, v, this$0);
-        }).flip());
-      }
-    });
-    var KeyedIterablePrototype = KeyedIterable.prototype;
-    KeyedIterablePrototype[IS_KEYED_SENTINEL] = true;
-    KeyedIterablePrototype[ITERATOR_SYMBOL] = IterablePrototype.entries;
-    KeyedIterablePrototype.__toJS = IterablePrototype.toObject;
-    KeyedIterablePrototype.__toStringMapper = function(v, k) {
-      return JSON.stringify(k) + ': ' + quoteString(v);
-    };
-    mixin(IndexedIterable, {
-      toKeyedSeq: function() {
-        return new ToKeyedSequence(this, false);
-      },
-      filter: function(predicate, context) {
-        return reify(this, filterFactory(this, predicate, context, false));
-      },
-      findIndex: function(predicate, context) {
-        var entry = this.findEntry(predicate, context);
-        return entry ? entry[0] : -1;
-      },
-      indexOf: function(searchValue) {
-        var key = this.toKeyedSeq().keyOf(searchValue);
-        return key === undefined ? -1 : key;
-      },
-      lastIndexOf: function(searchValue) {
-        return this.toSeq().reverse().indexOf(searchValue);
-      },
-      reverse: function() {
-        return reify(this, reverseFactory(this, false));
-      },
-      slice: function(begin, end) {
-        return reify(this, sliceFactory(this, begin, end, false));
-      },
-      splice: function(index, removeNum) {
-        var numArgs = arguments.length;
-        removeNum = Math.max(removeNum | 0, 0);
-        if (numArgs === 0 || (numArgs === 2 && !removeNum)) {
-          return this;
-        }
-        index = resolveBegin(index, index < 0 ? this.count() : this.size);
-        var spliced = this.slice(0, index);
-        return reify(this, numArgs === 1 ? spliced : spliced.concat(arrCopy(arguments, 2), this.slice(index + removeNum)));
-      },
-      findLastIndex: function(predicate, context) {
-        var key = this.toKeyedSeq().findLastKey(predicate, context);
-        return key === undefined ? -1 : key;
-      },
-      first: function() {
-        return this.get(0);
-      },
-      flatten: function(depth) {
-        return reify(this, flattenFactory(this, depth, false));
-      },
-      get: function(index, notSetValue) {
-        index = wrapIndex(this, index);
-        return (index < 0 || (this.size === Infinity || (this.size !== undefined && index > this.size))) ? notSetValue : this.find(function(_, key) {
-          return key === index;
-        }, undefined, notSetValue);
-      },
-      has: function(index) {
-        index = wrapIndex(this, index);
-        return index >= 0 && (this.size !== undefined ? this.size === Infinity || index < this.size : this.indexOf(index) !== -1);
-      },
-      interpose: function(separator) {
-        return reify(this, interposeFactory(this, separator));
-      },
-      interleave: function() {
-        var iterables = [this].concat(arrCopy(arguments));
-        var zipped = zipWithFactory(this.toSeq(), IndexedSeq.of, iterables);
-        var interleaved = zipped.flatten(true);
-        if (zipped.size) {
-          interleaved.size = zipped.size * iterables.length;
-        }
-        return reify(this, interleaved);
-      },
-      last: function() {
-        return this.get(-1);
-      },
-      skipWhile: function(predicate, context) {
-        return reify(this, skipWhileFactory(this, predicate, context, false));
-      },
-      zip: function() {
-        var iterables = [this].concat(arrCopy(arguments));
-        return reify(this, zipWithFactory(this, defaultZipper, iterables));
-      },
-      zipWith: function(zipper) {
-        var iterables = arrCopy(arguments);
-        iterables[0] = this;
-        return reify(this, zipWithFactory(this, zipper, iterables));
-      }
-    });
-    IndexedIterable.prototype[IS_INDEXED_SENTINEL] = true;
-    IndexedIterable.prototype[IS_ORDERED_SENTINEL] = true;
-    mixin(SetIterable, {
-      get: function(value, notSetValue) {
-        return this.has(value) ? value : notSetValue;
-      },
-      includes: function(value) {
-        return this.has(value);
-      },
-      keySeq: function() {
-        return this.valueSeq();
-      }
-    });
-    SetIterable.prototype.has = IterablePrototype.includes;
-    mixin(KeyedSeq, KeyedIterable.prototype);
-    mixin(IndexedSeq, IndexedIterable.prototype);
-    mixin(SetSeq, SetIterable.prototype);
-    mixin(KeyedCollection, KeyedIterable.prototype);
-    mixin(IndexedCollection, IndexedIterable.prototype);
-    mixin(SetCollection, SetIterable.prototype);
-    function keyMapper(v, k) {
-      return k;
-    }
-    function entryMapper(v, k) {
-      return [k, v];
-    }
-    function not(predicate) {
-      return function() {
-        return !predicate.apply(this, arguments);
-      };
-    }
-    function neg(predicate) {
-      return function() {
-        return -predicate.apply(this, arguments);
-      };
-    }
-    function quoteString(value) {
-      return typeof value === 'string' ? JSON.stringify(value) : value;
-    }
-    function defaultZipper() {
-      return arrCopy(arguments);
-    }
-    function defaultNegComparator(a, b) {
-      return a < b ? 1 : a > b ? -1 : 0;
-    }
-    function hashIterable(iterable) {
-      if (iterable.size === Infinity) {
-        return 0;
-      }
-      var ordered = isOrdered(iterable);
-      var keyed = isKeyed(iterable);
-      var h = ordered ? 1 : 0;
-      var size = iterable.__iterate(keyed ? ordered ? function(v, k) {
-        h = 31 * h + hashMerge(hash(v), hash(k)) | 0;
-      } : function(v, k) {
-        h = h + hashMerge(hash(v), hash(k)) | 0;
-      } : ordered ? function(v) {
-        h = 31 * h + hash(v) | 0;
-      } : function(v) {
-        h = h + hash(v) | 0;
-      });
-      return murmurHashOfSize(size, h);
-    }
-    function murmurHashOfSize(size, h) {
-      h = src_Math__imul(h, 0xCC9E2D51);
-      h = src_Math__imul(h << 15 | h >>> -15, 0x1B873593);
-      h = src_Math__imul(h << 13 | h >>> -13, 5);
-      h = (h + 0xE6546B64 | 0) ^ size;
-      h = src_Math__imul(h ^ h >>> 16, 0x85EBCA6B);
-      h = src_Math__imul(h ^ h >>> 13, 0xC2B2AE35);
-      h = smi(h ^ h >>> 16);
-      return h;
-    }
-    function hashMerge(a, b) {
-      return a ^ b + 0x9E3779B9 + (a << 6) + (a >> 2) | 0;
-    }
-    var Immutable = {
-      Iterable: Iterable,
-      Seq: Seq,
-      Collection: Collection,
-      Map: src_Map__Map,
-      OrderedMap: OrderedMap,
-      List: List,
-      Stack: Stack,
-      Set: src_Set__Set,
-      OrderedSet: OrderedSet,
-      Record: Record,
-      Range: Range,
-      Repeat: Repeat,
-      is: is,
-      fromJS: fromJS
-    };
-    return Immutable;
-  }));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("1b", ["24"], true, function(require, exports, module) {
+$__System.registerDynamic("1c", ["21"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -30151,55 +27982,4022 @@ $__System.registerDynamic("1b", ["24"], true, function(require, exports, module)
         root._ = _;
       }
     }.call(this));
-  })(require("24"));
+  })(require("21"));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("21", ["25", "26", "27"], true, function(require, exports, module) {
+$__System.registerDynamic("1f", ["22"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  require("25");
-  require("26");
-  module.exports = require("27");
+  module.exports = {
+    "default": require("22"),
+    __esModule: true
+  };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("22", ["25", "26", "28"], true, function(require, exports, module) {
+$__System.registerDynamic("20", ["23"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  require("25");
+  module.exports = {
+    "default": require("23"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1e", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  "format cjs";
+  (function(global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : global.Immutable = factory();
+  }(this, function() {
+    'use strict';
+    var SLICE$0 = Array.prototype.slice;
+    function createClass(ctor, superClass) {
+      if (superClass) {
+        ctor.prototype = Object.create(superClass.prototype);
+      }
+      ctor.prototype.constructor = ctor;
+    }
+    var DELETE = 'delete';
+    var SHIFT = 5;
+    var SIZE = 1 << SHIFT;
+    var MASK = SIZE - 1;
+    var NOT_SET = {};
+    var CHANGE_LENGTH = {value: false};
+    var DID_ALTER = {value: false};
+    function MakeRef(ref) {
+      ref.value = false;
+      return ref;
+    }
+    function SetRef(ref) {
+      ref && (ref.value = true);
+    }
+    function OwnerID() {}
+    function arrCopy(arr, offset) {
+      offset = offset || 0;
+      var len = Math.max(0, arr.length - offset);
+      var newArr = new Array(len);
+      for (var ii = 0; ii < len; ii++) {
+        newArr[ii] = arr[ii + offset];
+      }
+      return newArr;
+    }
+    function ensureSize(iter) {
+      if (iter.size === undefined) {
+        iter.size = iter.__iterate(returnTrue);
+      }
+      return iter.size;
+    }
+    function wrapIndex(iter, index) {
+      if (typeof index !== 'number') {
+        var numIndex = +index;
+        if ('' + numIndex !== index) {
+          return NaN;
+        }
+        index = numIndex;
+      }
+      return index < 0 ? ensureSize(iter) + index : index;
+    }
+    function returnTrue() {
+      return true;
+    }
+    function wholeSlice(begin, end, size) {
+      return (begin === 0 || (size !== undefined && begin <= -size)) && (end === undefined || (size !== undefined && end >= size));
+    }
+    function resolveBegin(begin, size) {
+      return resolveIndex(begin, size, 0);
+    }
+    function resolveEnd(end, size) {
+      return resolveIndex(end, size, size);
+    }
+    function resolveIndex(index, size, defaultIndex) {
+      return index === undefined ? defaultIndex : index < 0 ? Math.max(0, size + index) : size === undefined ? index : Math.min(size, index);
+    }
+    function Iterable(value) {
+      return isIterable(value) ? value : Seq(value);
+    }
+    createClass(KeyedIterable, Iterable);
+    function KeyedIterable(value) {
+      return isKeyed(value) ? value : KeyedSeq(value);
+    }
+    createClass(IndexedIterable, Iterable);
+    function IndexedIterable(value) {
+      return isIndexed(value) ? value : IndexedSeq(value);
+    }
+    createClass(SetIterable, Iterable);
+    function SetIterable(value) {
+      return isIterable(value) && !isAssociative(value) ? value : SetSeq(value);
+    }
+    function isIterable(maybeIterable) {
+      return !!(maybeIterable && maybeIterable[IS_ITERABLE_SENTINEL]);
+    }
+    function isKeyed(maybeKeyed) {
+      return !!(maybeKeyed && maybeKeyed[IS_KEYED_SENTINEL]);
+    }
+    function isIndexed(maybeIndexed) {
+      return !!(maybeIndexed && maybeIndexed[IS_INDEXED_SENTINEL]);
+    }
+    function isAssociative(maybeAssociative) {
+      return isKeyed(maybeAssociative) || isIndexed(maybeAssociative);
+    }
+    function isOrdered(maybeOrdered) {
+      return !!(maybeOrdered && maybeOrdered[IS_ORDERED_SENTINEL]);
+    }
+    Iterable.isIterable = isIterable;
+    Iterable.isKeyed = isKeyed;
+    Iterable.isIndexed = isIndexed;
+    Iterable.isAssociative = isAssociative;
+    Iterable.isOrdered = isOrdered;
+    Iterable.Keyed = KeyedIterable;
+    Iterable.Indexed = IndexedIterable;
+    Iterable.Set = SetIterable;
+    var IS_ITERABLE_SENTINEL = '@@__IMMUTABLE_ITERABLE__@@';
+    var IS_KEYED_SENTINEL = '@@__IMMUTABLE_KEYED__@@';
+    var IS_INDEXED_SENTINEL = '@@__IMMUTABLE_INDEXED__@@';
+    var IS_ORDERED_SENTINEL = '@@__IMMUTABLE_ORDERED__@@';
+    var ITERATE_KEYS = 0;
+    var ITERATE_VALUES = 1;
+    var ITERATE_ENTRIES = 2;
+    var REAL_ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+    var FAUX_ITERATOR_SYMBOL = '@@iterator';
+    var ITERATOR_SYMBOL = REAL_ITERATOR_SYMBOL || FAUX_ITERATOR_SYMBOL;
+    function src_Iterator__Iterator(next) {
+      this.next = next;
+    }
+    src_Iterator__Iterator.prototype.toString = function() {
+      return '[Iterator]';
+    };
+    src_Iterator__Iterator.KEYS = ITERATE_KEYS;
+    src_Iterator__Iterator.VALUES = ITERATE_VALUES;
+    src_Iterator__Iterator.ENTRIES = ITERATE_ENTRIES;
+    src_Iterator__Iterator.prototype.inspect = src_Iterator__Iterator.prototype.toSource = function() {
+      return this.toString();
+    };
+    src_Iterator__Iterator.prototype[ITERATOR_SYMBOL] = function() {
+      return this;
+    };
+    function iteratorValue(type, k, v, iteratorResult) {
+      var value = type === 0 ? k : type === 1 ? v : [k, v];
+      iteratorResult ? (iteratorResult.value = value) : (iteratorResult = {
+        value: value,
+        done: false
+      });
+      return iteratorResult;
+    }
+    function iteratorDone() {
+      return {
+        value: undefined,
+        done: true
+      };
+    }
+    function hasIterator(maybeIterable) {
+      return !!getIteratorFn(maybeIterable);
+    }
+    function isIterator(maybeIterator) {
+      return maybeIterator && typeof maybeIterator.next === 'function';
+    }
+    function getIterator(iterable) {
+      var iteratorFn = getIteratorFn(iterable);
+      return iteratorFn && iteratorFn.call(iterable);
+    }
+    function getIteratorFn(iterable) {
+      var iteratorFn = iterable && ((REAL_ITERATOR_SYMBOL && iterable[REAL_ITERATOR_SYMBOL]) || iterable[FAUX_ITERATOR_SYMBOL]);
+      if (typeof iteratorFn === 'function') {
+        return iteratorFn;
+      }
+    }
+    function isArrayLike(value) {
+      return value && typeof value.length === 'number';
+    }
+    createClass(Seq, Iterable);
+    function Seq(value) {
+      return value === null || value === undefined ? emptySequence() : isIterable(value) ? value.toSeq() : seqFromValue(value);
+    }
+    Seq.of = function() {
+      return Seq(arguments);
+    };
+    Seq.prototype.toSeq = function() {
+      return this;
+    };
+    Seq.prototype.toString = function() {
+      return this.__toString('Seq {', '}');
+    };
+    Seq.prototype.cacheResult = function() {
+      if (!this._cache && this.__iterateUncached) {
+        this._cache = this.entrySeq().toArray();
+        this.size = this._cache.length;
+      }
+      return this;
+    };
+    Seq.prototype.__iterate = function(fn, reverse) {
+      return seqIterate(this, fn, reverse, true);
+    };
+    Seq.prototype.__iterator = function(type, reverse) {
+      return seqIterator(this, type, reverse, true);
+    };
+    createClass(KeyedSeq, Seq);
+    function KeyedSeq(value) {
+      return value === null || value === undefined ? emptySequence().toKeyedSeq() : isIterable(value) ? (isKeyed(value) ? value.toSeq() : value.fromEntrySeq()) : keyedSeqFromValue(value);
+    }
+    KeyedSeq.prototype.toKeyedSeq = function() {
+      return this;
+    };
+    createClass(IndexedSeq, Seq);
+    function IndexedSeq(value) {
+      return value === null || value === undefined ? emptySequence() : !isIterable(value) ? indexedSeqFromValue(value) : isKeyed(value) ? value.entrySeq() : value.toIndexedSeq();
+    }
+    IndexedSeq.of = function() {
+      return IndexedSeq(arguments);
+    };
+    IndexedSeq.prototype.toIndexedSeq = function() {
+      return this;
+    };
+    IndexedSeq.prototype.toString = function() {
+      return this.__toString('Seq [', ']');
+    };
+    IndexedSeq.prototype.__iterate = function(fn, reverse) {
+      return seqIterate(this, fn, reverse, false);
+    };
+    IndexedSeq.prototype.__iterator = function(type, reverse) {
+      return seqIterator(this, type, reverse, false);
+    };
+    createClass(SetSeq, Seq);
+    function SetSeq(value) {
+      return (value === null || value === undefined ? emptySequence() : !isIterable(value) ? indexedSeqFromValue(value) : isKeyed(value) ? value.entrySeq() : value).toSetSeq();
+    }
+    SetSeq.of = function() {
+      return SetSeq(arguments);
+    };
+    SetSeq.prototype.toSetSeq = function() {
+      return this;
+    };
+    Seq.isSeq = isSeq;
+    Seq.Keyed = KeyedSeq;
+    Seq.Set = SetSeq;
+    Seq.Indexed = IndexedSeq;
+    var IS_SEQ_SENTINEL = '@@__IMMUTABLE_SEQ__@@';
+    Seq.prototype[IS_SEQ_SENTINEL] = true;
+    createClass(ArraySeq, IndexedSeq);
+    function ArraySeq(array) {
+      this._array = array;
+      this.size = array.length;
+    }
+    ArraySeq.prototype.get = function(index, notSetValue) {
+      return this.has(index) ? this._array[wrapIndex(this, index)] : notSetValue;
+    };
+    ArraySeq.prototype.__iterate = function(fn, reverse) {
+      var array = this._array;
+      var maxIndex = array.length - 1;
+      for (var ii = 0; ii <= maxIndex; ii++) {
+        if (fn(array[reverse ? maxIndex - ii : ii], ii, this) === false) {
+          return ii + 1;
+        }
+      }
+      return ii;
+    };
+    ArraySeq.prototype.__iterator = function(type, reverse) {
+      var array = this._array;
+      var maxIndex = array.length - 1;
+      var ii = 0;
+      return new src_Iterator__Iterator(function() {
+        return ii > maxIndex ? iteratorDone() : iteratorValue(type, ii, array[reverse ? maxIndex - ii++ : ii++]);
+      });
+    };
+    createClass(ObjectSeq, KeyedSeq);
+    function ObjectSeq(object) {
+      var keys = Object.keys(object);
+      this._object = object;
+      this._keys = keys;
+      this.size = keys.length;
+    }
+    ObjectSeq.prototype.get = function(key, notSetValue) {
+      if (notSetValue !== undefined && !this.has(key)) {
+        return notSetValue;
+      }
+      return this._object[key];
+    };
+    ObjectSeq.prototype.has = function(key) {
+      return this._object.hasOwnProperty(key);
+    };
+    ObjectSeq.prototype.__iterate = function(fn, reverse) {
+      var object = this._object;
+      var keys = this._keys;
+      var maxIndex = keys.length - 1;
+      for (var ii = 0; ii <= maxIndex; ii++) {
+        var key = keys[reverse ? maxIndex - ii : ii];
+        if (fn(object[key], key, this) === false) {
+          return ii + 1;
+        }
+      }
+      return ii;
+    };
+    ObjectSeq.prototype.__iterator = function(type, reverse) {
+      var object = this._object;
+      var keys = this._keys;
+      var maxIndex = keys.length - 1;
+      var ii = 0;
+      return new src_Iterator__Iterator(function() {
+        var key = keys[reverse ? maxIndex - ii : ii];
+        return ii++ > maxIndex ? iteratorDone() : iteratorValue(type, key, object[key]);
+      });
+    };
+    ObjectSeq.prototype[IS_ORDERED_SENTINEL] = true;
+    createClass(IterableSeq, IndexedSeq);
+    function IterableSeq(iterable) {
+      this._iterable = iterable;
+      this.size = iterable.length || iterable.size;
+    }
+    IterableSeq.prototype.__iterateUncached = function(fn, reverse) {
+      if (reverse) {
+        return this.cacheResult().__iterate(fn, reverse);
+      }
+      var iterable = this._iterable;
+      var iterator = getIterator(iterable);
+      var iterations = 0;
+      if (isIterator(iterator)) {
+        var step;
+        while (!(step = iterator.next()).done) {
+          if (fn(step.value, iterations++, this) === false) {
+            break;
+          }
+        }
+      }
+      return iterations;
+    };
+    IterableSeq.prototype.__iteratorUncached = function(type, reverse) {
+      if (reverse) {
+        return this.cacheResult().__iterator(type, reverse);
+      }
+      var iterable = this._iterable;
+      var iterator = getIterator(iterable);
+      if (!isIterator(iterator)) {
+        return new src_Iterator__Iterator(iteratorDone);
+      }
+      var iterations = 0;
+      return new src_Iterator__Iterator(function() {
+        var step = iterator.next();
+        return step.done ? step : iteratorValue(type, iterations++, step.value);
+      });
+    };
+    createClass(IteratorSeq, IndexedSeq);
+    function IteratorSeq(iterator) {
+      this._iterator = iterator;
+      this._iteratorCache = [];
+    }
+    IteratorSeq.prototype.__iterateUncached = function(fn, reverse) {
+      if (reverse) {
+        return this.cacheResult().__iterate(fn, reverse);
+      }
+      var iterator = this._iterator;
+      var cache = this._iteratorCache;
+      var iterations = 0;
+      while (iterations < cache.length) {
+        if (fn(cache[iterations], iterations++, this) === false) {
+          return iterations;
+        }
+      }
+      var step;
+      while (!(step = iterator.next()).done) {
+        var val = step.value;
+        cache[iterations] = val;
+        if (fn(val, iterations++, this) === false) {
+          break;
+        }
+      }
+      return iterations;
+    };
+    IteratorSeq.prototype.__iteratorUncached = function(type, reverse) {
+      if (reverse) {
+        return this.cacheResult().__iterator(type, reverse);
+      }
+      var iterator = this._iterator;
+      var cache = this._iteratorCache;
+      var iterations = 0;
+      return new src_Iterator__Iterator(function() {
+        if (iterations >= cache.length) {
+          var step = iterator.next();
+          if (step.done) {
+            return step;
+          }
+          cache[iterations] = step.value;
+        }
+        return iteratorValue(type, iterations, cache[iterations++]);
+      });
+    };
+    function isSeq(maybeSeq) {
+      return !!(maybeSeq && maybeSeq[IS_SEQ_SENTINEL]);
+    }
+    var EMPTY_SEQ;
+    function emptySequence() {
+      return EMPTY_SEQ || (EMPTY_SEQ = new ArraySeq([]));
+    }
+    function keyedSeqFromValue(value) {
+      var seq = Array.isArray(value) ? new ArraySeq(value).fromEntrySeq() : isIterator(value) ? new IteratorSeq(value).fromEntrySeq() : hasIterator(value) ? new IterableSeq(value).fromEntrySeq() : typeof value === 'object' ? new ObjectSeq(value) : undefined;
+      if (!seq) {
+        throw new TypeError('Expected Array or iterable object of [k, v] entries, ' + 'or keyed object: ' + value);
+      }
+      return seq;
+    }
+    function indexedSeqFromValue(value) {
+      var seq = maybeIndexedSeqFromValue(value);
+      if (!seq) {
+        throw new TypeError('Expected Array or iterable object of values: ' + value);
+      }
+      return seq;
+    }
+    function seqFromValue(value) {
+      var seq = maybeIndexedSeqFromValue(value) || (typeof value === 'object' && new ObjectSeq(value));
+      if (!seq) {
+        throw new TypeError('Expected Array or iterable object of values, or keyed object: ' + value);
+      }
+      return seq;
+    }
+    function maybeIndexedSeqFromValue(value) {
+      return (isArrayLike(value) ? new ArraySeq(value) : isIterator(value) ? new IteratorSeq(value) : hasIterator(value) ? new IterableSeq(value) : undefined);
+    }
+    function seqIterate(seq, fn, reverse, useKeys) {
+      var cache = seq._cache;
+      if (cache) {
+        var maxIndex = cache.length - 1;
+        for (var ii = 0; ii <= maxIndex; ii++) {
+          var entry = cache[reverse ? maxIndex - ii : ii];
+          if (fn(entry[1], useKeys ? entry[0] : ii, seq) === false) {
+            return ii + 1;
+          }
+        }
+        return ii;
+      }
+      return seq.__iterateUncached(fn, reverse);
+    }
+    function seqIterator(seq, type, reverse, useKeys) {
+      var cache = seq._cache;
+      if (cache) {
+        var maxIndex = cache.length - 1;
+        var ii = 0;
+        return new src_Iterator__Iterator(function() {
+          var entry = cache[reverse ? maxIndex - ii : ii];
+          return ii++ > maxIndex ? iteratorDone() : iteratorValue(type, useKeys ? entry[0] : ii - 1, entry[1]);
+        });
+      }
+      return seq.__iteratorUncached(type, reverse);
+    }
+    createClass(Collection, Iterable);
+    function Collection() {
+      throw TypeError('Abstract');
+    }
+    createClass(KeyedCollection, Collection);
+    function KeyedCollection() {}
+    createClass(IndexedCollection, Collection);
+    function IndexedCollection() {}
+    createClass(SetCollection, Collection);
+    function SetCollection() {}
+    Collection.Keyed = KeyedCollection;
+    Collection.Indexed = IndexedCollection;
+    Collection.Set = SetCollection;
+    function is(valueA, valueB) {
+      if (valueA === valueB || (valueA !== valueA && valueB !== valueB)) {
+        return true;
+      }
+      if (!valueA || !valueB) {
+        return false;
+      }
+      if (typeof valueA.valueOf === 'function' && typeof valueB.valueOf === 'function') {
+        valueA = valueA.valueOf();
+        valueB = valueB.valueOf();
+        if (valueA === valueB || (valueA !== valueA && valueB !== valueB)) {
+          return true;
+        }
+        if (!valueA || !valueB) {
+          return false;
+        }
+      }
+      if (typeof valueA.equals === 'function' && typeof valueB.equals === 'function' && valueA.equals(valueB)) {
+        return true;
+      }
+      return false;
+    }
+    function fromJS(json, converter) {
+      return converter ? fromJSWith(converter, json, '', {'': json}) : fromJSDefault(json);
+    }
+    function fromJSWith(converter, json, key, parentJSON) {
+      if (Array.isArray(json)) {
+        return converter.call(parentJSON, key, IndexedSeq(json).map(function(v, k) {
+          return fromJSWith(converter, v, k, json);
+        }));
+      }
+      if (isPlainObj(json)) {
+        return converter.call(parentJSON, key, KeyedSeq(json).map(function(v, k) {
+          return fromJSWith(converter, v, k, json);
+        }));
+      }
+      return json;
+    }
+    function fromJSDefault(json) {
+      if (Array.isArray(json)) {
+        return IndexedSeq(json).map(fromJSDefault).toList();
+      }
+      if (isPlainObj(json)) {
+        return KeyedSeq(json).map(fromJSDefault).toMap();
+      }
+      return json;
+    }
+    function isPlainObj(value) {
+      return value && (value.constructor === Object || value.constructor === undefined);
+    }
+    var src_Math__imul = typeof Math.imul === 'function' && Math.imul(0xffffffff, 2) === -2 ? Math.imul : function imul(a, b) {
+      a = a | 0;
+      b = b | 0;
+      var c = a & 0xffff;
+      var d = b & 0xffff;
+      return (c * d) + ((((a >>> 16) * d + c * (b >>> 16)) << 16) >>> 0) | 0;
+    };
+    function smi(i32) {
+      return ((i32 >>> 1) & 0x40000000) | (i32 & 0xBFFFFFFF);
+    }
+    function hash(o) {
+      if (o === false || o === null || o === undefined) {
+        return 0;
+      }
+      if (typeof o.valueOf === 'function') {
+        o = o.valueOf();
+        if (o === false || o === null || o === undefined) {
+          return 0;
+        }
+      }
+      if (o === true) {
+        return 1;
+      }
+      var type = typeof o;
+      if (type === 'number') {
+        var h = o | 0;
+        if (h !== o) {
+          h ^= o * 0xFFFFFFFF;
+        }
+        while (o > 0xFFFFFFFF) {
+          o /= 0xFFFFFFFF;
+          h ^= o;
+        }
+        return smi(h);
+      }
+      if (type === 'string') {
+        return o.length > STRING_HASH_CACHE_MIN_STRLEN ? cachedHashString(o) : hashString(o);
+      }
+      if (typeof o.hashCode === 'function') {
+        return o.hashCode();
+      }
+      return hashJSObj(o);
+    }
+    function cachedHashString(string) {
+      var hash = stringHashCache[string];
+      if (hash === undefined) {
+        hash = hashString(string);
+        if (STRING_HASH_CACHE_SIZE === STRING_HASH_CACHE_MAX_SIZE) {
+          STRING_HASH_CACHE_SIZE = 0;
+          stringHashCache = {};
+        }
+        STRING_HASH_CACHE_SIZE++;
+        stringHashCache[string] = hash;
+      }
+      return hash;
+    }
+    function hashString(string) {
+      var hash = 0;
+      for (var ii = 0; ii < string.length; ii++) {
+        hash = 31 * hash + string.charCodeAt(ii) | 0;
+      }
+      return smi(hash);
+    }
+    function hashJSObj(obj) {
+      var hash;
+      if (usingWeakMap) {
+        hash = weakMap.get(obj);
+        if (hash !== undefined) {
+          return hash;
+        }
+      }
+      hash = obj[UID_HASH_KEY];
+      if (hash !== undefined) {
+        return hash;
+      }
+      if (!canDefineProperty) {
+        hash = obj.propertyIsEnumerable && obj.propertyIsEnumerable[UID_HASH_KEY];
+        if (hash !== undefined) {
+          return hash;
+        }
+        hash = getIENodeHash(obj);
+        if (hash !== undefined) {
+          return hash;
+        }
+      }
+      hash = ++objHashUID;
+      if (objHashUID & 0x40000000) {
+        objHashUID = 0;
+      }
+      if (usingWeakMap) {
+        weakMap.set(obj, hash);
+      } else if (isExtensible !== undefined && isExtensible(obj) === false) {
+        throw new Error('Non-extensible objects are not allowed as keys.');
+      } else if (canDefineProperty) {
+        Object.defineProperty(obj, UID_HASH_KEY, {
+          'enumerable': false,
+          'configurable': false,
+          'writable': false,
+          'value': hash
+        });
+      } else if (obj.propertyIsEnumerable !== undefined && obj.propertyIsEnumerable === obj.constructor.prototype.propertyIsEnumerable) {
+        obj.propertyIsEnumerable = function() {
+          return this.constructor.prototype.propertyIsEnumerable.apply(this, arguments);
+        };
+        obj.propertyIsEnumerable[UID_HASH_KEY] = hash;
+      } else if (obj.nodeType !== undefined) {
+        obj[UID_HASH_KEY] = hash;
+      } else {
+        throw new Error('Unable to set a non-enumerable property on object.');
+      }
+      return hash;
+    }
+    var isExtensible = Object.isExtensible;
+    var canDefineProperty = (function() {
+      try {
+        Object.defineProperty({}, '@', {});
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }());
+    function getIENodeHash(node) {
+      if (node && node.nodeType > 0) {
+        switch (node.nodeType) {
+          case 1:
+            return node.uniqueID;
+          case 9:
+            return node.documentElement && node.documentElement.uniqueID;
+        }
+      }
+    }
+    var usingWeakMap = typeof WeakMap === 'function';
+    var weakMap;
+    if (usingWeakMap) {
+      weakMap = new WeakMap();
+    }
+    var objHashUID = 0;
+    var UID_HASH_KEY = '__immutablehash__';
+    if (typeof Symbol === 'function') {
+      UID_HASH_KEY = Symbol(UID_HASH_KEY);
+    }
+    var STRING_HASH_CACHE_MIN_STRLEN = 16;
+    var STRING_HASH_CACHE_MAX_SIZE = 255;
+    var STRING_HASH_CACHE_SIZE = 0;
+    var stringHashCache = {};
+    function invariant(condition, error) {
+      if (!condition)
+        throw new Error(error);
+    }
+    function assertNotInfinite(size) {
+      invariant(size !== Infinity, 'Cannot perform this action with an infinite size.');
+    }
+    createClass(ToKeyedSequence, KeyedSeq);
+    function ToKeyedSequence(indexed, useKeys) {
+      this._iter = indexed;
+      this._useKeys = useKeys;
+      this.size = indexed.size;
+    }
+    ToKeyedSequence.prototype.get = function(key, notSetValue) {
+      return this._iter.get(key, notSetValue);
+    };
+    ToKeyedSequence.prototype.has = function(key) {
+      return this._iter.has(key);
+    };
+    ToKeyedSequence.prototype.valueSeq = function() {
+      return this._iter.valueSeq();
+    };
+    ToKeyedSequence.prototype.reverse = function() {
+      var this$0 = this;
+      var reversedSequence = reverseFactory(this, true);
+      if (!this._useKeys) {
+        reversedSequence.valueSeq = function() {
+          return this$0._iter.toSeq().reverse();
+        };
+      }
+      return reversedSequence;
+    };
+    ToKeyedSequence.prototype.map = function(mapper, context) {
+      var this$0 = this;
+      var mappedSequence = mapFactory(this, mapper, context);
+      if (!this._useKeys) {
+        mappedSequence.valueSeq = function() {
+          return this$0._iter.toSeq().map(mapper, context);
+        };
+      }
+      return mappedSequence;
+    };
+    ToKeyedSequence.prototype.__iterate = function(fn, reverse) {
+      var this$0 = this;
+      var ii;
+      return this._iter.__iterate(this._useKeys ? function(v, k) {
+        return fn(v, k, this$0);
+      } : ((ii = reverse ? resolveSize(this) : 0), function(v) {
+        return fn(v, reverse ? --ii : ii++, this$0);
+      }), reverse);
+    };
+    ToKeyedSequence.prototype.__iterator = function(type, reverse) {
+      if (this._useKeys) {
+        return this._iter.__iterator(type, reverse);
+      }
+      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
+      var ii = reverse ? resolveSize(this) : 0;
+      return new src_Iterator__Iterator(function() {
+        var step = iterator.next();
+        return step.done ? step : iteratorValue(type, reverse ? --ii : ii++, step.value, step);
+      });
+    };
+    ToKeyedSequence.prototype[IS_ORDERED_SENTINEL] = true;
+    createClass(ToIndexedSequence, IndexedSeq);
+    function ToIndexedSequence(iter) {
+      this._iter = iter;
+      this.size = iter.size;
+    }
+    ToIndexedSequence.prototype.includes = function(value) {
+      return this._iter.includes(value);
+    };
+    ToIndexedSequence.prototype.__iterate = function(fn, reverse) {
+      var this$0 = this;
+      var iterations = 0;
+      return this._iter.__iterate(function(v) {
+        return fn(v, iterations++, this$0);
+      }, reverse);
+    };
+    ToIndexedSequence.prototype.__iterator = function(type, reverse) {
+      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
+      var iterations = 0;
+      return new src_Iterator__Iterator(function() {
+        var step = iterator.next();
+        return step.done ? step : iteratorValue(type, iterations++, step.value, step);
+      });
+    };
+    createClass(ToSetSequence, SetSeq);
+    function ToSetSequence(iter) {
+      this._iter = iter;
+      this.size = iter.size;
+    }
+    ToSetSequence.prototype.has = function(key) {
+      return this._iter.includes(key);
+    };
+    ToSetSequence.prototype.__iterate = function(fn, reverse) {
+      var this$0 = this;
+      return this._iter.__iterate(function(v) {
+        return fn(v, v, this$0);
+      }, reverse);
+    };
+    ToSetSequence.prototype.__iterator = function(type, reverse) {
+      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
+      return new src_Iterator__Iterator(function() {
+        var step = iterator.next();
+        return step.done ? step : iteratorValue(type, step.value, step.value, step);
+      });
+    };
+    createClass(FromEntriesSequence, KeyedSeq);
+    function FromEntriesSequence(entries) {
+      this._iter = entries;
+      this.size = entries.size;
+    }
+    FromEntriesSequence.prototype.entrySeq = function() {
+      return this._iter.toSeq();
+    };
+    FromEntriesSequence.prototype.__iterate = function(fn, reverse) {
+      var this$0 = this;
+      return this._iter.__iterate(function(entry) {
+        if (entry) {
+          validateEntry(entry);
+          var indexedIterable = isIterable(entry);
+          return fn(indexedIterable ? entry.get(1) : entry[1], indexedIterable ? entry.get(0) : entry[0], this$0);
+        }
+      }, reverse);
+    };
+    FromEntriesSequence.prototype.__iterator = function(type, reverse) {
+      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
+      return new src_Iterator__Iterator(function() {
+        while (true) {
+          var step = iterator.next();
+          if (step.done) {
+            return step;
+          }
+          var entry = step.value;
+          if (entry) {
+            validateEntry(entry);
+            var indexedIterable = isIterable(entry);
+            return iteratorValue(type, indexedIterable ? entry.get(0) : entry[0], indexedIterable ? entry.get(1) : entry[1], step);
+          }
+        }
+      });
+    };
+    ToIndexedSequence.prototype.cacheResult = ToKeyedSequence.prototype.cacheResult = ToSetSequence.prototype.cacheResult = FromEntriesSequence.prototype.cacheResult = cacheResultThrough;
+    function flipFactory(iterable) {
+      var flipSequence = makeSequence(iterable);
+      flipSequence._iter = iterable;
+      flipSequence.size = iterable.size;
+      flipSequence.flip = function() {
+        return iterable;
+      };
+      flipSequence.reverse = function() {
+        var reversedSequence = iterable.reverse.apply(this);
+        reversedSequence.flip = function() {
+          return iterable.reverse();
+        };
+        return reversedSequence;
+      };
+      flipSequence.has = function(key) {
+        return iterable.includes(key);
+      };
+      flipSequence.includes = function(key) {
+        return iterable.has(key);
+      };
+      flipSequence.cacheResult = cacheResultThrough;
+      flipSequence.__iterateUncached = function(fn, reverse) {
+        var this$0 = this;
+        return iterable.__iterate(function(v, k) {
+          return fn(k, v, this$0) !== false;
+        }, reverse);
+      };
+      flipSequence.__iteratorUncached = function(type, reverse) {
+        if (type === ITERATE_ENTRIES) {
+          var iterator = iterable.__iterator(type, reverse);
+          return new src_Iterator__Iterator(function() {
+            var step = iterator.next();
+            if (!step.done) {
+              var k = step.value[0];
+              step.value[0] = step.value[1];
+              step.value[1] = k;
+            }
+            return step;
+          });
+        }
+        return iterable.__iterator(type === ITERATE_VALUES ? ITERATE_KEYS : ITERATE_VALUES, reverse);
+      };
+      return flipSequence;
+    }
+    function mapFactory(iterable, mapper, context) {
+      var mappedSequence = makeSequence(iterable);
+      mappedSequence.size = iterable.size;
+      mappedSequence.has = function(key) {
+        return iterable.has(key);
+      };
+      mappedSequence.get = function(key, notSetValue) {
+        var v = iterable.get(key, NOT_SET);
+        return v === NOT_SET ? notSetValue : mapper.call(context, v, key, iterable);
+      };
+      mappedSequence.__iterateUncached = function(fn, reverse) {
+        var this$0 = this;
+        return iterable.__iterate(function(v, k, c) {
+          return fn(mapper.call(context, v, k, c), k, this$0) !== false;
+        }, reverse);
+      };
+      mappedSequence.__iteratorUncached = function(type, reverse) {
+        var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
+        return new src_Iterator__Iterator(function() {
+          var step = iterator.next();
+          if (step.done) {
+            return step;
+          }
+          var entry = step.value;
+          var key = entry[0];
+          return iteratorValue(type, key, mapper.call(context, entry[1], key, iterable), step);
+        });
+      };
+      return mappedSequence;
+    }
+    function reverseFactory(iterable, useKeys) {
+      var reversedSequence = makeSequence(iterable);
+      reversedSequence._iter = iterable;
+      reversedSequence.size = iterable.size;
+      reversedSequence.reverse = function() {
+        return iterable;
+      };
+      if (iterable.flip) {
+        reversedSequence.flip = function() {
+          var flipSequence = flipFactory(iterable);
+          flipSequence.reverse = function() {
+            return iterable.flip();
+          };
+          return flipSequence;
+        };
+      }
+      reversedSequence.get = function(key, notSetValue) {
+        return iterable.get(useKeys ? key : -1 - key, notSetValue);
+      };
+      reversedSequence.has = function(key) {
+        return iterable.has(useKeys ? key : -1 - key);
+      };
+      reversedSequence.includes = function(value) {
+        return iterable.includes(value);
+      };
+      reversedSequence.cacheResult = cacheResultThrough;
+      reversedSequence.__iterate = function(fn, reverse) {
+        var this$0 = this;
+        return iterable.__iterate(function(v, k) {
+          return fn(v, k, this$0);
+        }, !reverse);
+      };
+      reversedSequence.__iterator = function(type, reverse) {
+        return iterable.__iterator(type, !reverse);
+      };
+      return reversedSequence;
+    }
+    function filterFactory(iterable, predicate, context, useKeys) {
+      var filterSequence = makeSequence(iterable);
+      if (useKeys) {
+        filterSequence.has = function(key) {
+          var v = iterable.get(key, NOT_SET);
+          return v !== NOT_SET && !!predicate.call(context, v, key, iterable);
+        };
+        filterSequence.get = function(key, notSetValue) {
+          var v = iterable.get(key, NOT_SET);
+          return v !== NOT_SET && predicate.call(context, v, key, iterable) ? v : notSetValue;
+        };
+      }
+      filterSequence.__iterateUncached = function(fn, reverse) {
+        var this$0 = this;
+        var iterations = 0;
+        iterable.__iterate(function(v, k, c) {
+          if (predicate.call(context, v, k, c)) {
+            iterations++;
+            return fn(v, useKeys ? k : iterations - 1, this$0);
+          }
+        }, reverse);
+        return iterations;
+      };
+      filterSequence.__iteratorUncached = function(type, reverse) {
+        var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
+        var iterations = 0;
+        return new src_Iterator__Iterator(function() {
+          while (true) {
+            var step = iterator.next();
+            if (step.done) {
+              return step;
+            }
+            var entry = step.value;
+            var key = entry[0];
+            var value = entry[1];
+            if (predicate.call(context, value, key, iterable)) {
+              return iteratorValue(type, useKeys ? key : iterations++, value, step);
+            }
+          }
+        });
+      };
+      return filterSequence;
+    }
+    function countByFactory(iterable, grouper, context) {
+      var groups = src_Map__Map().asMutable();
+      iterable.__iterate(function(v, k) {
+        groups.update(grouper.call(context, v, k, iterable), 0, function(a) {
+          return a + 1;
+        });
+      });
+      return groups.asImmutable();
+    }
+    function groupByFactory(iterable, grouper, context) {
+      var isKeyedIter = isKeyed(iterable);
+      var groups = (isOrdered(iterable) ? OrderedMap() : src_Map__Map()).asMutable();
+      iterable.__iterate(function(v, k) {
+        groups.update(grouper.call(context, v, k, iterable), function(a) {
+          return (a = a || [], a.push(isKeyedIter ? [k, v] : v), a);
+        });
+      });
+      var coerce = iterableClass(iterable);
+      return groups.map(function(arr) {
+        return reify(iterable, coerce(arr));
+      });
+    }
+    function sliceFactory(iterable, begin, end, useKeys) {
+      var originalSize = iterable.size;
+      if (begin !== undefined) {
+        begin = begin | 0;
+      }
+      if (end !== undefined) {
+        end = end | 0;
+      }
+      if (wholeSlice(begin, end, originalSize)) {
+        return iterable;
+      }
+      var resolvedBegin = resolveBegin(begin, originalSize);
+      var resolvedEnd = resolveEnd(end, originalSize);
+      if (resolvedBegin !== resolvedBegin || resolvedEnd !== resolvedEnd) {
+        return sliceFactory(iterable.toSeq().cacheResult(), begin, end, useKeys);
+      }
+      var resolvedSize = resolvedEnd - resolvedBegin;
+      var sliceSize;
+      if (resolvedSize === resolvedSize) {
+        sliceSize = resolvedSize < 0 ? 0 : resolvedSize;
+      }
+      var sliceSeq = makeSequence(iterable);
+      sliceSeq.size = sliceSize === 0 ? sliceSize : iterable.size && sliceSize || undefined;
+      if (!useKeys && isSeq(iterable) && sliceSize >= 0) {
+        sliceSeq.get = function(index, notSetValue) {
+          index = wrapIndex(this, index);
+          return index >= 0 && index < sliceSize ? iterable.get(index + resolvedBegin, notSetValue) : notSetValue;
+        };
+      }
+      sliceSeq.__iterateUncached = function(fn, reverse) {
+        var this$0 = this;
+        if (sliceSize === 0) {
+          return 0;
+        }
+        if (reverse) {
+          return this.cacheResult().__iterate(fn, reverse);
+        }
+        var skipped = 0;
+        var isSkipping = true;
+        var iterations = 0;
+        iterable.__iterate(function(v, k) {
+          if (!(isSkipping && (isSkipping = skipped++ < resolvedBegin))) {
+            iterations++;
+            return fn(v, useKeys ? k : iterations - 1, this$0) !== false && iterations !== sliceSize;
+          }
+        });
+        return iterations;
+      };
+      sliceSeq.__iteratorUncached = function(type, reverse) {
+        if (sliceSize !== 0 && reverse) {
+          return this.cacheResult().__iterator(type, reverse);
+        }
+        var iterator = sliceSize !== 0 && iterable.__iterator(type, reverse);
+        var skipped = 0;
+        var iterations = 0;
+        return new src_Iterator__Iterator(function() {
+          while (skipped++ < resolvedBegin) {
+            iterator.next();
+          }
+          if (++iterations > sliceSize) {
+            return iteratorDone();
+          }
+          var step = iterator.next();
+          if (useKeys || type === ITERATE_VALUES) {
+            return step;
+          } else if (type === ITERATE_KEYS) {
+            return iteratorValue(type, iterations - 1, undefined, step);
+          } else {
+            return iteratorValue(type, iterations - 1, step.value[1], step);
+          }
+        });
+      };
+      return sliceSeq;
+    }
+    function takeWhileFactory(iterable, predicate, context) {
+      var takeSequence = makeSequence(iterable);
+      takeSequence.__iterateUncached = function(fn, reverse) {
+        var this$0 = this;
+        if (reverse) {
+          return this.cacheResult().__iterate(fn, reverse);
+        }
+        var iterations = 0;
+        iterable.__iterate(function(v, k, c) {
+          return predicate.call(context, v, k, c) && ++iterations && fn(v, k, this$0);
+        });
+        return iterations;
+      };
+      takeSequence.__iteratorUncached = function(type, reverse) {
+        var this$0 = this;
+        if (reverse) {
+          return this.cacheResult().__iterator(type, reverse);
+        }
+        var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
+        var iterating = true;
+        return new src_Iterator__Iterator(function() {
+          if (!iterating) {
+            return iteratorDone();
+          }
+          var step = iterator.next();
+          if (step.done) {
+            return step;
+          }
+          var entry = step.value;
+          var k = entry[0];
+          var v = entry[1];
+          if (!predicate.call(context, v, k, this$0)) {
+            iterating = false;
+            return iteratorDone();
+          }
+          return type === ITERATE_ENTRIES ? step : iteratorValue(type, k, v, step);
+        });
+      };
+      return takeSequence;
+    }
+    function skipWhileFactory(iterable, predicate, context, useKeys) {
+      var skipSequence = makeSequence(iterable);
+      skipSequence.__iterateUncached = function(fn, reverse) {
+        var this$0 = this;
+        if (reverse) {
+          return this.cacheResult().__iterate(fn, reverse);
+        }
+        var isSkipping = true;
+        var iterations = 0;
+        iterable.__iterate(function(v, k, c) {
+          if (!(isSkipping && (isSkipping = predicate.call(context, v, k, c)))) {
+            iterations++;
+            return fn(v, useKeys ? k : iterations - 1, this$0);
+          }
+        });
+        return iterations;
+      };
+      skipSequence.__iteratorUncached = function(type, reverse) {
+        var this$0 = this;
+        if (reverse) {
+          return this.cacheResult().__iterator(type, reverse);
+        }
+        var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
+        var skipping = true;
+        var iterations = 0;
+        return new src_Iterator__Iterator(function() {
+          var step,
+              k,
+              v;
+          do {
+            step = iterator.next();
+            if (step.done) {
+              if (useKeys || type === ITERATE_VALUES) {
+                return step;
+              } else if (type === ITERATE_KEYS) {
+                return iteratorValue(type, iterations++, undefined, step);
+              } else {
+                return iteratorValue(type, iterations++, step.value[1], step);
+              }
+            }
+            var entry = step.value;
+            k = entry[0];
+            v = entry[1];
+            skipping && (skipping = predicate.call(context, v, k, this$0));
+          } while (skipping);
+          return type === ITERATE_ENTRIES ? step : iteratorValue(type, k, v, step);
+        });
+      };
+      return skipSequence;
+    }
+    function concatFactory(iterable, values) {
+      var isKeyedIterable = isKeyed(iterable);
+      var iters = [iterable].concat(values).map(function(v) {
+        if (!isIterable(v)) {
+          v = isKeyedIterable ? keyedSeqFromValue(v) : indexedSeqFromValue(Array.isArray(v) ? v : [v]);
+        } else if (isKeyedIterable) {
+          v = KeyedIterable(v);
+        }
+        return v;
+      }).filter(function(v) {
+        return v.size !== 0;
+      });
+      if (iters.length === 0) {
+        return iterable;
+      }
+      if (iters.length === 1) {
+        var singleton = iters[0];
+        if (singleton === iterable || isKeyedIterable && isKeyed(singleton) || isIndexed(iterable) && isIndexed(singleton)) {
+          return singleton;
+        }
+      }
+      var concatSeq = new ArraySeq(iters);
+      if (isKeyedIterable) {
+        concatSeq = concatSeq.toKeyedSeq();
+      } else if (!isIndexed(iterable)) {
+        concatSeq = concatSeq.toSetSeq();
+      }
+      concatSeq = concatSeq.flatten(true);
+      concatSeq.size = iters.reduce(function(sum, seq) {
+        if (sum !== undefined) {
+          var size = seq.size;
+          if (size !== undefined) {
+            return sum + size;
+          }
+        }
+      }, 0);
+      return concatSeq;
+    }
+    function flattenFactory(iterable, depth, useKeys) {
+      var flatSequence = makeSequence(iterable);
+      flatSequence.__iterateUncached = function(fn, reverse) {
+        var iterations = 0;
+        var stopped = false;
+        function flatDeep(iter, currentDepth) {
+          var this$0 = this;
+          iter.__iterate(function(v, k) {
+            if ((!depth || currentDepth < depth) && isIterable(v)) {
+              flatDeep(v, currentDepth + 1);
+            } else if (fn(v, useKeys ? k : iterations++, this$0) === false) {
+              stopped = true;
+            }
+            return !stopped;
+          }, reverse);
+        }
+        flatDeep(iterable, 0);
+        return iterations;
+      };
+      flatSequence.__iteratorUncached = function(type, reverse) {
+        var iterator = iterable.__iterator(type, reverse);
+        var stack = [];
+        var iterations = 0;
+        return new src_Iterator__Iterator(function() {
+          while (iterator) {
+            var step = iterator.next();
+            if (step.done !== false) {
+              iterator = stack.pop();
+              continue;
+            }
+            var v = step.value;
+            if (type === ITERATE_ENTRIES) {
+              v = v[1];
+            }
+            if ((!depth || stack.length < depth) && isIterable(v)) {
+              stack.push(iterator);
+              iterator = v.__iterator(type, reverse);
+            } else {
+              return useKeys ? step : iteratorValue(type, iterations++, v, step);
+            }
+          }
+          return iteratorDone();
+        });
+      };
+      return flatSequence;
+    }
+    function flatMapFactory(iterable, mapper, context) {
+      var coerce = iterableClass(iterable);
+      return iterable.toSeq().map(function(v, k) {
+        return coerce(mapper.call(context, v, k, iterable));
+      }).flatten(true);
+    }
+    function interposeFactory(iterable, separator) {
+      var interposedSequence = makeSequence(iterable);
+      interposedSequence.size = iterable.size && iterable.size * 2 - 1;
+      interposedSequence.__iterateUncached = function(fn, reverse) {
+        var this$0 = this;
+        var iterations = 0;
+        iterable.__iterate(function(v, k) {
+          return (!iterations || fn(separator, iterations++, this$0) !== false) && fn(v, iterations++, this$0) !== false;
+        }, reverse);
+        return iterations;
+      };
+      interposedSequence.__iteratorUncached = function(type, reverse) {
+        var iterator = iterable.__iterator(ITERATE_VALUES, reverse);
+        var iterations = 0;
+        var step;
+        return new src_Iterator__Iterator(function() {
+          if (!step || iterations % 2) {
+            step = iterator.next();
+            if (step.done) {
+              return step;
+            }
+          }
+          return iterations % 2 ? iteratorValue(type, iterations++, separator) : iteratorValue(type, iterations++, step.value, step);
+        });
+      };
+      return interposedSequence;
+    }
+    function sortFactory(iterable, comparator, mapper) {
+      if (!comparator) {
+        comparator = defaultComparator;
+      }
+      var isKeyedIterable = isKeyed(iterable);
+      var index = 0;
+      var entries = iterable.toSeq().map(function(v, k) {
+        return [k, v, index++, mapper ? mapper(v, k, iterable) : v];
+      }).toArray();
+      entries.sort(function(a, b) {
+        return comparator(a[3], b[3]) || a[2] - b[2];
+      }).forEach(isKeyedIterable ? function(v, i) {
+        entries[i].length = 2;
+      } : function(v, i) {
+        entries[i] = v[1];
+      });
+      return isKeyedIterable ? KeyedSeq(entries) : isIndexed(iterable) ? IndexedSeq(entries) : SetSeq(entries);
+    }
+    function maxFactory(iterable, comparator, mapper) {
+      if (!comparator) {
+        comparator = defaultComparator;
+      }
+      if (mapper) {
+        var entry = iterable.toSeq().map(function(v, k) {
+          return [v, mapper(v, k, iterable)];
+        }).reduce(function(a, b) {
+          return maxCompare(comparator, a[1], b[1]) ? b : a;
+        });
+        return entry && entry[0];
+      } else {
+        return iterable.reduce(function(a, b) {
+          return maxCompare(comparator, a, b) ? b : a;
+        });
+      }
+    }
+    function maxCompare(comparator, a, b) {
+      var comp = comparator(b, a);
+      return (comp === 0 && b !== a && (b === undefined || b === null || b !== b)) || comp > 0;
+    }
+    function zipWithFactory(keyIter, zipper, iters) {
+      var zipSequence = makeSequence(keyIter);
+      zipSequence.size = new ArraySeq(iters).map(function(i) {
+        return i.size;
+      }).min();
+      zipSequence.__iterate = function(fn, reverse) {
+        var iterator = this.__iterator(ITERATE_VALUES, reverse);
+        var step;
+        var iterations = 0;
+        while (!(step = iterator.next()).done) {
+          if (fn(step.value, iterations++, this) === false) {
+            break;
+          }
+        }
+        return iterations;
+      };
+      zipSequence.__iteratorUncached = function(type, reverse) {
+        var iterators = iters.map(function(i) {
+          return (i = Iterable(i), getIterator(reverse ? i.reverse() : i));
+        });
+        var iterations = 0;
+        var isDone = false;
+        return new src_Iterator__Iterator(function() {
+          var steps;
+          if (!isDone) {
+            steps = iterators.map(function(i) {
+              return i.next();
+            });
+            isDone = steps.some(function(s) {
+              return s.done;
+            });
+          }
+          if (isDone) {
+            return iteratorDone();
+          }
+          return iteratorValue(type, iterations++, zipper.apply(null, steps.map(function(s) {
+            return s.value;
+          })));
+        });
+      };
+      return zipSequence;
+    }
+    function reify(iter, seq) {
+      return isSeq(iter) ? seq : iter.constructor(seq);
+    }
+    function validateEntry(entry) {
+      if (entry !== Object(entry)) {
+        throw new TypeError('Expected [K, V] tuple: ' + entry);
+      }
+    }
+    function resolveSize(iter) {
+      assertNotInfinite(iter.size);
+      return ensureSize(iter);
+    }
+    function iterableClass(iterable) {
+      return isKeyed(iterable) ? KeyedIterable : isIndexed(iterable) ? IndexedIterable : SetIterable;
+    }
+    function makeSequence(iterable) {
+      return Object.create((isKeyed(iterable) ? KeyedSeq : isIndexed(iterable) ? IndexedSeq : SetSeq).prototype);
+    }
+    function cacheResultThrough() {
+      if (this._iter.cacheResult) {
+        this._iter.cacheResult();
+        this.size = this._iter.size;
+        return this;
+      } else {
+        return Seq.prototype.cacheResult.call(this);
+      }
+    }
+    function defaultComparator(a, b) {
+      return a > b ? 1 : a < b ? -1 : 0;
+    }
+    function forceIterator(keyPath) {
+      var iter = getIterator(keyPath);
+      if (!iter) {
+        if (!isArrayLike(keyPath)) {
+          throw new TypeError('Expected iterable or array-like: ' + keyPath);
+        }
+        iter = getIterator(Iterable(keyPath));
+      }
+      return iter;
+    }
+    createClass(src_Map__Map, KeyedCollection);
+    function src_Map__Map(value) {
+      return value === null || value === undefined ? emptyMap() : isMap(value) && !isOrdered(value) ? value : emptyMap().withMutations(function(map) {
+        var iter = KeyedIterable(value);
+        assertNotInfinite(iter.size);
+        iter.forEach(function(v, k) {
+          return map.set(k, v);
+        });
+      });
+    }
+    src_Map__Map.prototype.toString = function() {
+      return this.__toString('Map {', '}');
+    };
+    src_Map__Map.prototype.get = function(k, notSetValue) {
+      return this._root ? this._root.get(0, undefined, k, notSetValue) : notSetValue;
+    };
+    src_Map__Map.prototype.set = function(k, v) {
+      return updateMap(this, k, v);
+    };
+    src_Map__Map.prototype.setIn = function(keyPath, v) {
+      return this.updateIn(keyPath, NOT_SET, function() {
+        return v;
+      });
+    };
+    src_Map__Map.prototype.remove = function(k) {
+      return updateMap(this, k, NOT_SET);
+    };
+    src_Map__Map.prototype.deleteIn = function(keyPath) {
+      return this.updateIn(keyPath, function() {
+        return NOT_SET;
+      });
+    };
+    src_Map__Map.prototype.update = function(k, notSetValue, updater) {
+      return arguments.length === 1 ? k(this) : this.updateIn([k], notSetValue, updater);
+    };
+    src_Map__Map.prototype.updateIn = function(keyPath, notSetValue, updater) {
+      if (!updater) {
+        updater = notSetValue;
+        notSetValue = undefined;
+      }
+      var updatedValue = updateInDeepMap(this, forceIterator(keyPath), notSetValue, updater);
+      return updatedValue === NOT_SET ? undefined : updatedValue;
+    };
+    src_Map__Map.prototype.clear = function() {
+      if (this.size === 0) {
+        return this;
+      }
+      if (this.__ownerID) {
+        this.size = 0;
+        this._root = null;
+        this.__hash = undefined;
+        this.__altered = true;
+        return this;
+      }
+      return emptyMap();
+    };
+    src_Map__Map.prototype.merge = function() {
+      return mergeIntoMapWith(this, undefined, arguments);
+    };
+    src_Map__Map.prototype.mergeWith = function(merger) {
+      var iters = SLICE$0.call(arguments, 1);
+      return mergeIntoMapWith(this, merger, iters);
+    };
+    src_Map__Map.prototype.mergeIn = function(keyPath) {
+      var iters = SLICE$0.call(arguments, 1);
+      return this.updateIn(keyPath, emptyMap(), function(m) {
+        return typeof m.merge === 'function' ? m.merge.apply(m, iters) : iters[iters.length - 1];
+      });
+    };
+    src_Map__Map.prototype.mergeDeep = function() {
+      return mergeIntoMapWith(this, deepMerger(undefined), arguments);
+    };
+    src_Map__Map.prototype.mergeDeepWith = function(merger) {
+      var iters = SLICE$0.call(arguments, 1);
+      return mergeIntoMapWith(this, deepMerger(merger), iters);
+    };
+    src_Map__Map.prototype.mergeDeepIn = function(keyPath) {
+      var iters = SLICE$0.call(arguments, 1);
+      return this.updateIn(keyPath, emptyMap(), function(m) {
+        return typeof m.mergeDeep === 'function' ? m.mergeDeep.apply(m, iters) : iters[iters.length - 1];
+      });
+    };
+    src_Map__Map.prototype.sort = function(comparator) {
+      return OrderedMap(sortFactory(this, comparator));
+    };
+    src_Map__Map.prototype.sortBy = function(mapper, comparator) {
+      return OrderedMap(sortFactory(this, comparator, mapper));
+    };
+    src_Map__Map.prototype.withMutations = function(fn) {
+      var mutable = this.asMutable();
+      fn(mutable);
+      return mutable.wasAltered() ? mutable.__ensureOwner(this.__ownerID) : this;
+    };
+    src_Map__Map.prototype.asMutable = function() {
+      return this.__ownerID ? this : this.__ensureOwner(new OwnerID());
+    };
+    src_Map__Map.prototype.asImmutable = function() {
+      return this.__ensureOwner();
+    };
+    src_Map__Map.prototype.wasAltered = function() {
+      return this.__altered;
+    };
+    src_Map__Map.prototype.__iterator = function(type, reverse) {
+      return new MapIterator(this, type, reverse);
+    };
+    src_Map__Map.prototype.__iterate = function(fn, reverse) {
+      var this$0 = this;
+      var iterations = 0;
+      this._root && this._root.iterate(function(entry) {
+        iterations++;
+        return fn(entry[1], entry[0], this$0);
+      }, reverse);
+      return iterations;
+    };
+    src_Map__Map.prototype.__ensureOwner = function(ownerID) {
+      if (ownerID === this.__ownerID) {
+        return this;
+      }
+      if (!ownerID) {
+        this.__ownerID = ownerID;
+        this.__altered = false;
+        return this;
+      }
+      return makeMap(this.size, this._root, ownerID, this.__hash);
+    };
+    function isMap(maybeMap) {
+      return !!(maybeMap && maybeMap[IS_MAP_SENTINEL]);
+    }
+    src_Map__Map.isMap = isMap;
+    var IS_MAP_SENTINEL = '@@__IMMUTABLE_MAP__@@';
+    var MapPrototype = src_Map__Map.prototype;
+    MapPrototype[IS_MAP_SENTINEL] = true;
+    MapPrototype[DELETE] = MapPrototype.remove;
+    MapPrototype.removeIn = MapPrototype.deleteIn;
+    function ArrayMapNode(ownerID, entries) {
+      this.ownerID = ownerID;
+      this.entries = entries;
+    }
+    ArrayMapNode.prototype.get = function(shift, keyHash, key, notSetValue) {
+      var entries = this.entries;
+      for (var ii = 0,
+          len = entries.length; ii < len; ii++) {
+        if (is(key, entries[ii][0])) {
+          return entries[ii][1];
+        }
+      }
+      return notSetValue;
+    };
+    ArrayMapNode.prototype.update = function(ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
+      var removed = value === NOT_SET;
+      var entries = this.entries;
+      var idx = 0;
+      for (var len = entries.length; idx < len; idx++) {
+        if (is(key, entries[idx][0])) {
+          break;
+        }
+      }
+      var exists = idx < len;
+      if (exists ? entries[idx][1] === value : removed) {
+        return this;
+      }
+      SetRef(didAlter);
+      (removed || !exists) && SetRef(didChangeSize);
+      if (removed && entries.length === 1) {
+        return;
+      }
+      if (!exists && !removed && entries.length >= MAX_ARRAY_MAP_SIZE) {
+        return createNodes(ownerID, entries, key, value);
+      }
+      var isEditable = ownerID && ownerID === this.ownerID;
+      var newEntries = isEditable ? entries : arrCopy(entries);
+      if (exists) {
+        if (removed) {
+          idx === len - 1 ? newEntries.pop() : (newEntries[idx] = newEntries.pop());
+        } else {
+          newEntries[idx] = [key, value];
+        }
+      } else {
+        newEntries.push([key, value]);
+      }
+      if (isEditable) {
+        this.entries = newEntries;
+        return this;
+      }
+      return new ArrayMapNode(ownerID, newEntries);
+    };
+    function BitmapIndexedNode(ownerID, bitmap, nodes) {
+      this.ownerID = ownerID;
+      this.bitmap = bitmap;
+      this.nodes = nodes;
+    }
+    BitmapIndexedNode.prototype.get = function(shift, keyHash, key, notSetValue) {
+      if (keyHash === undefined) {
+        keyHash = hash(key);
+      }
+      var bit = (1 << ((shift === 0 ? keyHash : keyHash >>> shift) & MASK));
+      var bitmap = this.bitmap;
+      return (bitmap & bit) === 0 ? notSetValue : this.nodes[popCount(bitmap & (bit - 1))].get(shift + SHIFT, keyHash, key, notSetValue);
+    };
+    BitmapIndexedNode.prototype.update = function(ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
+      if (keyHash === undefined) {
+        keyHash = hash(key);
+      }
+      var keyHashFrag = (shift === 0 ? keyHash : keyHash >>> shift) & MASK;
+      var bit = 1 << keyHashFrag;
+      var bitmap = this.bitmap;
+      var exists = (bitmap & bit) !== 0;
+      if (!exists && value === NOT_SET) {
+        return this;
+      }
+      var idx = popCount(bitmap & (bit - 1));
+      var nodes = this.nodes;
+      var node = exists ? nodes[idx] : undefined;
+      var newNode = updateNode(node, ownerID, shift + SHIFT, keyHash, key, value, didChangeSize, didAlter);
+      if (newNode === node) {
+        return this;
+      }
+      if (!exists && newNode && nodes.length >= MAX_BITMAP_INDEXED_SIZE) {
+        return expandNodes(ownerID, nodes, bitmap, keyHashFrag, newNode);
+      }
+      if (exists && !newNode && nodes.length === 2 && isLeafNode(nodes[idx ^ 1])) {
+        return nodes[idx ^ 1];
+      }
+      if (exists && newNode && nodes.length === 1 && isLeafNode(newNode)) {
+        return newNode;
+      }
+      var isEditable = ownerID && ownerID === this.ownerID;
+      var newBitmap = exists ? newNode ? bitmap : bitmap ^ bit : bitmap | bit;
+      var newNodes = exists ? newNode ? setIn(nodes, idx, newNode, isEditable) : spliceOut(nodes, idx, isEditable) : spliceIn(nodes, idx, newNode, isEditable);
+      if (isEditable) {
+        this.bitmap = newBitmap;
+        this.nodes = newNodes;
+        return this;
+      }
+      return new BitmapIndexedNode(ownerID, newBitmap, newNodes);
+    };
+    function HashArrayMapNode(ownerID, count, nodes) {
+      this.ownerID = ownerID;
+      this.count = count;
+      this.nodes = nodes;
+    }
+    HashArrayMapNode.prototype.get = function(shift, keyHash, key, notSetValue) {
+      if (keyHash === undefined) {
+        keyHash = hash(key);
+      }
+      var idx = (shift === 0 ? keyHash : keyHash >>> shift) & MASK;
+      var node = this.nodes[idx];
+      return node ? node.get(shift + SHIFT, keyHash, key, notSetValue) : notSetValue;
+    };
+    HashArrayMapNode.prototype.update = function(ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
+      if (keyHash === undefined) {
+        keyHash = hash(key);
+      }
+      var idx = (shift === 0 ? keyHash : keyHash >>> shift) & MASK;
+      var removed = value === NOT_SET;
+      var nodes = this.nodes;
+      var node = nodes[idx];
+      if (removed && !node) {
+        return this;
+      }
+      var newNode = updateNode(node, ownerID, shift + SHIFT, keyHash, key, value, didChangeSize, didAlter);
+      if (newNode === node) {
+        return this;
+      }
+      var newCount = this.count;
+      if (!node) {
+        newCount++;
+      } else if (!newNode) {
+        newCount--;
+        if (newCount < MIN_HASH_ARRAY_MAP_SIZE) {
+          return packNodes(ownerID, nodes, newCount, idx);
+        }
+      }
+      var isEditable = ownerID && ownerID === this.ownerID;
+      var newNodes = setIn(nodes, idx, newNode, isEditable);
+      if (isEditable) {
+        this.count = newCount;
+        this.nodes = newNodes;
+        return this;
+      }
+      return new HashArrayMapNode(ownerID, newCount, newNodes);
+    };
+    function HashCollisionNode(ownerID, keyHash, entries) {
+      this.ownerID = ownerID;
+      this.keyHash = keyHash;
+      this.entries = entries;
+    }
+    HashCollisionNode.prototype.get = function(shift, keyHash, key, notSetValue) {
+      var entries = this.entries;
+      for (var ii = 0,
+          len = entries.length; ii < len; ii++) {
+        if (is(key, entries[ii][0])) {
+          return entries[ii][1];
+        }
+      }
+      return notSetValue;
+    };
+    HashCollisionNode.prototype.update = function(ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
+      if (keyHash === undefined) {
+        keyHash = hash(key);
+      }
+      var removed = value === NOT_SET;
+      if (keyHash !== this.keyHash) {
+        if (removed) {
+          return this;
+        }
+        SetRef(didAlter);
+        SetRef(didChangeSize);
+        return mergeIntoNode(this, ownerID, shift, keyHash, [key, value]);
+      }
+      var entries = this.entries;
+      var idx = 0;
+      for (var len = entries.length; idx < len; idx++) {
+        if (is(key, entries[idx][0])) {
+          break;
+        }
+      }
+      var exists = idx < len;
+      if (exists ? entries[idx][1] === value : removed) {
+        return this;
+      }
+      SetRef(didAlter);
+      (removed || !exists) && SetRef(didChangeSize);
+      if (removed && len === 2) {
+        return new ValueNode(ownerID, this.keyHash, entries[idx ^ 1]);
+      }
+      var isEditable = ownerID && ownerID === this.ownerID;
+      var newEntries = isEditable ? entries : arrCopy(entries);
+      if (exists) {
+        if (removed) {
+          idx === len - 1 ? newEntries.pop() : (newEntries[idx] = newEntries.pop());
+        } else {
+          newEntries[idx] = [key, value];
+        }
+      } else {
+        newEntries.push([key, value]);
+      }
+      if (isEditable) {
+        this.entries = newEntries;
+        return this;
+      }
+      return new HashCollisionNode(ownerID, this.keyHash, newEntries);
+    };
+    function ValueNode(ownerID, keyHash, entry) {
+      this.ownerID = ownerID;
+      this.keyHash = keyHash;
+      this.entry = entry;
+    }
+    ValueNode.prototype.get = function(shift, keyHash, key, notSetValue) {
+      return is(key, this.entry[0]) ? this.entry[1] : notSetValue;
+    };
+    ValueNode.prototype.update = function(ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
+      var removed = value === NOT_SET;
+      var keyMatch = is(key, this.entry[0]);
+      if (keyMatch ? value === this.entry[1] : removed) {
+        return this;
+      }
+      SetRef(didAlter);
+      if (removed) {
+        SetRef(didChangeSize);
+        return;
+      }
+      if (keyMatch) {
+        if (ownerID && ownerID === this.ownerID) {
+          this.entry[1] = value;
+          return this;
+        }
+        return new ValueNode(ownerID, this.keyHash, [key, value]);
+      }
+      SetRef(didChangeSize);
+      return mergeIntoNode(this, ownerID, shift, hash(key), [key, value]);
+    };
+    ArrayMapNode.prototype.iterate = HashCollisionNode.prototype.iterate = function(fn, reverse) {
+      var entries = this.entries;
+      for (var ii = 0,
+          maxIndex = entries.length - 1; ii <= maxIndex; ii++) {
+        if (fn(entries[reverse ? maxIndex - ii : ii]) === false) {
+          return false;
+        }
+      }
+    };
+    BitmapIndexedNode.prototype.iterate = HashArrayMapNode.prototype.iterate = function(fn, reverse) {
+      var nodes = this.nodes;
+      for (var ii = 0,
+          maxIndex = nodes.length - 1; ii <= maxIndex; ii++) {
+        var node = nodes[reverse ? maxIndex - ii : ii];
+        if (node && node.iterate(fn, reverse) === false) {
+          return false;
+        }
+      }
+    };
+    ValueNode.prototype.iterate = function(fn, reverse) {
+      return fn(this.entry);
+    };
+    createClass(MapIterator, src_Iterator__Iterator);
+    function MapIterator(map, type, reverse) {
+      this._type = type;
+      this._reverse = reverse;
+      this._stack = map._root && mapIteratorFrame(map._root);
+    }
+    MapIterator.prototype.next = function() {
+      var type = this._type;
+      var stack = this._stack;
+      while (stack) {
+        var node = stack.node;
+        var index = stack.index++;
+        var maxIndex;
+        if (node.entry) {
+          if (index === 0) {
+            return mapIteratorValue(type, node.entry);
+          }
+        } else if (node.entries) {
+          maxIndex = node.entries.length - 1;
+          if (index <= maxIndex) {
+            return mapIteratorValue(type, node.entries[this._reverse ? maxIndex - index : index]);
+          }
+        } else {
+          maxIndex = node.nodes.length - 1;
+          if (index <= maxIndex) {
+            var subNode = node.nodes[this._reverse ? maxIndex - index : index];
+            if (subNode) {
+              if (subNode.entry) {
+                return mapIteratorValue(type, subNode.entry);
+              }
+              stack = this._stack = mapIteratorFrame(subNode, stack);
+            }
+            continue;
+          }
+        }
+        stack = this._stack = this._stack.__prev;
+      }
+      return iteratorDone();
+    };
+    function mapIteratorValue(type, entry) {
+      return iteratorValue(type, entry[0], entry[1]);
+    }
+    function mapIteratorFrame(node, prev) {
+      return {
+        node: node,
+        index: 0,
+        __prev: prev
+      };
+    }
+    function makeMap(size, root, ownerID, hash) {
+      var map = Object.create(MapPrototype);
+      map.size = size;
+      map._root = root;
+      map.__ownerID = ownerID;
+      map.__hash = hash;
+      map.__altered = false;
+      return map;
+    }
+    var EMPTY_MAP;
+    function emptyMap() {
+      return EMPTY_MAP || (EMPTY_MAP = makeMap(0));
+    }
+    function updateMap(map, k, v) {
+      var newRoot;
+      var newSize;
+      if (!map._root) {
+        if (v === NOT_SET) {
+          return map;
+        }
+        newSize = 1;
+        newRoot = new ArrayMapNode(map.__ownerID, [[k, v]]);
+      } else {
+        var didChangeSize = MakeRef(CHANGE_LENGTH);
+        var didAlter = MakeRef(DID_ALTER);
+        newRoot = updateNode(map._root, map.__ownerID, 0, undefined, k, v, didChangeSize, didAlter);
+        if (!didAlter.value) {
+          return map;
+        }
+        newSize = map.size + (didChangeSize.value ? v === NOT_SET ? -1 : 1 : 0);
+      }
+      if (map.__ownerID) {
+        map.size = newSize;
+        map._root = newRoot;
+        map.__hash = undefined;
+        map.__altered = true;
+        return map;
+      }
+      return newRoot ? makeMap(newSize, newRoot) : emptyMap();
+    }
+    function updateNode(node, ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
+      if (!node) {
+        if (value === NOT_SET) {
+          return node;
+        }
+        SetRef(didAlter);
+        SetRef(didChangeSize);
+        return new ValueNode(ownerID, keyHash, [key, value]);
+      }
+      return node.update(ownerID, shift, keyHash, key, value, didChangeSize, didAlter);
+    }
+    function isLeafNode(node) {
+      return node.constructor === ValueNode || node.constructor === HashCollisionNode;
+    }
+    function mergeIntoNode(node, ownerID, shift, keyHash, entry) {
+      if (node.keyHash === keyHash) {
+        return new HashCollisionNode(ownerID, keyHash, [node.entry, entry]);
+      }
+      var idx1 = (shift === 0 ? node.keyHash : node.keyHash >>> shift) & MASK;
+      var idx2 = (shift === 0 ? keyHash : keyHash >>> shift) & MASK;
+      var newNode;
+      var nodes = idx1 === idx2 ? [mergeIntoNode(node, ownerID, shift + SHIFT, keyHash, entry)] : ((newNode = new ValueNode(ownerID, keyHash, entry)), idx1 < idx2 ? [node, newNode] : [newNode, node]);
+      return new BitmapIndexedNode(ownerID, (1 << idx1) | (1 << idx2), nodes);
+    }
+    function createNodes(ownerID, entries, key, value) {
+      if (!ownerID) {
+        ownerID = new OwnerID();
+      }
+      var node = new ValueNode(ownerID, hash(key), [key, value]);
+      for (var ii = 0; ii < entries.length; ii++) {
+        var entry = entries[ii];
+        node = node.update(ownerID, 0, undefined, entry[0], entry[1]);
+      }
+      return node;
+    }
+    function packNodes(ownerID, nodes, count, excluding) {
+      var bitmap = 0;
+      var packedII = 0;
+      var packedNodes = new Array(count);
+      for (var ii = 0,
+          bit = 1,
+          len = nodes.length; ii < len; ii++, bit <<= 1) {
+        var node = nodes[ii];
+        if (node !== undefined && ii !== excluding) {
+          bitmap |= bit;
+          packedNodes[packedII++] = node;
+        }
+      }
+      return new BitmapIndexedNode(ownerID, bitmap, packedNodes);
+    }
+    function expandNodes(ownerID, nodes, bitmap, including, node) {
+      var count = 0;
+      var expandedNodes = new Array(SIZE);
+      for (var ii = 0; bitmap !== 0; ii++, bitmap >>>= 1) {
+        expandedNodes[ii] = bitmap & 1 ? nodes[count++] : undefined;
+      }
+      expandedNodes[including] = node;
+      return new HashArrayMapNode(ownerID, count + 1, expandedNodes);
+    }
+    function mergeIntoMapWith(map, merger, iterables) {
+      var iters = [];
+      for (var ii = 0; ii < iterables.length; ii++) {
+        var value = iterables[ii];
+        var iter = KeyedIterable(value);
+        if (!isIterable(value)) {
+          iter = iter.map(function(v) {
+            return fromJS(v);
+          });
+        }
+        iters.push(iter);
+      }
+      return mergeIntoCollectionWith(map, merger, iters);
+    }
+    function deepMerger(merger) {
+      return function(existing, value, key) {
+        return existing && existing.mergeDeepWith && isIterable(value) ? existing.mergeDeepWith(merger, value) : merger ? merger(existing, value, key) : value;
+      };
+    }
+    function mergeIntoCollectionWith(collection, merger, iters) {
+      iters = iters.filter(function(x) {
+        return x.size !== 0;
+      });
+      if (iters.length === 0) {
+        return collection;
+      }
+      if (collection.size === 0 && !collection.__ownerID && iters.length === 1) {
+        return collection.constructor(iters[0]);
+      }
+      return collection.withMutations(function(collection) {
+        var mergeIntoMap = merger ? function(value, key) {
+          collection.update(key, NOT_SET, function(existing) {
+            return existing === NOT_SET ? value : merger(existing, value, key);
+          });
+        } : function(value, key) {
+          collection.set(key, value);
+        };
+        for (var ii = 0; ii < iters.length; ii++) {
+          iters[ii].forEach(mergeIntoMap);
+        }
+      });
+    }
+    function updateInDeepMap(existing, keyPathIter, notSetValue, updater) {
+      var isNotSet = existing === NOT_SET;
+      var step = keyPathIter.next();
+      if (step.done) {
+        var existingValue = isNotSet ? notSetValue : existing;
+        var newValue = updater(existingValue);
+        return newValue === existingValue ? existing : newValue;
+      }
+      invariant(isNotSet || (existing && existing.set), 'invalid keyPath');
+      var key = step.value;
+      var nextExisting = isNotSet ? NOT_SET : existing.get(key, NOT_SET);
+      var nextUpdated = updateInDeepMap(nextExisting, keyPathIter, notSetValue, updater);
+      return nextUpdated === nextExisting ? existing : nextUpdated === NOT_SET ? existing.remove(key) : (isNotSet ? emptyMap() : existing).set(key, nextUpdated);
+    }
+    function popCount(x) {
+      x = x - ((x >> 1) & 0x55555555);
+      x = (x & 0x33333333) + ((x >> 2) & 0x33333333);
+      x = (x + (x >> 4)) & 0x0f0f0f0f;
+      x = x + (x >> 8);
+      x = x + (x >> 16);
+      return x & 0x7f;
+    }
+    function setIn(array, idx, val, canEdit) {
+      var newArray = canEdit ? array : arrCopy(array);
+      newArray[idx] = val;
+      return newArray;
+    }
+    function spliceIn(array, idx, val, canEdit) {
+      var newLen = array.length + 1;
+      if (canEdit && idx + 1 === newLen) {
+        array[idx] = val;
+        return array;
+      }
+      var newArray = new Array(newLen);
+      var after = 0;
+      for (var ii = 0; ii < newLen; ii++) {
+        if (ii === idx) {
+          newArray[ii] = val;
+          after = -1;
+        } else {
+          newArray[ii] = array[ii + after];
+        }
+      }
+      return newArray;
+    }
+    function spliceOut(array, idx, canEdit) {
+      var newLen = array.length - 1;
+      if (canEdit && idx === newLen) {
+        array.pop();
+        return array;
+      }
+      var newArray = new Array(newLen);
+      var after = 0;
+      for (var ii = 0; ii < newLen; ii++) {
+        if (ii === idx) {
+          after = 1;
+        }
+        newArray[ii] = array[ii + after];
+      }
+      return newArray;
+    }
+    var MAX_ARRAY_MAP_SIZE = SIZE / 4;
+    var MAX_BITMAP_INDEXED_SIZE = SIZE / 2;
+    var MIN_HASH_ARRAY_MAP_SIZE = SIZE / 4;
+    createClass(List, IndexedCollection);
+    function List(value) {
+      var empty = emptyList();
+      if (value === null || value === undefined) {
+        return empty;
+      }
+      if (isList(value)) {
+        return value;
+      }
+      var iter = IndexedIterable(value);
+      var size = iter.size;
+      if (size === 0) {
+        return empty;
+      }
+      assertNotInfinite(size);
+      if (size > 0 && size < SIZE) {
+        return makeList(0, size, SHIFT, null, new VNode(iter.toArray()));
+      }
+      return empty.withMutations(function(list) {
+        list.setSize(size);
+        iter.forEach(function(v, i) {
+          return list.set(i, v);
+        });
+      });
+    }
+    List.of = function() {
+      return this(arguments);
+    };
+    List.prototype.toString = function() {
+      return this.__toString('List [', ']');
+    };
+    List.prototype.get = function(index, notSetValue) {
+      index = wrapIndex(this, index);
+      if (index >= 0 && index < this.size) {
+        index += this._origin;
+        var node = listNodeFor(this, index);
+        return node && node.array[index & MASK];
+      }
+      return notSetValue;
+    };
+    List.prototype.set = function(index, value) {
+      return updateList(this, index, value);
+    };
+    List.prototype.remove = function(index) {
+      return !this.has(index) ? this : index === 0 ? this.shift() : index === this.size - 1 ? this.pop() : this.splice(index, 1);
+    };
+    List.prototype.clear = function() {
+      if (this.size === 0) {
+        return this;
+      }
+      if (this.__ownerID) {
+        this.size = this._origin = this._capacity = 0;
+        this._level = SHIFT;
+        this._root = this._tail = null;
+        this.__hash = undefined;
+        this.__altered = true;
+        return this;
+      }
+      return emptyList();
+    };
+    List.prototype.push = function() {
+      var values = arguments;
+      var oldSize = this.size;
+      return this.withMutations(function(list) {
+        setListBounds(list, 0, oldSize + values.length);
+        for (var ii = 0; ii < values.length; ii++) {
+          list.set(oldSize + ii, values[ii]);
+        }
+      });
+    };
+    List.prototype.pop = function() {
+      return setListBounds(this, 0, -1);
+    };
+    List.prototype.unshift = function() {
+      var values = arguments;
+      return this.withMutations(function(list) {
+        setListBounds(list, -values.length);
+        for (var ii = 0; ii < values.length; ii++) {
+          list.set(ii, values[ii]);
+        }
+      });
+    };
+    List.prototype.shift = function() {
+      return setListBounds(this, 1);
+    };
+    List.prototype.merge = function() {
+      return mergeIntoListWith(this, undefined, arguments);
+    };
+    List.prototype.mergeWith = function(merger) {
+      var iters = SLICE$0.call(arguments, 1);
+      return mergeIntoListWith(this, merger, iters);
+    };
+    List.prototype.mergeDeep = function() {
+      return mergeIntoListWith(this, deepMerger(undefined), arguments);
+    };
+    List.prototype.mergeDeepWith = function(merger) {
+      var iters = SLICE$0.call(arguments, 1);
+      return mergeIntoListWith(this, deepMerger(merger), iters);
+    };
+    List.prototype.setSize = function(size) {
+      return setListBounds(this, 0, size);
+    };
+    List.prototype.slice = function(begin, end) {
+      var size = this.size;
+      if (wholeSlice(begin, end, size)) {
+        return this;
+      }
+      return setListBounds(this, resolveBegin(begin, size), resolveEnd(end, size));
+    };
+    List.prototype.__iterator = function(type, reverse) {
+      var index = 0;
+      var values = iterateList(this, reverse);
+      return new src_Iterator__Iterator(function() {
+        var value = values();
+        return value === DONE ? iteratorDone() : iteratorValue(type, index++, value);
+      });
+    };
+    List.prototype.__iterate = function(fn, reverse) {
+      var index = 0;
+      var values = iterateList(this, reverse);
+      var value;
+      while ((value = values()) !== DONE) {
+        if (fn(value, index++, this) === false) {
+          break;
+        }
+      }
+      return index;
+    };
+    List.prototype.__ensureOwner = function(ownerID) {
+      if (ownerID === this.__ownerID) {
+        return this;
+      }
+      if (!ownerID) {
+        this.__ownerID = ownerID;
+        return this;
+      }
+      return makeList(this._origin, this._capacity, this._level, this._root, this._tail, ownerID, this.__hash);
+    };
+    function isList(maybeList) {
+      return !!(maybeList && maybeList[IS_LIST_SENTINEL]);
+    }
+    List.isList = isList;
+    var IS_LIST_SENTINEL = '@@__IMMUTABLE_LIST__@@';
+    var ListPrototype = List.prototype;
+    ListPrototype[IS_LIST_SENTINEL] = true;
+    ListPrototype[DELETE] = ListPrototype.remove;
+    ListPrototype.setIn = MapPrototype.setIn;
+    ListPrototype.deleteIn = ListPrototype.removeIn = MapPrototype.removeIn;
+    ListPrototype.update = MapPrototype.update;
+    ListPrototype.updateIn = MapPrototype.updateIn;
+    ListPrototype.mergeIn = MapPrototype.mergeIn;
+    ListPrototype.mergeDeepIn = MapPrototype.mergeDeepIn;
+    ListPrototype.withMutations = MapPrototype.withMutations;
+    ListPrototype.asMutable = MapPrototype.asMutable;
+    ListPrototype.asImmutable = MapPrototype.asImmutable;
+    ListPrototype.wasAltered = MapPrototype.wasAltered;
+    function VNode(array, ownerID) {
+      this.array = array;
+      this.ownerID = ownerID;
+    }
+    VNode.prototype.removeBefore = function(ownerID, level, index) {
+      if (index === level ? 1 << level : 0 || this.array.length === 0) {
+        return this;
+      }
+      var originIndex = (index >>> level) & MASK;
+      if (originIndex >= this.array.length) {
+        return new VNode([], ownerID);
+      }
+      var removingFirst = originIndex === 0;
+      var newChild;
+      if (level > 0) {
+        var oldChild = this.array[originIndex];
+        newChild = oldChild && oldChild.removeBefore(ownerID, level - SHIFT, index);
+        if (newChild === oldChild && removingFirst) {
+          return this;
+        }
+      }
+      if (removingFirst && !newChild) {
+        return this;
+      }
+      var editable = editableVNode(this, ownerID);
+      if (!removingFirst) {
+        for (var ii = 0; ii < originIndex; ii++) {
+          editable.array[ii] = undefined;
+        }
+      }
+      if (newChild) {
+        editable.array[originIndex] = newChild;
+      }
+      return editable;
+    };
+    VNode.prototype.removeAfter = function(ownerID, level, index) {
+      if (index === (level ? 1 << level : 0) || this.array.length === 0) {
+        return this;
+      }
+      var sizeIndex = ((index - 1) >>> level) & MASK;
+      if (sizeIndex >= this.array.length) {
+        return this;
+      }
+      var newChild;
+      if (level > 0) {
+        var oldChild = this.array[sizeIndex];
+        newChild = oldChild && oldChild.removeAfter(ownerID, level - SHIFT, index);
+        if (newChild === oldChild && sizeIndex === this.array.length - 1) {
+          return this;
+        }
+      }
+      var editable = editableVNode(this, ownerID);
+      editable.array.splice(sizeIndex + 1);
+      if (newChild) {
+        editable.array[sizeIndex] = newChild;
+      }
+      return editable;
+    };
+    var DONE = {};
+    function iterateList(list, reverse) {
+      var left = list._origin;
+      var right = list._capacity;
+      var tailPos = getTailOffset(right);
+      var tail = list._tail;
+      return iterateNodeOrLeaf(list._root, list._level, 0);
+      function iterateNodeOrLeaf(node, level, offset) {
+        return level === 0 ? iterateLeaf(node, offset) : iterateNode(node, level, offset);
+      }
+      function iterateLeaf(node, offset) {
+        var array = offset === tailPos ? tail && tail.array : node && node.array;
+        var from = offset > left ? 0 : left - offset;
+        var to = right - offset;
+        if (to > SIZE) {
+          to = SIZE;
+        }
+        return function() {
+          if (from === to) {
+            return DONE;
+          }
+          var idx = reverse ? --to : from++;
+          return array && array[idx];
+        };
+      }
+      function iterateNode(node, level, offset) {
+        var values;
+        var array = node && node.array;
+        var from = offset > left ? 0 : (left - offset) >> level;
+        var to = ((right - offset) >> level) + 1;
+        if (to > SIZE) {
+          to = SIZE;
+        }
+        return function() {
+          do {
+            if (values) {
+              var value = values();
+              if (value !== DONE) {
+                return value;
+              }
+              values = null;
+            }
+            if (from === to) {
+              return DONE;
+            }
+            var idx = reverse ? --to : from++;
+            values = iterateNodeOrLeaf(array && array[idx], level - SHIFT, offset + (idx << level));
+          } while (true);
+        };
+      }
+    }
+    function makeList(origin, capacity, level, root, tail, ownerID, hash) {
+      var list = Object.create(ListPrototype);
+      list.size = capacity - origin;
+      list._origin = origin;
+      list._capacity = capacity;
+      list._level = level;
+      list._root = root;
+      list._tail = tail;
+      list.__ownerID = ownerID;
+      list.__hash = hash;
+      list.__altered = false;
+      return list;
+    }
+    var EMPTY_LIST;
+    function emptyList() {
+      return EMPTY_LIST || (EMPTY_LIST = makeList(0, 0, SHIFT));
+    }
+    function updateList(list, index, value) {
+      index = wrapIndex(list, index);
+      if (index !== index) {
+        return list;
+      }
+      if (index >= list.size || index < 0) {
+        return list.withMutations(function(list) {
+          index < 0 ? setListBounds(list, index).set(0, value) : setListBounds(list, 0, index + 1).set(index, value);
+        });
+      }
+      index += list._origin;
+      var newTail = list._tail;
+      var newRoot = list._root;
+      var didAlter = MakeRef(DID_ALTER);
+      if (index >= getTailOffset(list._capacity)) {
+        newTail = updateVNode(newTail, list.__ownerID, 0, index, value, didAlter);
+      } else {
+        newRoot = updateVNode(newRoot, list.__ownerID, list._level, index, value, didAlter);
+      }
+      if (!didAlter.value) {
+        return list;
+      }
+      if (list.__ownerID) {
+        list._root = newRoot;
+        list._tail = newTail;
+        list.__hash = undefined;
+        list.__altered = true;
+        return list;
+      }
+      return makeList(list._origin, list._capacity, list._level, newRoot, newTail);
+    }
+    function updateVNode(node, ownerID, level, index, value, didAlter) {
+      var idx = (index >>> level) & MASK;
+      var nodeHas = node && idx < node.array.length;
+      if (!nodeHas && value === undefined) {
+        return node;
+      }
+      var newNode;
+      if (level > 0) {
+        var lowerNode = node && node.array[idx];
+        var newLowerNode = updateVNode(lowerNode, ownerID, level - SHIFT, index, value, didAlter);
+        if (newLowerNode === lowerNode) {
+          return node;
+        }
+        newNode = editableVNode(node, ownerID);
+        newNode.array[idx] = newLowerNode;
+        return newNode;
+      }
+      if (nodeHas && node.array[idx] === value) {
+        return node;
+      }
+      SetRef(didAlter);
+      newNode = editableVNode(node, ownerID);
+      if (value === undefined && idx === newNode.array.length - 1) {
+        newNode.array.pop();
+      } else {
+        newNode.array[idx] = value;
+      }
+      return newNode;
+    }
+    function editableVNode(node, ownerID) {
+      if (ownerID && node && ownerID === node.ownerID) {
+        return node;
+      }
+      return new VNode(node ? node.array.slice() : [], ownerID);
+    }
+    function listNodeFor(list, rawIndex) {
+      if (rawIndex >= getTailOffset(list._capacity)) {
+        return list._tail;
+      }
+      if (rawIndex < 1 << (list._level + SHIFT)) {
+        var node = list._root;
+        var level = list._level;
+        while (node && level > 0) {
+          node = node.array[(rawIndex >>> level) & MASK];
+          level -= SHIFT;
+        }
+        return node;
+      }
+    }
+    function setListBounds(list, begin, end) {
+      if (begin !== undefined) {
+        begin = begin | 0;
+      }
+      if (end !== undefined) {
+        end = end | 0;
+      }
+      var owner = list.__ownerID || new OwnerID();
+      var oldOrigin = list._origin;
+      var oldCapacity = list._capacity;
+      var newOrigin = oldOrigin + begin;
+      var newCapacity = end === undefined ? oldCapacity : end < 0 ? oldCapacity + end : oldOrigin + end;
+      if (newOrigin === oldOrigin && newCapacity === oldCapacity) {
+        return list;
+      }
+      if (newOrigin >= newCapacity) {
+        return list.clear();
+      }
+      var newLevel = list._level;
+      var newRoot = list._root;
+      var offsetShift = 0;
+      while (newOrigin + offsetShift < 0) {
+        newRoot = new VNode(newRoot && newRoot.array.length ? [undefined, newRoot] : [], owner);
+        newLevel += SHIFT;
+        offsetShift += 1 << newLevel;
+      }
+      if (offsetShift) {
+        newOrigin += offsetShift;
+        oldOrigin += offsetShift;
+        newCapacity += offsetShift;
+        oldCapacity += offsetShift;
+      }
+      var oldTailOffset = getTailOffset(oldCapacity);
+      var newTailOffset = getTailOffset(newCapacity);
+      while (newTailOffset >= 1 << (newLevel + SHIFT)) {
+        newRoot = new VNode(newRoot && newRoot.array.length ? [newRoot] : [], owner);
+        newLevel += SHIFT;
+      }
+      var oldTail = list._tail;
+      var newTail = newTailOffset < oldTailOffset ? listNodeFor(list, newCapacity - 1) : newTailOffset > oldTailOffset ? new VNode([], owner) : oldTail;
+      if (oldTail && newTailOffset > oldTailOffset && newOrigin < oldCapacity && oldTail.array.length) {
+        newRoot = editableVNode(newRoot, owner);
+        var node = newRoot;
+        for (var level = newLevel; level > SHIFT; level -= SHIFT) {
+          var idx = (oldTailOffset >>> level) & MASK;
+          node = node.array[idx] = editableVNode(node.array[idx], owner);
+        }
+        node.array[(oldTailOffset >>> SHIFT) & MASK] = oldTail;
+      }
+      if (newCapacity < oldCapacity) {
+        newTail = newTail && newTail.removeAfter(owner, 0, newCapacity);
+      }
+      if (newOrigin >= newTailOffset) {
+        newOrigin -= newTailOffset;
+        newCapacity -= newTailOffset;
+        newLevel = SHIFT;
+        newRoot = null;
+        newTail = newTail && newTail.removeBefore(owner, 0, newOrigin);
+      } else if (newOrigin > oldOrigin || newTailOffset < oldTailOffset) {
+        offsetShift = 0;
+        while (newRoot) {
+          var beginIndex = (newOrigin >>> newLevel) & MASK;
+          if (beginIndex !== (newTailOffset >>> newLevel) & MASK) {
+            break;
+          }
+          if (beginIndex) {
+            offsetShift += (1 << newLevel) * beginIndex;
+          }
+          newLevel -= SHIFT;
+          newRoot = newRoot.array[beginIndex];
+        }
+        if (newRoot && newOrigin > oldOrigin) {
+          newRoot = newRoot.removeBefore(owner, newLevel, newOrigin - offsetShift);
+        }
+        if (newRoot && newTailOffset < oldTailOffset) {
+          newRoot = newRoot.removeAfter(owner, newLevel, newTailOffset - offsetShift);
+        }
+        if (offsetShift) {
+          newOrigin -= offsetShift;
+          newCapacity -= offsetShift;
+        }
+      }
+      if (list.__ownerID) {
+        list.size = newCapacity - newOrigin;
+        list._origin = newOrigin;
+        list._capacity = newCapacity;
+        list._level = newLevel;
+        list._root = newRoot;
+        list._tail = newTail;
+        list.__hash = undefined;
+        list.__altered = true;
+        return list;
+      }
+      return makeList(newOrigin, newCapacity, newLevel, newRoot, newTail);
+    }
+    function mergeIntoListWith(list, merger, iterables) {
+      var iters = [];
+      var maxSize = 0;
+      for (var ii = 0; ii < iterables.length; ii++) {
+        var value = iterables[ii];
+        var iter = IndexedIterable(value);
+        if (iter.size > maxSize) {
+          maxSize = iter.size;
+        }
+        if (!isIterable(value)) {
+          iter = iter.map(function(v) {
+            return fromJS(v);
+          });
+        }
+        iters.push(iter);
+      }
+      if (maxSize > list.size) {
+        list = list.setSize(maxSize);
+      }
+      return mergeIntoCollectionWith(list, merger, iters);
+    }
+    function getTailOffset(size) {
+      return size < SIZE ? 0 : (((size - 1) >>> SHIFT) << SHIFT);
+    }
+    createClass(OrderedMap, src_Map__Map);
+    function OrderedMap(value) {
+      return value === null || value === undefined ? emptyOrderedMap() : isOrderedMap(value) ? value : emptyOrderedMap().withMutations(function(map) {
+        var iter = KeyedIterable(value);
+        assertNotInfinite(iter.size);
+        iter.forEach(function(v, k) {
+          return map.set(k, v);
+        });
+      });
+    }
+    OrderedMap.of = function() {
+      return this(arguments);
+    };
+    OrderedMap.prototype.toString = function() {
+      return this.__toString('OrderedMap {', '}');
+    };
+    OrderedMap.prototype.get = function(k, notSetValue) {
+      var index = this._map.get(k);
+      return index !== undefined ? this._list.get(index)[1] : notSetValue;
+    };
+    OrderedMap.prototype.clear = function() {
+      if (this.size === 0) {
+        return this;
+      }
+      if (this.__ownerID) {
+        this.size = 0;
+        this._map.clear();
+        this._list.clear();
+        return this;
+      }
+      return emptyOrderedMap();
+    };
+    OrderedMap.prototype.set = function(k, v) {
+      return updateOrderedMap(this, k, v);
+    };
+    OrderedMap.prototype.remove = function(k) {
+      return updateOrderedMap(this, k, NOT_SET);
+    };
+    OrderedMap.prototype.wasAltered = function() {
+      return this._map.wasAltered() || this._list.wasAltered();
+    };
+    OrderedMap.prototype.__iterate = function(fn, reverse) {
+      var this$0 = this;
+      return this._list.__iterate(function(entry) {
+        return entry && fn(entry[1], entry[0], this$0);
+      }, reverse);
+    };
+    OrderedMap.prototype.__iterator = function(type, reverse) {
+      return this._list.fromEntrySeq().__iterator(type, reverse);
+    };
+    OrderedMap.prototype.__ensureOwner = function(ownerID) {
+      if (ownerID === this.__ownerID) {
+        return this;
+      }
+      var newMap = this._map.__ensureOwner(ownerID);
+      var newList = this._list.__ensureOwner(ownerID);
+      if (!ownerID) {
+        this.__ownerID = ownerID;
+        this._map = newMap;
+        this._list = newList;
+        return this;
+      }
+      return makeOrderedMap(newMap, newList, ownerID, this.__hash);
+    };
+    function isOrderedMap(maybeOrderedMap) {
+      return isMap(maybeOrderedMap) && isOrdered(maybeOrderedMap);
+    }
+    OrderedMap.isOrderedMap = isOrderedMap;
+    OrderedMap.prototype[IS_ORDERED_SENTINEL] = true;
+    OrderedMap.prototype[DELETE] = OrderedMap.prototype.remove;
+    function makeOrderedMap(map, list, ownerID, hash) {
+      var omap = Object.create(OrderedMap.prototype);
+      omap.size = map ? map.size : 0;
+      omap._map = map;
+      omap._list = list;
+      omap.__ownerID = ownerID;
+      omap.__hash = hash;
+      return omap;
+    }
+    var EMPTY_ORDERED_MAP;
+    function emptyOrderedMap() {
+      return EMPTY_ORDERED_MAP || (EMPTY_ORDERED_MAP = makeOrderedMap(emptyMap(), emptyList()));
+    }
+    function updateOrderedMap(omap, k, v) {
+      var map = omap._map;
+      var list = omap._list;
+      var i = map.get(k);
+      var has = i !== undefined;
+      var newMap;
+      var newList;
+      if (v === NOT_SET) {
+        if (!has) {
+          return omap;
+        }
+        if (list.size >= SIZE && list.size >= map.size * 2) {
+          newList = list.filter(function(entry, idx) {
+            return entry !== undefined && i !== idx;
+          });
+          newMap = newList.toKeyedSeq().map(function(entry) {
+            return entry[0];
+          }).flip().toMap();
+          if (omap.__ownerID) {
+            newMap.__ownerID = newList.__ownerID = omap.__ownerID;
+          }
+        } else {
+          newMap = map.remove(k);
+          newList = i === list.size - 1 ? list.pop() : list.set(i, undefined);
+        }
+      } else {
+        if (has) {
+          if (v === list.get(i)[1]) {
+            return omap;
+          }
+          newMap = map;
+          newList = list.set(i, [k, v]);
+        } else {
+          newMap = map.set(k, list.size);
+          newList = list.set(list.size, [k, v]);
+        }
+      }
+      if (omap.__ownerID) {
+        omap.size = newMap.size;
+        omap._map = newMap;
+        omap._list = newList;
+        omap.__hash = undefined;
+        return omap;
+      }
+      return makeOrderedMap(newMap, newList);
+    }
+    createClass(Stack, IndexedCollection);
+    function Stack(value) {
+      return value === null || value === undefined ? emptyStack() : isStack(value) ? value : emptyStack().unshiftAll(value);
+    }
+    Stack.of = function() {
+      return this(arguments);
+    };
+    Stack.prototype.toString = function() {
+      return this.__toString('Stack [', ']');
+    };
+    Stack.prototype.get = function(index, notSetValue) {
+      var head = this._head;
+      index = wrapIndex(this, index);
+      while (head && index--) {
+        head = head.next;
+      }
+      return head ? head.value : notSetValue;
+    };
+    Stack.prototype.peek = function() {
+      return this._head && this._head.value;
+    };
+    Stack.prototype.push = function() {
+      if (arguments.length === 0) {
+        return this;
+      }
+      var newSize = this.size + arguments.length;
+      var head = this._head;
+      for (var ii = arguments.length - 1; ii >= 0; ii--) {
+        head = {
+          value: arguments[ii],
+          next: head
+        };
+      }
+      if (this.__ownerID) {
+        this.size = newSize;
+        this._head = head;
+        this.__hash = undefined;
+        this.__altered = true;
+        return this;
+      }
+      return makeStack(newSize, head);
+    };
+    Stack.prototype.pushAll = function(iter) {
+      iter = IndexedIterable(iter);
+      if (iter.size === 0) {
+        return this;
+      }
+      assertNotInfinite(iter.size);
+      var newSize = this.size;
+      var head = this._head;
+      iter.reverse().forEach(function(value) {
+        newSize++;
+        head = {
+          value: value,
+          next: head
+        };
+      });
+      if (this.__ownerID) {
+        this.size = newSize;
+        this._head = head;
+        this.__hash = undefined;
+        this.__altered = true;
+        return this;
+      }
+      return makeStack(newSize, head);
+    };
+    Stack.prototype.pop = function() {
+      return this.slice(1);
+    };
+    Stack.prototype.unshift = function() {
+      return this.push.apply(this, arguments);
+    };
+    Stack.prototype.unshiftAll = function(iter) {
+      return this.pushAll(iter);
+    };
+    Stack.prototype.shift = function() {
+      return this.pop.apply(this, arguments);
+    };
+    Stack.prototype.clear = function() {
+      if (this.size === 0) {
+        return this;
+      }
+      if (this.__ownerID) {
+        this.size = 0;
+        this._head = undefined;
+        this.__hash = undefined;
+        this.__altered = true;
+        return this;
+      }
+      return emptyStack();
+    };
+    Stack.prototype.slice = function(begin, end) {
+      if (wholeSlice(begin, end, this.size)) {
+        return this;
+      }
+      var resolvedBegin = resolveBegin(begin, this.size);
+      var resolvedEnd = resolveEnd(end, this.size);
+      if (resolvedEnd !== this.size) {
+        return IndexedCollection.prototype.slice.call(this, begin, end);
+      }
+      var newSize = this.size - resolvedBegin;
+      var head = this._head;
+      while (resolvedBegin--) {
+        head = head.next;
+      }
+      if (this.__ownerID) {
+        this.size = newSize;
+        this._head = head;
+        this.__hash = undefined;
+        this.__altered = true;
+        return this;
+      }
+      return makeStack(newSize, head);
+    };
+    Stack.prototype.__ensureOwner = function(ownerID) {
+      if (ownerID === this.__ownerID) {
+        return this;
+      }
+      if (!ownerID) {
+        this.__ownerID = ownerID;
+        this.__altered = false;
+        return this;
+      }
+      return makeStack(this.size, this._head, ownerID, this.__hash);
+    };
+    Stack.prototype.__iterate = function(fn, reverse) {
+      if (reverse) {
+        return this.reverse().__iterate(fn);
+      }
+      var iterations = 0;
+      var node = this._head;
+      while (node) {
+        if (fn(node.value, iterations++, this) === false) {
+          break;
+        }
+        node = node.next;
+      }
+      return iterations;
+    };
+    Stack.prototype.__iterator = function(type, reverse) {
+      if (reverse) {
+        return this.reverse().__iterator(type);
+      }
+      var iterations = 0;
+      var node = this._head;
+      return new src_Iterator__Iterator(function() {
+        if (node) {
+          var value = node.value;
+          node = node.next;
+          return iteratorValue(type, iterations++, value);
+        }
+        return iteratorDone();
+      });
+    };
+    function isStack(maybeStack) {
+      return !!(maybeStack && maybeStack[IS_STACK_SENTINEL]);
+    }
+    Stack.isStack = isStack;
+    var IS_STACK_SENTINEL = '@@__IMMUTABLE_STACK__@@';
+    var StackPrototype = Stack.prototype;
+    StackPrototype[IS_STACK_SENTINEL] = true;
+    StackPrototype.withMutations = MapPrototype.withMutations;
+    StackPrototype.asMutable = MapPrototype.asMutable;
+    StackPrototype.asImmutable = MapPrototype.asImmutable;
+    StackPrototype.wasAltered = MapPrototype.wasAltered;
+    function makeStack(size, head, ownerID, hash) {
+      var map = Object.create(StackPrototype);
+      map.size = size;
+      map._head = head;
+      map.__ownerID = ownerID;
+      map.__hash = hash;
+      map.__altered = false;
+      return map;
+    }
+    var EMPTY_STACK;
+    function emptyStack() {
+      return EMPTY_STACK || (EMPTY_STACK = makeStack(0));
+    }
+    createClass(src_Set__Set, SetCollection);
+    function src_Set__Set(value) {
+      return value === null || value === undefined ? emptySet() : isSet(value) && !isOrdered(value) ? value : emptySet().withMutations(function(set) {
+        var iter = SetIterable(value);
+        assertNotInfinite(iter.size);
+        iter.forEach(function(v) {
+          return set.add(v);
+        });
+      });
+    }
+    src_Set__Set.of = function() {
+      return this(arguments);
+    };
+    src_Set__Set.fromKeys = function(value) {
+      return this(KeyedIterable(value).keySeq());
+    };
+    src_Set__Set.prototype.toString = function() {
+      return this.__toString('Set {', '}');
+    };
+    src_Set__Set.prototype.has = function(value) {
+      return this._map.has(value);
+    };
+    src_Set__Set.prototype.add = function(value) {
+      return updateSet(this, this._map.set(value, true));
+    };
+    src_Set__Set.prototype.remove = function(value) {
+      return updateSet(this, this._map.remove(value));
+    };
+    src_Set__Set.prototype.clear = function() {
+      return updateSet(this, this._map.clear());
+    };
+    src_Set__Set.prototype.union = function() {
+      var iters = SLICE$0.call(arguments, 0);
+      iters = iters.filter(function(x) {
+        return x.size !== 0;
+      });
+      if (iters.length === 0) {
+        return this;
+      }
+      if (this.size === 0 && !this.__ownerID && iters.length === 1) {
+        return this.constructor(iters[0]);
+      }
+      return this.withMutations(function(set) {
+        for (var ii = 0; ii < iters.length; ii++) {
+          SetIterable(iters[ii]).forEach(function(value) {
+            return set.add(value);
+          });
+        }
+      });
+    };
+    src_Set__Set.prototype.intersect = function() {
+      var iters = SLICE$0.call(arguments, 0);
+      if (iters.length === 0) {
+        return this;
+      }
+      iters = iters.map(function(iter) {
+        return SetIterable(iter);
+      });
+      var originalSet = this;
+      return this.withMutations(function(set) {
+        originalSet.forEach(function(value) {
+          if (!iters.every(function(iter) {
+            return iter.includes(value);
+          })) {
+            set.remove(value);
+          }
+        });
+      });
+    };
+    src_Set__Set.prototype.subtract = function() {
+      var iters = SLICE$0.call(arguments, 0);
+      if (iters.length === 0) {
+        return this;
+      }
+      iters = iters.map(function(iter) {
+        return SetIterable(iter);
+      });
+      var originalSet = this;
+      return this.withMutations(function(set) {
+        originalSet.forEach(function(value) {
+          if (iters.some(function(iter) {
+            return iter.includes(value);
+          })) {
+            set.remove(value);
+          }
+        });
+      });
+    };
+    src_Set__Set.prototype.merge = function() {
+      return this.union.apply(this, arguments);
+    };
+    src_Set__Set.prototype.mergeWith = function(merger) {
+      var iters = SLICE$0.call(arguments, 1);
+      return this.union.apply(this, iters);
+    };
+    src_Set__Set.prototype.sort = function(comparator) {
+      return OrderedSet(sortFactory(this, comparator));
+    };
+    src_Set__Set.prototype.sortBy = function(mapper, comparator) {
+      return OrderedSet(sortFactory(this, comparator, mapper));
+    };
+    src_Set__Set.prototype.wasAltered = function() {
+      return this._map.wasAltered();
+    };
+    src_Set__Set.prototype.__iterate = function(fn, reverse) {
+      var this$0 = this;
+      return this._map.__iterate(function(_, k) {
+        return fn(k, k, this$0);
+      }, reverse);
+    };
+    src_Set__Set.prototype.__iterator = function(type, reverse) {
+      return this._map.map(function(_, k) {
+        return k;
+      }).__iterator(type, reverse);
+    };
+    src_Set__Set.prototype.__ensureOwner = function(ownerID) {
+      if (ownerID === this.__ownerID) {
+        return this;
+      }
+      var newMap = this._map.__ensureOwner(ownerID);
+      if (!ownerID) {
+        this.__ownerID = ownerID;
+        this._map = newMap;
+        return this;
+      }
+      return this.__make(newMap, ownerID);
+    };
+    function isSet(maybeSet) {
+      return !!(maybeSet && maybeSet[IS_SET_SENTINEL]);
+    }
+    src_Set__Set.isSet = isSet;
+    var IS_SET_SENTINEL = '@@__IMMUTABLE_SET__@@';
+    var SetPrototype = src_Set__Set.prototype;
+    SetPrototype[IS_SET_SENTINEL] = true;
+    SetPrototype[DELETE] = SetPrototype.remove;
+    SetPrototype.mergeDeep = SetPrototype.merge;
+    SetPrototype.mergeDeepWith = SetPrototype.mergeWith;
+    SetPrototype.withMutations = MapPrototype.withMutations;
+    SetPrototype.asMutable = MapPrototype.asMutable;
+    SetPrototype.asImmutable = MapPrototype.asImmutable;
+    SetPrototype.__empty = emptySet;
+    SetPrototype.__make = makeSet;
+    function updateSet(set, newMap) {
+      if (set.__ownerID) {
+        set.size = newMap.size;
+        set._map = newMap;
+        return set;
+      }
+      return newMap === set._map ? set : newMap.size === 0 ? set.__empty() : set.__make(newMap);
+    }
+    function makeSet(map, ownerID) {
+      var set = Object.create(SetPrototype);
+      set.size = map ? map.size : 0;
+      set._map = map;
+      set.__ownerID = ownerID;
+      return set;
+    }
+    var EMPTY_SET;
+    function emptySet() {
+      return EMPTY_SET || (EMPTY_SET = makeSet(emptyMap()));
+    }
+    createClass(OrderedSet, src_Set__Set);
+    function OrderedSet(value) {
+      return value === null || value === undefined ? emptyOrderedSet() : isOrderedSet(value) ? value : emptyOrderedSet().withMutations(function(set) {
+        var iter = SetIterable(value);
+        assertNotInfinite(iter.size);
+        iter.forEach(function(v) {
+          return set.add(v);
+        });
+      });
+    }
+    OrderedSet.of = function() {
+      return this(arguments);
+    };
+    OrderedSet.fromKeys = function(value) {
+      return this(KeyedIterable(value).keySeq());
+    };
+    OrderedSet.prototype.toString = function() {
+      return this.__toString('OrderedSet {', '}');
+    };
+    function isOrderedSet(maybeOrderedSet) {
+      return isSet(maybeOrderedSet) && isOrdered(maybeOrderedSet);
+    }
+    OrderedSet.isOrderedSet = isOrderedSet;
+    var OrderedSetPrototype = OrderedSet.prototype;
+    OrderedSetPrototype[IS_ORDERED_SENTINEL] = true;
+    OrderedSetPrototype.__empty = emptyOrderedSet;
+    OrderedSetPrototype.__make = makeOrderedSet;
+    function makeOrderedSet(map, ownerID) {
+      var set = Object.create(OrderedSetPrototype);
+      set.size = map ? map.size : 0;
+      set._map = map;
+      set.__ownerID = ownerID;
+      return set;
+    }
+    var EMPTY_ORDERED_SET;
+    function emptyOrderedSet() {
+      return EMPTY_ORDERED_SET || (EMPTY_ORDERED_SET = makeOrderedSet(emptyOrderedMap()));
+    }
+    createClass(Record, KeyedCollection);
+    function Record(defaultValues, name) {
+      var hasInitialized;
+      var RecordType = function Record(values) {
+        if (values instanceof RecordType) {
+          return values;
+        }
+        if (!(this instanceof RecordType)) {
+          return new RecordType(values);
+        }
+        if (!hasInitialized) {
+          hasInitialized = true;
+          var keys = Object.keys(defaultValues);
+          setProps(RecordTypePrototype, keys);
+          RecordTypePrototype.size = keys.length;
+          RecordTypePrototype._name = name;
+          RecordTypePrototype._keys = keys;
+          RecordTypePrototype._defaultValues = defaultValues;
+        }
+        this._map = src_Map__Map(values);
+      };
+      var RecordTypePrototype = RecordType.prototype = Object.create(RecordPrototype);
+      RecordTypePrototype.constructor = RecordType;
+      return RecordType;
+    }
+    Record.prototype.toString = function() {
+      return this.__toString(recordName(this) + ' {', '}');
+    };
+    Record.prototype.has = function(k) {
+      return this._defaultValues.hasOwnProperty(k);
+    };
+    Record.prototype.get = function(k, notSetValue) {
+      if (!this.has(k)) {
+        return notSetValue;
+      }
+      var defaultVal = this._defaultValues[k];
+      return this._map ? this._map.get(k, defaultVal) : defaultVal;
+    };
+    Record.prototype.clear = function() {
+      if (this.__ownerID) {
+        this._map && this._map.clear();
+        return this;
+      }
+      var RecordType = this.constructor;
+      return RecordType._empty || (RecordType._empty = makeRecord(this, emptyMap()));
+    };
+    Record.prototype.set = function(k, v) {
+      if (!this.has(k)) {
+        throw new Error('Cannot set unknown key "' + k + '" on ' + recordName(this));
+      }
+      var newMap = this._map && this._map.set(k, v);
+      if (this.__ownerID || newMap === this._map) {
+        return this;
+      }
+      return makeRecord(this, newMap);
+    };
+    Record.prototype.remove = function(k) {
+      if (!this.has(k)) {
+        return this;
+      }
+      var newMap = this._map && this._map.remove(k);
+      if (this.__ownerID || newMap === this._map) {
+        return this;
+      }
+      return makeRecord(this, newMap);
+    };
+    Record.prototype.wasAltered = function() {
+      return this._map.wasAltered();
+    };
+    Record.prototype.__iterator = function(type, reverse) {
+      var this$0 = this;
+      return KeyedIterable(this._defaultValues).map(function(_, k) {
+        return this$0.get(k);
+      }).__iterator(type, reverse);
+    };
+    Record.prototype.__iterate = function(fn, reverse) {
+      var this$0 = this;
+      return KeyedIterable(this._defaultValues).map(function(_, k) {
+        return this$0.get(k);
+      }).__iterate(fn, reverse);
+    };
+    Record.prototype.__ensureOwner = function(ownerID) {
+      if (ownerID === this.__ownerID) {
+        return this;
+      }
+      var newMap = this._map && this._map.__ensureOwner(ownerID);
+      if (!ownerID) {
+        this.__ownerID = ownerID;
+        this._map = newMap;
+        return this;
+      }
+      return makeRecord(this, newMap, ownerID);
+    };
+    var RecordPrototype = Record.prototype;
+    RecordPrototype[DELETE] = RecordPrototype.remove;
+    RecordPrototype.deleteIn = RecordPrototype.removeIn = MapPrototype.removeIn;
+    RecordPrototype.merge = MapPrototype.merge;
+    RecordPrototype.mergeWith = MapPrototype.mergeWith;
+    RecordPrototype.mergeIn = MapPrototype.mergeIn;
+    RecordPrototype.mergeDeep = MapPrototype.mergeDeep;
+    RecordPrototype.mergeDeepWith = MapPrototype.mergeDeepWith;
+    RecordPrototype.mergeDeepIn = MapPrototype.mergeDeepIn;
+    RecordPrototype.setIn = MapPrototype.setIn;
+    RecordPrototype.update = MapPrototype.update;
+    RecordPrototype.updateIn = MapPrototype.updateIn;
+    RecordPrototype.withMutations = MapPrototype.withMutations;
+    RecordPrototype.asMutable = MapPrototype.asMutable;
+    RecordPrototype.asImmutable = MapPrototype.asImmutable;
+    function makeRecord(likeRecord, map, ownerID) {
+      var record = Object.create(Object.getPrototypeOf(likeRecord));
+      record._map = map;
+      record.__ownerID = ownerID;
+      return record;
+    }
+    function recordName(record) {
+      return record._name || record.constructor.name || 'Record';
+    }
+    function setProps(prototype, names) {
+      try {
+        names.forEach(setProp.bind(undefined, prototype));
+      } catch (error) {}
+    }
+    function setProp(prototype, name) {
+      Object.defineProperty(prototype, name, {
+        get: function() {
+          return this.get(name);
+        },
+        set: function(value) {
+          invariant(this.__ownerID, 'Cannot set on an immutable record.');
+          this.set(name, value);
+        }
+      });
+    }
+    function deepEqual(a, b) {
+      if (a === b) {
+        return true;
+      }
+      if (!isIterable(b) || a.size !== undefined && b.size !== undefined && a.size !== b.size || a.__hash !== undefined && b.__hash !== undefined && a.__hash !== b.__hash || isKeyed(a) !== isKeyed(b) || isIndexed(a) !== isIndexed(b) || isOrdered(a) !== isOrdered(b)) {
+        return false;
+      }
+      if (a.size === 0 && b.size === 0) {
+        return true;
+      }
+      var notAssociative = !isAssociative(a);
+      if (isOrdered(a)) {
+        var entries = a.entries();
+        return b.every(function(v, k) {
+          var entry = entries.next().value;
+          return entry && is(entry[1], v) && (notAssociative || is(entry[0], k));
+        }) && entries.next().done;
+      }
+      var flipped = false;
+      if (a.size === undefined) {
+        if (b.size === undefined) {
+          if (typeof a.cacheResult === 'function') {
+            a.cacheResult();
+          }
+        } else {
+          flipped = true;
+          var _ = a;
+          a = b;
+          b = _;
+        }
+      }
+      var allEqual = true;
+      var bSize = b.__iterate(function(v, k) {
+        if (notAssociative ? !a.has(v) : flipped ? !is(v, a.get(k, NOT_SET)) : !is(a.get(k, NOT_SET), v)) {
+          allEqual = false;
+          return false;
+        }
+      });
+      return allEqual && a.size === bSize;
+    }
+    createClass(Range, IndexedSeq);
+    function Range(start, end, step) {
+      if (!(this instanceof Range)) {
+        return new Range(start, end, step);
+      }
+      invariant(step !== 0, 'Cannot step a Range by 0');
+      start = start || 0;
+      if (end === undefined) {
+        end = Infinity;
+      }
+      step = step === undefined ? 1 : Math.abs(step);
+      if (end < start) {
+        step = -step;
+      }
+      this._start = start;
+      this._end = end;
+      this._step = step;
+      this.size = Math.max(0, Math.ceil((end - start) / step - 1) + 1);
+      if (this.size === 0) {
+        if (EMPTY_RANGE) {
+          return EMPTY_RANGE;
+        }
+        EMPTY_RANGE = this;
+      }
+    }
+    Range.prototype.toString = function() {
+      if (this.size === 0) {
+        return 'Range []';
+      }
+      return 'Range [ ' + this._start + '...' + this._end + (this._step > 1 ? ' by ' + this._step : '') + ' ]';
+    };
+    Range.prototype.get = function(index, notSetValue) {
+      return this.has(index) ? this._start + wrapIndex(this, index) * this._step : notSetValue;
+    };
+    Range.prototype.includes = function(searchValue) {
+      var possibleIndex = (searchValue - this._start) / this._step;
+      return possibleIndex >= 0 && possibleIndex < this.size && possibleIndex === Math.floor(possibleIndex);
+    };
+    Range.prototype.slice = function(begin, end) {
+      if (wholeSlice(begin, end, this.size)) {
+        return this;
+      }
+      begin = resolveBegin(begin, this.size);
+      end = resolveEnd(end, this.size);
+      if (end <= begin) {
+        return new Range(0, 0);
+      }
+      return new Range(this.get(begin, this._end), this.get(end, this._end), this._step);
+    };
+    Range.prototype.indexOf = function(searchValue) {
+      var offsetValue = searchValue - this._start;
+      if (offsetValue % this._step === 0) {
+        var index = offsetValue / this._step;
+        if (index >= 0 && index < this.size) {
+          return index;
+        }
+      }
+      return -1;
+    };
+    Range.prototype.lastIndexOf = function(searchValue) {
+      return this.indexOf(searchValue);
+    };
+    Range.prototype.__iterate = function(fn, reverse) {
+      var maxIndex = this.size - 1;
+      var step = this._step;
+      var value = reverse ? this._start + maxIndex * step : this._start;
+      for (var ii = 0; ii <= maxIndex; ii++) {
+        if (fn(value, ii, this) === false) {
+          return ii + 1;
+        }
+        value += reverse ? -step : step;
+      }
+      return ii;
+    };
+    Range.prototype.__iterator = function(type, reverse) {
+      var maxIndex = this.size - 1;
+      var step = this._step;
+      var value = reverse ? this._start + maxIndex * step : this._start;
+      var ii = 0;
+      return new src_Iterator__Iterator(function() {
+        var v = value;
+        value += reverse ? -step : step;
+        return ii > maxIndex ? iteratorDone() : iteratorValue(type, ii++, v);
+      });
+    };
+    Range.prototype.equals = function(other) {
+      return other instanceof Range ? this._start === other._start && this._end === other._end && this._step === other._step : deepEqual(this, other);
+    };
+    var EMPTY_RANGE;
+    createClass(Repeat, IndexedSeq);
+    function Repeat(value, times) {
+      if (!(this instanceof Repeat)) {
+        return new Repeat(value, times);
+      }
+      this._value = value;
+      this.size = times === undefined ? Infinity : Math.max(0, times);
+      if (this.size === 0) {
+        if (EMPTY_REPEAT) {
+          return EMPTY_REPEAT;
+        }
+        EMPTY_REPEAT = this;
+      }
+    }
+    Repeat.prototype.toString = function() {
+      if (this.size === 0) {
+        return 'Repeat []';
+      }
+      return 'Repeat [ ' + this._value + ' ' + this.size + ' times ]';
+    };
+    Repeat.prototype.get = function(index, notSetValue) {
+      return this.has(index) ? this._value : notSetValue;
+    };
+    Repeat.prototype.includes = function(searchValue) {
+      return is(this._value, searchValue);
+    };
+    Repeat.prototype.slice = function(begin, end) {
+      var size = this.size;
+      return wholeSlice(begin, end, size) ? this : new Repeat(this._value, resolveEnd(end, size) - resolveBegin(begin, size));
+    };
+    Repeat.prototype.reverse = function() {
+      return this;
+    };
+    Repeat.prototype.indexOf = function(searchValue) {
+      if (is(this._value, searchValue)) {
+        return 0;
+      }
+      return -1;
+    };
+    Repeat.prototype.lastIndexOf = function(searchValue) {
+      if (is(this._value, searchValue)) {
+        return this.size;
+      }
+      return -1;
+    };
+    Repeat.prototype.__iterate = function(fn, reverse) {
+      for (var ii = 0; ii < this.size; ii++) {
+        if (fn(this._value, ii, this) === false) {
+          return ii + 1;
+        }
+      }
+      return ii;
+    };
+    Repeat.prototype.__iterator = function(type, reverse) {
+      var this$0 = this;
+      var ii = 0;
+      return new src_Iterator__Iterator(function() {
+        return ii < this$0.size ? iteratorValue(type, ii++, this$0._value) : iteratorDone();
+      });
+    };
+    Repeat.prototype.equals = function(other) {
+      return other instanceof Repeat ? is(this._value, other._value) : deepEqual(other);
+    };
+    var EMPTY_REPEAT;
+    function mixin(ctor, methods) {
+      var keyCopier = function(key) {
+        ctor.prototype[key] = methods[key];
+      };
+      Object.keys(methods).forEach(keyCopier);
+      Object.getOwnPropertySymbols && Object.getOwnPropertySymbols(methods).forEach(keyCopier);
+      return ctor;
+    }
+    Iterable.Iterator = src_Iterator__Iterator;
+    mixin(Iterable, {
+      toArray: function() {
+        assertNotInfinite(this.size);
+        var array = new Array(this.size || 0);
+        this.valueSeq().__iterate(function(v, i) {
+          array[i] = v;
+        });
+        return array;
+      },
+      toIndexedSeq: function() {
+        return new ToIndexedSequence(this);
+      },
+      toJS: function() {
+        return this.toSeq().map(function(value) {
+          return value && typeof value.toJS === 'function' ? value.toJS() : value;
+        }).__toJS();
+      },
+      toJSON: function() {
+        return this.toSeq().map(function(value) {
+          return value && typeof value.toJSON === 'function' ? value.toJSON() : value;
+        }).__toJS();
+      },
+      toKeyedSeq: function() {
+        return new ToKeyedSequence(this, true);
+      },
+      toMap: function() {
+        return src_Map__Map(this.toKeyedSeq());
+      },
+      toObject: function() {
+        assertNotInfinite(this.size);
+        var object = {};
+        this.__iterate(function(v, k) {
+          object[k] = v;
+        });
+        return object;
+      },
+      toOrderedMap: function() {
+        return OrderedMap(this.toKeyedSeq());
+      },
+      toOrderedSet: function() {
+        return OrderedSet(isKeyed(this) ? this.valueSeq() : this);
+      },
+      toSet: function() {
+        return src_Set__Set(isKeyed(this) ? this.valueSeq() : this);
+      },
+      toSetSeq: function() {
+        return new ToSetSequence(this);
+      },
+      toSeq: function() {
+        return isIndexed(this) ? this.toIndexedSeq() : isKeyed(this) ? this.toKeyedSeq() : this.toSetSeq();
+      },
+      toStack: function() {
+        return Stack(isKeyed(this) ? this.valueSeq() : this);
+      },
+      toList: function() {
+        return List(isKeyed(this) ? this.valueSeq() : this);
+      },
+      toString: function() {
+        return '[Iterable]';
+      },
+      __toString: function(head, tail) {
+        if (this.size === 0) {
+          return head + tail;
+        }
+        return head + ' ' + this.toSeq().map(this.__toStringMapper).join(', ') + ' ' + tail;
+      },
+      concat: function() {
+        var values = SLICE$0.call(arguments, 0);
+        return reify(this, concatFactory(this, values));
+      },
+      includes: function(searchValue) {
+        return this.some(function(value) {
+          return is(value, searchValue);
+        });
+      },
+      entries: function() {
+        return this.__iterator(ITERATE_ENTRIES);
+      },
+      every: function(predicate, context) {
+        assertNotInfinite(this.size);
+        var returnValue = true;
+        this.__iterate(function(v, k, c) {
+          if (!predicate.call(context, v, k, c)) {
+            returnValue = false;
+            return false;
+          }
+        });
+        return returnValue;
+      },
+      filter: function(predicate, context) {
+        return reify(this, filterFactory(this, predicate, context, true));
+      },
+      find: function(predicate, context, notSetValue) {
+        var entry = this.findEntry(predicate, context);
+        return entry ? entry[1] : notSetValue;
+      },
+      findEntry: function(predicate, context) {
+        var found;
+        this.__iterate(function(v, k, c) {
+          if (predicate.call(context, v, k, c)) {
+            found = [k, v];
+            return false;
+          }
+        });
+        return found;
+      },
+      findLastEntry: function(predicate, context) {
+        return this.toSeq().reverse().findEntry(predicate, context);
+      },
+      forEach: function(sideEffect, context) {
+        assertNotInfinite(this.size);
+        return this.__iterate(context ? sideEffect.bind(context) : sideEffect);
+      },
+      join: function(separator) {
+        assertNotInfinite(this.size);
+        separator = separator !== undefined ? '' + separator : ',';
+        var joined = '';
+        var isFirst = true;
+        this.__iterate(function(v) {
+          isFirst ? (isFirst = false) : (joined += separator);
+          joined += v !== null && v !== undefined ? v.toString() : '';
+        });
+        return joined;
+      },
+      keys: function() {
+        return this.__iterator(ITERATE_KEYS);
+      },
+      map: function(mapper, context) {
+        return reify(this, mapFactory(this, mapper, context));
+      },
+      reduce: function(reducer, initialReduction, context) {
+        assertNotInfinite(this.size);
+        var reduction;
+        var useFirst;
+        if (arguments.length < 2) {
+          useFirst = true;
+        } else {
+          reduction = initialReduction;
+        }
+        this.__iterate(function(v, k, c) {
+          if (useFirst) {
+            useFirst = false;
+            reduction = v;
+          } else {
+            reduction = reducer.call(context, reduction, v, k, c);
+          }
+        });
+        return reduction;
+      },
+      reduceRight: function(reducer, initialReduction, context) {
+        var reversed = this.toKeyedSeq().reverse();
+        return reversed.reduce.apply(reversed, arguments);
+      },
+      reverse: function() {
+        return reify(this, reverseFactory(this, true));
+      },
+      slice: function(begin, end) {
+        return reify(this, sliceFactory(this, begin, end, true));
+      },
+      some: function(predicate, context) {
+        return !this.every(not(predicate), context);
+      },
+      sort: function(comparator) {
+        return reify(this, sortFactory(this, comparator));
+      },
+      values: function() {
+        return this.__iterator(ITERATE_VALUES);
+      },
+      butLast: function() {
+        return this.slice(0, -1);
+      },
+      isEmpty: function() {
+        return this.size !== undefined ? this.size === 0 : !this.some(function() {
+          return true;
+        });
+      },
+      count: function(predicate, context) {
+        return ensureSize(predicate ? this.toSeq().filter(predicate, context) : this);
+      },
+      countBy: function(grouper, context) {
+        return countByFactory(this, grouper, context);
+      },
+      equals: function(other) {
+        return deepEqual(this, other);
+      },
+      entrySeq: function() {
+        var iterable = this;
+        if (iterable._cache) {
+          return new ArraySeq(iterable._cache);
+        }
+        var entriesSequence = iterable.toSeq().map(entryMapper).toIndexedSeq();
+        entriesSequence.fromEntrySeq = function() {
+          return iterable.toSeq();
+        };
+        return entriesSequence;
+      },
+      filterNot: function(predicate, context) {
+        return this.filter(not(predicate), context);
+      },
+      findLast: function(predicate, context, notSetValue) {
+        return this.toKeyedSeq().reverse().find(predicate, context, notSetValue);
+      },
+      first: function() {
+        return this.find(returnTrue);
+      },
+      flatMap: function(mapper, context) {
+        return reify(this, flatMapFactory(this, mapper, context));
+      },
+      flatten: function(depth) {
+        return reify(this, flattenFactory(this, depth, true));
+      },
+      fromEntrySeq: function() {
+        return new FromEntriesSequence(this);
+      },
+      get: function(searchKey, notSetValue) {
+        return this.find(function(_, key) {
+          return is(key, searchKey);
+        }, undefined, notSetValue);
+      },
+      getIn: function(searchKeyPath, notSetValue) {
+        var nested = this;
+        var iter = forceIterator(searchKeyPath);
+        var step;
+        while (!(step = iter.next()).done) {
+          var key = step.value;
+          nested = nested && nested.get ? nested.get(key, NOT_SET) : NOT_SET;
+          if (nested === NOT_SET) {
+            return notSetValue;
+          }
+        }
+        return nested;
+      },
+      groupBy: function(grouper, context) {
+        return groupByFactory(this, grouper, context);
+      },
+      has: function(searchKey) {
+        return this.get(searchKey, NOT_SET) !== NOT_SET;
+      },
+      hasIn: function(searchKeyPath) {
+        return this.getIn(searchKeyPath, NOT_SET) !== NOT_SET;
+      },
+      isSubset: function(iter) {
+        iter = typeof iter.includes === 'function' ? iter : Iterable(iter);
+        return this.every(function(value) {
+          return iter.includes(value);
+        });
+      },
+      isSuperset: function(iter) {
+        iter = typeof iter.isSubset === 'function' ? iter : Iterable(iter);
+        return iter.isSubset(this);
+      },
+      keySeq: function() {
+        return this.toSeq().map(keyMapper).toIndexedSeq();
+      },
+      last: function() {
+        return this.toSeq().reverse().first();
+      },
+      max: function(comparator) {
+        return maxFactory(this, comparator);
+      },
+      maxBy: function(mapper, comparator) {
+        return maxFactory(this, comparator, mapper);
+      },
+      min: function(comparator) {
+        return maxFactory(this, comparator ? neg(comparator) : defaultNegComparator);
+      },
+      minBy: function(mapper, comparator) {
+        return maxFactory(this, comparator ? neg(comparator) : defaultNegComparator, mapper);
+      },
+      rest: function() {
+        return this.slice(1);
+      },
+      skip: function(amount) {
+        return this.slice(Math.max(0, amount));
+      },
+      skipLast: function(amount) {
+        return reify(this, this.toSeq().reverse().skip(amount).reverse());
+      },
+      skipWhile: function(predicate, context) {
+        return reify(this, skipWhileFactory(this, predicate, context, true));
+      },
+      skipUntil: function(predicate, context) {
+        return this.skipWhile(not(predicate), context);
+      },
+      sortBy: function(mapper, comparator) {
+        return reify(this, sortFactory(this, comparator, mapper));
+      },
+      take: function(amount) {
+        return this.slice(0, Math.max(0, amount));
+      },
+      takeLast: function(amount) {
+        return reify(this, this.toSeq().reverse().take(amount).reverse());
+      },
+      takeWhile: function(predicate, context) {
+        return reify(this, takeWhileFactory(this, predicate, context));
+      },
+      takeUntil: function(predicate, context) {
+        return this.takeWhile(not(predicate), context);
+      },
+      valueSeq: function() {
+        return this.toIndexedSeq();
+      },
+      hashCode: function() {
+        return this.__hash || (this.__hash = hashIterable(this));
+      }
+    });
+    var IterablePrototype = Iterable.prototype;
+    IterablePrototype[IS_ITERABLE_SENTINEL] = true;
+    IterablePrototype[ITERATOR_SYMBOL] = IterablePrototype.values;
+    IterablePrototype.__toJS = IterablePrototype.toArray;
+    IterablePrototype.__toStringMapper = quoteString;
+    IterablePrototype.inspect = IterablePrototype.toSource = function() {
+      return this.toString();
+    };
+    IterablePrototype.chain = IterablePrototype.flatMap;
+    IterablePrototype.contains = IterablePrototype.includes;
+    (function() {
+      try {
+        Object.defineProperty(IterablePrototype, 'length', {get: function() {
+            if (!Iterable.noLengthWarning) {
+              var stack;
+              try {
+                throw new Error();
+              } catch (error) {
+                stack = error.stack;
+              }
+              if (stack.indexOf('_wrapObject') === -1) {
+                console && console.warn && console.warn('iterable.length has been deprecated, ' + 'use iterable.size or iterable.count(). ' + 'This warning will become a silent error in a future version. ' + stack);
+                return this.size;
+              }
+            }
+          }});
+      } catch (e) {}
+    })();
+    mixin(KeyedIterable, {
+      flip: function() {
+        return reify(this, flipFactory(this));
+      },
+      findKey: function(predicate, context) {
+        var entry = this.findEntry(predicate, context);
+        return entry && entry[0];
+      },
+      findLastKey: function(predicate, context) {
+        return this.toSeq().reverse().findKey(predicate, context);
+      },
+      keyOf: function(searchValue) {
+        return this.findKey(function(value) {
+          return is(value, searchValue);
+        });
+      },
+      lastKeyOf: function(searchValue) {
+        return this.findLastKey(function(value) {
+          return is(value, searchValue);
+        });
+      },
+      mapEntries: function(mapper, context) {
+        var this$0 = this;
+        var iterations = 0;
+        return reify(this, this.toSeq().map(function(v, k) {
+          return mapper.call(context, [k, v], iterations++, this$0);
+        }).fromEntrySeq());
+      },
+      mapKeys: function(mapper, context) {
+        var this$0 = this;
+        return reify(this, this.toSeq().flip().map(function(k, v) {
+          return mapper.call(context, k, v, this$0);
+        }).flip());
+      }
+    });
+    var KeyedIterablePrototype = KeyedIterable.prototype;
+    KeyedIterablePrototype[IS_KEYED_SENTINEL] = true;
+    KeyedIterablePrototype[ITERATOR_SYMBOL] = IterablePrototype.entries;
+    KeyedIterablePrototype.__toJS = IterablePrototype.toObject;
+    KeyedIterablePrototype.__toStringMapper = function(v, k) {
+      return JSON.stringify(k) + ': ' + quoteString(v);
+    };
+    mixin(IndexedIterable, {
+      toKeyedSeq: function() {
+        return new ToKeyedSequence(this, false);
+      },
+      filter: function(predicate, context) {
+        return reify(this, filterFactory(this, predicate, context, false));
+      },
+      findIndex: function(predicate, context) {
+        var entry = this.findEntry(predicate, context);
+        return entry ? entry[0] : -1;
+      },
+      indexOf: function(searchValue) {
+        var key = this.toKeyedSeq().keyOf(searchValue);
+        return key === undefined ? -1 : key;
+      },
+      lastIndexOf: function(searchValue) {
+        return this.toSeq().reverse().indexOf(searchValue);
+      },
+      reverse: function() {
+        return reify(this, reverseFactory(this, false));
+      },
+      slice: function(begin, end) {
+        return reify(this, sliceFactory(this, begin, end, false));
+      },
+      splice: function(index, removeNum) {
+        var numArgs = arguments.length;
+        removeNum = Math.max(removeNum | 0, 0);
+        if (numArgs === 0 || (numArgs === 2 && !removeNum)) {
+          return this;
+        }
+        index = resolveBegin(index, index < 0 ? this.count() : this.size);
+        var spliced = this.slice(0, index);
+        return reify(this, numArgs === 1 ? spliced : spliced.concat(arrCopy(arguments, 2), this.slice(index + removeNum)));
+      },
+      findLastIndex: function(predicate, context) {
+        var key = this.toKeyedSeq().findLastKey(predicate, context);
+        return key === undefined ? -1 : key;
+      },
+      first: function() {
+        return this.get(0);
+      },
+      flatten: function(depth) {
+        return reify(this, flattenFactory(this, depth, false));
+      },
+      get: function(index, notSetValue) {
+        index = wrapIndex(this, index);
+        return (index < 0 || (this.size === Infinity || (this.size !== undefined && index > this.size))) ? notSetValue : this.find(function(_, key) {
+          return key === index;
+        }, undefined, notSetValue);
+      },
+      has: function(index) {
+        index = wrapIndex(this, index);
+        return index >= 0 && (this.size !== undefined ? this.size === Infinity || index < this.size : this.indexOf(index) !== -1);
+      },
+      interpose: function(separator) {
+        return reify(this, interposeFactory(this, separator));
+      },
+      interleave: function() {
+        var iterables = [this].concat(arrCopy(arguments));
+        var zipped = zipWithFactory(this.toSeq(), IndexedSeq.of, iterables);
+        var interleaved = zipped.flatten(true);
+        if (zipped.size) {
+          interleaved.size = zipped.size * iterables.length;
+        }
+        return reify(this, interleaved);
+      },
+      last: function() {
+        return this.get(-1);
+      },
+      skipWhile: function(predicate, context) {
+        return reify(this, skipWhileFactory(this, predicate, context, false));
+      },
+      zip: function() {
+        var iterables = [this].concat(arrCopy(arguments));
+        return reify(this, zipWithFactory(this, defaultZipper, iterables));
+      },
+      zipWith: function(zipper) {
+        var iterables = arrCopy(arguments);
+        iterables[0] = this;
+        return reify(this, zipWithFactory(this, zipper, iterables));
+      }
+    });
+    IndexedIterable.prototype[IS_INDEXED_SENTINEL] = true;
+    IndexedIterable.prototype[IS_ORDERED_SENTINEL] = true;
+    mixin(SetIterable, {
+      get: function(value, notSetValue) {
+        return this.has(value) ? value : notSetValue;
+      },
+      includes: function(value) {
+        return this.has(value);
+      },
+      keySeq: function() {
+        return this.valueSeq();
+      }
+    });
+    SetIterable.prototype.has = IterablePrototype.includes;
+    mixin(KeyedSeq, KeyedIterable.prototype);
+    mixin(IndexedSeq, IndexedIterable.prototype);
+    mixin(SetSeq, SetIterable.prototype);
+    mixin(KeyedCollection, KeyedIterable.prototype);
+    mixin(IndexedCollection, IndexedIterable.prototype);
+    mixin(SetCollection, SetIterable.prototype);
+    function keyMapper(v, k) {
+      return k;
+    }
+    function entryMapper(v, k) {
+      return [k, v];
+    }
+    function not(predicate) {
+      return function() {
+        return !predicate.apply(this, arguments);
+      };
+    }
+    function neg(predicate) {
+      return function() {
+        return -predicate.apply(this, arguments);
+      };
+    }
+    function quoteString(value) {
+      return typeof value === 'string' ? JSON.stringify(value) : value;
+    }
+    function defaultZipper() {
+      return arrCopy(arguments);
+    }
+    function defaultNegComparator(a, b) {
+      return a < b ? 1 : a > b ? -1 : 0;
+    }
+    function hashIterable(iterable) {
+      if (iterable.size === Infinity) {
+        return 0;
+      }
+      var ordered = isOrdered(iterable);
+      var keyed = isKeyed(iterable);
+      var h = ordered ? 1 : 0;
+      var size = iterable.__iterate(keyed ? ordered ? function(v, k) {
+        h = 31 * h + hashMerge(hash(v), hash(k)) | 0;
+      } : function(v, k) {
+        h = h + hashMerge(hash(v), hash(k)) | 0;
+      } : ordered ? function(v) {
+        h = 31 * h + hash(v) | 0;
+      } : function(v) {
+        h = h + hash(v) | 0;
+      });
+      return murmurHashOfSize(size, h);
+    }
+    function murmurHashOfSize(size, h) {
+      h = src_Math__imul(h, 0xCC9E2D51);
+      h = src_Math__imul(h << 15 | h >>> -15, 0x1B873593);
+      h = src_Math__imul(h << 13 | h >>> -13, 5);
+      h = (h + 0xE6546B64 | 0) ^ size;
+      h = src_Math__imul(h ^ h >>> 16, 0x85EBCA6B);
+      h = src_Math__imul(h ^ h >>> 13, 0xC2B2AE35);
+      h = smi(h ^ h >>> 16);
+      return h;
+    }
+    function hashMerge(a, b) {
+      return a ^ b + 0x9E3779B9 + (a << 6) + (a >> 2) | 0;
+    }
+    var Immutable = {
+      Iterable: Iterable,
+      Seq: Seq,
+      Collection: Collection,
+      Map: src_Map__Map,
+      OrderedMap: OrderedMap,
+      List: List,
+      Stack: Stack,
+      Set: src_Set__Set,
+      OrderedSet: OrderedSet,
+      Record: Record,
+      Range: Range,
+      Repeat: Repeat,
+      is: is,
+      fromJS: fromJS
+    };
+    return Immutable;
+  }));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1d", ["24"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("24"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("21", ["25"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("25");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("22", ["26", "27", "28"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
   require("26");
+  require("27");
   module.exports = require("28");
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("25", ["29", "2a"], true, function(require, exports, module) {
+$__System.registerDynamic("23", ["26", "27", "29"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  require("29");
-  var Iterators = require("2a");
+  require("26");
+  require("27");
+  module.exports = require("29");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("24", ["2a"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("2a");
+  module.exports = function defineProperty(it, key, desc) {
+    return $.setDesc(it, key, desc);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("25", ["2b"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__System._nodeRequire ? process : require("2b");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("26", ["2c", "2d"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  require("2c");
+  var Iterators = require("2d");
   Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("26", ["2b", "2c"], true, function(require, exports, module) {
+$__System.registerDynamic("27", ["2e", "2f"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $at = require("2b")(true);
-  require("2c")(String, 'String', function(iterated) {
+  var $at = require("2e")(true);
+  require("2f")(String, 'String', function(iterated) {
     this._t = String(iterated);
     this._i = 0;
   }, function() {
@@ -30222,37 +32020,30 @@ $__System.registerDynamic("26", ["2b", "2c"], true, function(require, exports, m
   return module.exports;
 });
 
-$__System.registerDynamic("24", ["2d"], true, function(require, exports, module) {
+$__System.registerDynamic("29", ["30", "31", "2d", "32"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = require("2d");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("23", ["2e"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = require("2e");
-  module.exports = function defineProperty(it, key, desc) {
-    return $.setDesc(it, key, desc);
+  var classof = require("30"),
+      ITERATOR = require("31")('iterator'),
+      Iterators = require("2d");
+  module.exports = require("32").isIterable = function(it) {
+    var O = Object(it);
+    return ITERATOR in O || '@@iterator' in O || Iterators.hasOwnProperty(classof(O));
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("27", ["2f", "30", "31"], true, function(require, exports, module) {
+$__System.registerDynamic("28", ["33", "34", "32"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var anObject = require("2f"),
-      get = require("30");
-  module.exports = require("31").getIterator = function(it) {
+  var anObject = require("33"),
+      get = require("34");
+  module.exports = require("32").getIterator = function(it) {
     var iterFn = get(it);
     if (typeof iterFn != 'function')
       throw TypeError(it + ' is not iterable!');
@@ -30262,1788 +32053,39 @@ $__System.registerDynamic("27", ["2f", "30", "31"], true, function(require, expo
   return module.exports;
 });
 
-$__System.registerDynamic("28", ["32", "33", "2a", "31"], true, function(require, exports, module) {
+$__System.registerDynamic("2a", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var classof = require("32"),
-      ITERATOR = require("33")('iterator'),
-      Iterators = require("2a");
-  module.exports = require("31").isIterable = function(it) {
-    var O = Object(it);
-    return ITERATOR in O || '@@iterator' in O || Iterators.hasOwnProperty(classof(O));
+  var $Object = Object;
+  module.exports = {
+    create: $Object.create,
+    getProto: $Object.getPrototypeOf,
+    isEnum: {}.propertyIsEnumerable,
+    getDesc: $Object.getOwnPropertyDescriptor,
+    setDesc: $Object.defineProperty,
+    setDescs: $Object.defineProperties,
+    getKeys: $Object.keys,
+    getNames: $Object.getOwnPropertyNames,
+    getSymbols: $Object.getOwnPropertySymbols,
+    each: [].forEach
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("20", [], false, function(__require, __exports, __module) {
-  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
-  (function() {
-    var ngFileUpload = this["ngFileUpload"];
-    (function() {
-      function patchXHR(fnName, newFn) {
-        window.XMLHttpRequest.prototype[fnName] = newFn(window.XMLHttpRequest.prototype[fnName]);
-      }
-      function redefineProp(xhr, prop, fn) {
-        try {
-          Object.defineProperty(xhr, prop, {get: fn});
-        } catch (e) {}
-      }
-      if (!window.FileAPI) {
-        window.FileAPI = {};
-      }
-      FileAPI.shouldLoad = (window.XMLHttpRequest && !window.FormData) || FileAPI.forceLoad;
-      if (FileAPI.shouldLoad) {
-        var initializeUploadListener = function(xhr) {
-          if (!xhr.__listeners) {
-            if (!xhr.upload)
-              xhr.upload = {};
-            xhr.__listeners = [];
-            var origAddEventListener = xhr.upload.addEventListener;
-            xhr.upload.addEventListener = function(t, fn) {
-              xhr.__listeners[t] = fn;
-              if (origAddEventListener)
-                origAddEventListener.apply(this, arguments);
-            };
-          }
-        };
-        patchXHR('open', function(orig) {
-          return function(m, url, b) {
-            initializeUploadListener(this);
-            this.__url = url;
-            try {
-              orig.apply(this, [m, url, b]);
-            } catch (e) {
-              if (e.message.indexOf('Access is denied') > -1) {
-                this.__origError = e;
-                orig.apply(this, [m, '_fix_for_ie_crossdomain__', b]);
-              }
-            }
-          };
-        });
-        patchXHR('getResponseHeader', function(orig) {
-          return function(h) {
-            return this.__fileApiXHR && this.__fileApiXHR.getResponseHeader ? this.__fileApiXHR.getResponseHeader(h) : (orig == null ? null : orig.apply(this, [h]));
-          };
-        });
-        patchXHR('getAllResponseHeaders', function(orig) {
-          return function() {
-            return this.__fileApiXHR && this.__fileApiXHR.getAllResponseHeaders ? this.__fileApiXHR.getAllResponseHeaders() : (orig == null ? null : orig.apply(this));
-          };
-        });
-        patchXHR('abort', function(orig) {
-          return function() {
-            return this.__fileApiXHR && this.__fileApiXHR.abort ? this.__fileApiXHR.abort() : (orig == null ? null : orig.apply(this));
-          };
-        });
-        patchXHR('setRequestHeader', function(orig) {
-          return function(header, value) {
-            if (header === '__setXHR_') {
-              initializeUploadListener(this);
-              var val = value(this);
-              if (val instanceof Function) {
-                val(this);
-              }
-            } else {
-              this.__requestHeaders = this.__requestHeaders || {};
-              this.__requestHeaders[header] = value;
-              orig.apply(this, arguments);
-            }
-          };
-        });
-        patchXHR('send', function(orig) {
-          return function() {
-            var xhr = this;
-            if (arguments[0] && arguments[0].__isFileAPIShim) {
-              var formData = arguments[0];
-              var config = {
-                url: xhr.__url,
-                jsonp: false,
-                cache: true,
-                complete: function(err, fileApiXHR) {
-                  if (err && angular.isString(err) && err.indexOf('#2174') !== -1) {
-                    err = null;
-                  }
-                  xhr.__completed = true;
-                  if (!err && xhr.__listeners.load)
-                    xhr.__listeners.load({
-                      type: 'load',
-                      loaded: xhr.__loaded,
-                      total: xhr.__total,
-                      target: xhr,
-                      lengthComputable: true
-                    });
-                  if (!err && xhr.__listeners.loadend)
-                    xhr.__listeners.loadend({
-                      type: 'loadend',
-                      loaded: xhr.__loaded,
-                      total: xhr.__total,
-                      target: xhr,
-                      lengthComputable: true
-                    });
-                  if (err === 'abort' && xhr.__listeners.abort)
-                    xhr.__listeners.abort({
-                      type: 'abort',
-                      loaded: xhr.__loaded,
-                      total: xhr.__total,
-                      target: xhr,
-                      lengthComputable: true
-                    });
-                  if (fileApiXHR.status !== undefined)
-                    redefineProp(xhr, 'status', function() {
-                      return (fileApiXHR.status === 0 && err && err !== 'abort') ? 500 : fileApiXHR.status;
-                    });
-                  if (fileApiXHR.statusText !== undefined)
-                    redefineProp(xhr, 'statusText', function() {
-                      return fileApiXHR.statusText;
-                    });
-                  redefineProp(xhr, 'readyState', function() {
-                    return 4;
-                  });
-                  if (fileApiXHR.response !== undefined)
-                    redefineProp(xhr, 'response', function() {
-                      return fileApiXHR.response;
-                    });
-                  var resp = fileApiXHR.responseText || (err && fileApiXHR.status === 0 && err !== 'abort' ? err : undefined);
-                  redefineProp(xhr, 'responseText', function() {
-                    return resp;
-                  });
-                  redefineProp(xhr, 'response', function() {
-                    return resp;
-                  });
-                  if (err)
-                    redefineProp(xhr, 'err', function() {
-                      return err;
-                    });
-                  xhr.__fileApiXHR = fileApiXHR;
-                  if (xhr.onreadystatechange)
-                    xhr.onreadystatechange();
-                  if (xhr.onload)
-                    xhr.onload();
-                },
-                progress: function(e) {
-                  e.target = xhr;
-                  if (xhr.__listeners.progress)
-                    xhr.__listeners.progress(e);
-                  xhr.__total = e.total;
-                  xhr.__loaded = e.loaded;
-                  if (e.total === e.loaded) {
-                    var _this = this;
-                    setTimeout(function() {
-                      if (!xhr.__completed) {
-                        xhr.getAllResponseHeaders = function() {};
-                        _this.complete(null, {
-                          status: 204,
-                          statusText: 'No Content'
-                        });
-                      }
-                    }, FileAPI.noContentTimeout || 10000);
-                  }
-                },
-                headers: xhr.__requestHeaders
-              };
-              config.data = {};
-              config.files = {};
-              for (var i = 0; i < formData.data.length; i++) {
-                var item = formData.data[i];
-                if (item.val != null && item.val.name != null && item.val.size != null && item.val.type != null) {
-                  config.files[item.key] = item.val;
-                } else {
-                  config.data[item.key] = item.val;
-                }
-              }
-              setTimeout(function() {
-                if (!FileAPI.hasFlash) {
-                  throw 'Adode Flash Player need to be installed. To check ahead use "FileAPI.hasFlash"';
-                }
-                xhr.__fileApiXHR = FileAPI.upload(config);
-              }, 1);
-            } else {
-              if (this.__origError) {
-                throw this.__origError;
-              }
-              orig.apply(xhr, arguments);
-            }
-          };
-        });
-        window.XMLHttpRequest.__isFileAPIShim = true;
-        window.FormData = FormData = function() {
-          return {
-            append: function(key, val, name) {
-              if (val.__isFileAPIBlobShim) {
-                val = val.data[0];
-              }
-              this.data.push({
-                key: key,
-                val: val,
-                name: name
-              });
-            },
-            data: [],
-            __isFileAPIShim: true
-          };
-        };
-        window.Blob = Blob = function(b) {
-          return {
-            data: b,
-            __isFileAPIBlobShim: true
-          };
-        };
-      }
-    })();
-    (function() {
-      function isInputTypeFile(elem) {
-        return elem[0].tagName.toLowerCase() === 'input' && elem.attr('type') && elem.attr('type').toLowerCase() === 'file';
-      }
-      function hasFlash() {
-        try {
-          var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
-          if (fo)
-            return true;
-        } catch (e) {
-          if (navigator.mimeTypes['application/x-shockwave-flash'] !== undefined)
-            return true;
-        }
-        return false;
-      }
-      function getOffset(obj) {
-        var left = 0,
-            top = 0;
-        if (window.jQuery) {
-          return jQuery(obj).offset();
-        }
-        if (obj.offsetParent) {
-          do {
-            left += (obj.offsetLeft - obj.scrollLeft);
-            top += (obj.offsetTop - obj.scrollTop);
-            obj = obj.offsetParent;
-          } while (obj);
-        }
-        return {
-          left: left,
-          top: top
-        };
-      }
-      if (FileAPI.shouldLoad) {
-        if (FileAPI.forceLoad) {
-          FileAPI.html5 = false;
-        }
-        if (!FileAPI.upload) {
-          var jsUrl,
-              basePath,
-              script = document.createElement('script'),
-              allScripts = document.getElementsByTagName('script'),
-              i,
-              index,
-              src;
-          if (window.FileAPI.jsUrl) {
-            jsUrl = window.FileAPI.jsUrl;
-          } else if (window.FileAPI.jsPath) {
-            basePath = window.FileAPI.jsPath;
-          } else {
-            for (i = 0; i < allScripts.length; i++) {
-              src = allScripts[i].src;
-              index = src.search(/\/ng\-file\-upload[\-a-zA-z0-9\.]*\.js/);
-              if (index > -1) {
-                basePath = src.substring(0, index + 1);
-                break;
-              }
-            }
-          }
-          if (FileAPI.staticPath == null)
-            FileAPI.staticPath = basePath;
-          script.setAttribute('src', jsUrl || basePath + 'FileAPI.min.js');
-          document.getElementsByTagName('head')[0].appendChild(script);
-          FileAPI.hasFlash = hasFlash();
-        }
-        FileAPI.ngfFixIE = function(elem, fileElem, changeFn) {
-          if (!hasFlash()) {
-            throw 'Adode Flash Player need to be installed. To check ahead use "FileAPI.hasFlash"';
-          }
-          var fixInputStyle = function() {
-            if (elem.attr('disabled')) {
-              if (fileElem)
-                fileElem.removeClass('js-fileapi-wrapper');
-            } else {
-              if (!fileElem.attr('__ngf_flash_')) {
-                fileElem.unbind('change');
-                fileElem.unbind('click');
-                fileElem.bind('change', function(evt) {
-                  fileApiChangeFn.apply(this, [evt]);
-                  changeFn.apply(this, [evt]);
-                });
-                fileElem.attr('__ngf_flash_', 'true');
-              }
-              fileElem.addClass('js-fileapi-wrapper');
-              if (!isInputTypeFile(elem)) {
-                fileElem.css('position', 'absolute').css('top', getOffset(elem[0]).top + 'px').css('left', getOffset(elem[0]).left + 'px').css('width', elem[0].offsetWidth + 'px').css('height', elem[0].offsetHeight + 'px').css('filter', 'alpha(opacity=0)').css('display', elem.css('display')).css('overflow', 'hidden').css('z-index', '900000').css('visibility', 'visible');
-              }
-            }
-          };
-          elem.bind('mouseenter', fixInputStyle);
-          var fileApiChangeFn = function(evt) {
-            var files = FileAPI.getFiles(evt);
-            for (var i = 0; i < files.length; i++) {
-              if (files[i].size === undefined)
-                files[i].size = 0;
-              if (files[i].name === undefined)
-                files[i].name = 'file';
-              if (files[i].type === undefined)
-                files[i].type = 'undefined';
-            }
-            if (!evt.target) {
-              evt.target = {};
-            }
-            evt.target.files = files;
-            if (evt.target.files !== files) {
-              evt.__files_ = files;
-            }
-            (evt.__files_ || evt.target.files).item = function(i) {
-              return (evt.__files_ || evt.target.files)[i] || null;
-            };
-          };
-        };
-        FileAPI.disableFileInput = function(elem, disable) {
-          if (disable) {
-            elem.removeClass('js-fileapi-wrapper');
-          } else {
-            elem.addClass('js-fileapi-wrapper');
-          }
-        };
-      }
-    })();
-    if (!window.FileReader) {
-      window.FileReader = function() {
-        var _this = this,
-            loadStarted = false;
-        this.listeners = {};
-        this.addEventListener = function(type, fn) {
-          _this.listeners[type] = _this.listeners[type] || [];
-          _this.listeners[type].push(fn);
-        };
-        this.removeEventListener = function(type, fn) {
-          if (_this.listeners[type])
-            _this.listeners[type].splice(_this.listeners[type].indexOf(fn), 1);
-        };
-        this.dispatchEvent = function(evt) {
-          var list = _this.listeners[evt.type];
-          if (list) {
-            for (var i = 0; i < list.length; i++) {
-              list[i].call(_this, evt);
-            }
-          }
-        };
-        this.onabort = this.onerror = this.onload = this.onloadstart = this.onloadend = this.onprogress = null;
-        var constructEvent = function(type, evt) {
-          var e = {
-            type: type,
-            target: _this,
-            loaded: evt.loaded,
-            total: evt.total,
-            error: evt.error
-          };
-          if (evt.result != null)
-            e.target.result = evt.result;
-          return e;
-        };
-        var listener = function(evt) {
-          if (!loadStarted) {
-            loadStarted = true;
-            if (_this.onloadstart)
-              _this.onloadstart(constructEvent('loadstart', evt));
-          }
-          var e;
-          if (evt.type === 'load') {
-            if (_this.onloadend)
-              _this.onloadend(constructEvent('loadend', evt));
-            e = constructEvent('load', evt);
-            if (_this.onload)
-              _this.onload(e);
-            _this.dispatchEvent(e);
-          } else if (evt.type === 'progress') {
-            e = constructEvent('progress', evt);
-            if (_this.onprogress)
-              _this.onprogress(e);
-            _this.dispatchEvent(e);
-          } else {
-            e = constructEvent('error', evt);
-            if (_this.onerror)
-              _this.onerror(e);
-            _this.dispatchEvent(e);
-          }
-        };
-        this.readAsArrayBuffer = function(file) {
-          FileAPI.readAsBinaryString(file, listener);
-        };
-        this.readAsBinaryString = function(file) {
-          FileAPI.readAsBinaryString(file, listener);
-        };
-        this.readAsDataURL = function(file) {
-          FileAPI.readAsDataURL(file, listener);
-        };
-        this.readAsText = function(file) {
-          FileAPI.readAsText(file, listener);
-        };
-      };
-    }
-    if (window.XMLHttpRequest && !(window.FileAPI && FileAPI.shouldLoad)) {
-      window.XMLHttpRequest.prototype.setRequestHeader = (function(orig) {
-        return function(header, value) {
-          if (header === '__setXHR_') {
-            var val = value(this);
-            if (val instanceof Function) {
-              val(this);
-            }
-          } else {
-            orig.apply(this, arguments);
-          }
-        };
-      })(window.XMLHttpRequest.prototype.setRequestHeader);
-    }
-    var ngFileUpload = angular.module('ngFileUpload', []);
-    ngFileUpload.version = '7.2.1';
-    ngFileUpload.service('UploadBase', ['$http', '$q', '$timeout', function($http, $q, $timeout) {
-      function sendHttp(config) {
-        config.method = config.method || 'POST';
-        config.headers = config.headers || {};
-        var deferred = $q.defer();
-        var promise = deferred.promise;
-        config.headers.__setXHR_ = function() {
-          return function(xhr) {
-            if (!xhr)
-              return;
-            config.__XHR = xhr;
-            if (config.xhrFn)
-              config.xhrFn(xhr);
-            xhr.upload.addEventListener('progress', function(e) {
-              e.config = config;
-              if (deferred.notify) {
-                deferred.notify(e);
-              } else if (promise.progressFunc) {
-                $timeout(function() {
-                  promise.progressFunc(e);
-                });
-              }
-            }, false);
-            xhr.upload.addEventListener('load', function(e) {
-              if (e.lengthComputable) {
-                e.config = config;
-                if (deferred.notify) {
-                  deferred.notify(e);
-                } else if (promise.progressFunc) {
-                  $timeout(function() {
-                    promise.progressFunc(e);
-                  });
-                }
-              }
-            }, false);
-          };
-        };
-        $http(config).then(function(r) {
-          deferred.resolve(r);
-        }, function(e) {
-          deferred.reject(e);
-        }, function(n) {
-          deferred.notify(n);
-        });
-        promise.success = function(fn) {
-          promise.then(function(response) {
-            fn(response.data, response.status, response.headers, config);
-          });
-          return promise;
-        };
-        promise.error = function(fn) {
-          promise.then(null, function(response) {
-            fn(response.data, response.status, response.headers, config);
-          });
-          return promise;
-        };
-        promise.progress = function(fn) {
-          promise.progressFunc = fn;
-          promise.then(null, null, function(update) {
-            fn(update);
-          });
-          return promise;
-        };
-        promise.abort = function() {
-          if (config.__XHR) {
-            $timeout(function() {
-              config.__XHR.abort();
-            });
-          }
-          return promise;
-        };
-        promise.xhr = function(fn) {
-          config.xhrFn = (function(origXhrFn) {
-            return function() {
-              if (origXhrFn)
-                origXhrFn.apply(promise, arguments);
-              fn.apply(promise, arguments);
-            };
-          })(config.xhrFn);
-          return promise;
-        };
-        return promise;
-      }
-      this.upload = function(config) {
-        function addFieldToFormData(formData, val, key) {
-          if (val !== undefined) {
-            if (angular.isDate(val)) {
-              val = val.toISOString();
-            }
-            if (angular.isString(val)) {
-              formData.append(key, val);
-            } else if (config.sendFieldsAs === 'form') {
-              if (angular.isObject(val)) {
-                for (var k in val) {
-                  if (val.hasOwnProperty(k)) {
-                    addFieldToFormData(formData, val[k], key + '[' + k + ']');
-                  }
-                }
-              } else {
-                formData.append(key, val);
-              }
-            } else {
-              val = angular.isString(val) ? val : angular.toJson(val);
-              if (config.sendFieldsAs === 'json-blob') {
-                formData.append(key, new Blob([val], {type: 'application/json'}));
-              } else {
-                formData.append(key, val);
-              }
-            }
-          }
-        }
-        function isFile(file) {
-          return file instanceof Blob || (file.flashId && file.name && file.size);
-        }
-        function addFileToFormData(formData, file, key) {
-          if (isFile(file)) {
-            formData.append(key, file, file.fileName || file.name);
-          } else if (angular.isObject(file)) {
-            for (var k in file) {
-              if (file.hasOwnProperty(k)) {
-                var split = k.split(',');
-                if (split[1]) {
-                  file[k].fileName = split[1].replace(/^\s+|\s+$/g, '');
-                }
-                addFileToFormData(formData, file[k], split[0]);
-              }
-            }
-          } else {
-            throw 'Expected file object in Upload.upload file option: ' + file.toString();
-          }
-        }
-        config.headers = config.headers || {};
-        config.headers['Content-Type'] = undefined;
-        config.transformRequest = config.transformRequest ? (angular.isArray(config.transformRequest) ? config.transformRequest : [config.transformRequest]) : [];
-        config.transformRequest.push(function(data) {
-          var formData = new FormData(),
-              allFields = {},
-              key;
-          for (key in config.fields) {
-            if (config.fields.hasOwnProperty(key)) {
-              allFields[key] = config.fields[key];
-            }
-          }
-          if (data)
-            allFields.data = data;
-          for (key in allFields) {
-            if (allFields.hasOwnProperty(key)) {
-              var val = allFields[key];
-              if (config.formDataAppender) {
-                config.formDataAppender(formData, key, val);
-              } else {
-                addFieldToFormData(formData, val, key);
-              }
-            }
-          }
-          if (config.file != null) {
-            if (angular.isArray(config.file)) {
-              for (var i = 0; i < config.file.length; i++) {
-                addFileToFormData(formData, config.file[i], 'file');
-              }
-            } else {
-              addFileToFormData(formData, config.file, 'file');
-            }
-          }
-          return formData;
-        });
-        return sendHttp(config);
-      };
-      this.http = function(config) {
-        config.transformRequest = config.transformRequest || function(data) {
-          if ((window.ArrayBuffer && data instanceof window.ArrayBuffer) || data instanceof Blob) {
-            return data;
-          }
-          return $http.defaults.transformRequest[0].apply(this, arguments);
-        };
-        return sendHttp(config);
-      };
-      this.setDefaults = function(defaults) {
-        this.defaults = defaults || {};
-      };
-      this.defaults = {};
-      this.version = ngFileUpload.version;
-    }]);
-    ngFileUpload.service('Upload', ['$parse', '$timeout', '$compile', 'UploadResize', function($parse, $timeout, $compile, UploadResize) {
-      var upload = UploadResize;
-      upload.getAttrWithDefaults = function(attr, name) {
-        return attr[name] != null ? attr[name] : (upload.defaults[name] == null ? upload.defaults[name] : upload.defaults[name].toString());
-      };
-      upload.attrGetter = function(name, attr, scope, params) {
-        if (scope) {
-          try {
-            if (params) {
-              return $parse(this.getAttrWithDefaults(attr, name))(scope, params);
-            } else {
-              return $parse(this.getAttrWithDefaults(attr, name))(scope);
-            }
-          } catch (e) {
-            if (name.search(/min|max|pattern/i)) {
-              return this.getAttrWithDefaults(attr, name);
-            } else {
-              throw e;
-            }
-          }
-        } else {
-          return this.getAttrWithDefaults(attr, name);
-        }
-      };
-      upload.updateModel = function(ngModel, attr, scope, fileChange, files, evt, noDelay) {
-        function update() {
-          var file = files && files.length ? files[0] : null;
-          if (ngModel) {
-            var singleModel = !upload.attrGetter('ngfMultiple', attr, scope) && !upload.attrGetter('multiple', attr) && !keep;
-            $parse(upload.attrGetter('ngModel', attr)).assign(scope, singleModel ? file : files);
-          }
-          var ngfModel = upload.attrGetter('ngfModel', attr);
-          if (ngfModel) {
-            $parse(ngfModel).assign(scope, files);
-          }
-          if (fileChange) {
-            $parse(fileChange)(scope, {
-              $files: files,
-              $file: file,
-              $event: evt
-            });
-          }
-          $timeout(function() {});
-        }
-        var keep = upload.attrGetter('ngfKeep', attr, scope);
-        if (keep === true) {
-          if (!files || !files.length) {
-            return;
-          } else {
-            var prevFiles = ((ngModel && ngModel.$modelValue) || attr.$$ngfPrevFiles || []).slice(0),
-                hasNew = false;
-            if (upload.attrGetter('ngfKeepDistinct', attr, scope) === true) {
-              var len = prevFiles.length;
-              for (var i = 0; i < files.length; i++) {
-                for (var j = 0; j < len; j++) {
-                  if (files[i].name === prevFiles[j].name)
-                    break;
-                }
-                if (j === len) {
-                  prevFiles.push(files[i]);
-                  hasNew = true;
-                }
-              }
-              if (!hasNew)
-                return;
-              files = prevFiles;
-            } else {
-              files = prevFiles.concat(files);
-            }
-          }
-        }
-        attr.$$ngfPrevFiles = files;
-        function resize(files, callback) {
-          var param = upload.attrGetter('ngfResize', attr, scope);
-          if (!param)
-            return callback();
-          var count = files.length;
-          var checkCallback = function() {
-            count--;
-            if (count === 0)
-              callback();
-          };
-          var success = function(index) {
-            return function(resizedFile) {
-              files.splice(index, 1, resizedFile);
-              checkCallback();
-            };
-          };
-          var error = function(f) {
-            return function(e) {
-              checkCallback();
-              f.$error = 'resize';
-              f.$errorParam = (e ? (e.message ? e.message : e) + ': ' : '') + (f && f.name);
-            };
-          };
-          for (var i = 0; i < files.length; i++) {
-            var f = files[i];
-            if (!f.$error && f.type.indexOf('image') === 0) {
-              upload.resize(f, param.width, param.height, param.quality).then(success(i), error(f));
-            } else {
-              checkCallback();
-            }
-          }
-        }
-        if (noDelay) {
-          update();
-        } else if (upload.validate(files, ngModel, attr, scope, upload.attrGetter('ngfValidateLater', attr), function() {
-          resize(files, function() {
-            $timeout(function() {
-              update();
-            });
-          });
-        }))
-          ;
-      };
-      return upload;
-    }]);
-    ngFileUpload.directive('ngfSelect', ['$parse', '$timeout', '$compile', 'Upload', function($parse, $timeout, $compile, Upload) {
-      var generatedElems = [];
-      function isDelayedClickSupported(ua) {
-        var m = ua.match(/Android[^\d]*(\d+)\.(\d+)/);
-        if (m && m.length > 2) {
-          var v = Upload.defaults.androidFixMinorVersion || 4;
-          return parseInt(m[1]) < 4 || (parseInt(m[1]) === v && parseInt(m[2]) < v);
-        }
-        return ua.indexOf('Chrome') === -1 && /.*Windows.*Safari.*/.test(ua);
-      }
-      function linkFileSelect(scope, elem, attr, ngModel, $parse, $timeout, $compile, upload) {
-        var attrGetter = function(name, scope) {
-          return upload.attrGetter(name, attr, scope);
-        };
-        function isInputTypeFile() {
-          return elem[0].tagName.toLowerCase() === 'input' && attr.type && attr.type.toLowerCase() === 'file';
-        }
-        function fileChangeAttr() {
-          return attrGetter('ngfChange') || attrGetter('ngfSelect');
-        }
-        function changeFn(evt) {
-          var fileList = evt.__files_ || (evt.target && evt.target.files),
-              files = [];
-          for (var i = 0; i < fileList.length; i++) {
-            files.push(fileList[i]);
-          }
-          upload.updateModel(ngModel, attr, scope, fileChangeAttr(), files.length ? files : null, evt);
-        }
-        var unwatches = [];
-        unwatches.push(scope.$watch(attrGetter('ngfMultiple'), function() {
-          fileElem.attr('multiple', attrGetter('ngfMultiple', scope));
-        }));
-        unwatches.push(scope.$watch(attrGetter('ngfCapture'), function() {
-          fileElem.attr('capture', attrGetter('ngfCapture', scope));
-        }));
-        attr.$observe('accept', function() {
-          fileElem.attr('accept', attrGetter('accept'));
-        });
-        unwatches.push(function() {
-          if (attr.$$observers)
-            delete attr.$$observers.accept;
-        });
-        function bindAttrToFileInput(fileElem) {
-          if (elem !== fileElem) {
-            for (var i = 0; i < elem[0].attributes.length; i++) {
-              var attribute = elem[0].attributes[i];
-              if (attribute.name !== 'type' && attribute.name !== 'class' && attribute.name !== 'id' && attribute.name !== 'style') {
-                if (attribute.value == null || attribute.value === '') {
-                  if (attribute.name === 'required')
-                    attribute.value = 'required';
-                  if (attribute.name === 'multiple')
-                    attribute.value = 'multiple';
-                }
-                fileElem.attr(attribute.name, attribute.value);
-              }
-            }
-          }
-        }
-        function createFileInput() {
-          if (isInputTypeFile()) {
-            return elem;
-          }
-          var fileElem = angular.element('<input type="file">');
-          bindAttrToFileInput(fileElem);
-          fileElem.css('visibility', 'hidden').css('position', 'absolute').css('overflow', 'hidden').css('width', '0px').css('height', '0px').css('border', 'none').css('margin', '0px').css('padding', '0px').attr('tabindex', '-1');
-          generatedElems.push({
-            el: elem,
-            ref: fileElem
-          });
-          document.body.appendChild(fileElem[0]);
-          return fileElem;
-        }
-        var initialTouchStartY = 0;
-        function clickHandler(evt) {
-          if (elem.attr('disabled') || attrGetter('ngfSelectDisabled', scope))
-            return false;
-          var r = handleTouch(evt);
-          if (r != null)
-            return r;
-          resetModel(evt);
-          if (isDelayedClickSupported(navigator.userAgent)) {
-            setTimeout(function() {
-              fileElem[0].click();
-            }, 0);
-          } else {
-            fileElem[0].click();
-          }
-          return false;
-        }
-        function handleTouch(evt) {
-          var touches = evt.changedTouches || (evt.originalEvent && evt.originalEvent.changedTouches);
-          if (evt.type === 'touchstart') {
-            initialTouchStartY = touches ? touches[0].clientY : 0;
-            return true;
-          } else {
-            evt.stopPropagation();
-            evt.preventDefault();
-            if (evt.type === 'touchend') {
-              var currentLocation = touches ? touches[0].clientY : 0;
-              if (Math.abs(currentLocation - initialTouchStartY) > 20)
-                return false;
-            }
-          }
-        }
-        var fileElem = elem;
-        function resetModel(evt) {
-          if (fileElem.val()) {
-            fileElem.val(null);
-            upload.updateModel(ngModel, attr, scope, fileChangeAttr(), null, evt, true);
-          }
-        }
-        if (!isInputTypeFile()) {
-          fileElem = createFileInput();
-        }
-        fileElem.bind('change', changeFn);
-        if (!isInputTypeFile()) {
-          elem.bind('click touchstart touchend', clickHandler);
-        } else {
-          elem.bind('click', resetModel);
-        }
-        upload.registerValidators(ngModel, fileElem, attr, scope);
-        function ie10SameFileSelectFix(evt) {
-          if (fileElem && !fileElem.attr('__ngf_ie10_Fix_')) {
-            if (!fileElem[0].parentNode) {
-              fileElem = null;
-              return;
-            }
-            evt.preventDefault();
-            evt.stopPropagation();
-            fileElem.unbind('click');
-            var clone = fileElem.clone();
-            fileElem.replaceWith(clone);
-            fileElem = clone;
-            fileElem.attr('__ngf_ie10_Fix_', 'true');
-            fileElem.bind('change', changeFn);
-            fileElem.bind('click', ie10SameFileSelectFix);
-            fileElem[0].click();
-            return false;
-          } else {
-            fileElem.removeAttr('__ngf_ie10_Fix_');
-          }
-        }
-        if (navigator.appVersion.indexOf('MSIE 10') !== -1) {
-          fileElem.bind('click', ie10SameFileSelectFix);
-        }
-        scope.$on('$destroy', function() {
-          if (!isInputTypeFile())
-            fileElem.remove();
-          angular.forEach(unwatches, function(unwatch) {
-            unwatch();
-          });
-        });
-        $timeout(function() {
-          for (var i = 0; i < generatedElems.length; i++) {
-            var g = generatedElems[i];
-            if (!document.body.contains(g.el[0])) {
-              generatedElems.splice(i, 1);
-              g.ref.remove();
-            }
-          }
-        });
-        if (window.FileAPI && window.FileAPI.ngfFixIE) {
-          window.FileAPI.ngfFixIE(elem, fileElem, changeFn);
-        }
-      }
-      return {
-        restrict: 'AEC',
-        require: '?ngModel',
-        link: function(scope, elem, attr, ngModel) {
-          linkFileSelect(scope, elem, attr, ngModel, $parse, $timeout, $compile, Upload);
-        }
-      };
-    }]);
-    (function() {
-      ngFileUpload.service('UploadDataUrl', ['UploadBase', '$timeout', '$q', function(UploadBase, $timeout, $q) {
-        var upload = UploadBase;
-        upload.dataUrl = function(file, disallowObjectUrl) {
-          if ((disallowObjectUrl && file.dataUrl != null) || (!disallowObjectUrl && file.blobUrl != null)) {
-            var d = $q.defer();
-            $timeout(function() {
-              d.resolve(disallowObjectUrl ? file.dataUrl : file.blobUrl);
-            });
-            return d.promise;
-          }
-          var p = disallowObjectUrl ? file.$ngfDataUrlPromise : file.$ngfBlobUrlPromise;
-          if (p)
-            return p;
-          var deferred = $q.defer();
-          $timeout(function() {
-            if (window.FileReader && file && (!window.FileAPI || navigator.userAgent.indexOf('MSIE 8') === -1 || file.size < 20000) && (!window.FileAPI || navigator.userAgent.indexOf('MSIE 9') === -1 || file.size < 4000000)) {
-              var URL = window.URL || window.webkitURL;
-              if (URL && URL.createObjectURL && !disallowObjectUrl) {
-                var url;
-                try {
-                  url = URL.createObjectURL(file);
-                } catch (e) {
-                  $timeout(function() {
-                    file.blobUrl = '';
-                    deferred.reject();
-                  });
-                  return;
-                }
-                $timeout(function() {
-                  file.blobUrl = url;
-                  if (url)
-                    deferred.resolve(url);
-                });
-              } else {
-                var fileReader = new FileReader();
-                fileReader.onload = function(e) {
-                  $timeout(function() {
-                    file.dataUrl = e.target.result;
-                    deferred.resolve(e.target.result);
-                  });
-                };
-                fileReader.onerror = function() {
-                  $timeout(function() {
-                    file.dataUrl = '';
-                    deferred.reject();
-                  });
-                };
-                fileReader.readAsDataURL(file);
-              }
-            } else {
-              $timeout(function() {
-                file[disallowObjectUrl ? 'dataUrl' : 'blobUrl'] = '';
-                deferred.reject();
-              });
-            }
-          });
-          if (disallowObjectUrl) {
-            p = file.$ngfDataUrlPromise = deferred.promise;
-          } else {
-            p = file.$ngfBlobUrlPromise = deferred.promise;
-          }
-          p['finally'](function() {
-            delete file[disallowObjectUrl ? '$ngfDataUrlPromise' : '$ngfBlobUrlPromise'];
-          });
-          return p;
-        };
-        return upload;
-      }]);
-      function getTagType(el) {
-        if (el.tagName.toLowerCase() === 'img')
-          return 'image';
-        if (el.tagName.toLowerCase() === 'audio')
-          return 'audio';
-        if (el.tagName.toLowerCase() === 'video')
-          return 'video';
-        return /\./;
-      }
-      var style = angular.element('<style>.ngf-hide{display:none !important}</style>');
-      document.getElementsByTagName('head')[0].appendChild(style[0]);
-      ngFileUpload.directive('ngfSrc', ['$compile', '$timeout', 'Upload', function($compile, $timeout, Upload) {
-        return {
-          restrict: 'AE',
-          link: function(scope, elem, attr) {
-            $timeout(function() {
-              var unwatch = scope.$watch(attr.ngfSrc, function(file) {
-                if (angular.isString(file)) {
-                  elem.removeClass('ngf-hide');
-                  return elem.attr('src', file);
-                }
-                if (file && file.type && file.type.indexOf(getTagType(elem[0])) === 0) {
-                  var disallowObjectUrl = Upload.attrGetter('ngfNoObjectUrl', attr, scope);
-                  Upload.dataUrl(file, disallowObjectUrl)['finally'](function() {
-                    $timeout(function() {
-                      if (file.blobUrl || file.dataUrl) {
-                        elem.removeClass('ngf-hide');
-                        elem.attr('src', (disallowObjectUrl ? file.dataUrl : file.blobUrl) || file.dataUrl);
-                      } else {
-                        elem.addClass('ngf-hide');
-                      }
-                    });
-                  });
-                } else {
-                  elem.addClass('ngf-hide');
-                }
-              });
-              scope.$on('$destroy', function() {
-                unwatch();
-              });
-            });
-          }
-        };
-      }]);
-      ngFileUpload.directive('ngfBackground', ['Upload', '$compile', '$timeout', function(Upload, $compile, $timeout) {
-        return {
-          restrict: 'AE',
-          link: function(scope, elem, attr) {
-            $timeout(function() {
-              var unwatch = scope.$watch(attr.ngfBackground, function(file) {
-                if (angular.isString(file))
-                  return elem.css('background-image', 'url(\'' + file + '\')');
-                if (file && file.type && file.type.indexOf('image') === 0) {
-                  var disallowObjectUrl = Upload.attrGetter('ngfNoObjectUrl', attr, scope);
-                  Upload.dataUrl(file, disallowObjectUrl)['finally'](function() {
-                    $timeout(function() {
-                      if ((disallowObjectUrl && file.dataUrl) || (!disallowObjectUrl && file.blobUrl)) {
-                        elem.css('background-image', 'url(\'' + (disallowObjectUrl ? file.dataUrl : file.blobUrl) + '\')');
-                      } else {
-                        elem.css('background-image', '');
-                      }
-                    });
-                  });
-                } else {
-                  elem.css('background-image', '');
-                }
-              });
-              scope.$on('$destroy', function() {
-                unwatch();
-              });
-            });
-          }
-        };
-      }]);
-      ngFileUpload.config(['$compileProvider', function($compileProvider) {
-        if ($compileProvider.imgSrcSanitizationWhitelist)
-          $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|local|file|data|blob):/);
-        if ($compileProvider.aHrefSanitizationWhitelist)
-          $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|local|file|data|blob):/);
-      }]);
-      ngFileUpload.filter('ngfDataUrl', ['UploadDataUrl', '$sce', function(UploadDataUrl, $sce) {
-        return function(file, disallowObjectUrl) {
-          if (angular.isString(file)) {
-            return $sce.trustAsResourceUrl(file);
-          }
-          if (file && !file.dataUrl) {
-            if (file.dataUrl === undefined && angular.isObject(file)) {
-              file.dataUrl = null;
-              UploadDataUrl.dataUrl(file, disallowObjectUrl);
-            }
-            return '';
-          }
-          return (file && file.dataUrl ? $sce.trustAsResourceUrl(file.dataUrl) : file) || '';
-        };
-      }]);
-    })();
-    ngFileUpload.service('UploadValidate', ['UploadDataUrl', '$q', '$timeout', function(UploadDataUrl, $q, $timeout) {
-      var upload = UploadDataUrl;
-      function globStringToRegex(str) {
-        if (str.length > 2 && str[0] === '/' && str[str.length - 1] === '/') {
-          return str.substring(1, str.length - 1);
-        }
-        var split = str.split(','),
-            result = '';
-        if (split.length > 1) {
-          for (var i = 0; i < split.length; i++) {
-            result += '(' + globStringToRegex(split[i]) + ')';
-            if (i < split.length - 1) {
-              result += '|';
-            }
-          }
-        } else {
-          if (str.indexOf('.') === 0) {
-            str = '*' + str;
-          }
-          result = '^' + str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\' + '-]', 'g'), '\\$&') + '$';
-          result = result.replace(/\\\*/g, '.*').replace(/\\\?/g, '.');
-        }
-        return result;
-      }
-      function translateScalars(str) {
-        if (angular.isString(str)) {
-          if (str.search(/kb/i) === str.length - 2) {
-            return parseFloat(str.substring(0, str.length - 2) * 1000);
-          } else if (str.search(/mb/i) === str.length - 2) {
-            return parseFloat(str.substring(0, str.length - 2) * 1000000);
-          } else if (str.search(/gb/i) === str.length - 2) {
-            return parseFloat(str.substring(0, str.length - 2) * 1000000000);
-          } else if (str.search(/b/i) === str.length - 1) {
-            return parseFloat(str.substring(0, str.length - 1));
-          } else if (str.search(/s/i) === str.length - 1) {
-            return parseFloat(str.substring(0, str.length - 1));
-          } else if (str.search(/m/i) === str.length - 1) {
-            return parseFloat(str.substring(0, str.length - 1) * 60);
-          } else if (str.search(/h/i) === str.length - 1) {
-            return parseFloat(str.substring(0, str.length - 1) * 3600);
-          }
-        }
-        return str;
-      }
-      upload.registerValidators = function(ngModel, elem, attr, scope) {
-        if (!ngModel)
-          return;
-        ngModel.$ngfValidations = [];
-        function setValidities(ngModel) {
-          angular.forEach(ngModel.$ngfValidations, function(validation) {
-            ngModel.$setValidity(validation.name, validation.valid);
-          });
-        }
-        ngModel.$formatters.push(function(val) {
-          if (upload.attrGetter('ngfValidateLater', attr, scope) || !ngModel.$$ngfValidated) {
-            upload.validate(val, ngModel, attr, scope, false, function() {
-              setValidities(ngModel);
-              ngModel.$$ngfValidated = false;
-            });
-            if (val && val.length === 0) {
-              val = null;
-            }
-            if (elem && (val == null || val.length === 0)) {
-              if (elem.val()) {
-                elem.val(null);
-              }
-            }
-          } else {
-            setValidities(ngModel);
-            ngModel.$$ngfValidated = false;
-          }
-          return val;
-        });
-      };
-      upload.validatePattern = function(file, val) {
-        if (!val) {
-          return true;
-        }
-        var regexp = new RegExp(globStringToRegex(val), 'gi');
-        return (file.type != null && regexp.test(file.type.toLowerCase())) || (file.name != null && regexp.test(file.name.toLowerCase()));
-      };
-      upload.validate = function(files, ngModel, attr, scope, later, callback) {
-        ngModel = ngModel || {};
-        ngModel.$ngfValidations = ngModel.$ngfValidations || [];
-        angular.forEach(ngModel.$ngfValidations, function(v) {
-          v.valid = true;
-        });
-        var attrGetter = function(name, params) {
-          return upload.attrGetter(name, attr, scope, params);
-        };
-        if (later) {
-          callback.call(ngModel);
-          return;
-        }
-        ngModel.$$ngfValidated = true;
-        if (files == null || files.length === 0) {
-          callback.call(ngModel);
-          return;
-        }
-        files = files.length === undefined ? [files] : files.slice(0);
-        function validateSync(name, validatorVal, fn) {
-          if (files) {
-            var dName = 'ngf' + name[0].toUpperCase() + name.substr(1);
-            var i = files.length,
-                valid = null;
-            while (i--) {
-              var file = files[i];
-              var val = attrGetter(dName, {'$file': file});
-              if (val == null) {
-                val = validatorVal(attrGetter('ngfValidate') || {});
-                valid = valid == null ? true : valid;
-              }
-              if (val != null) {
-                if (!fn(file, val)) {
-                  file.$error = name;
-                  file.$errorParam = val;
-                  files.splice(i, 1);
-                  valid = false;
-                }
-              }
-            }
-            if (valid !== null) {
-              ngModel.$ngfValidations.push({
-                name: name,
-                valid: valid
-              });
-            }
-          }
-        }
-        validateSync('pattern', function(cons) {
-          return cons.pattern;
-        }, upload.validatePattern);
-        validateSync('minSize', function(cons) {
-          return cons.size && cons.size.min;
-        }, function(file, val) {
-          return file.size >= translateScalars(val);
-        });
-        validateSync('maxSize', function(cons) {
-          return cons.size && cons.size.max;
-        }, function(file, val) {
-          return file.size <= translateScalars(val);
-        });
-        validateSync('validateFn', function() {
-          return null;
-        }, function(file, r) {
-          return r === true || r === null || r === '';
-        });
-        if (!files.length) {
-          callback.call(ngModel, ngModel.$ngfValidations);
-          return;
-        }
-        var pendings = 0;
-        function validateAsync(name, validatorVal, type, asyncFn, fn) {
-          if (files) {
-            var thisPendings = 0,
-                hasError = false,
-                dName = 'ngf' + name[0].toUpperCase() + name.substr(1);
-            files = files.length === undefined ? [files] : files;
-            angular.forEach(files, function(file) {
-              if (file.type.search(type) !== 0) {
-                return true;
-              }
-              var val = attrGetter(dName, {'$file': file}) || validatorVal(attrGetter('ngfValidate', {'$file': file}) || {});
-              if (val) {
-                pendings++;
-                thisPendings++;
-                asyncFn(file, val).then(function(d) {
-                  if (!fn(d, val)) {
-                    file.$error = name;
-                    file.$errorParam = val;
-                    hasError = true;
-                  }
-                }, function() {
-                  if (attrGetter('ngfValidateForce', {'$file': file})) {
-                    file.$error = name;
-                    file.$errorParam = val;
-                    hasError = true;
-                  }
-                })['finally'](function() {
-                  pendings--;
-                  thisPendings--;
-                  if (!thisPendings) {
-                    ngModel.$ngfValidations.push({
-                      name: name,
-                      valid: !hasError
-                    });
-                  }
-                  if (!pendings) {
-                    callback.call(ngModel, ngModel.$ngfValidations);
-                  }
-                });
-              }
-            });
-          }
-        }
-        validateAsync('maxHeight', function(cons) {
-          return cons.height && cons.height.max;
-        }, /image/, this.imageDimensions, function(d, val) {
-          return d.height <= val;
-        });
-        validateAsync('minHeight', function(cons) {
-          return cons.height && cons.height.min;
-        }, /image/, this.imageDimensions, function(d, val) {
-          return d.height >= val;
-        });
-        validateAsync('maxWidth', function(cons) {
-          return cons.width && cons.width.max;
-        }, /image/, this.imageDimensions, function(d, val) {
-          return d.width <= val;
-        });
-        validateAsync('minWidth', function(cons) {
-          return cons.width && cons.width.min;
-        }, /image/, this.imageDimensions, function(d, val) {
-          return d.width >= val;
-        });
-        validateAsync('ratio', function(cons) {
-          return cons.ratio;
-        }, /image/, this.imageDimensions, function(d, val) {
-          var split = val.toString().split(','),
-              valid = false;
-          for (var i = 0; i < split.length; i++) {
-            var r = split[i],
-                xIndex = r.search(/x/i);
-            if (xIndex > -1) {
-              r = parseFloat(r.substring(0, xIndex)) / parseFloat(r.substring(xIndex + 1));
-            } else {
-              r = parseFloat(r);
-            }
-            if (Math.abs((d.width / d.height) - r) < 0.0001) {
-              valid = true;
-            }
-          }
-          return valid;
-        });
-        validateAsync('maxDuration', function(cons) {
-          return cons.duration && cons.duration.max;
-        }, /audio|video/, this.mediaDuration, function(d, val) {
-          return d <= translateScalars(val);
-        });
-        validateAsync('minDuration', function(cons) {
-          return cons.duration && cons.duration.min;
-        }, /audio|video/, this.mediaDuration, function(d, val) {
-          return d >= translateScalars(val);
-        });
-        validateAsync('validateAsyncFn', function() {
-          return null;
-        }, /./, function(file, val) {
-          return val;
-        }, function(r) {
-          return r === true || r === null || r === '';
-        });
-        if (!pendings) {
-          callback.call(ngModel, ngModel.$ngfValidations);
-        }
-      };
-      upload.imageDimensions = function(file) {
-        if (file.width && file.height) {
-          var d = $q.defer();
-          $timeout(function() {
-            d.resolve({
-              width: file.width,
-              height: file.height
-            });
-          });
-          return d.promise;
-        }
-        if (file.$ngfDimensionPromise)
-          return file.$ngfDimensionPromise;
-        var deferred = $q.defer();
-        $timeout(function() {
-          if (file.type.indexOf('image') !== 0) {
-            deferred.reject('not image');
-            return;
-          }
-          upload.dataUrl(file).then(function(dataUrl) {
-            var img = angular.element('<img>').attr('src', dataUrl).css('visibility', 'hidden').css('position', 'fixed');
-            function success() {
-              var width = img[0].clientWidth;
-              var height = img[0].clientHeight;
-              img.remove();
-              file.width = width;
-              file.height = height;
-              deferred.resolve({
-                width: width,
-                height: height
-              });
-            }
-            function error() {
-              img.remove();
-              deferred.reject('load error');
-            }
-            img.on('load', success);
-            img.on('error', error);
-            var count = 0;
-            function checkLoadError() {
-              $timeout(function() {
-                if (img[0].parentNode) {
-                  if (img[0].clientWidth) {
-                    success();
-                  } else if (count > 10) {
-                    error();
-                  } else {
-                    checkLoadError();
-                  }
-                }
-              }, 1000);
-            }
-            checkLoadError();
-            angular.element(document.getElementsByTagName('body')[0]).append(img);
-          }, function() {
-            deferred.reject('load error');
-          });
-        });
-        file.$ngfDimensionPromise = deferred.promise;
-        file.$ngfDimensionPromise['finally'](function() {
-          delete file.$ngfDimensionPromise;
-        });
-        return file.$ngfDimensionPromise;
-      };
-      upload.mediaDuration = function(file) {
-        if (file.duration) {
-          var d = $q.defer();
-          $timeout(function() {
-            d.resolve(file.duration);
-          });
-          return d.promise;
-        }
-        if (file.$ngfDurationPromise)
-          return file.$ngfDurationPromise;
-        var deferred = $q.defer();
-        $timeout(function() {
-          if (file.type.indexOf('audio') !== 0 && file.type.indexOf('video') !== 0) {
-            deferred.reject('not media');
-            return;
-          }
-          upload.dataUrl(file).then(function(dataUrl) {
-            var el = angular.element(file.type.indexOf('audio') === 0 ? '<audio>' : '<video>').attr('src', dataUrl).css('visibility', 'none').css('position', 'fixed');
-            function success() {
-              var duration = el[0].duration;
-              file.duration = duration;
-              el.remove();
-              deferred.resolve(duration);
-            }
-            function error() {
-              el.remove();
-              deferred.reject('load error');
-            }
-            el.on('loadedmetadata', success);
-            el.on('error', error);
-            var count = 0;
-            function checkLoadError() {
-              $timeout(function() {
-                if (el[0].parentNode) {
-                  if (el[0].duration) {
-                    success();
-                  } else if (count > 10) {
-                    error();
-                  } else {
-                    checkLoadError();
-                  }
-                }
-              }, 1000);
-            }
-            checkLoadError();
-            angular.element(document.body).append(el);
-          }, function() {
-            deferred.reject('load error');
-          });
-        });
-        file.$ngfDurationPromise = deferred.promise;
-        file.$ngfDurationPromise['finally'](function() {
-          delete file.$ngfDurationPromise;
-        });
-        return file.$ngfDurationPromise;
-      };
-      return upload;
-    }]);
-    ngFileUpload.service('UploadResize', ['UploadValidate', '$q', '$timeout', function(UploadValidate, $q, $timeout) {
-      var upload = UploadValidate;
-      var calculateAspectRatioFit = function(srcWidth, srcHeight, maxWidth, maxHeight) {
-        var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
-        return {
-          width: srcWidth * ratio,
-          height: srcHeight * ratio
-        };
-      };
-      var resize = function(imagen, width, height, quality, type) {
-        var deferred = $q.defer();
-        var canvasElement = document.createElement('canvas');
-        var imagenElement = document.createElement('img');
-        imagenElement.onload = function() {
-          try {
-            var dimensions = calculateAspectRatioFit(imagenElement.width, imagenElement.height, width, height);
-            canvasElement.width = dimensions.width;
-            canvasElement.height = dimensions.height;
-            var context = canvasElement.getContext('2d');
-            context.drawImage(imagenElement, 0, 0, dimensions.width, dimensions.height);
-            deferred.resolve(canvasElement.toDataURL(type || 'image/WebP', quality || 1.0));
-          } catch (e) {
-            deferred.reject(e);
-          }
-        };
-        imagenElement.onerror = function() {
-          deferred.reject();
-        };
-        imagenElement.src = imagen;
-        return deferred.promise;
-      };
-      var dataURLtoBlob = function(dataurl) {
-        var arr = dataurl.split(','),
-            mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]),
-            n = bstr.length,
-            u8arr = new Uint8Array(n);
-        while (n--) {
-          u8arr[n] = bstr.charCodeAt(n);
-        }
-        return new Blob([u8arr], {type: mime});
-      };
-      upload.resize = function(file, width, height, quality) {
-        var deferred = $q.defer();
-        if (file.type.indexOf('image') !== 0) {
-          $timeout(function() {
-            deferred.resolve('Only images are allowed for resizing!');
-          });
-          return deferred.promise;
-        }
-        upload.dataUrl(file, true).then(function(url) {
-          resize(url, width, height, quality, file.type).then(function(dataUrl) {
-            var blob = dataURLtoBlob(dataUrl);
-            blob.name = file.name;
-            deferred.resolve(blob);
-          }, function() {
-            deferred.reject();
-          });
-        }, function() {
-          deferred.reject();
-        });
-        return deferred.promise;
-      };
-      return upload;
-    }]);
-    (function() {
-      ngFileUpload.directive('ngfDrop', ['$parse', '$timeout', '$location', 'Upload', function($parse, $timeout, $location, Upload) {
-        return {
-          restrict: 'AEC',
-          require: '?ngModel',
-          link: function(scope, elem, attr, ngModel) {
-            linkDrop(scope, elem, attr, ngModel, $parse, $timeout, $location, Upload);
-          }
-        };
-      }]);
-      ngFileUpload.directive('ngfNoFileDrop', function() {
-        return function(scope, elem) {
-          if (dropAvailable())
-            elem.css('display', 'none');
-        };
-      });
-      ngFileUpload.directive('ngfDropAvailable', ['$parse', '$timeout', 'Upload', function($parse, $timeout, Upload) {
-        return function(scope, elem, attr) {
-          if (dropAvailable()) {
-            var model = $parse(Upload.attrGetter('ngfDropAvailable', attr));
-            $timeout(function() {
-              model(scope);
-              if (model.assign) {
-                model.assign(scope, true);
-              }
-            });
-          }
-        };
-      }]);
-      function linkDrop(scope, elem, attr, ngModel, $parse, $timeout, $location, upload) {
-        var available = dropAvailable();
-        var attrGetter = function(name, scope, params) {
-          return upload.attrGetter(name, attr, scope, params);
-        };
-        if (attrGetter('dropAvailable')) {
-          $timeout(function() {
-            if (scope[attrGetter('dropAvailable')]) {
-              scope[attrGetter('dropAvailable')].value = available;
-            } else {
-              scope[attrGetter('dropAvailable')] = available;
-            }
-          });
-        }
-        if (!available) {
-          if (attrGetter('ngfHideOnDropNotAvailable', scope) === true) {
-            elem.css('display', 'none');
-          }
-          return;
-        }
-        function isDisabled() {
-          return elem.attr('disabled') || attrGetter('ngfDropDisabled', scope);
-        }
-        upload.registerValidators(ngModel, null, attr, scope);
-        var leaveTimeout = null;
-        var stopPropagation = $parse(attrGetter('ngfStopPropagation'));
-        var dragOverDelay = 1;
-        var actualDragOverClass;
-        elem[0].addEventListener('dragover', function(evt) {
-          if (isDisabled())
-            return;
-          evt.preventDefault();
-          if (stopPropagation(scope))
-            evt.stopPropagation();
-          if (navigator.userAgent.indexOf('Chrome') > -1) {
-            var b = evt.dataTransfer.effectAllowed;
-            evt.dataTransfer.dropEffect = ('move' === b || 'linkMove' === b) ? 'move' : 'copy';
-          }
-          $timeout.cancel(leaveTimeout);
-          if (!actualDragOverClass) {
-            actualDragOverClass = 'C';
-            calculateDragOverClass(scope, attr, evt, function(clazz) {
-              actualDragOverClass = clazz;
-              elem.addClass(actualDragOverClass);
-            });
-          }
-        }, false);
-        elem[0].addEventListener('dragenter', function(evt) {
-          if (isDisabled())
-            return;
-          evt.preventDefault();
-          if (stopPropagation(scope))
-            evt.stopPropagation();
-        }, false);
-        elem[0].addEventListener('dragleave', function() {
-          if (isDisabled())
-            return;
-          leaveTimeout = $timeout(function() {
-            elem.removeClass(actualDragOverClass);
-            actualDragOverClass = null;
-          }, dragOverDelay || 1);
-        }, false);
-        elem[0].addEventListener('drop', function(evt) {
-          if (isDisabled())
-            return;
-          evt.preventDefault();
-          if (stopPropagation(scope))
-            evt.stopPropagation();
-          elem.removeClass(actualDragOverClass);
-          actualDragOverClass = null;
-          extractFiles(evt, function(files) {
-            upload.updateModel(ngModel, attr, scope, attrGetter('ngfChange') || attrGetter('ngfDrop'), files, evt);
-          }, attrGetter('ngfAllowDir', scope) !== false, attrGetter('multiple') || attrGetter('ngfMultiple', scope));
-        }, false);
-        elem[0].addEventListener('paste', function(evt) {
-          if (isDisabled())
-            return;
-          var files = [];
-          var clipboard = evt.clipboardData || evt.originalEvent.clipboardData;
-          if (clipboard && clipboard.items) {
-            for (var k = 0; k < clipboard.items.length; k++) {
-              if (clipboard.items[k].type.indexOf('image') !== -1) {
-                files.push(clipboard.items[k].getAsFile());
-              }
-            }
-            upload.updateModel(ngModel, attr, scope, attrGetter('ngfChange') || attrGetter('ngfDrop'), files, evt);
-          }
-        }, false);
-        function calculateDragOverClass(scope, attr, evt, callback) {
-          var clazz = attrGetter('ngfDragOverClass', scope, {$event: evt}),
-              dClass = attrGetter('ngfDragOverClass') || 'dragover';
-          if (angular.isString(clazz)) {
-            callback(clazz);
-            return;
-          }
-          if (clazz) {
-            if (clazz.delay)
-              dragOverDelay = clazz.delay;
-            if (clazz.accept || clazz.reject) {
-              var items = evt.dataTransfer.items;
-              if (items != null) {
-                var pattern = attrGetter('ngfPattern', scope, {$event: evt});
-                for (var i = 0; i < items.length; i++) {
-                  if (items[i].kind === 'file' || items[i].kind === '') {
-                    if (!upload.validatePattern(items[i], pattern)) {
-                      dClass = clazz.reject;
-                      break;
-                    } else {
-                      dClass = clazz.accept;
-                    }
-                  }
-                }
-              }
-            }
-          }
-          callback(dClass);
-        }
-        function extractFiles(evt, callback, allowDir, multiple) {
-          var files = [],
-              processing = 0;
-          function traverseFileTree(files, entry, path) {
-            if (entry != null) {
-              if (entry.isDirectory) {
-                var filePath = (path || '') + entry.name;
-                files.push({
-                  name: entry.name,
-                  type: 'directory',
-                  path: filePath
-                });
-                var dirReader = entry.createReader();
-                var entries = [];
-                processing++;
-                var readEntries = function() {
-                  dirReader.readEntries(function(results) {
-                    try {
-                      if (!results.length) {
-                        for (var i = 0; i < entries.length; i++) {
-                          traverseFileTree(files, entries[i], (path ? path : '') + entry.name + '/');
-                        }
-                        processing--;
-                      } else {
-                        entries = entries.concat(Array.prototype.slice.call(results || [], 0));
-                        readEntries();
-                      }
-                    } catch (e) {
-                      processing--;
-                      console.error(e);
-                    }
-                  }, function() {
-                    processing--;
-                  });
-                };
-                readEntries();
-              } else {
-                processing++;
-                entry.file(function(file) {
-                  try {
-                    processing--;
-                    file.path = (path ? path : '') + file.name;
-                    files.push(file);
-                  } catch (e) {
-                    processing--;
-                    console.error(e);
-                  }
-                }, function() {
-                  processing--;
-                });
-              }
-            }
-          }
-          var items = evt.dataTransfer.items;
-          if (items && items.length > 0 && $location.protocol() !== 'file') {
-            for (var i = 0; i < items.length; i++) {
-              if (items[i].webkitGetAsEntry && items[i].webkitGetAsEntry() && items[i].webkitGetAsEntry().isDirectory) {
-                var entry = items[i].webkitGetAsEntry();
-                if (entry.isDirectory && !allowDir) {
-                  continue;
-                }
-                if (entry != null) {
-                  traverseFileTree(files, entry);
-                }
-              } else {
-                var f = items[i].getAsFile();
-                if (f != null)
-                  files.push(f);
-              }
-              if (!multiple && files.length > 0)
-                break;
-            }
-          } else {
-            var fileList = evt.dataTransfer.files;
-            if (fileList != null) {
-              for (var j = 0; j < fileList.length; j++) {
-                files.push(fileList.item(j));
-                if (!multiple && files.length > 0) {
-                  break;
-                }
-              }
-            }
-          }
-          var delays = 0;
-          (function waitForProcess(delay) {
-            $timeout(function() {
-              if (!processing) {
-                if (!multiple && files.length > 1) {
-                  i = 0;
-                  while (files[i].type === 'directory')
-                    i++;
-                  files = [files[i]];
-                }
-                callback(files);
-              } else {
-                if (delays++ * 10 < 20 * 1000) {
-                  waitForProcess(10);
-                }
-              }
-            }, delay || 0);
-          })();
-        }
-      }
-      function dropAvailable() {
-        var div = document.createElement('div');
-        return ('draggable' in div) && ('ondrop' in div) && !/Edge\/12./i.test(navigator.userAgent);
-      }
-    })();
-    this["ngFileUpload"] = ngFileUpload;
-  })();
-  return _retrieveGlobal();
+$__System.registerDynamic("2b", ["35"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("35");
+  global.define = __define;
+  return module.exports;
 });
 
-$__System.registerDynamic("2a", [], true, function(require, exports, module) {
+$__System.registerDynamic("2d", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -32053,19 +32095,79 @@ $__System.registerDynamic("2a", [], true, function(require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("2c", ["34", "35", "36", "37", "38", "33", "2a", "39", "2e", "3a"], true, function(require, exports, module) {
+$__System.registerDynamic("2c", ["36", "37", "2d", "38", "2f"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var LIBRARY = require("34"),
-      $def = require("35"),
-      $redef = require("36"),
-      hide = require("37"),
-      has = require("38"),
-      SYMBOL_ITERATOR = require("33")('iterator'),
-      Iterators = require("2a"),
+  var setUnscope = require("36"),
+      step = require("37"),
+      Iterators = require("2d"),
+      toIObject = require("38");
+  require("2f")(Array, 'Array', function(iterated, kind) {
+    this._t = toIObject(iterated);
+    this._i = 0;
+    this._k = kind;
+  }, function() {
+    var O = this._t,
+        kind = this._k,
+        index = this._i++;
+    if (!O || index >= O.length) {
+      this._t = undefined;
+      return step(1);
+    }
+    if (kind == 'keys')
+      return step(0, index);
+    if (kind == 'values')
+      return step(0, O[index]);
+    return step(0, [index, O[index]]);
+  }, 'values');
+  Iterators.Arguments = Iterators.Array;
+  setUnscope('keys');
+  setUnscope('values');
+  setUnscope('entries');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2e", ["39", "3a"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var toInteger = require("39"),
+      defined = require("3a");
+  module.exports = function(TO_STRING) {
+    return function(that, pos) {
+      var s = String(defined(that)),
+          i = toInteger(pos),
+          l = s.length,
+          a,
+          b;
+      if (i < 0 || i >= l)
+        return TO_STRING ? '' : undefined;
+      a = s.charCodeAt(i);
+      return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2f", ["3b", "3c", "3d", "3e", "3f", "31", "2d", "40", "2a", "41"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var LIBRARY = require("3b"),
+      $def = require("3c"),
+      $redef = require("3d"),
+      hide = require("3e"),
+      has = require("3f"),
+      SYMBOL_ITERATOR = require("31")('iterator'),
+      Iterators = require("2d"),
       BUGGY = !([].keys && 'next' in [].keys()),
       FF_ITERATOR = '@@iterator',
       KEYS = 'keys',
@@ -32074,7 +32176,7 @@ $__System.registerDynamic("2c", ["34", "35", "36", "37", "38", "33", "2a", "39",
     return this;
   };
   module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE) {
-    require("39")(Constructor, NAME, next);
+    require("40")(Constructor, NAME, next);
     var createMethod = function(kind) {
       switch (kind) {
         case KEYS:
@@ -32097,8 +32199,8 @@ $__System.registerDynamic("2c", ["34", "35", "36", "37", "38", "33", "2a", "39",
         methods,
         key;
     if (_native) {
-      var IteratorPrototype = require("2e").getProto(_default.call(new Base));
-      require("3a")(IteratorPrototype, TAG, true);
+      var IteratorPrototype = require("2a").getProto(_default.call(new Base));
+      require("41")(IteratorPrototype, TAG, true);
       if (!LIBRARY && has(proto, FF_ITERATOR))
         hide(IteratorPrototype, SYMBOL_ITERATOR, returnThis);
     }
@@ -32125,162 +32227,13 @@ $__System.registerDynamic("2c", ["34", "35", "36", "37", "38", "33", "2a", "39",
   return module.exports;
 });
 
-$__System.registerDynamic("2d", ["3b"], true, function(require, exports, module) {
+$__System.registerDynamic("30", ["42", "31"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__System._nodeRequire ? process : require("3b");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2e", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $Object = Object;
-  module.exports = {
-    create: $Object.create,
-    getProto: $Object.getPrototypeOf,
-    isEnum: {}.propertyIsEnumerable,
-    getDesc: $Object.getOwnPropertyDescriptor,
-    setDesc: $Object.defineProperty,
-    setDescs: $Object.defineProperties,
-    getKeys: $Object.keys,
-    getNames: $Object.getOwnPropertyNames,
-    getSymbols: $Object.getOwnPropertySymbols,
-    each: [].forEach
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("30", ["32", "33", "2a", "31"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var classof = require("32"),
-      ITERATOR = require("33")('iterator'),
-      Iterators = require("2a");
-  module.exports = require("31").getIteratorMethod = function(it) {
-    if (it != undefined)
-      return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("29", ["3c", "3d", "2a", "3e", "2c"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var setUnscope = require("3c"),
-      step = require("3d"),
-      Iterators = require("2a"),
-      toIObject = require("3e");
-  require("2c")(Array, 'Array', function(iterated, kind) {
-    this._t = toIObject(iterated);
-    this._i = 0;
-    this._k = kind;
-  }, function() {
-    var O = this._t,
-        kind = this._k,
-        index = this._i++;
-    if (!O || index >= O.length) {
-      this._t = undefined;
-      return step(1);
-    }
-    if (kind == 'keys')
-      return step(0, index);
-    if (kind == 'values')
-      return step(0, O[index]);
-    return step(0, [index, O[index]]);
-  }, 'values');
-  Iterators.Arguments = Iterators.Array;
-  setUnscope('keys');
-  setUnscope('values');
-  setUnscope('entries');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2b", ["3f", "40"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toInteger = require("3f"),
-      defined = require("40");
-  module.exports = function(TO_STRING) {
-    return function(that, pos) {
-      var s = String(defined(that)),
-          i = toInteger(pos),
-          l = s.length,
-          a,
-          b;
-      if (i < 0 || i >= l)
-        return TO_STRING ? '' : undefined;
-      a = s.charCodeAt(i);
-      return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-    };
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2f", ["41"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var isObject = require("41");
-  module.exports = function(it) {
-    if (!isObject(it))
-      throw TypeError(it + ' is not an object!');
-    return it;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("33", ["42", "43", "44"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var store = require("42")('wks'),
-      Symbol = require("43").Symbol;
-  module.exports = function(name) {
-    return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || require("44"))('Symbol.' + name));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("31", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var core = module.exports = {};
-  if (typeof __e == 'number')
-    __e = core;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("32", ["45", "33"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var cof = require("45"),
-      TAG = require("33")('toStringTag'),
+  var cof = require("42"),
+      TAG = require("31")('toStringTag'),
       ARG = cof(function() {
         return arguments;
       }()) == 'Arguments';
@@ -32294,338 +32247,64 @@ $__System.registerDynamic("32", ["45", "33"], true, function(require, exports, m
   return module.exports;
 });
 
-$__System.registerDynamic("35", ["43", "31"], true, function(require, exports, module) {
+$__System.registerDynamic("32", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var global = require("43"),
-      core = require("31"),
-      PROTOTYPE = 'prototype';
-  var ctx = function(fn, that) {
-    return function() {
-      return fn.apply(that, arguments);
-    };
-  };
-  var $def = function(type, name, source) {
-    var key,
-        own,
-        out,
-        exp,
-        isGlobal = type & $def.G,
-        isProto = type & $def.P,
-        target = isGlobal ? global : type & $def.S ? global[name] : (global[name] || {})[PROTOTYPE],
-        exports = isGlobal ? core : core[name] || (core[name] = {});
-    if (isGlobal)
-      source = name;
-    for (key in source) {
-      own = !(type & $def.F) && target && key in target;
-      if (own && key in exports)
-        continue;
-      out = own ? target[key] : source[key];
-      if (isGlobal && typeof target[key] != 'function')
-        exp = source[key];
-      else if (type & $def.B && own)
-        exp = ctx(out, global);
-      else if (type & $def.W && target[key] == out)
-        !function(C) {
-          exp = function(param) {
-            return this instanceof C ? new C(param) : C(param);
-          };
-          exp[PROTOTYPE] = C[PROTOTYPE];
-        }(out);
-      else
-        exp = isProto && typeof out == 'function' ? ctx(Function.call, out) : out;
-      exports[key] = exp;
-      if (isProto)
-        (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
-    }
-  };
-  $def.F = 1;
-  $def.G = 2;
-  $def.S = 4;
-  $def.P = 8;
-  $def.B = 16;
-  $def.W = 32;
-  module.exports = $def;
+  var core = module.exports = {};
+  if (typeof __e == 'number')
+    __e = core;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("34", [], true, function(require, exports, module) {
+$__System.registerDynamic("31", ["43", "44", "45"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("36", ["37"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("37");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("39", ["2e", "37", "33", "46", "3a"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var $ = require("2e"),
-      IteratorPrototype = {};
-  require("37")(IteratorPrototype, require("33")('iterator'), function() {
-    return this;
-  });
-  module.exports = function(Constructor, NAME, next) {
-    Constructor.prototype = $.create(IteratorPrototype, {next: require("46")(1, next)});
-    require("3a")(Constructor, NAME + ' Iterator');
+  var store = require("43")('wks'),
+      Symbol = require("44").Symbol;
+  module.exports = function(name) {
+    return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || require("45"))('Symbol.' + name));
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("3a", ["38", "37", "33"], true, function(require, exports, module) {
+$__System.registerDynamic("33", ["46"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var has = require("38"),
-      hide = require("37"),
-      TAG = require("33")('toStringTag');
-  module.exports = function(it, tag, stat) {
-    if (it && !has(it = stat ? it : it.prototype, TAG))
-      hide(it, TAG, tag);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3e", ["47", "40"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var IObject = require("47"),
-      defined = require("40");
+  var isObject = require("46");
   module.exports = function(it) {
-    return IObject(defined(it));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3d", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(done, value) {
-    return {
-      value: value,
-      done: !!done
-    };
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3b", ["48"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("48");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3c", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function() {};
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3f", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ceil = Math.ceil,
-      floor = Math.floor;
-  module.exports = function(it) {
-    return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("37", ["2e", "46", "49"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = require("2e"),
-      createDesc = require("46");
-  module.exports = require("49") ? function(object, key, value) {
-    return $.setDesc(object, key, createDesc(1, value));
-  } : function(object, key, value) {
-    object[key] = value;
-    return object;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("40", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(it) {
-    if (it == undefined)
-      throw TypeError("Can't call method on  " + it);
+    if (!isObject(it))
+      throw TypeError(it + ' is not an object!');
     return it;
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("43", [], true, function(require, exports, module) {
+$__System.registerDynamic("34", ["30", "31", "2d", "32"], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var UNDEFINED = 'undefined';
-  var global = module.exports = typeof window != UNDEFINED && window.Math == Math ? window : typeof self != UNDEFINED && self.Math == Math ? self : Function('return this')();
-  if (typeof __g == 'number')
-    __g = global;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("42", ["43"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var global = require("43"),
-      SHARED = '__core-js_shared__',
-      store = global[SHARED] || (global[SHARED] = {});
-  module.exports = function(key) {
-    return store[key] || (store[key] = {});
+  var classof = require("30"),
+      ITERATOR = require("31")('iterator'),
+      Iterators = require("2d");
+  module.exports = require("32").getIteratorMethod = function(it) {
+    if (it != undefined)
+      return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("44", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var id = 0,
-      px = Math.random();
-  module.exports = function(key) {
-    return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("45", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toString = {}.toString;
-  module.exports = function(it) {
-    return toString.call(it).slice(8, -1);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("38", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var hasOwnProperty = {}.hasOwnProperty;
-  module.exports = function(it, key) {
-    return hasOwnProperty.call(it, key);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("41", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(it) {
-    return it !== null && (typeof it == 'object' || typeof it == 'function');
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("46", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(bitmap, value) {
-    return {
-      enumerable: !(bitmap & 1),
-      configurable: !(bitmap & 2),
-      writable: !(bitmap & 4),
-      value: value
-    };
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("47", ["45"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var cof = require("45");
-  module.exports = 0 in Object('z') ? Object : function(it) {
-    return cof(it) == 'String' ? it.split('') : Object(it);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("49", ["4a"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = !require("4a")(function() {
-    return Object.defineProperty({}, 'a', {get: function() {
-        return 7;
-      }}).a != 7;
-  });
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("48", [], true, function(require, exports, module) {
+$__System.registerDynamic("35", [], true, function(require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -32683,6 +32362,327 @@ $__System.registerDynamic("48", [], true, function(require, exports, module) {
   process.umask = function() {
     return 0;
   };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("36", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function() {};
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("38", ["47", "3a"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var IObject = require("47"),
+      defined = require("3a");
+  module.exports = function(it) {
+    return IObject(defined(it));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("37", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(done, value) {
+    return {
+      value: value,
+      done: !!done
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3a", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(it) {
+    if (it == undefined)
+      throw TypeError("Can't call method on  " + it);
+    return it;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("39", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ceil = Math.ceil,
+      floor = Math.floor;
+  module.exports = function(it) {
+    return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3b", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = true;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3c", ["44", "32"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var global = require("44"),
+      core = require("32"),
+      PROTOTYPE = 'prototype';
+  var ctx = function(fn, that) {
+    return function() {
+      return fn.apply(that, arguments);
+    };
+  };
+  var $def = function(type, name, source) {
+    var key,
+        own,
+        out,
+        exp,
+        isGlobal = type & $def.G,
+        isProto = type & $def.P,
+        target = isGlobal ? global : type & $def.S ? global[name] : (global[name] || {})[PROTOTYPE],
+        exports = isGlobal ? core : core[name] || (core[name] = {});
+    if (isGlobal)
+      source = name;
+    for (key in source) {
+      own = !(type & $def.F) && target && key in target;
+      if (own && key in exports)
+        continue;
+      out = own ? target[key] : source[key];
+      if (isGlobal && typeof target[key] != 'function')
+        exp = source[key];
+      else if (type & $def.B && own)
+        exp = ctx(out, global);
+      else if (type & $def.W && target[key] == out)
+        !function(C) {
+          exp = function(param) {
+            return this instanceof C ? new C(param) : C(param);
+          };
+          exp[PROTOTYPE] = C[PROTOTYPE];
+        }(out);
+      else
+        exp = isProto && typeof out == 'function' ? ctx(Function.call, out) : out;
+      exports[key] = exp;
+      if (isProto)
+        (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
+    }
+  };
+  $def.F = 1;
+  $def.G = 2;
+  $def.S = 4;
+  $def.P = 8;
+  $def.B = 16;
+  $def.W = 32;
+  module.exports = $def;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3d", ["3e"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("3e");
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3e", ["2a", "48", "49"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("2a"),
+      createDesc = require("48");
+  module.exports = require("49") ? function(object, key, value) {
+    return $.setDesc(object, key, createDesc(1, value));
+  } : function(object, key, value) {
+    object[key] = value;
+    return object;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3f", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var hasOwnProperty = {}.hasOwnProperty;
+  module.exports = function(it, key) {
+    return hasOwnProperty.call(it, key);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("40", ["2a", "3e", "31", "48", "41"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $ = require("2a"),
+      IteratorPrototype = {};
+  require("3e")(IteratorPrototype, require("31")('iterator'), function() {
+    return this;
+  });
+  module.exports = function(Constructor, NAME, next) {
+    Constructor.prototype = $.create(IteratorPrototype, {next: require("48")(1, next)});
+    require("41")(Constructor, NAME + ' Iterator');
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("41", ["3f", "3e", "31"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var has = require("3f"),
+      hide = require("3e"),
+      TAG = require("31")('toStringTag');
+  module.exports = function(it, tag, stat) {
+    if (it && !has(it = stat ? it : it.prototype, TAG))
+      hide(it, TAG, tag);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("42", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var toString = {}.toString;
+  module.exports = function(it) {
+    return toString.call(it).slice(8, -1);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("43", ["44"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var global = require("44"),
+      SHARED = '__core-js_shared__',
+      store = global[SHARED] || (global[SHARED] = {});
+  module.exports = function(key) {
+    return store[key] || (store[key] = {});
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("44", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var UNDEFINED = 'undefined';
+  var global = module.exports = typeof window != UNDEFINED && window.Math == Math ? window : typeof self != UNDEFINED && self.Math == Math ? self : Function('return this')();
+  if (typeof __g == 'number')
+    __g = global;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("45", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var id = 0,
+      px = Math.random();
+  module.exports = function(key) {
+    return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("46", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(it) {
+    return it !== null && (typeof it == 'object' || typeof it == 'function');
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("47", ["42"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var cof = require("42");
+  module.exports = 0 in Object('z') ? Object : function(it) {
+    return cof(it) == 'String' ? it.split('') : Object(it);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("48", [], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(bitmap, value) {
+    return {
+      enumerable: !(bitmap & 1),
+      configurable: !(bitmap & 2),
+      writable: !(bitmap & 4),
+      value: value
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("49", ["4a"], true, function(require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = !require("4a")(function() {
+    return Object.defineProperty({}, 'a', {get: function() {
+        return 7;
+      }}).a != 7;
+  });
   global.define = __define;
   return module.exports;
 });
@@ -32757,7 +32757,7 @@ $__System.register('0', ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 
         }
     };
 });
-$__System.register('7', ['13', '14', '15'], function (_export) {
+$__System.register('7', ['16', '17', '18'], function (_export) {
     var _, _createClass, _classCallCheck, MainService;
 
     return {
@@ -32798,6 +32798,11 @@ $__System.register('7', ['13', '14', '15'], function (_export) {
                     key: 'getFeedback',
                     value: function getFeedback() {
                         return this.$http.get('/comments');
+                    }
+                }, {
+                    key: 'getAnalytics',
+                    value: function getAnalytics() {
+                        return this.$http.get('/analytics');
                     }
                 }, {
                     key: 'saveData',
@@ -32865,65 +32870,8 @@ $__System.register('7', ['13', '14', '15'], function (_export) {
         }
     };
 });
-$__System.register('9', ['14', '15'], function (_export) {
-    var _createClass, _classCallCheck, UploadCtrl;
-
-    return {
-        setters: [function (_) {
-            _createClass = _['default'];
-        }, function (_2) {
-            _classCallCheck = _2['default'];
-        }],
-        execute: function () {
-            'use strict';
-
-            UploadCtrl = (function () {
-                function UploadCtrl($state, Upload, Main) {
-                    _classCallCheck(this, UploadCtrl);
-
-                    this.Main = Main;
-                    this.Upload = Upload;
-                    this.$state = $state;
-
-                    this.myFiles = [];
-                    this.msg = "Select file to upload";
-                }
-
-                _createClass(UploadCtrl, [{
-                    key: 'upload',
-                    value: function upload() {
-                        var _this = this;
-
-                        this.Upload.upload({
-                            url: '/tcx/tojson',
-                            file: this.file
-                        }).progress(function (evt) {
-                            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                            _this.msg = 'progress: ' + progressPercentage + '% ' + evt.config.file.name;
-                        }).success(function (data, status, headers, config) {
-                            _this.Main.fname = config.file.name;
-                            ga('send', 'event', 'file-upload', _this.Main.fname);
-                            // console.log(data);
-
-                            // this.Main.data = this.Main.removeNullEntries(data);
-                            _this.Main.setTcxData(data);
-
-                            console.log("uploaded:", config.file.name);
-
-                            _this.$state.go('editor', {});
-                        });
-                    }
-                }]);
-
-                return UploadCtrl;
-            })();
-
-            _export('default', UploadCtrl);
-        }
-    };
-});
-$__System.register('a', ['13', '14', '15'], function (_export) {
-    var _, _createClass, _classCallCheck, MapCtrl;
+$__System.register('8', ['16', '17', '18', '19', '1a'], function (_export) {
+    var _, _createClass, _classCallCheck, Immutable, _slicedToArray, getTimeChange, getMovingTime, totalDist, updateSelected, getLastDistFromLap, initialiseSelected, EditorCtrl;
 
     return {
         setters: [function (_4) {
@@ -32932,158 +32880,10 @@ $__System.register('a', ['13', '14', '15'], function (_export) {
             _createClass = _2['default'];
         }, function (_3) {
             _classCallCheck = _3['default'];
-        }],
-        execute: function () {
-            'use strict';
-
-            MapCtrl = (function () {
-                function MapCtrl(Main, $scope, $rootScope) {
-                    var _this = this;
-
-                    _classCallCheck(this, MapCtrl);
-
-                    this.Main = Main;
-                    this.dots = [];
-                    this.map = {};
-                    // this.lap = this.Main.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap
-
-                    // $scope.$watch(this.Main.data, (newData) => {
-                    $scope.$watch(function () {
-                        return Main.data;
-                    }, function (newData) {
-                        // console.log(newData);
-                        if (!_.isEmpty(newData)) {
-                            _this.lap = Main.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
-
-                            if (!_.isEmpty(_this.map)) _this.drawMarkers(_this.lap);
-                        }
-                    });
-
-                    $scope.$on('mapInitialized', function (event, map) {
-                        _this.map = map;
-
-                        if (!_.isEmpty(_this.lap)) _this.drawMarkers(_this.lap);
-
-                        map.addListener('click', function (e) {
-                            // console.log(e.latLng);
-                            var closest = _this.findClosest(_this.lap, e.latLng);
-                            $rootScope.$broadcast("closest", closest);
-                        });
-
-                        map.addListener('zoom_changed', function () {
-                            _this.drawMarkers(_this.lap, false);
-                        });
-                    });
-
-                    $scope.$on('redraw', function () {
-                        return _this.drawMarkers(_this.lap);
-                    });
-                }
-
-                _createClass(MapCtrl, [{
-                    key: 'drawMarkers',
-                    value: function drawMarkers(laps) {
-                        var _this2 = this;
-
-                        var fitBounds = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
-
-                        var mybounds, radius, skipCount;
-                        radius = 2;
-                        // skipCount = Math.floor(Math.log(this.Main.trackpointCount));
-                        skipCount = (20 - Math.min(19, this.map.getZoom())) * 3 - 2;
-                        console.log("Zoom %s, skipCount %s", this.map.getZoom(), skipCount);
-
-                        // remove existing points
-                        if (this.dots.length) this.dots.forEach(function (dot) {
-                            return dot.setMap(null);
-                        });
-
-                        mybounds = new google.maps.LatLngBounds();
-                        laps.forEach(function (lap) {
-                            return lap.Track[0].Trackpoint.forEach(function (elem, idx) {
-                                var c, lat, lng, marker, markerOptions;
-                                if (idx % skipCount === 0) {
-                                    lat = parseFloat(elem.Position[0].LatitudeDegrees[0]);
-                                    lng = parseFloat(elem.Position[0].LongitudeDegrees[0]);
-                                    c = new google.maps.LatLng(lat, lng);
-                                    mybounds.extend(c);
-                                    markerOptions = {
-                                        position: c,
-                                        map: _this2.map
-                                    };
-                                    marker = new google.maps.Marker(markerOptions);
-                                    return _this2.dots.push(marker);
-                                }
-                            });
-                        });
-
-                        if (fitBounds) this.map.fitBounds(mybounds);
-                    }
-
-                    // Iterates through Main.data to find point closest to click point
-                    // returns [lap, idx]
-                }, {
-                    key: 'findClosest',
-                    value: function findClosest(laps, point) {
-                        var plat, plng, res;
-
-                        plat = point.lat();
-                        plng = point.lng();
-
-                        res = _.reduce(laps, function (lapAcc, lap, lapCount) {
-                            var thisLap;
-
-                            // get shortest distance for this lap
-                            thisLap = _.reduce(lap.Track[0].Trackpoint, function (acc, elem, idx) {
-                                var dist, lat, lng;
-                                if (elem.Position) {
-                                    lat = parseFloat(elem.Position[0].LatitudeDegrees[0]);
-                                    lng = parseFloat(elem.Position[0].LongitudeDegrees[0]);
-                                    dist = Math.pow(plat - lat, 2) + Math.pow(plng - lng, 2);
-
-                                    if (dist < acc[1]) {
-                                        return [idx, dist];
-                                    } else {
-                                        return acc;
-                                    }
-                                }
-                            }, [0, lapAcc[2]]);
-
-                            // compare this with best so far
-                            if (thisLap[1] < lapAcc[2]) {
-                                // i.e. return [lap, index in lap, dist]
-                                return [lapCount].concat(thisLap);
-                            } else {
-                                return lapAcc;
-                            }
-                        }, [0, 0, 10000000]);
-
-                        // console.log(res);
-                        return res.slice(0, -1);
-                    }
-                }]);
-
-                return MapCtrl;
-            })();
-
-            _export('default', MapCtrl);
-        }
-    };
-});
-$__System.register('8', ['13', '14', '15', '16', '17'], function (_export) {
-    var _, _createClass, _classCallCheck, Immutable, _slicedToArray, getTimeChange, getMovingTime, totalDist, updateSelected, getLastDistFromLap, initialiseSelected, EditorCtrl;
-
-    return {
-        setters: [function (_5) {
-            _ = _5['default'];
-        }, function (_2) {
-            _createClass = _2['default'];
-        }, function (_3) {
-            _classCallCheck = _3['default'];
-        }, function (_6) {
-            Immutable = _6['default'];
-        }, function (_4) {
-            _slicedToArray = _4['default'];
+        }, function (_5) {
+            Immutable = _5['default'];
+        }, function (_a) {
+            _slicedToArray = _a['default'];
         }],
         execute: function () {
 
@@ -33380,6 +33180,244 @@ $__System.register('8', ['13', '14', '15', '16', '17'], function (_export) {
         }
     };
 });
+$__System.register('9', ['17', '18'], function (_export) {
+    var _createClass, _classCallCheck, UploadCtrl;
+
+    return {
+        setters: [function (_) {
+            _createClass = _['default'];
+        }, function (_2) {
+            _classCallCheck = _2['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            UploadCtrl = (function () {
+                function UploadCtrl($state, Upload, Main) {
+                    _classCallCheck(this, UploadCtrl);
+
+                    this.Main = Main;
+                    this.Upload = Upload;
+                    this.$state = $state;
+
+                    this.myFiles = [];
+                    this.msg = "Select file to upload";
+                }
+
+                _createClass(UploadCtrl, [{
+                    key: 'upload',
+                    value: function upload() {
+                        var _this = this;
+
+                        this.Upload.upload({
+                            url: '/tcx/tojson',
+                            file: this.file
+                        }).progress(function (evt) {
+                            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                            _this.msg = 'progress: ' + progressPercentage + '% ' + evt.config.file.name;
+                        }).success(function (data, status, headers, config) {
+                            _this.Main.fname = config.file.name;
+                            ga('send', 'event', 'file-upload', _this.Main.fname);
+                            // console.log(data);
+
+                            // this.Main.data = this.Main.removeNullEntries(data);
+                            _this.Main.setTcxData(data);
+
+                            console.log("uploaded:", config.file.name);
+
+                            _this.$state.go('editor', {});
+                        });
+                    }
+                }]);
+
+                return UploadCtrl;
+            })();
+
+            _export('default', UploadCtrl);
+        }
+    };
+});
+$__System.register('a', ['16', '17', '18'], function (_export) {
+    var _, _createClass, _classCallCheck, MapCtrl;
+
+    return {
+        setters: [function (_4) {
+            _ = _4['default'];
+        }, function (_2) {
+            _createClass = _2['default'];
+        }, function (_3) {
+            _classCallCheck = _3['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            MapCtrl = (function () {
+                function MapCtrl(Main, $scope, $rootScope) {
+                    var _this = this;
+
+                    _classCallCheck(this, MapCtrl);
+
+                    this.Main = Main;
+                    this.dots = [];
+                    this.map = {};
+                    // this.lap = this.Main.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap
+
+                    // $scope.$watch(this.Main.data, (newData) => {
+                    $scope.$watch(function () {
+                        return Main.data;
+                    }, function (newData) {
+                        // console.log(newData);
+                        if (!_.isEmpty(newData)) {
+                            _this.lap = Main.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
+
+                            if (!_.isEmpty(_this.map)) _this.drawMarkers(_this.lap);
+                        }
+                    });
+
+                    $scope.$on('mapInitialized', function (event, map) {
+                        _this.map = map;
+
+                        if (!_.isEmpty(_this.lap)) _this.drawMarkers(_this.lap);
+
+                        map.addListener('click', function (e) {
+                            // console.log(e.latLng);
+                            var closest = _this.findClosest(_this.lap, e.latLng);
+                            $rootScope.$broadcast("closest", closest);
+                        });
+
+                        map.addListener('zoom_changed', function () {
+                            _this.drawMarkers(_this.lap, false);
+                        });
+                    });
+
+                    $scope.$on('redraw', function () {
+                        return _this.drawMarkers(_this.lap);
+                    });
+                }
+
+                _createClass(MapCtrl, [{
+                    key: 'drawMarkers',
+                    value: function drawMarkers(laps) {
+                        var _this2 = this;
+
+                        var fitBounds = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+
+                        var mybounds, radius, skipCount;
+                        radius = 2;
+                        // skipCount = Math.floor(Math.log(this.Main.trackpointCount));
+                        skipCount = (20 - Math.min(19, this.map.getZoom())) * 3 - 2;
+                        console.log("Zoom %s, skipCount %s", this.map.getZoom(), skipCount);
+
+                        // remove existing points
+                        if (this.dots.length) this.dots.forEach(function (dot) {
+                            return dot.setMap(null);
+                        });
+
+                        mybounds = new google.maps.LatLngBounds();
+                        laps.forEach(function (lap) {
+                            return lap.Track[0].Trackpoint.forEach(function (elem, idx) {
+                                var c, lat, lng, marker, markerOptions;
+                                if (idx % skipCount === 0) {
+                                    lat = parseFloat(elem.Position[0].LatitudeDegrees[0]);
+                                    lng = parseFloat(elem.Position[0].LongitudeDegrees[0]);
+                                    c = new google.maps.LatLng(lat, lng);
+                                    mybounds.extend(c);
+                                    markerOptions = {
+                                        position: c,
+                                        map: _this2.map
+                                    };
+                                    marker = new google.maps.Marker(markerOptions);
+                                    return _this2.dots.push(marker);
+                                }
+                            });
+                        });
+
+                        if (fitBounds) this.map.fitBounds(mybounds);
+                    }
+
+                    // Iterates through Main.data to find point closest to click point
+                    // returns [lap, idx]
+                }, {
+                    key: 'findClosest',
+                    value: function findClosest(laps, point) {
+                        var plat, plng, res;
+
+                        plat = point.lat();
+                        plng = point.lng();
+
+                        res = _.reduce(laps, function (lapAcc, lap, lapCount) {
+                            var thisLap;
+
+                            // get shortest distance for this lap
+                            thisLap = _.reduce(lap.Track[0].Trackpoint, function (acc, elem, idx) {
+                                var dist, lat, lng;
+                                if (elem.Position) {
+                                    lat = parseFloat(elem.Position[0].LatitudeDegrees[0]);
+                                    lng = parseFloat(elem.Position[0].LongitudeDegrees[0]);
+                                    dist = Math.pow(plat - lat, 2) + Math.pow(plng - lng, 2);
+
+                                    if (dist < acc[1]) {
+                                        return [idx, dist];
+                                    } else {
+                                        return acc;
+                                    }
+                                }
+                            }, [0, lapAcc[2]]);
+
+                            // compare this with best so far
+                            if (thisLap[1] < lapAcc[2]) {
+                                // i.e. return [lap, index in lap, dist]
+                                return [lapCount].concat(thisLap);
+                            } else {
+                                return lapAcc;
+                            }
+                        }, [0, 0, 10000000]);
+
+                        // console.log(res);
+                        return res.slice(0, -1);
+                    }
+                }]);
+
+                return MapCtrl;
+            })();
+
+            _export('default', MapCtrl);
+        }
+    };
+});
+$__System.register("b", ["18"], function (_export) {
+    var _classCallCheck, FeedbackCtrl;
+
+    return {
+        setters: [function (_) {
+            _classCallCheck = _["default"];
+        }],
+        execute: function () {
+            "use strict";
+
+            FeedbackCtrl = function FeedbackCtrl(Main) {
+                var _this = this;
+
+                _classCallCheck(this, FeedbackCtrl);
+
+                Main.getFeedback().then(function (response) {
+                    return _this.comments = response.data;
+                })["catch"](function (err) {
+                    return console.error(err);
+                });
+
+                Main.getAnalytics().then(function (response) {
+                    console.log(response.data);
+                    _this.analytics = response.data;
+                })["catch"](function (err) {
+                    return console.error(err);
+                });
+            };
+
+            _export("default", FeedbackCtrl);
+        }
+    };
+});
 $__System.register('c', [], function (_export) {
     'use strict';
 
@@ -33415,32 +33453,6 @@ $__System.register('c', [], function (_export) {
             ;
 
             _export('default', FeedbackDir);
-        }
-    };
-});
-$__System.register("b", ["15"], function (_export) {
-    var _classCallCheck, FeedbackCtrl;
-
-    return {
-        setters: [function (_) {
-            _classCallCheck = _["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            FeedbackCtrl = function FeedbackCtrl(Main) {
-                var _this = this;
-
-                _classCallCheck(this, FeedbackCtrl);
-
-                Main.getFeedback().then(function (response) {
-                    return _this.comments = response.data;
-                })["catch"](function (err) {
-                    return console.error(err);
-                });
-            };
-
-            _export("default", FeedbackCtrl);
         }
     };
 });

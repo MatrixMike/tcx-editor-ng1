@@ -1,3 +1,5 @@
+"use strict";
+
 var debug = process.env.NODE_ENV === 'development';
 var mailgun = require('mailgun-js')({
 	apiKey: process.env.MAILGUN_KEY,

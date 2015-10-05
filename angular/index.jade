@@ -10,15 +10,15 @@ html
         link(rel='stylesheet', href='/styles.css')
 
         //- You can use open graph tags to customize link previews. Learn more: https://developers.facebook.com/docs/sharing/webmasters
-        meta(property="og:url", content="https://tcx-editor.herokuapp.com/")
-        meta(property="og:type"          content="website")
-        meta(property="og:title"         content="Garmin tcx online file editor")
-        meta(property="og:description"   content="Remove un-wanted points from tcx tracks via simple online application; no download needed!")
-        meta(property="og:image"         content="https://tcx-editor.herokuapp.com/images/editor.png")
+        meta(property="og:url"         content="https://tcx-editor.herokuapp.com/")
+        meta(property="og:type"        content="website")
+        meta(property="og:title"       content="Garmin tcx online file editor")
+        meta(property="og:description" content="Remove un-wanted points from tcx tracks via simple online application; no download needed!")
+        meta(property="og:image"       content="https://tcx-editor.herokuapp.com/images/editor.png")
 
         base(href='/')
 
-    body(ng-app='garminEditorApp')
+    body()
         div#fb-root
         script.
             (function(d, s, id) {
@@ -62,7 +62,7 @@ html
         }
     
     script(src='//maps.google.com/maps/api/js')
-    //- script(src='system.js')
-    //- script(src='config.js')
-    script(src='build.js')
-    //- script(src='loader.js')
+    script(src='jspm_packages/system.js')
+    script(src='config.js')
+    script(src='loader.js')
+    //- script(src='build.js')

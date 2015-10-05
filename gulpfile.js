@@ -17,11 +17,8 @@ var paths = {
 	partials: ['angular/**/*.jade', '!angular/index.jade'],
 	home    : ['angular/index.jade'],
 	scss    : ['angular/**/*.scss'],
-	copy    : ['angular/assets/**/*.{png,jpg}'
-			  ,'angular/favicon.ico'
-			  ,'angular/jspm_packages/system.js'
-			  ,'angular/config.js'
-		  	  ,'angular/loader.js'
+	copy    : ['angular/assets/**/*.{png,jpg}',
+			  'angular/favicon.ico'
 		      ]
 };
 
@@ -70,14 +67,15 @@ gulp.task('copy', function () {
 	.pipe(gulp.dest('./dist'));
 });
 
-//run server using nodemon
-config = require('./ignore/settings');
+// run server using nodemon
+// use_strict is for let/const?
+var config = require('./ignore/settings');
 gulp.task('serve', function(){
 	return nodemon({
-		// script: 'server/bin/www',
-		script: 'index.js',
+		script: 'server/bin/www',
+		// script: 'index.js',
 		execMap: {
-	      js: "node --harmony --use_strict"
+	      js: "node --use_strict"
 	    },
 	    watch: 'server/*',
 		env: config
@@ -87,13 +85,17 @@ gulp.task('serve', function(){
 	});
 });
 
+gulp.task('production', function() {
+	gulp.start('systemjsbundle');
+});
+
 gulp.task('watch', ['serve'], function() {
     browserSync.init({
     	proxy: 'localhost:5000',
     });
 
     gulp.watch(paths.scss, ['sass']);
-    gulp.watch(paths.app, ['systemjsbundle']);
+    // gulp.watch(paths.app, ['systemjsbundle']);
     gulp.watch(paths.partials, ['jade']);
     gulp.watch(paths.home, ['home']);
     gulp.watch(paths.copy, ['copy']);

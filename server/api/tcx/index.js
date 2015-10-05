@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 var controller = require('./controller')
 
-// router.get('/test', controller.test);
+if (process.env.NODE_ENV === 'development')
+    router.get('/test', controller.test);
+
 router.post('/tojson', controller.TCX2Json);
 router.post('/fromjson/:fname', controller.Json2TcxFile);
 

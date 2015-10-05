@@ -21,6 +21,10 @@ class MainService {
         return this.$http.get('/comments');
     }
 
+    getAnalytics() {
+        return this.$http.get('/analytics');
+    }
+
     saveData(fname) {
 		return this.$http.post('/tcx/fromjson/' + this.fname, this.data);
     }

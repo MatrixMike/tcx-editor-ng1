@@ -5,12 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var cors = require('cors');
-var routes = require('./routes/index');
-var tcx = require('./api/tcx');
-var feedback = require('./api/feedback');
-
 var app = express();
+
+var cors = require('cors');
+// var routes = require('./routes/index')(app);
+
+// var tcx = require('./api/tcx');
+// var analytics = require('./api/analytics');
+// var feedback = require('./api/feedback');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,14 +28,12 @@ app.use(cookieParser());
 // CORS
 if (process.env.NODE_ENV = 'development')
     app.use(cors());
-// app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, '../dist')));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'tmp')));
 
-app.use('/tcx', tcx);
-app.use('/comments', feedback);
-app.use('/', routes); // must be last
+require('./routes/index')(app);
+// app.use('/tcx', tcx);
+// app.use('/analytics', analytics);
+// app.use('/comments', feedback);
+// app.use('/', routes); // must be last
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -10,3 +10,6 @@
 		.col-sm-3 {{comment.date}}
 		.col-sm-2 {{comment.email}}
 		.col-sm-7 {{comment.comment}}
+
+	map(center="0,0" zoom="1")
+		marker(ng-repeat="location in vm.analytics", position="{{location.lat}},{{location.lng}}")
