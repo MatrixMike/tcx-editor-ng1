@@ -1,6 +1,6 @@
 "use strict";
 
-var debug = process.env.NODE_ENV === 'development';
+var simDebug = process.env.NODE_ENV === 'development';
 var mailgun = require('mailgun-js')({
 	apiKey: process.env.MAILGUN_KEY,
 	domain: process.env.MAILGUN_DOMAIN
@@ -8,8 +8,10 @@ var mailgun = require('mailgun-js')({
 
 var oio = require('orchestrate');
 var db = oio(process.env.ORCHESTRATE_KEY, "api.aws-eu-west-1.orchestrate.io");
-var coll = (debug) ? "tcxeditor-dev" : "tcxeditor";
-if (debug) console.log("Getting data from collection: ", coll);
+// *********************** FIX
+// var coll = (simDebug) ? "tcxeditor-dev" : "tcxeditor";
+var coll = "tcxeditor";
+if (simDebug) console.log("Getting data from collection: ", coll);
 
 var getAllComments = function(withEmail, cb) {
 
@@ -56,11 +58,11 @@ exports.postComment = function(req, res) {
 	  "email": req.body.email,
 	  "comment": req.body.comment
 	}
-	if (debug) console.log("postComment: inserting to collection: '%s', '%s'", coll, JSON.stringify(data));
+	if (simDebug) console.log("postComment: inserting to collection: '%s', '%s'", coll, JSON.stringify(data));
 
 	db.post(coll, data)
 	.then(function (response) {
-		// if (debug) console.log("postComment: ", response);
+		// if (simDebug) console.log("postComment: ", response);
 
 		var data = {
 		  from: 'TCX-editor <me@tcxeditor.mailgun.org>',
@@ -71,7 +73,7 @@ exports.postComment = function(req, res) {
 
 		mailgun.messages().send(data, function (err, body) {
 			if (err) throw err;
-			if (debug) console.log('mailgun: ', body);
+			if (simDebug) console.log('mailgun: ', body);
 		});
 
 		getAllComments(false, (err, data) => {

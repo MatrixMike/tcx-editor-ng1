@@ -40,15 +40,15 @@
   padding: 10px 0 5px;
   max-height: 100px; }
 
-.hotbelgo-feedback .comments {
-  padding: 5px 0; }
-
 .feedback {
   margin-top: 10px;
   padding-bottom: 10px;
   background-color: #6ca3f5; }
   .feedback .comments > div {
     margin-bottom: 1em; }
+
+.hotbelgo-feedback .comments {
+  padding: 5px 0; }
 
 map {
   height: 350px; }
