@@ -11,5 +11,5 @@
 		.col-sm-2 {{comment.email}}
 		.col-sm-7 {{comment.comment}}
 
-	map(center="0,0" zoom="1")
+	map(center="40,-10" zoom="2")
 		marker(ng-repeat="location in vm.analytics", position="{{location.lat}},{{location.lng}}")
