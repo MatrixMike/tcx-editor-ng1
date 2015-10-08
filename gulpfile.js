@@ -40,7 +40,7 @@ gulp.task('home', function() {
 	.pipe(gulp.dest(dist));
 });
 
-gulp.task('systemjsbundle', function () {
+gulp.task('bundle', function () {
     builder.reset();
 
     return builder.loadConfig('./angular/config.js')
@@ -86,7 +86,7 @@ gulp.task('serve', function(){
 });
 
 gulp.task('production', function() {
-	gulp.start('systemjsbundle');
+	gulp.start('bundle');
 });
 
 gulp.task('watch', ['serve'], function() {
@@ -95,7 +95,7 @@ gulp.task('watch', ['serve'], function() {
     });
 
     gulp.watch(paths.scss, ['sass']);
-    // gulp.watch(paths.app, ['systemjsbundle']);
+    // gulp.watch(paths.app, ['bundle']);
     gulp.watch(paths.partials, ['jade']);
     gulp.watch(paths.home, ['home']);
     gulp.watch(paths.copy, ['copy']);
@@ -104,4 +104,4 @@ gulp.task('watch', ['serve'], function() {
 
 
 gulp.task('default', ['build', 'watch']);
-gulp.task('build', ['jade', 'copy', 'systemjsbundle', 'sass', 'home']);
+gulp.task('build', ['jade', 'copy', 'bundle', 'sass', 'home']);

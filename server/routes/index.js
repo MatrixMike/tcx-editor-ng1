@@ -11,7 +11,7 @@ module.exports = function (app) {
     app.use('/analytics', analytics);
     app.use('/comments', feedback);
 
-    app.use(express.static(path.join(__dirname, '../../angular')));
+    // app.use(express.static(path.join(__dirname, '../../angular')));
     app.use(express.static(path.join(__dirname, '../../dist')));
     app.use(express.static(path.join(__dirname, '../public')));
     app.use(express.static(path.join(__dirname, '../tmp')));

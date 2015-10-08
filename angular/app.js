@@ -4,7 +4,7 @@ import angular from 'angular';
 import 'angular-ui-router';
 import 'allenhwkim/angularjs-google-maps';
 import 'danialfarid/ng-file-upload';
-import 'mgechev/angular-immutable';
+// import 'mgechev/angular-immutable';
 
 import MainSvc from './services/main.svc';
 import EditorCtrl from './editor/editor.ctrl';
@@ -20,7 +20,6 @@ angular.module('garminEditorApp',
     [ 'ui.router'
     , 'ngMap'
     , 'ngFileUpload'
-    , 'immutable'
     , 'scroller'
     , 'templates'
     ]
