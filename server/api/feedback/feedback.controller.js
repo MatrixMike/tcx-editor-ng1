@@ -9,9 +9,9 @@ var mailgun = require('mailgun-js')({
 var oio = require('orchestrate');
 var db = oio(process.env.ORCHESTRATE_KEY, "api.aws-eu-west-1.orchestrate.io");
 var coll = (debug) ? "tcxeditor-dev" : "tcxeditor";
+if (debug) console.log("Getting data from collection: ", coll);
 
 var getAllComments = function(withEmail, cb) {
-	if (debug) console.log("Getting data from collection: ", coll);
 
 	db.list(coll)
 	.then(function(result) {

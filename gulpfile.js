@@ -72,10 +72,10 @@ gulp.task('copy', function () {
 var config = require('./ignore/settings');
 gulp.task('serve', function(){
 	return nodemon({
-		script: 'server/bin/www',
+		// script: 'server/bin/www',
 		// script: 'index.js',
 		execMap: {
-	      js: "node --use_strict"
+	      js: "npm start"
 	    },
 	    watch: 'server/*',
 		env: config
