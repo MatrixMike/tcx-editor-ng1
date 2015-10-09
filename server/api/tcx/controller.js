@@ -37,11 +37,13 @@ exports.TCX2Json = function (req, res, next) {
 				res.json(data);
 
 				// Save a copy of location for analytics
-				var loc = data.TrainingCenterDatabase.Activities[0].Activity[0].Lap[0].Track[0].Trackpoint[0].Position[0];
-				db.post('tcx-locations', {
-					lat: loc.LatitudeDegrees[0],
-					lng: loc.LongitudeDegrees[0]
-				})
+				if (!debug) {
+					var loc = data.TrainingCenterDatabase.Activities[0].Activity[0].Lap[0].Track[0].Trackpoint[0].Position[0];
+					db.post('tcx-locations', {
+						lat: loc.LatitudeDegrees[0],
+						lng: loc.LongitudeDegrees[0]
+					});
+				}
 				// .then(res =>
 				// 	// console.log(res).bind(console)
 				// );

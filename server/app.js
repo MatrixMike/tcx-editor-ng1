@@ -26,7 +26,7 @@ app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(cookieParser());
 // CORS
-if (process.env.NODE_ENV = 'development')
+if (process.env.NODE_ENV === 'development')
     app.use(cors());
 
 require('./routes/index')(app);

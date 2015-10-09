@@ -152,7 +152,14 @@
 
     var declaration = entry.declare.call(global, function(name, value) {
       module.locked = true;
-      exports[name] = value;
+
+      if (typeof name == 'object') {
+        for (var p in name)
+          exports[p] = name[p];
+      }
+      else {
+        exports[name] = value;
+      }
 
       for (var i = 0, l = module.importers.length; i < l; i++) {
         var importerModule = module.importers[i];
@@ -346,6 +353,10 @@
     if (modules[name])
       return modules[name];
 
+    // node core modules
+    if (name.substr(0, 6) == '@node/')
+      return require(name.substr(6));
+
     var entry = defined[name];
 
     // first we check if this module has already been defined in the registry
@@ -433,7 +444,7 @@
   // etc UMD / module pattern
 })*/
 
-(['0'], [], function($__System) {
+(['1'], [], function($__System) {
 
 (function(__global) {
   var loader = $__System;
@@ -693,13 +704,7 @@
             return require.call(loader, names, callback, errback, module.id);
           });
 
-        // set global require to AMD require
-        var curRequire = __global.require;
-        __global.require = require;
-
         var output = factory.apply(exportsIndex == -1 ? __global : exports, depValues);
-
-        __global.require = curRequire;
 
         if (typeof output == 'undefined' && module)
           output = module.exports;
@@ -782,87 +787,8 @@
   loader.amdDefine = define;
   loader.amdRequire = require;
 })(typeof self != 'undefined' ? self : global);
+
 "bundle";
-(function() {
-var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-define("1", ["f"], function(main) {
-  return main;
-});
-
-_removeDefine();
-})();
-$__System.registerDynamic("2", ["10"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("10");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3", ["11"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("11");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("4", ["12"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("12");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5", ["13"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("13");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("e", [], false, function(__require, __exports, __module) {
-  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
-  (function() {
-    angular.module("templates", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("editor/editor.html", "\n<div class=\"col-xs-12\">\n  <div class=\"row summary\">       \n    <div class=\"col-xs-12\">\n      <h2>Summary of ride ({{vm.startTime | date: \"d MMM yy\"}})</h2>\n      <div class=\"row\">\n        <div class=\"col-xs-2 table-head\"> </div>\n        <div class=\"col-xs-2 table-head\">Start</div>\n        <div class=\"col-xs-2 table-head\">End</div>\n        <div class=\"col-xs-2 table-head\">Time</div>\n        <div class=\"col-xs-2 table-head\">Distance</div>\n        <div class=\"col-xs-2 table-head\">Avg speed</div>\n      </div>\n      <div ng-repeat=\"lap in vm.data.Lap\" class=\"row\">\n        <div class=\"col-xs-2 table-head\">Lap {{$index + 1}}</div>\n        <div class=\"col-xs-2\">{{lap.Track[0].Trackpoint[0].Time[0] | date: \"HH:mm:ss\"}}</div>\n        <div class=\"col-xs-2\">{{lap.Track[0].Trackpoint[lap.Track[0].Trackpoint.length - 1].Time[0] | date: \"HH:mm:ss\"}}</div>\n        <div class=\"col-xs-2\">{{lap.TotalTimeSeconds[0]}}s</div>\n        <div class=\"col-xs-2\">{{lap.DistanceMeters / 1000 | number : 3}} km</div>\n        <div class=\"col-xs-2\">{{lap.Extensions[0].LX[0].AvgSpeed[0] * 60 * 60 / 1000 | number : 1}} km/h</div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <h2>Trackpoint data</h2>\n      <p>Choose \'trackpoints\' to delete from the rows below or click on the map (not the markers). Use Shift+Click to select multiple rows.</p>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-5 data-table\">\n      <div scroll-to=\"scroll-to\" data-target=\"{{vm.scrollPos}}\" ng-repeat=\"lap in vm.data.Lap track by $index\"><strong>Lap {{$index+1}}</strong>\n        <lap lapdata=\"lap.Track[0].Trackpoint\" count=\"{{$index}}\" check=\"vm.checkChange(lapIdx, idx, shift)\" selected=\"vm.selected[$index]\"></lap>\n      </div>\n    </div>\n    <div class=\"col-xs-7\"><map center=\"44, 5\" zoom=\"11\" draggable=\"true\" map-type-control=\"false\" auto-refresh=\"auto-refresh\" ng-controller=\"MapCtrl as map\"></map>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12 controls\">\n      <button ng-click=\"vm.deletePoints()\" class=\"btn btn-danger\">Delete selected points</button>\n      <button ng-click=\"vm.saveFile()\" class=\"btn btn-success btn-disabled\">{{vm.downloadMsg}}</button><a ui-sref=\"upload\" class=\"btn btn-primary\">Load different file</a>\n    </div>\n  </div>\n  <div class=\"row feedback\">\n    <div class=\"col-xs-12\">\n      <feedback></feedback>\n    </div>\n  </div>\n</div>");
-      $templateCache.put("editor/lap.tmpl.html", "\n<table>\n  <tr>\n    <th>Timestamp</th>\n    <th>Accum Dist. (m)</th>\n  </tr>\n  <tr ng-repeat=\"tp in vm.lapdata track by $index\" ng-class=\"{\'selected\': vm.selected[$index]}\" ng-click=\"vm.select($event, $index)\" class=\"trackpoint c{{$index}}\">\n    <td>{{tp.Time[0] | date: \'H:mm:ss\'}}</td>\n    <td>{{tp.DistanceMeters[0] | number : 1}} m</td>\n  </tr>\n</table>");
-      $templateCache.put("feedback.dir/feedback.tmpl.html", "\n<div>\n  <h3>Developer feedback</h3>\n  <p>Did the app work? If so, let me now your experience. If not, please provide details of what you did and what you hoped / expected it would do.</p>\n  <form ng-hide=\"comments\" class=\"row\">\n    <div class=\"col-sm-7\">\n      <div class=\"form-group\">\n        <textarea rows=\"2\" ng-model=\"vm.feedback\" placeholder=\"Comments, suggestions,...\" class=\"form-control\"></textarea>\n      </div>\n    </div>\n    <div class=\"col-sm-3\">\n      <div class=\"form-group\">\n        <input type=\"text\" ng-model=\"vm.email\" placeholder=\"email (Optional*)\" class=\"form-control\"/>\n      </div>\n      <p>* For developer contact. Not made public.</p>\n    </div>\n    <div class=\"col-sm-2\">\n      <button ng-click=\"vm.sendFeedback()\" class=\"btn btn-primary\">Send</button>\n    </div>\n  </form>\n  <div ng-show=\"comments\" class=\"row\">\n    <div class=\"col-sm-3\">\n      <h4>Date</h4>\n    </div>\n    <div class=\"col-sm-9\">\n      <h4>Comment</h4>\n    </div>\n  </div>\n  <div ng-repeat=\"comment in vm.comments\" class=\"row comments\">\n    <div class=\"col-sm-3\">\n      <p>{{comment.date}}</p>\n    </div>\n    <div class=\"col-sm-9\">\n      <p>{{comment.comment}}</p>\n    </div>\n  </div>\n</div>");
-      $templateCache.put("feedback/feedback.html", "\n<div class=\"col-xs-12 feedback\">\n  <h3>Feedback</h3>\n  <div class=\"row\">\n    <div class=\"col-sm-3 table-head\">Date</div>\n    <div class=\"col-sm-2 table-head\">Email</div>\n    <div class=\"col-sm-7 table-head\">Comments</div>\n  </div>\n  <div ng-repeat=\"comment in vm.comments\" class=\"row comments\">\n    <div class=\"col-sm-3\">{{comment.date}}</div>\n    <div class=\"col-sm-2\">{{comment.email}}</div>\n    <div class=\"col-sm-7\">{{comment.comment}}</div>\n  </div><map center=\"40,-10\" zoom=\"2\">\n    <marker ng-repeat=\"location in vm.analytics\" position=\"{{location.lat}},{{location.lng}}\"></marker></map>\n</div>");
-      $templateCache.put("upload/upload.html", "\n<div class=\"col-xs-12 upload\">\n  <div class=\"row\">\n    <div class=\"col-xs-7\">\n      <p>Ever left your Garmin running at the end of a ride? All your hard earned averages declined pointlessly? </p>\n      <p>This simple editor enables you to delete points from a file, recalculates aggregate ride data, and returns a new copy of the file.</p>\n      <p>To start, upload a \'.tcx\' file. You can convert a .fit file to .tcx using <a href=\"http://connect.garmin.com/\"> Garmin Connect\'s</a> export functionality.</p>\n      <p><strong>Note:</strong> This app is tested with Edge 800 (firmware 2.6) data. YMMV, but other users (including with Garmin 610) report success. </p>\n      <p>No copy of the data processed is kept.</p>\n      <form>\n        <div ngf-select=\"vm.upload($file)\" ng-model=\"vm.file\" name=\"file\" class=\"btn btn-primary btn-upload\">{{vm.msg}}</div>\n      </form>\n    </div>\n    <div class=\"col-xs-5 img-holder\"><img src=\"images/editor.png\" alt=\"Garmin tcx editor\"/></div>\n  </div>\n</div>");
-    }]);
-  })();
-  return _retrieveGlobal();
-});
-
-$__System.registerDynamic("d", [], false, function(__require, __exports, __module) {
-  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
-  (function() {
-    angular.module("scroller", []).directive('scrollTo', function() {
-      return {
-        restrict: 'A',
-        scope: {targetPx: '@'},
-        link: function(scope, $elm, attrs) {
-          return attrs.$observe('target', function(newValue, oldValue) {
-            jQuery(".data-table").animate({scrollTop: parseInt(newValue)}, "slow");
-          });
-        }
-      };
-    });
-  })();
-  return _retrieveGlobal();
-});
-
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
 (function(global, factory) {
@@ -6764,7 +6690,7 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
   };
   jQuery.fn.andSelf = jQuery.fn.addBack;
   if (typeof define === "function" && define.amd) {
-    define("f", [], function() {
+    define("2", [], function() {
       return jQuery;
     });
   }
@@ -6787,7 +6713,15 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
 
 _removeDefine();
 })();
-$__System.registerDynamic("10", [], false, function(__require, __exports, __module) {
+(function() {
+var _removeDefine = $__System.get("@@amd-helpers").createDefine();
+define("3", ["2"], function(main) {
+  return main;
+});
+
+_removeDefine();
+})();
+$__System.registerDynamic("4", [], false, function(__require, __exports, __module) {
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, "angular", null);
   (function() {
     "format global";
@@ -18161,7 +18095,17 @@ $__System.registerDynamic("10", [], false, function(__require, __exports, __modu
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("11", ["2"], false, function(__require, __exports, __module) {
+$__System.registerDynamic("5", ["4"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = req('4');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("6", ["5"], false, function(__require, __exports, __module) {
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
   (function() {
     "format global";
@@ -20217,7 +20161,17 @@ $__System.registerDynamic("11", ["2"], false, function(__require, __exports, __m
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("12", [], false, function(__require, __exports, __module) {
+$__System.registerDynamic("7", ["6"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = req('6');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("8", [], false, function(__require, __exports, __module) {
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
   (function() {
     angular.module('ngMap', []);
@@ -21808,135 +21762,17 @@ $__System.registerDynamic("12", [], false, function(__require, __exports, __modu
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("13", ["19"], true, function(require, exports, module) {
+$__System.registerDynamic("9", ["8"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  require("19");
-  module.exports = 'ngFileUpload';
+  module.exports = req('8');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("14", ["1a"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("1a");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("16", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  "use strict";
-  exports["default"] = function(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  };
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("15", ["1b"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  "use strict";
-  var _Object$defineProperty = require("1b")["default"];
-  exports["default"] = (function() {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor)
-          descriptor.writable = true;
-        _Object$defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-    return function(Constructor, protoProps, staticProps) {
-      if (protoProps)
-        defineProperties(Constructor.prototype, protoProps);
-      if (staticProps)
-        defineProperties(Constructor, staticProps);
-      return Constructor;
-    };
-  })();
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("17", ["1c"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("1c");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("18", ["1d", "1e"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  "use strict";
-  var _getIterator = require("1d")["default"];
-  var _isIterable = require("1e")["default"];
-  exports["default"] = (function() {
-    function sliceIterator(arr, i) {
-      var _arr = [];
-      var _n = true;
-      var _d = false;
-      var _e = undefined;
-      try {
-        for (var _i = _getIterator(arr),
-            _s; !(_n = (_s = _i.next()).done); _n = true) {
-          _arr.push(_s.value);
-          if (i && _arr.length === i)
-            break;
-        }
-      } catch (err) {
-        _d = true;
-        _e = err;
-      } finally {
-        try {
-          if (!_n && _i["return"])
-            _i["return"]();
-        } finally {
-          if (_d)
-            throw _e;
-        }
-      }
-      return _arr;
-    }
-    return function(arr, i) {
-      if (Array.isArray(arr)) {
-        return arr;
-      } else if (_isIterable(Object(arr))) {
-        return sliceIterator(arr, i);
-      } else {
-        throw new TypeError("Invalid attempt to destructure non-iterable instance");
-      }
-    };
-  })();
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("19", [], false, function(__require, __exports, __module) {
+$__System.registerDynamic("a", [], false, function(__require, __exports, __module) {
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
   (function() {
     var ngFileUpload = this["ngFileUpload"];
@@ -23832,7 +23668,245 @@ $__System.registerDynamic("19", [], false, function(__require, __exports, __modu
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("1a", ["1f"], true, function(require, exports, module) {
+$__System.registerDynamic("b", ["a"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  req('a');
+  module.exports = 'ngFileUpload';
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("c", ["b"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = req('b');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("d", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $Object = Object;
+  module.exports = {
+    create: $Object.create,
+    getProto: $Object.getPrototypeOf,
+    isEnum: {}.propertyIsEnumerable,
+    getDesc: $Object.getOwnPropertyDescriptor,
+    setDesc: $Object.defineProperty,
+    setDescs: $Object.defineProperties,
+    getKeys: $Object.keys,
+    getNames: $Object.getOwnPropertyNames,
+    getSymbols: $Object.getOwnPropertySymbols,
+    each: [].forEach
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("e", ["d"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = req('d');
+  module.exports = function defineProperty(it, key, desc) {
+    return $.setDesc(it, key, desc);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("f", ["e"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": req('e'),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("10", ["f"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  var _Object$defineProperty = req('f')["default"];
+  exports["default"] = (function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        _Object$defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  })();
+  exports.__esModule = true;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("11", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  exports["default"] = function(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  };
+  exports.__esModule = true;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("12", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var process = module.exports = {};
+  var queue = [];
+  var draining = false;
+  var currentQueue;
+  var queueIndex = -1;
+  function cleanUpNextTick() {
+    draining = false;
+    if (currentQueue.length) {
+      queue = currentQueue.concat(queue);
+    } else {
+      queueIndex = -1;
+    }
+    if (queue.length) {
+      drainQueue();
+    }
+  }
+  function drainQueue() {
+    if (draining) {
+      return;
+    }
+    var timeout = setTimeout(cleanUpNextTick);
+    draining = true;
+    var len = queue.length;
+    while (len) {
+      currentQueue = queue;
+      queue = [];
+      while (++queueIndex < len) {
+        if (currentQueue) {
+          currentQueue[queueIndex].run();
+        }
+      }
+      queueIndex = -1;
+      len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    clearTimeout(timeout);
+  }
+  process.nextTick = function(fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+      for (var i = 1; i < arguments.length; i++) {
+        args[i - 1] = arguments[i];
+      }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+      setTimeout(drainQueue, 0);
+    }
+  };
+  function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+  }
+  Item.prototype.run = function() {
+    this.fun.apply(null, this.array);
+  };
+  process.title = 'browser';
+  process.browser = true;
+  process.env = {};
+  process.argv = [];
+  process.version = '';
+  process.versions = {};
+  function noop() {}
+  process.on = noop;
+  process.addListener = noop;
+  process.once = noop;
+  process.off = noop;
+  process.removeListener = noop;
+  process.removeAllListeners = noop;
+  process.emit = noop;
+  process.binding = function(name) {
+    throw new Error('process.binding is not supported');
+  };
+  process.cwd = function() {
+    return '/';
+  };
+  process.chdir = function(dir) {
+    throw new Error('process.chdir is not supported');
+  };
+  process.umask = function() {
+    return 0;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("13", ["12"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = req('12');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("14", ["13"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__System._nodeRequire ? process : req('13');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("15", ["14"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = req('14');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("16", ["15"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -28141,25 +28215,867 @@ $__System.registerDynamic("1a", ["1f"], true, function(require, exports, module)
         root._ = _;
       }
     }.call(this));
-  })(require("1f"));
+  })(req('15'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("1b", ["20"], true, function(require, exports, module) {
+$__System.registerDynamic("17", ["16"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = req('16');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.register('18', ['10', '11', '17'], function (_export) {
+    var _createClass, _classCallCheck, _, MainService;
+
+    return {
+        setters: [function (_2) {
+            _createClass = _2['default'];
+        }, function (_3) {
+            _classCallCheck = _3['default'];
+        }, function (_4) {
+            _ = _4['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            MainService = (function () {
+                function MainService($http) {
+                    _classCallCheck(this, MainService);
+
+                    this.$http = $http;
+
+                    this.debug = !!location.host.match('localhost');
+                    // total number of points in uploaded file; used to limit number of markers shown
+                    this.trackpointCount = 0;
+                    // this will be the full data; EditorCtrl just works with the laps
+                    this.data = {};
+                }
+
+                _createClass(MainService, [{
+                    key: 'getDummyData',
+                    value: function getDummyData() {
+                        var _this = this;
+
+                        this.fname = 'dummy.tcx';
+                        return this.$http.get('/tcx/test').then(function (res) {
+                            return _this.setTcxData(res.data);
+                        });
+                    }
+                }, {
+                    key: 'getFeedback',
+                    value: function getFeedback() {
+                        return this.$http.get('/comments');
+                    }
+                }, {
+                    key: 'getAnalytics',
+                    value: function getAnalytics() {
+                        return this.$http.get('/analytics');
+                    }
+                }, {
+                    key: 'saveData',
+                    value: function saveData(fname) {
+                        return this.$http.post('/tcx/fromjson/' + this.fname, this.data);
+                    }
+                }, {
+                    key: 'setTcxData',
+                    value: function setTcxData(data) {
+                        var _this2 = this;
+
+                        var laps = data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
+
+                        var newLaps = _.map(laps, function (lap, idx) {
+                            var lapPoints = lap.Track[0].Trackpoint;
+
+                            // we only want points that has a Position element
+                            var newLapPoints = _.filter(lapPoints, function (elem) {
+                                return elem.Position;
+                            });
+
+                            _this2.trackpointCount += newLapPoints.length;
+
+                            if (lapPoints.length > newLapPoints.length) {
+                                console.log("Lap %s had %s positionless elements in, which have been removed", idx, lapPoints.length - newLapPoints.length);
+                            }
+                            // replace in lap
+                            lap.Track[0].Trackpoint = newLapPoints;
+                            return lap;
+                        });
+                        this.data = data;
+                        this.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap = newLaps;
+                    }
+                }]);
+
+                return MainService;
+            })();
+
+            _export('default', MainService);
+
+            // removeNullEntries(data) {
+            //     var laps;
+            //     laps = data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
+            //
+            //     // foreach????
+            //     _.map(laps, (lap, idx) => {
+            //         var lapPoints = lap.Track[0].Trackpoint;
+            //
+            //         this.trackpointCount += lapPoints.length;
+            //
+            //         // we only want points that has a Position element
+            //         var newLapPoints = _.filter(lapPoints, elem => elem.Position);
+            //
+            //         if (lapPoints.length > newLapPoints.length) {
+            //             console.log("Lap %s had %s positionless elements in, which have been removed", idx, lapPoints.length - newLapPoints.length);
+            //         }
+            //         // replace in main structure
+            //         lap.Track[0].Trackpoint = newLapPoints;
+            //         return lap.Track[0].Trackpoint;
+            //         // return lap?
+            //     });
+            //     // THIS IS WRONG
+            //     return data;
+            // };
+        }
+    };
+});
+
+$__System.registerDynamic("19", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function() {};
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1a", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(done, value) {
+    return {
+      value: value,
+      done: !!done
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1b", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {};
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1c", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var toString = {}.toString;
+  module.exports = function(it) {
+    return toString.call(it).slice(8, -1);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1d", ["1c"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var cof = req('1c');
+  module.exports = 0 in Object('z') ? Object : function(it) {
+    return cof(it) == 'String' ? it.split('') : Object(it);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1e", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(it) {
+    if (it == undefined)
+      throw TypeError("Can't call method on  " + it);
+    return it;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1f", ["1d", "1e"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var IObject = req('1d'),
+      defined = req('1e');
+  module.exports = function(it) {
+    return IObject(defined(it));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("20", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = true;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("21", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var UNDEFINED = 'undefined';
+  var global = module.exports = typeof window != UNDEFINED && window.Math == Math ? window : typeof self != UNDEFINED && self.Math == Math ? self : Function('return this')();
+  if (typeof __g == 'number')
+    __g = global;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("22", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var core = module.exports = {version: '1.2.1'};
+  if (typeof __e == 'number')
+    __e = core;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("23", ["21", "22"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var global = req('21'),
+      core = req('22'),
+      PROTOTYPE = 'prototype';
+  var ctx = function(fn, that) {
+    return function() {
+      return fn.apply(that, arguments);
+    };
+  };
+  var $def = function(type, name, source) {
+    var key,
+        own,
+        out,
+        exp,
+        isGlobal = type & $def.G,
+        isProto = type & $def.P,
+        target = isGlobal ? global : type & $def.S ? global[name] : (global[name] || {})[PROTOTYPE],
+        exports = isGlobal ? core : core[name] || (core[name] = {});
+    if (isGlobal)
+      source = name;
+    for (key in source) {
+      own = !(type & $def.F) && target && key in target;
+      if (own && key in exports)
+        continue;
+      out = own ? target[key] : source[key];
+      if (isGlobal && typeof target[key] != 'function')
+        exp = source[key];
+      else if (type & $def.B && own)
+        exp = ctx(out, global);
+      else if (type & $def.W && target[key] == out)
+        !function(C) {
+          exp = function(param) {
+            return this instanceof C ? new C(param) : C(param);
+          };
+          exp[PROTOTYPE] = C[PROTOTYPE];
+        }(out);
+      else
+        exp = isProto && typeof out == 'function' ? ctx(Function.call, out) : out;
+      exports[key] = exp;
+      if (isProto)
+        (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
+    }
+  };
+  $def.F = 1;
+  $def.G = 2;
+  $def.S = 4;
+  $def.P = 8;
+  $def.B = 16;
+  $def.W = 32;
+  module.exports = $def;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("24", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(bitmap, value) {
+    return {
+      enumerable: !(bitmap & 1),
+      configurable: !(bitmap & 2),
+      writable: !(bitmap & 4),
+      value: value
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("25", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(exec) {
+    try {
+      return !!exec();
+    } catch (e) {
+      return true;
+    }
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("26", ["25"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = !req('25')(function() {
+    return Object.defineProperty({}, 'a', {get: function() {
+        return 7;
+      }}).a != 7;
+  });
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("27", ["d", "24", "26"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = req('d'),
+      createDesc = req('24');
+  module.exports = req('26') ? function(object, key, value) {
+    return $.setDesc(object, key, createDesc(1, value));
+  } : function(object, key, value) {
+    object[key] = value;
+    return object;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("28", ["27"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = req('27');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("29", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var hasOwnProperty = {}.hasOwnProperty;
+  module.exports = function(it, key) {
+    return hasOwnProperty.call(it, key);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2a", ["21"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var global = req('21'),
+      SHARED = '__core-js_shared__',
+      store = global[SHARED] || (global[SHARED] = {});
+  module.exports = function(key) {
+    return store[key] || (store[key] = {});
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2b", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var id = 0,
+      px = Math.random();
+  module.exports = function(key) {
+    return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2c", ["2a", "21", "2b"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var store = req('2a')('wks'),
+      Symbol = req('21').Symbol;
+  module.exports = function(name) {
+    return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || req('2b'))('Symbol.' + name));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2d", ["29", "27", "2c"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var has = req('29'),
+      hide = req('27'),
+      TAG = req('2c')('toStringTag');
+  module.exports = function(it, tag, stat) {
+    if (it && !has(it = stat ? it : it.prototype, TAG))
+      hide(it, TAG, tag);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2e", ["d", "27", "2c", "24", "2d"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $ = req('d'),
+      IteratorPrototype = {};
+  req('27')(IteratorPrototype, req('2c')('iterator'), function() {
+    return this;
+  });
+  module.exports = function(Constructor, NAME, next) {
+    Constructor.prototype = $.create(IteratorPrototype, {next: req('24')(1, next)});
+    req('2d')(Constructor, NAME + ' Iterator');
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2f", ["20", "23", "28", "27", "29", "2c", "1b", "2e", "d", "2d"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var LIBRARY = req('20'),
+      $def = req('23'),
+      $redef = req('28'),
+      hide = req('27'),
+      has = req('29'),
+      SYMBOL_ITERATOR = req('2c')('iterator'),
+      Iterators = req('1b'),
+      BUGGY = !([].keys && 'next' in [].keys()),
+      FF_ITERATOR = '@@iterator',
+      KEYS = 'keys',
+      VALUES = 'values';
+  var returnThis = function() {
+    return this;
+  };
+  module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE) {
+    req('2e')(Constructor, NAME, next);
+    var createMethod = function(kind) {
+      switch (kind) {
+        case KEYS:
+          return function keys() {
+            return new Constructor(this, kind);
+          };
+        case VALUES:
+          return function values() {
+            return new Constructor(this, kind);
+          };
+      }
+      return function entries() {
+        return new Constructor(this, kind);
+      };
+    };
+    var TAG = NAME + ' Iterator',
+        proto = Base.prototype,
+        _native = proto[SYMBOL_ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT],
+        _default = _native || createMethod(DEFAULT),
+        methods,
+        key;
+    if (_native) {
+      var IteratorPrototype = req('d').getProto(_default.call(new Base));
+      req('2d')(IteratorPrototype, TAG, true);
+      if (!LIBRARY && has(proto, FF_ITERATOR))
+        hide(IteratorPrototype, SYMBOL_ITERATOR, returnThis);
+    }
+    if (!LIBRARY || FORCE)
+      hide(proto, SYMBOL_ITERATOR, _default);
+    Iterators[NAME] = _default;
+    Iterators[TAG] = returnThis;
+    if (DEFAULT) {
+      methods = {
+        keys: IS_SET ? _default : createMethod(KEYS),
+        values: DEFAULT == VALUES ? _default : createMethod(VALUES),
+        entries: DEFAULT != VALUES ? _default : createMethod('entries')
+      };
+      if (FORCE)
+        for (key in methods) {
+          if (!(key in proto))
+            $redef(proto, key, methods[key]);
+        }
+      else
+        $def($def.P + $def.F * BUGGY, NAME, methods);
+    }
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("30", ["19", "1a", "1b", "1f", "2f"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var setUnscope = req('19'),
+      step = req('1a'),
+      Iterators = req('1b'),
+      toIObject = req('1f');
+  req('2f')(Array, 'Array', function(iterated, kind) {
+    this._t = toIObject(iterated);
+    this._i = 0;
+    this._k = kind;
+  }, function() {
+    var O = this._t,
+        kind = this._k,
+        index = this._i++;
+    if (!O || index >= O.length) {
+      this._t = undefined;
+      return step(1);
+    }
+    if (kind == 'keys')
+      return step(0, index);
+    if (kind == 'values')
+      return step(0, O[index]);
+    return step(0, [index, O[index]]);
+  }, 'values');
+  Iterators.Arguments = Iterators.Array;
+  setUnscope('keys');
+  setUnscope('values');
+  setUnscope('entries');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("31", ["30", "1b"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  req('30');
+  var Iterators = req('1b');
+  Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("32", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ceil = Math.ceil,
+      floor = Math.floor;
+  module.exports = function(it) {
+    return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("33", ["32", "1e"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var toInteger = req('32'),
+      defined = req('1e');
+  module.exports = function(TO_STRING) {
+    return function(that, pos) {
+      var s = String(defined(that)),
+          i = toInteger(pos),
+          l = s.length,
+          a,
+          b;
+      if (i < 0 || i >= l)
+        return TO_STRING ? '' : undefined;
+      a = s.charCodeAt(i);
+      return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("34", ["33", "2f"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $at = req('33')(true);
+  req('2f')(String, 'String', function(iterated) {
+    this._t = String(iterated);
+    this._i = 0;
+  }, function() {
+    var O = this._t,
+        index = this._i,
+        point;
+    if (index >= O.length)
+      return {
+        value: undefined,
+        done: true
+      };
+    point = $at(O, index);
+    this._i += point.length;
+    return {
+      value: point,
+      done: false
+    };
+  });
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("35", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(it) {
+    return typeof it === 'object' ? it !== null : typeof it === 'function';
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("36", ["35"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var isObject = req('35');
+  module.exports = function(it) {
+    if (!isObject(it))
+      throw TypeError(it + ' is not an object!');
+    return it;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("37", ["1c", "2c"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var cof = req('1c'),
+      TAG = req('2c')('toStringTag'),
+      ARG = cof(function() {
+        return arguments;
+      }()) == 'Arguments';
+  module.exports = function(it) {
+    var O,
+        T,
+        B;
+    return it === undefined ? 'Undefined' : it === null ? 'Null' : typeof(T = (O = Object(it))[TAG]) == 'string' ? T : ARG ? cof(O) : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("38", ["37", "2c", "1b", "22"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var classof = req('37'),
+      ITERATOR = req('2c')('iterator'),
+      Iterators = req('1b');
+  module.exports = req('22').getIteratorMethod = function(it) {
+    if (it != undefined)
+      return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("39", ["36", "38", "22"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var anObject = req('36'),
+      get = req('38');
+  module.exports = req('22').getIterator = function(it) {
+    var iterFn = get(it);
+    if (typeof iterFn != 'function')
+      throw TypeError(it + ' is not iterable!');
+    return anObject(iterFn.call(it));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3a", ["31", "34", "39"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  req('31');
+  req('34');
+  module.exports = req('39');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3b", ["3a"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("20"),
+    "default": req('3a'),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("1c", [], true, function(require, exports, module) {
+$__System.registerDynamic("3c", ["37", "2c", "1b", "22"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var classof = req('37'),
+      ITERATOR = req('2c')('iterator'),
+      Iterators = req('1b');
+  module.exports = req('22').isIterable = function(it) {
+    var O = Object(it);
+    return ITERATOR in O || '@@iterator' in O || Iterators.hasOwnProperty(classof(O));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3d", ["31", "34", "3c"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  req('31');
+  req('34');
+  module.exports = req('3c');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3e", ["3d"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": req('3d'),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3f", ["3b", "3e"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  var _getIterator = req('3b')["default"];
+  var _isIterable = req('3e')["default"];
+  exports["default"] = (function() {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+      try {
+        for (var _i = _getIterator(arr),
+            _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+          if (i && _arr.length === i)
+            break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"])
+            _i["return"]();
+        } finally {
+          if (_d)
+            throw _e;
+        }
+      }
+      return _arr;
+    }
+    return function(arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (_isIterable(Object(arr))) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  })();
+  exports.__esModule = true;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("40", [], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -32054,1029 +32970,30 @@ $__System.registerDynamic("1c", [], true, function(require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("1d", ["21"], true, function(require, exports, module) {
+$__System.registerDynamic("41", ["40"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = {
-    "default": require("21"),
-    __esModule: true
-  };
+  module.exports = req('40');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("1e", ["22"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": require("22"),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("1f", ["23"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("23");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("20", ["24"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = require("24");
-  module.exports = function defineProperty(it, key, desc) {
-    return $.setDesc(it, key, desc);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("21", ["25", "26", "27"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  require("25");
-  require("26");
-  module.exports = require("27");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("22", ["25", "26", "28"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  require("25");
-  require("26");
-  module.exports = require("28");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("23", ["29"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__System._nodeRequire ? process : require("29");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("24", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $Object = Object;
-  module.exports = {
-    create: $Object.create,
-    getProto: $Object.getPrototypeOf,
-    isEnum: {}.propertyIsEnumerable,
-    getDesc: $Object.getOwnPropertyDescriptor,
-    setDesc: $Object.defineProperty,
-    setDescs: $Object.defineProperties,
-    getKeys: $Object.keys,
-    getNames: $Object.getOwnPropertyNames,
-    getSymbols: $Object.getOwnPropertySymbols,
-    each: [].forEach
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("25", ["2a", "2b"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  require("2a");
-  var Iterators = require("2b");
-  Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("26", ["2c", "2d"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var $at = require("2c")(true);
-  require("2d")(String, 'String', function(iterated) {
-    this._t = String(iterated);
-    this._i = 0;
-  }, function() {
-    var O = this._t,
-        index = this._i,
-        point;
-    if (index >= O.length)
-      return {
-        value: undefined,
-        done: true
-      };
-    point = $at(O, index);
-    this._i += point.length;
-    return {
-      value: point,
-      done: false
-    };
-  });
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("27", ["2e", "2f", "30"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var anObject = require("2e"),
-      get = require("2f");
-  module.exports = require("30").getIterator = function(it) {
-    var iterFn = get(it);
-    if (typeof iterFn != 'function')
-      throw TypeError(it + ' is not iterable!');
-    return anObject(iterFn.call(it));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("28", ["31", "32", "2b", "30"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var classof = require("31"),
-      ITERATOR = require("32")('iterator'),
-      Iterators = require("2b");
-  module.exports = require("30").isIterable = function(it) {
-    var O = Object(it);
-    return ITERATOR in O || '@@iterator' in O || Iterators.hasOwnProperty(classof(O));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("29", ["33"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("33");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2a", ["34", "35", "2b", "36", "2d"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var setUnscope = require("34"),
-      step = require("35"),
-      Iterators = require("2b"),
-      toIObject = require("36");
-  require("2d")(Array, 'Array', function(iterated, kind) {
-    this._t = toIObject(iterated);
-    this._i = 0;
-    this._k = kind;
-  }, function() {
-    var O = this._t,
-        kind = this._k,
-        index = this._i++;
-    if (!O || index >= O.length) {
-      this._t = undefined;
-      return step(1);
-    }
-    if (kind == 'keys')
-      return step(0, index);
-    if (kind == 'values')
-      return step(0, O[index]);
-    return step(0, [index, O[index]]);
-  }, 'values');
-  Iterators.Arguments = Iterators.Array;
-  setUnscope('keys');
-  setUnscope('values');
-  setUnscope('entries');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2b", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {};
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2c", ["37", "38"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toInteger = require("37"),
-      defined = require("38");
-  module.exports = function(TO_STRING) {
-    return function(that, pos) {
-      var s = String(defined(that)),
-          i = toInteger(pos),
-          l = s.length,
-          a,
-          b;
-      if (i < 0 || i >= l)
-        return TO_STRING ? '' : undefined;
-      a = s.charCodeAt(i);
-      return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-    };
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2d", ["39", "3a", "3b", "3c", "3d", "32", "2b", "3e", "24", "3f"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var LIBRARY = require("39"),
-      $def = require("3a"),
-      $redef = require("3b"),
-      hide = require("3c"),
-      has = require("3d"),
-      SYMBOL_ITERATOR = require("32")('iterator'),
-      Iterators = require("2b"),
-      BUGGY = !([].keys && 'next' in [].keys()),
-      FF_ITERATOR = '@@iterator',
-      KEYS = 'keys',
-      VALUES = 'values';
-  var returnThis = function() {
-    return this;
-  };
-  module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE) {
-    require("3e")(Constructor, NAME, next);
-    var createMethod = function(kind) {
-      switch (kind) {
-        case KEYS:
-          return function keys() {
-            return new Constructor(this, kind);
-          };
-        case VALUES:
-          return function values() {
-            return new Constructor(this, kind);
-          };
-      }
-      return function entries() {
-        return new Constructor(this, kind);
-      };
-    };
-    var TAG = NAME + ' Iterator',
-        proto = Base.prototype,
-        _native = proto[SYMBOL_ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT],
-        _default = _native || createMethod(DEFAULT),
-        methods,
-        key;
-    if (_native) {
-      var IteratorPrototype = require("24").getProto(_default.call(new Base));
-      require("3f")(IteratorPrototype, TAG, true);
-      if (!LIBRARY && has(proto, FF_ITERATOR))
-        hide(IteratorPrototype, SYMBOL_ITERATOR, returnThis);
-    }
-    if (!LIBRARY || FORCE)
-      hide(proto, SYMBOL_ITERATOR, _default);
-    Iterators[NAME] = _default;
-    Iterators[TAG] = returnThis;
-    if (DEFAULT) {
-      methods = {
-        keys: IS_SET ? _default : createMethod(KEYS),
-        values: DEFAULT == VALUES ? _default : createMethod(VALUES),
-        entries: DEFAULT != VALUES ? _default : createMethod('entries')
-      };
-      if (FORCE)
-        for (key in methods) {
-          if (!(key in proto))
-            $redef(proto, key, methods[key]);
-        }
-      else
-        $def($def.P + $def.F * BUGGY, NAME, methods);
-    }
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2e", ["40"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var isObject = require("40");
-  module.exports = function(it) {
-    if (!isObject(it))
-      throw TypeError(it + ' is not an object!');
-    return it;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2f", ["31", "32", "2b", "30"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var classof = require("31"),
-      ITERATOR = require("32")('iterator'),
-      Iterators = require("2b");
-  module.exports = require("30").getIteratorMethod = function(it) {
-    if (it != undefined)
-      return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("30", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var core = module.exports = {version: '1.2.1'};
-  if (typeof __e == 'number')
-    __e = core;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("31", ["41", "32"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var cof = require("41"),
-      TAG = require("32")('toStringTag'),
-      ARG = cof(function() {
-        return arguments;
-      }()) == 'Arguments';
-  module.exports = function(it) {
-    var O,
-        T,
-        B;
-    return it === undefined ? 'Undefined' : it === null ? 'Null' : typeof(T = (O = Object(it))[TAG]) == 'string' ? T : ARG ? cof(O) : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("32", ["42", "43", "44"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var store = require("42")('wks'),
-      Symbol = require("43").Symbol;
-  module.exports = function(name) {
-    return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || require("44"))('Symbol.' + name));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("33", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var process = module.exports = {};
-  var queue = [];
-  var draining = false;
-  var currentQueue;
-  var queueIndex = -1;
-  function cleanUpNextTick() {
-    draining = false;
-    if (currentQueue.length) {
-      queue = currentQueue.concat(queue);
-    } else {
-      queueIndex = -1;
-    }
-    if (queue.length) {
-      drainQueue();
-    }
-  }
-  function drainQueue() {
-    if (draining) {
-      return;
-    }
-    var timeout = setTimeout(cleanUpNextTick);
-    draining = true;
-    var len = queue.length;
-    while (len) {
-      currentQueue = queue;
-      queue = [];
-      while (++queueIndex < len) {
-        if (currentQueue) {
-          currentQueue[queueIndex].run();
-        }
-      }
-      queueIndex = -1;
-      len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    clearTimeout(timeout);
-  }
-  process.nextTick = function(fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-      for (var i = 1; i < arguments.length; i++) {
-        args[i - 1] = arguments[i];
-      }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-      setTimeout(drainQueue, 0);
-    }
-  };
-  function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-  }
-  Item.prototype.run = function() {
-    this.fun.apply(null, this.array);
-  };
-  process.title = 'browser';
-  process.browser = true;
-  process.env = {};
-  process.argv = [];
-  process.version = '';
-  process.versions = {};
-  function noop() {}
-  process.on = noop;
-  process.addListener = noop;
-  process.once = noop;
-  process.off = noop;
-  process.removeListener = noop;
-  process.removeAllListeners = noop;
-  process.emit = noop;
-  process.binding = function(name) {
-    throw new Error('process.binding is not supported');
-  };
-  process.cwd = function() {
-    return '/';
-  };
-  process.chdir = function(dir) {
-    throw new Error('process.chdir is not supported');
-  };
-  process.umask = function() {
-    return 0;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("35", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(done, value) {
-    return {
-      value: value,
-      done: !!done
-    };
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("34", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function() {};
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("36", ["45", "38"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var IObject = require("45"),
-      defined = require("38");
-  module.exports = function(it) {
-    return IObject(defined(it));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("37", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ceil = Math.ceil,
-      floor = Math.floor;
-  module.exports = function(it) {
-    return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("38", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(it) {
-    if (it == undefined)
-      throw TypeError("Can't call method on  " + it);
-    return it;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3a", ["43", "30"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var global = require("43"),
-      core = require("30"),
-      PROTOTYPE = 'prototype';
-  var ctx = function(fn, that) {
-    return function() {
-      return fn.apply(that, arguments);
-    };
-  };
-  var $def = function(type, name, source) {
-    var key,
-        own,
-        out,
-        exp,
-        isGlobal = type & $def.G,
-        isProto = type & $def.P,
-        target = isGlobal ? global : type & $def.S ? global[name] : (global[name] || {})[PROTOTYPE],
-        exports = isGlobal ? core : core[name] || (core[name] = {});
-    if (isGlobal)
-      source = name;
-    for (key in source) {
-      own = !(type & $def.F) && target && key in target;
-      if (own && key in exports)
-        continue;
-      out = own ? target[key] : source[key];
-      if (isGlobal && typeof target[key] != 'function')
-        exp = source[key];
-      else if (type & $def.B && own)
-        exp = ctx(out, global);
-      else if (type & $def.W && target[key] == out)
-        !function(C) {
-          exp = function(param) {
-            return this instanceof C ? new C(param) : C(param);
-          };
-          exp[PROTOTYPE] = C[PROTOTYPE];
-        }(out);
-      else
-        exp = isProto && typeof out == 'function' ? ctx(Function.call, out) : out;
-      exports[key] = exp;
-      if (isProto)
-        (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
-    }
-  };
-  $def.F = 1;
-  $def.G = 2;
-  $def.S = 4;
-  $def.P = 8;
-  $def.B = 16;
-  $def.W = 32;
-  module.exports = $def;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3b", ["3c"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = require("3c");
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3c", ["24", "46", "47"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = require("24"),
-      createDesc = require("46");
-  module.exports = require("47") ? function(object, key, value) {
-    return $.setDesc(object, key, createDesc(1, value));
-  } : function(object, key, value) {
-    object[key] = value;
-    return object;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3d", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var hasOwnProperty = {}.hasOwnProperty;
-  module.exports = function(it, key) {
-    return hasOwnProperty.call(it, key);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3e", ["24", "3c", "32", "46", "3f"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  'use strict';
-  var $ = require("24"),
-      IteratorPrototype = {};
-  require("3c")(IteratorPrototype, require("32")('iterator'), function() {
-    return this;
-  });
-  module.exports = function(Constructor, NAME, next) {
-    Constructor.prototype = $.create(IteratorPrototype, {next: require("46")(1, next)});
-    require("3f")(Constructor, NAME + ' Iterator');
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3f", ["3d", "3c", "32"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var has = require("3d"),
-      hide = require("3c"),
-      TAG = require("32")('toStringTag');
-  module.exports = function(it, tag, stat) {
-    if (it && !has(it = stat ? it : it.prototype, TAG))
-      hide(it, TAG, tag);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("40", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(it) {
-    return typeof it === 'object' ? it !== null : typeof it === 'function';
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("41", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toString = {}.toString;
-  module.exports = function(it) {
-    return toString.call(it).slice(8, -1);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("43", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var UNDEFINED = 'undefined';
-  var global = module.exports = typeof window != UNDEFINED && window.Math == Math ? window : typeof self != UNDEFINED && self.Math == Math ? self : Function('return this')();
-  if (typeof __g == 'number')
-    __g = global;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("42", ["43"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var global = require("43"),
-      SHARED = '__core-js_shared__',
-      store = global[SHARED] || (global[SHARED] = {});
-  module.exports = function(key) {
-    return store[key] || (store[key] = {});
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("44", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var id = 0,
-      px = Math.random();
-  module.exports = function(key) {
-    return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("39", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("46", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(bitmap, value) {
-    return {
-      enumerable: !(bitmap & 1),
-      configurable: !(bitmap & 2),
-      writable: !(bitmap & 4),
-      value: value
-    };
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("47", ["48"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = !require("48")(function() {
-    return Object.defineProperty({}, 'a', {get: function() {
-        return 7;
-      }}).a != 7;
-  });
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("45", ["41"], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var cof = require("41");
-  module.exports = 0 in Object('z') ? Object : function(it) {
-    return cof(it) == 'String' ? it.split('') : Object(it);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("48", [], true, function(require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(exec) {
-    try {
-      return !!exec();
-    } catch (e) {
-      return true;
-    }
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.register('0', ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e'], function (_export) {
-    // imports
-    'use strict';
-
-    // import 'mgechev/angular-immutable';
-
-    var angular, MainSvc, EditorCtrl, UploadCtrl, MapCtrl, FeedbackCtrl, FeedbackDir, LapDir;
-    return {
-        setters: [function (_) {}, function (_2) {
-            angular = _2['default'];
-        }, function (_3) {}, function (_4) {}, function (_5) {}, function (_6) {
-            MainSvc = _6['default'];
-        }, function (_7) {
-            EditorCtrl = _7['default'];
-        }, function (_8) {
-            UploadCtrl = _8['default'];
-        }, function (_9) {
-            MapCtrl = _9['default'];
-        }, function (_a) {
-            FeedbackCtrl = _a['default'];
-        }, function (_b) {
-            FeedbackDir = _b['default'];
-        }, function (_c) {
-            LapDir = _c['default'];
-        }, function (_d) {}, function (_e) {}],
-        execute: function () {
-
-            angular.module('garminEditorApp', ['ui.router', 'ngMap', 'ngFileUpload', 'scroller', 'templates']);
-
-            angular.module('garminEditorApp').service('Main', MainSvc).controller('UploadCtrl', UploadCtrl).controller('EditorCtrl', EditorCtrl).controller('MapCtrl', MapCtrl).controller('FeedbackCtrl', FeedbackCtrl).directive('lap', LapDir).directive('feedback', FeedbackDir);
-
-            angular.module('garminEditorApp').config(function ($stateProvider, $urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider) {
-                $urlRouterProvider.otherwise('/');
-                $locationProvider.html5Mode(true);
-                $urlMatcherFactoryProvider.strictMode(false); // allows trailing slashes
-
-                return $stateProvider.state('upload', {
-                    url: '/',
-                    templateUrl: 'upload/upload.html',
-                    controller: 'UploadCtrl',
-                    controllerAs: 'vm'
-                }).state('editor', {
-                    url: '/editor',
-                    templateUrl: 'editor/editor.html',
-                    controller: 'EditorCtrl',
-                    controllerAs: 'vm'
-                }).state('feedback', {
-                    url: '/feedback',
-                    templateUrl: 'feedback/feedback.html',
-                    controller: 'FeedbackCtrl',
-                    controllerAs: 'vm'
-                });
-            });
-
-            angular.bootstrap(document.getElementsByTagName('body')[0], ['garminEditorApp']);
-        }
-    };
-});
-$__System.register('6', ['14', '15', '16'], function (_export) {
-    var _, _createClass, _classCallCheck, MainService;
+$__System.register('42', ['10', '11', '17', '41', '3f'], function (_export) {
+    var _createClass, _classCallCheck, _, Immutable, _slicedToArray, getTimeChange, getMovingTime, totalDist, updateSelected, getLastDistFromLap, initialiseSelected, EditorCtrl;
 
     return {
-        setters: [function (_4) {
-            _ = _4['default'];
-        }, function (_2) {
+        setters: [function (_2) {
             _createClass = _2['default'];
         }, function (_3) {
             _classCallCheck = _3['default'];
-        }],
-        execute: function () {
-            'use strict';
-
-            MainService = (function () {
-                function MainService($http) {
-                    _classCallCheck(this, MainService);
-
-                    this.$http = $http;
-
-                    this.debug = !!location.host.match('localhost');
-                    // total number of points in uploaded file; used to limit number of markers shown
-                    this.trackpointCount = 0;
-                    // this will be the full data; EditorCtrl just works with the laps
-                    this.data = {};
-                }
-
-                _createClass(MainService, [{
-                    key: 'getDummyData',
-                    value: function getDummyData() {
-                        var _this = this;
-
-                        this.fname = 'dummy.tcx';
-                        return this.$http.get('/tcx/test').then(function (res) {
-                            return _this.setTcxData(res.data);
-                        });
-                    }
-                }, {
-                    key: 'getFeedback',
-                    value: function getFeedback() {
-                        return this.$http.get('/comments');
-                    }
-                }, {
-                    key: 'getAnalytics',
-                    value: function getAnalytics() {
-                        return this.$http.get('/analytics');
-                    }
-                }, {
-                    key: 'saveData',
-                    value: function saveData(fname) {
-                        return this.$http.post('/tcx/fromjson/' + this.fname, this.data);
-                    }
-                }, {
-                    key: 'setTcxData',
-                    value: function setTcxData(data) {
-                        var _this2 = this;
-
-                        var laps = data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
-
-                        var newLaps = _.map(laps, function (lap, idx) {
-                            var lapPoints = lap.Track[0].Trackpoint;
-
-                            // we only want points that has a Position element
-                            var newLapPoints = _.filter(lapPoints, function (elem) {
-                                return elem.Position;
-                            });
-
-                            _this2.trackpointCount += newLapPoints.length;
-
-                            if (lapPoints.length > newLapPoints.length) {
-                                console.log("Lap %s had %s positionless elements in, which have been removed", idx, lapPoints.length - newLapPoints.length);
-                            }
-                            // replace in lap
-                            lap.Track[0].Trackpoint = newLapPoints;
-                            return lap;
-                        });
-                        this.data = data;
-                        this.data.TrainingCenterDatabase.Activities[0].Activity[0].Lap = newLaps;
-                    }
-                }]);
-
-                return MainService;
-            })();
-
-            _export('default', MainService);
-
-            // removeNullEntries(data) {
-            //     var laps;
-            //     laps = data.TrainingCenterDatabase.Activities[0].Activity[0].Lap;
-            //
-            //     // foreach????
-            //     _.map(laps, (lap, idx) => {
-            //         var lapPoints = lap.Track[0].Trackpoint;
-            //
-            //         this.trackpointCount += lapPoints.length;
-            //
-            //         // we only want points that has a Position element
-            //         var newLapPoints = _.filter(lapPoints, elem => elem.Position);
-            //
-            //         if (lapPoints.length > newLapPoints.length) {
-            //             console.log("Lap %s had %s positionless elements in, which have been removed", idx, lapPoints.length - newLapPoints.length);
-            //         }
-            //         // replace in main structure
-            //         lap.Track[0].Trackpoint = newLapPoints;
-            //         return lap.Track[0].Trackpoint;
-            //         // return lap?
-            //     });
-            //     // THIS IS WRONG
-            //     return data;
-            // };
-        }
-    };
-});
-$__System.register('7', ['14', '15', '16', '17', '18'], function (_export) {
-    var _, _createClass, _classCallCheck, Immutable, _slicedToArray, getTimeChange, getMovingTime, totalDist, updateSelected, getLastDistFromLap, initialiseSelected, EditorCtrl;
-
-    return {
-        setters: [function (_5) {
-            _ = _5['default'];
-        }, function (_2) {
-            _createClass = _2['default'];
-        }, function (_3) {
-            _classCallCheck = _3['default'];
-        }, function (_6) {
-            Immutable = _6['default'];
         }, function (_4) {
-            _slicedToArray = _4['default'];
+            _ = _4['default'];
+        }, function (_5) {
+            Immutable = _5['default'];
+        }, function (_f) {
+            _slicedToArray = _f['default'];
         }],
         execute: function () {
 
@@ -33373,7 +33290,8 @@ $__System.register('7', ['14', '15', '16', '17', '18'], function (_export) {
         }
     };
 });
-$__System.register('8', ['15', '16'], function (_export) {
+
+$__System.register('43', ['10', '11'], function (_export) {
     var _createClass, _classCallCheck, UploadCtrl;
 
     return {
@@ -33430,16 +33348,17 @@ $__System.register('8', ['15', '16'], function (_export) {
         }
     };
 });
-$__System.register('9', ['14', '15', '16'], function (_export) {
-    var _, _createClass, _classCallCheck, MapCtrl;
+
+$__System.register('44', ['10', '11', '17'], function (_export) {
+    var _createClass, _classCallCheck, _, MapCtrl;
 
     return {
-        setters: [function (_4) {
-            _ = _4['default'];
-        }, function (_2) {
+        setters: [function (_2) {
             _createClass = _2['default'];
         }, function (_3) {
             _classCallCheck = _3['default'];
+        }, function (_4) {
+            _ = _4['default'];
         }],
         execute: function () {
             'use strict';
@@ -33578,7 +33497,8 @@ $__System.register('9', ['14', '15', '16'], function (_export) {
         }
     };
 });
-$__System.register("a", ["16"], function (_export) {
+
+$__System.register("45", ["11"], function (_export) {
     var _classCallCheck, FeedbackCtrl;
 
     return {
@@ -33611,7 +33531,8 @@ $__System.register("a", ["16"], function (_export) {
         }
     };
 });
-$__System.register('b', [], function (_export) {
+
+$__System.register('46', [], function (_export) {
     'use strict';
 
     function FeedbackDir() {
@@ -33649,7 +33570,8 @@ $__System.register('b', [], function (_export) {
         }
     };
 });
-$__System.register('c', [], function (_export) {
+
+$__System.register('47', [], function (_export) {
     // import Immutable from 'immutable';
 
     'use strict';
@@ -33689,8 +33611,99 @@ $__System.register('c', [], function (_export) {
         }
     };
 });
+
+$__System.registerDynamic("48", [], false, function(__require, __exports, __module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
+  (function() {
+    angular.module("scroller", []).directive('scrollTo', function() {
+      return {
+        restrict: 'A',
+        scope: {targetPx: '@'},
+        link: function(scope, $elm, attrs) {
+          return attrs.$observe('target', function(newValue, oldValue) {
+            jQuery(".data-table").animate({scrollTop: parseInt(newValue)}, "slow");
+          });
+        }
+      };
+    });
+  })();
+  return _retrieveGlobal();
+});
+
+$__System.registerDynamic("49", [], false, function(__require, __exports, __module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
+  (function() {
+    angular.module("templates", []).run(["$templateCache", function($templateCache) {
+      $templateCache.put("editor/editor.html", "\n<div class=\"col-xs-12\">\n  <div class=\"row summary\">       \n    <div class=\"col-xs-12\">\n      <h2>Summary of ride ({{vm.startTime | date: \"d MMM yy\"}})</h2>\n      <div class=\"row\">\n        <div class=\"col-xs-2 table-head\"> </div>\n        <div class=\"col-xs-2 table-head\">Start</div>\n        <div class=\"col-xs-2 table-head\">End</div>\n        <div class=\"col-xs-2 table-head\">Time</div>\n        <div class=\"col-xs-2 table-head\">Distance</div>\n        <div class=\"col-xs-2 table-head\">Avg speed</div>\n      </div>\n      <div ng-repeat=\"lap in vm.data.Lap\" class=\"row\">\n        <div class=\"col-xs-2 table-head\">Lap {{$index + 1}}</div>\n        <div class=\"col-xs-2\">{{lap.Track[0].Trackpoint[0].Time[0] | date: \"HH:mm:ss\"}}</div>\n        <div class=\"col-xs-2\">{{lap.Track[0].Trackpoint[lap.Track[0].Trackpoint.length - 1].Time[0] | date: \"HH:mm:ss\"}}</div>\n        <div class=\"col-xs-2\">{{lap.TotalTimeSeconds[0]}}s</div>\n        <div class=\"col-xs-2\">{{lap.DistanceMeters / 1000 | number : 3}} km</div>\n        <div class=\"col-xs-2\">{{lap.Extensions[0].LX[0].AvgSpeed[0] * 60 * 60 / 1000 | number : 1}} km/h</div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <h2>Trackpoint data</h2>\n      <p>Choose \'trackpoints\' to delete from the rows below or click on the map (not the markers). Use Shift+Click to select multiple rows.</p>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-5 data-table\">\n      <div scroll-to=\"scroll-to\" data-target=\"{{vm.scrollPos}}\" ng-repeat=\"lap in vm.data.Lap track by $index\"><strong>Lap {{$index+1}}</strong>\n        <lap lapdata=\"lap.Track[0].Trackpoint\" count=\"{{$index}}\" check=\"vm.checkChange(lapIdx, idx, shift)\" selected=\"vm.selected[$index]\"></lap>\n      </div>\n    </div>\n    <div class=\"col-xs-7\"><map center=\"44, 5\" zoom=\"11\" draggable=\"true\" map-type-control=\"false\" auto-refresh=\"auto-refresh\" ng-controller=\"MapCtrl as map\"></map>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12 controls\">\n      <button ng-click=\"vm.deletePoints()\" class=\"btn btn-danger\">Delete selected points</button>\n      <button ng-click=\"vm.saveFile()\" class=\"btn btn-success btn-disabled\">{{vm.downloadMsg}}</button><a ui-sref=\"upload\" class=\"btn btn-primary\">Load different file</a>\n    </div>\n  </div>\n  <div class=\"row feedback\">\n    <div class=\"col-xs-12\">\n      <feedback></feedback>\n    </div>\n  </div>\n</div>");
+      $templateCache.put("editor/lap.tmpl.html", "\n<table>\n  <tr>\n    <th>Timestamp</th>\n    <th>Accum Dist. (m)</th>\n  </tr>\n  <tr ng-repeat=\"tp in vm.lapdata track by $index\" ng-class=\"{\'selected\': vm.selected[$index]}\" ng-click=\"vm.select($event, $index)\" class=\"trackpoint c{{$index}}\">\n    <td>{{tp.Time[0] | date: \'H:mm:ss\'}}</td>\n    <td>{{tp.DistanceMeters[0] | number : 1}} m</td>\n  </tr>\n</table>");
+      $templateCache.put("feedback/feedback.html", "\n<div class=\"col-xs-12 feedback\">\n  <h3>Feedback</h3>\n  <div class=\"row\">\n    <div class=\"col-sm-3 table-head\">Date</div>\n    <div class=\"col-sm-2 table-head\">Email</div>\n    <div class=\"col-sm-7 table-head\">Comments</div>\n  </div>\n  <div ng-repeat=\"comment in vm.comments\" class=\"row comments\">\n    <div class=\"col-sm-3\">{{comment.date}}</div>\n    <div class=\"col-sm-2\">{{comment.email}}</div>\n    <div class=\"col-sm-7\">{{comment.comment}}</div>\n  </div><map center=\"40,-10\" zoom=\"2\">\n    <marker ng-repeat=\"location in vm.analytics\" position=\"{{location.lat}},{{location.lng}}\"></marker></map>\n</div>");
+      $templateCache.put("feedback.dir/feedback.tmpl.html", "\n<div>\n  <h3>Developer feedback</h3>\n  <p>Did the app work? If so, let me now your experience. If not, please provide details of what you did and what you hoped / expected it would do.</p>\n  <form ng-hide=\"comments\" class=\"row\">\n    <div class=\"col-sm-7\">\n      <div class=\"form-group\">\n        <textarea rows=\"2\" ng-model=\"vm.feedback\" placeholder=\"Comments, suggestions,...\" class=\"form-control\"></textarea>\n      </div>\n    </div>\n    <div class=\"col-sm-3\">\n      <div class=\"form-group\">\n        <input type=\"text\" ng-model=\"vm.email\" placeholder=\"email (Optional*)\" class=\"form-control\"/>\n      </div>\n      <p>* For developer contact. Not made public.</p>\n    </div>\n    <div class=\"col-sm-2\">\n      <button ng-click=\"vm.sendFeedback()\" class=\"btn btn-primary\">Send</button>\n    </div>\n  </form>\n  <div ng-show=\"comments\" class=\"row\">\n    <div class=\"col-sm-3\">\n      <h4>Date</h4>\n    </div>\n    <div class=\"col-sm-9\">\n      <h4>Comment</h4>\n    </div>\n  </div>\n  <div ng-repeat=\"comment in vm.comments\" class=\"row comments\">\n    <div class=\"col-sm-3\">\n      <p>{{comment.date}}</p>\n    </div>\n    <div class=\"col-sm-9\">\n      <p>{{comment.comment}}</p>\n    </div>\n  </div>\n</div>");
+      $templateCache.put("upload/upload.html", "\n<div class=\"col-xs-12 upload\">\n  <div class=\"row\">\n    <div class=\"col-xs-7\">\n      <p>Ever left your Garmin running at the end of a ride? All your hard earned averages declined pointlessly? </p>\n      <p>This simple editor enables you to delete points from a file, recalculates aggregate ride data, and returns a new copy of the file.</p>\n      <p>To start, upload a \'.tcx\' file. You can convert a .fit file to .tcx using <a href=\"http://connect.garmin.com/\"> Garmin Connect\'s</a> export functionality.</p>\n      <p><strong>Note:</strong> This app is tested with Edge 800 (firmware 2.6) data. YMMV, but other users (including with Garmin 610) report success. </p>\n      <p>No copy of the data processed is kept.</p>\n      <form>\n        <div ngf-select=\"vm.upload($file)\" ng-model=\"vm.file\" name=\"file\" class=\"btn btn-primary btn-upload\">{{vm.msg}}</div>\n      </form>\n    </div>\n    <div class=\"col-xs-5 img-holder\"><img src=\"assets/images/editor.png\" alt=\"Garmin tcx editor\"/></div>\n  </div>\n</div>");
+    }]);
+  })();
+  return _retrieveGlobal();
+});
+
+$__System.register('1', ['3', '5', '7', '9', '18', '42', '43', '44', '45', '46', '47', '48', '49', 'c'], function (_export) {
+    // imports
+    'use strict';
+
+    // import 'mgechev/angular-immutable';
+
+    var angular, MainSvc, EditorCtrl, UploadCtrl, MapCtrl, FeedbackCtrl, FeedbackDir, LapDir;
+    return {
+        setters: [function (_) {}, function (_2) {
+            angular = _2['default'];
+        }, function (_3) {}, function (_4) {}, function (_5) {
+            MainSvc = _5['default'];
+        }, function (_6) {
+            EditorCtrl = _6['default'];
+        }, function (_7) {
+            UploadCtrl = _7['default'];
+        }, function (_8) {
+            MapCtrl = _8['default'];
+        }, function (_9) {
+            FeedbackCtrl = _9['default'];
+        }, function (_10) {
+            FeedbackDir = _10['default'];
+        }, function (_11) {
+            LapDir = _11['default'];
+        }, function (_12) {}, function (_13) {}, function (_c) {}],
+        execute: function () {
+
+            angular.module('garminEditorApp', ['ui.router', 'ngMap', 'ngFileUpload', 'scroller', 'templates']);
+
+            angular.module('garminEditorApp').service('Main', MainSvc).controller('UploadCtrl', UploadCtrl).controller('EditorCtrl', EditorCtrl).controller('MapCtrl', MapCtrl).controller('FeedbackCtrl', FeedbackCtrl).directive('lap', LapDir).directive('feedback', FeedbackDir);
+
+            angular.module('garminEditorApp').config(function ($stateProvider, $urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider) {
+                $urlRouterProvider.otherwise('/');
+                $locationProvider.html5Mode(true);
+                $urlMatcherFactoryProvider.strictMode(false); // allows trailing slashes
+
+                return $stateProvider.state('upload', {
+                    url: '/',
+                    templateUrl: 'upload/upload.html',
+                    controller: 'UploadCtrl',
+                    controllerAs: 'vm'
+                }).state('editor', {
+                    url: '/editor',
+                    templateUrl: 'editor/editor.html',
+                    controller: 'EditorCtrl',
+                    controllerAs: 'vm'
+                }).state('feedback', {
+                    url: '/feedback',
+                    templateUrl: 'feedback/feedback.html',
+                    controller: 'FeedbackCtrl',
+                    controllerAs: 'vm'
+                });
+            });
+
+            angular.bootstrap(document.getElementsByTagName('body')[0], ['garminEditorApp']);
+        }
+    };
+});
+
 })
 (function(factory) {
   factory();
 });
-//# sourceMappingURL=build.js.map

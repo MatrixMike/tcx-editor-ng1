@@ -1,5 +1,5 @@
 System.config({
-  baseURL: "./angular",
+  baseURL: "./",
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {

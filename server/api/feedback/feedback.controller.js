@@ -1,6 +1,7 @@
 "use strict";
 
 var simDebug = process.env.NODE_ENV === 'development';
+
 var mailgun = require('mailgun-js')({
 	apiKey: process.env.MAILGUN_KEY,
 	domain: process.env.MAILGUN_DOMAIN
@@ -8,9 +9,8 @@ var mailgun = require('mailgun-js')({
 
 var oio = require('orchestrate');
 var db = oio(process.env.ORCHESTRATE_KEY, "api.aws-eu-west-1.orchestrate.io");
-// *********************** FIX
-// var coll = (simDebug) ? "tcxeditor-dev" : "tcxeditor";
-var coll = "tcxeditor";
+
+var coll = (simDebug) ? "tcxeditor-dev" : "tcxeditor";
 if (simDebug) console.log("Getting data from collection: ", coll);
 
 var getAllComments = function(withEmail, cb) {

@@ -14,6 +14,7 @@ import FeedbackCtrl from './feedback/feedback.ctrl';
 import FeedbackDir from './feedback.dir/feedback.dir';
 import LapDir from './editor/lap.dir';
 import './modules/scroller.dir';
+
 import "./templates";
 
 angular.module('garminEditorApp',
