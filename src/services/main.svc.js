@@ -13,7 +13,7 @@ class MainService {
 
     getDummyData() {
         this.fname = 'dummy.tcx';
-        return this.$http.get('/tcx/test')
+        return this.$http.get('/tcx/demo')
             .then( res => this.setTcxData(res.data) );
     }
 

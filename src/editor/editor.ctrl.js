@@ -81,6 +81,7 @@ class EditorCtrl {
     	this.downloadMsg = "Download .tcx";
 
     	if (Main.debug && _.isEmpty(Main.data)) {
+            console.log("Dev mode: downloading demo/dummy data");
             Main.getDummyData()
                 .then(() => this.processData());
         } else {

@@ -1,5 +1,4 @@
-Garmin .tcx GPS file editor
-=======================
+# Garmin .tcx GPS file editor
 
 MEAN application to decode, display and provide limited editing of Garmin biking GSP data (.tcx format).
 
@@ -20,7 +19,7 @@ Known bugs
     <Activity Sport="Biking">
       <Id>**Updated by app**</Id>
       <Lap StartTime="**Updated by app**">
-        <TotalTimeSeconds>**Updated by app**</TotalTimeSeconds>                        **Recorded to 3 decimal places**
+        <TotalTimeSeconds>**Updated by app**</TotalTimeSeconds>                 **Recorded to 3 decimal places**
         <DistanceMeters>**Updated by app**</DistanceMeters>
         <MaximumSpeed>1.531999</MaximumSpeed>
         <Calories>15</Calories>
@@ -28,7 +27,7 @@ Known bugs
         <TriggerMethod>Manual</TriggerMethod>
         <Track>  **Updated by app**
           <Trackpoint>
-            <Time>2015-01-01T11:49:09.000Z</Time>                                       **Recorded, effectively, to 0 decimal places**
+            <Time>2015-01-01T11:49:09.000Z</Time>                               **Recorded, effectively, to 0 decimal places**
             <Position>
               <LatitudeDegrees>-120.844</LatitudeDegrees>
               <LongitudeDegrees>14.9435</LongitudeDegrees>
@@ -37,7 +36,7 @@ Known bugs
             <DistanceMeters>1.009999</DistanceMeters>
             <Extensions>
               <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-                <Speed>0.9139999747276306</Speed>                                     **Not included in latest tcx from Connect**
+                <Speed>0.9139999747276306</Speed>                               **m/s; Not included in latest tcx from Connect**
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -45,7 +44,7 @@ Known bugs
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>**Updated by app**</AvgSpeed>
+            <AvgSpeed>**Updated by app**</AvgSpeed>                             **m/s
           </LX>
         </Extensions>
       </Lap>

@@ -14,7 +14,7 @@
                 .col-xs-2 {{lap.Track[0].Trackpoint[0].Time[0] | date: "HH:mm:ss"}}
                 .col-xs-2 {{lap.Track[0].Trackpoint[lap.Track[0].Trackpoint.length - 1].Time[0] | date: "HH:mm:ss"}}
                 .col-xs-2 {{lap.TotalTimeSeconds[0]}}s
-                .col-xs-2 {{lap.DistanceMeters / 1000 | number : 3}} km
+                .col-xs-2 {{lap.DistanceMeters / 1000 | number : 2}} km
                 .col-xs-2 {{lap.Extensions[0].LX[0].AvgSpeed[0] * 60 * 60 / 1000 | number : 1}} km/h
     //- .row
     //-     .col-xs-2.col-xs-offset-8.table-head {{vm.totalDist / 1000 | number: 1}} km

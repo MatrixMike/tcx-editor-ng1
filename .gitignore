@@ -1,7 +1,6 @@
 ignore
 node_modules
 jspm_packages
-elm
 server/tmp
-server/public
 .tmp
+Elm

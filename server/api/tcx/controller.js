@@ -1,6 +1,6 @@
 var debug = process.env.NODE_ENV === 'development';
 var oio = require('orchestrate');
-var db = oio(process.env.ORCHESTRATE_KEY, "api.aws-eu-west-1.orchestrate.io");
+// var db = oio(process.env.ORCHESTRATE_KEY, "api.aws-eu-west-1.orchestrate.io");
 
 var fs = require('fs'),
 	path = require("path"),
@@ -12,9 +12,14 @@ var xml2js = require('xml2js'),
 
 // GET
 exports.test = function(req, res) {
-	// var fname = path.join(__dirname, '../../tmp/test.tcx');
-	var fname = path.join(__dirname, '../../tmp/noposdata.tcx');
+	var fname = path.join(__dirname, '../../public/demo.tcx');
+	// var fname = path.join(__dirname, '../../tmp/noposdata.tcx');
 	// console.log(fname);
+	genJson(fname, (data) => res.json(data) );
+};
+
+exports.demo = function(req, res) {
+	var fname = path.join(__dirname, '../../public/demo.tcx');
 	genJson(fname, (data) => res.json(data) );
 };
 
@@ -59,6 +64,16 @@ exports.TCX2Json = function (req, res, next) {
 	req.pipe(busboy);
 };
 
+exports.TcxString2Json = function(req, res) {
+	// var body = decodeURIComponent(req.body);
+	var body = req.body;
+	// console.log(req.body);
+	genJsonFromString(body.data, function(result) {
+		// console.log(result);
+		res.send(result);
+	});
+};
+
 // 2) POST /tcx
 // writes file to disk so it can be requested separately by client
 exports.Json2TcxFile = function (req, res, next) {
@@ -88,12 +103,18 @@ exports.Json2TcxFile = function (req, res, next) {
 var genJson = function(filename, cb) {
 	return fs.readFile(filename, function(err, data) {
 		if (err) throw err;
-		return parser.parseString(data, function (err, result) {
-			if (err) throw err;
-			cb(result);
-		});
+		return genJsonFromString(data, cb);
 	});
 };
+// var genJson = function(filename, cb) {
+// 	return fs.readFile(filename, function(err, data) {
+// 		if (err) throw err;
+// 		return parser.parseString(data, function (err, result) {
+// 			if (err) throw err;
+// 			cb(result);
+// 		});
+// 	});
+// };
 
 var genJsonFromString = function(str, cb) {
 	return parser.parseString(str, function (err, result) {
